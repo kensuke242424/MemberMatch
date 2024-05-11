@@ -19,27 +19,38 @@ struct RootView: View {
     @State private var selectionTabIndex = 1
 
     var body: some View {
+
         TabView(selection: $selectionTabIndex) {
 
-            PostingBoardView()
-                .tabItem { Label("掲示板", systemImage: "list.bullet.clipboard") }
-                .tag(1)
+            NavigationStack {
+                PostingBoardView()
+            }
+            .tabItem { Label("掲示板", systemImage: "list.bullet.clipboard") }
+            .tag(1)
 
-            MemberScoutView()
-                .tabItem { Label("スカウト", systemImage: "sparkle.magnifyingglass") }
-                .tag(2)
+            NavigationStack {
+                MemberScoutView()
+            }
+            .tabItem { Label("スカウト", systemImage: "sparkle.magnifyingglass") }
+            .tag(2)
 
-            MessageView()
-                .tabItem { Label("メッセージ", systemImage: "bubble.left.fill") }
-                .tag(3)
+            NavigationStack {
+                MessageView()
+            }
+            .tabItem { Label("メッセージ", systemImage: "bubble.left.fill") }
+            .tag(3)
 
-            NotificationView()
-                .tabItem { Label("通知", systemImage: "bell") }
-                .tag(4)
+            NavigationStack {
+                NotificationView()
+            }
+            .tabItem { Label("通知", systemImage: "bell") }
+            .tag(4)
 
-            ProfileView()
-                .tabItem { Label("プロフ", systemImage: "person.crop.rectangle") }
-                .tag(5)
+            NavigationStack {
+                ProfileView()
+            }
+            .tabItem { Label("プロフ", systemImage: "person.crop.rectangle") }
+            .tag(5)
         }
         .tint(.customWhite)
     }
