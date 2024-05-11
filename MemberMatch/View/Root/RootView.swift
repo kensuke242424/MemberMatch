@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RootView: View {
 
-    // タブアイコン日選択時のカラー
+    // タブアイコン非選択時のカラー
     init() {
         UITabBar.appearance().unselectedItemTintColor = UIColor.gray
     }

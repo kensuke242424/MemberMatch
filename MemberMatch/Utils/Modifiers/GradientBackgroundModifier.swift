@@ -14,14 +14,20 @@ struct GradientBackgroundModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(LinearGradient(
-                gradient: Gradient(colors: [
-                    startColor ?? .customMediumGray,
-                    endColor ?? .customDarkGray
-                ]),
-                startPoint: .top,
-                endPoint: .bottom
-            ))
+            .background(
+                ZStack {
+                    LinearGradient(
+                        gradient: Gradient(colors: [
+                            startColor ?? .customMediumGray,
+                            endColor ?? .customDarkGray
+                        ]),
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                    BlurView(style: .systemUltraThinMaterialDark)
+                }
+                .ignoresSafeArea()
+            )
     }
 }
 
