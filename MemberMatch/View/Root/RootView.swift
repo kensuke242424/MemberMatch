@@ -22,11 +22,9 @@ struct RootView: View {
 
         TabView(selection: $selectionTabIndex) {
 
-            NavigationStack {
-                PostingBoardView()
-            }
-            .tabItem { Label("掲示板", systemImage: "list.bullet.clipboard") }
-            .tag(1)
+            RecruitmentBoardView()
+                .tabItem { Label("掲示板", systemImage: "list.bullet.clipboard") }
+                .tag(1)
 
             NavigationStack {
                 MemberScoutView()
@@ -52,7 +50,7 @@ struct RootView: View {
             .tabItem { Label("プロフ", systemImage: "person.crop.rectangle") }
             .tag(5)
         }
-        .tint(.customWhite)
+        //        .tint(.customWhite)
     }
 }
 
