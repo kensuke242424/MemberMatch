@@ -30,6 +30,12 @@ struct TabsView: View {
 
                         case .detail(let recruitment):
                             RecruitmentDetail(recruitment: recruitment)
+
+                        case .userProfile(let user):
+                            UserProfileView(user: user)
+
+                        case .teamProfile(let team):
+                            TeamProfileView(team: team)
                         }
                     }
             }
@@ -96,4 +102,5 @@ extension TabsView {
 
 #Preview {
     TabsView()
+        .environmentObject(Router())
 }

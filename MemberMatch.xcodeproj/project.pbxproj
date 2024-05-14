@@ -26,6 +26,14 @@
 		BED4B23C2BF086CF00C49EB5 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = BED4B23B2BF086CF00C49EB5 /* SDWebImageSwiftUI */; };
 		BED4B23F2BF259A600C49EB5 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4B23E2BF259A600C49EB5 /* RootView.swift */; };
 		BED4B2422BF259FA00C49EB5 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4B2412BF259FA00C49EB5 /* Router.swift */; };
+		BED4B2442BF3BCD100C49EB5 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4B2432BF3BCD100C49EB5 /* UserProfileView.swift */; };
+		BED4B2462BF3BCE000C49EB5 /* TeamProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4B2452BF3BCE000C49EB5 /* TeamProfileView.swift */; };
+		BED4B2492BF3BEA100C49EB5 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4B2482BF3BEA100C49EB5 /* Team.swift */; };
+		BED4B24C2BF3C17A00C49EB5 /* MusicGenre.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4B24B2BF3C17A00C49EB5 /* MusicGenre.swift */; };
+		BED4B24F2BF3CE7300C49EB5 /* Instrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4B24E2BF3CE7300C49EB5 /* Instrument.swift */; };
+		BED4B2522BF3D04F00C49EB5 /* SkillLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4B2512BF3D04F00C49EB5 /* SkillLevel.swift */; };
+		BED4B2552BF3D1BF00C49EB5 /* CommitmentLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4B2542BF3D1BF00C49EB5 /* CommitmentLevel.swift */; };
+		BED4B2572BF3D74B00C49EB5 /* Prefecture.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4B2562BF3D74B00C49EB5 /* Prefecture.swift */; };
 		BEFAE4E22BDE73A000CADC73 /* MemberMatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFAE4E12BDE73A000CADC73 /* MemberMatchApp.swift */; };
 		BEFAE4E42BDE73A000CADC73 /* TabsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFAE4E32BDE73A000CADC73 /* TabsView.swift */; };
 		BEFAE4E62BDE73A200CADC73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEFAE4E52BDE73A200CADC73 /* Assets.xcassets */; };
@@ -52,6 +60,14 @@
 		BED4B2382BF086B500C49EB5 /* SDWebImageCircleIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDWebImageCircleIcon.swift; sourceTree = "<group>"; };
 		BED4B23E2BF259A600C49EB5 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		BED4B2412BF259FA00C49EB5 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		BED4B2432BF3BCD100C49EB5 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
+		BED4B2452BF3BCE000C49EB5 /* TeamProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamProfileView.swift; sourceTree = "<group>"; };
+		BED4B2482BF3BEA100C49EB5 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
+		BED4B24B2BF3C17A00C49EB5 /* MusicGenre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicGenre.swift; sourceTree = "<group>"; };
+		BED4B24E2BF3CE7300C49EB5 /* Instrument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instrument.swift; sourceTree = "<group>"; };
+		BED4B2512BF3D04F00C49EB5 /* SkillLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillLevel.swift; sourceTree = "<group>"; };
+		BED4B2542BF3D1BF00C49EB5 /* CommitmentLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitmentLevel.swift; sourceTree = "<group>"; };
+		BED4B2562BF3D74B00C49EB5 /* Prefecture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prefecture.swift; sourceTree = "<group>"; };
 		BEFAE4DE2BDE73A000CADC73 /* MemberMatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemberMatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEFAE4E12BDE73A000CADC73 /* MemberMatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberMatchApp.swift; sourceTree = "<group>"; };
 		BEFAE4E32BDE73A000CADC73 /* TabsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabsView.swift; sourceTree = "<group>"; };
@@ -141,6 +157,8 @@
 			isa = PBXGroup;
 			children = (
 				BED4B2282BEFD5FE00C49EB5 /* ProfileView.swift */,
+				BED4B2432BF3BCD100C49EB5 /* UserProfileView.swift */,
+				BED4B2452BF3BCE000C49EB5 /* TeamProfileView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -212,6 +230,26 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+		BED4B2472BF3BE9200C49EB5 /* Team */ = {
+			isa = PBXGroup;
+			children = (
+				BED4B2482BF3BEA100C49EB5 /* Team.swift */,
+			);
+			path = Team;
+			sourceTree = "<group>";
+		};
+		BED4B2532BF3D07E00C49EB5 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				BED4B2512BF3D04F00C49EB5 /* SkillLevel.swift */,
+				BED4B24E2BF3CE7300C49EB5 /* Instrument.swift */,
+				BED4B24B2BF3C17A00C49EB5 /* MusicGenre.swift */,
+				BED4B2542BF3D1BF00C49EB5 /* CommitmentLevel.swift */,
+				BED4B2562BF3D74B00C49EB5 /* Prefecture.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		BEFAE4D52BDE73A000CADC73 = {
 			isa = PBXGroup;
 			children = (
@@ -253,6 +291,8 @@
 		BEFAE4EF2BDE759A00CADC73 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				BED4B2532BF3D07E00C49EB5 /* Common */,
+				BED4B2472BF3BE9200C49EB5 /* Team */,
 				BED4B2342BF0787800C49EB5 /* User */,
 				BED4B2312BF05D7400C49EB5 /* Recruitment */,
 			);
@@ -380,15 +420,21 @@
 			files = (
 				BED4B21D2BEFD2E300C49EB5 /* MemberScoutView.swift in Sources */,
 				BED4B22B2BEFDECC00C49EB5 /* BlurView.swift in Sources */,
+				BED4B24F2BF3CE7300C49EB5 /* Instrument.swift in Sources */,
 				BED4B21A2BEFCF7D00C49EB5 /* GradientBackgroundModifier.swift in Sources */,
 				BEFAE4E42BDE73A000CADC73 /* TabsView.swift in Sources */,
 				BED4B23F2BF259A600C49EB5 /* RootView.swift in Sources */,
 				BED4B2392BF086B500C49EB5 /* SDWebImageCircleIcon.swift in Sources */,
 				BED4B20E2BE99A3F00C49EB5 /* SignUpView.swift in Sources */,
+				BED4B2522BF3D04F00C49EB5 /* SkillLevel.swift in Sources */,
+				BED4B2552BF3D1BF00C49EB5 /* CommitmentLevel.swift in Sources */,
+				BED4B2442BF3BCD100C49EB5 /* UserProfileView.swift in Sources */,
+				BED4B24C2BF3C17A00C49EB5 /* MusicGenre.swift in Sources */,
 				BEFAE4F52BDE768F00CADC73 /* TabsViewModel.swift in Sources */,
 				BED4B22D2BF056F100C49EB5 /* RecruitmentDetail.swift in Sources */,
 				BED4B2172BEFC90800C49EB5 /* CustomText.swift in Sources */,
 				BED4B2422BF259FA00C49EB5 /* Router.swift in Sources */,
+				BED4B2492BF3BEA100C49EB5 /* Team.swift in Sources */,
 				BED4B2252BEFD5E700C49EB5 /* MessageView.swift in Sources */,
 				BED4B2132BEFC8C700C49EB5 /* ViewExtension.swift in Sources */,
 				BED4B20B2BE999C700C49EB5 /* LoginView.swift in Sources */,
@@ -396,8 +442,10 @@
 				BED4B2292BEFD5FE00C49EB5 /* ProfileView.swift in Sources */,
 				BEFAE4E22BDE73A000CADC73 /* MemberMatchApp.swift in Sources */,
 				BED4B2362BF0788800C49EB5 /* User.swift in Sources */,
+				BED4B2572BF3D74B00C49EB5 /* Prefecture.swift in Sources */,
 				BED4B22F2BF059E100C49EB5 /* Recruitment.swift in Sources */,
 				BED4B2272BEFD5F400C49EB5 /* NotificationView.swift in Sources */,
+				BED4B2462BF3BCE000C49EB5 /* TeamProfileView.swift in Sources */,
 				BED4B2332BF05D9400C49EB5 /* RecruitmentBoardViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

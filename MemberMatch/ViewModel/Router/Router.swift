@@ -10,6 +10,8 @@ import SwiftUI
 enum RecruitmentPagePath: Hashable {
     case home
     case detail(Recruitment)
+    case userProfile(User)
+    case teamProfile(Team)
 }
 
 enum MemberScoutPagePath: Hashable {
