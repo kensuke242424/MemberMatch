@@ -24,7 +24,7 @@ struct GradientBackgroundModifier: ViewModifier {
                         startPoint: .top,
                         endPoint: .bottom
                     )
-                    BlurView(style: .systemUltraThinMaterialDark)
+//                    BlurView(style: .systemUltraThinMaterialDark)
                 }
                 .ignoresSafeArea()
             )

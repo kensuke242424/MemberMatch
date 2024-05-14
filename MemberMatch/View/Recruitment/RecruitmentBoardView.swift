@@ -9,32 +9,24 @@ import SwiftUI
 
 struct RecruitmentBoardView: View {
     @StateObject private var vm = RecruitmentBoardViewModel()
+    @EnvironmentObject var router: Router
 
     var body: some View {
-        NavigationStack(path: $vm.path) {
-            VStack {
-                ScrollView(content: {
-                    ForEach(vm.recruitments) { recruitment in
-                        RecruitmentCard(recruitment: recruitment)
-                    }
-                    Spacer().frame(height: 20) // スクロール下部の余白
-                })
-                .scrollIndicators(.hidden)
-            }
-            .padding(.horizontal)
-            .gradientBackground()
-            .navigationTitle("掲示板")
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationDestination(for: RecruitmentPath.self, destination: { destination in
-                switch destination {
-                case .home:
-                    RecruitmentBoardView()
 
-                case .detail(let recruitment):
-                    RecruitmentDetail(recruitment: recruitment)
+        VStack {
+            ScrollView(content: {
+                ForEach(vm.recruitments) { recruitment in
+                    RecruitmentCard(recruitment: recruitment)
                 }
+                Spacer().frame(height: 20) // スクロール下部の余白
             })
+            .scrollIndicators(.hidden)
         }
+        .padding(.horizontal)
+        .gradientBackground()
+        .navigationTitle("メンバー募集")
+        .navigationBarTitleDisplayMode(.inline)
+
     }
 }
 
@@ -42,23 +34,39 @@ extension RecruitmentBoardView {
     @ViewBuilder
     private func RecruitmentCard(recruitment: Recruitment) -> some View {
         Button {
-            vm.path.append(.detail(recruitment))
+            router.push([.detail(recruitment)])
         } label: {
-            HStack {
-                VStack(alignment: .leading, spacing: 5) {
-                    CustomText(recruitment.title, .customTextColorBlack)
-                        .fontWeight(.bold)
-                    CustomText(recruitment.description, .gray)
-                        .lineLimit(2)
-                        .multilineTextAlignment(.leading)
-                        .font(.caption)
+            VStack(spacing: 4) {
+                HStack {
+                    VStack(alignment: .leading, spacing: 8) {
+                        CustomText(recruitment.title, .customTextColorBlack)
+                            .lineLimit(1)
+                            .fontWeight(.bold)
+                        CustomText(recruitment.description, .gray)
+                            .lineLimit(2)
+                            .multilineTextAlignment(.leading)
+                            .font(.caption)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+
+                    Circle().foregroundStyle(.customAccentYellow).shadow(radius: 2)
                 }
-                Circle().foregroundStyle(.customAccentYellow)
+                HStack {
+                    CustomText("気になる", .gray).font(.caption).fontWeight(.bold)
+                    Image(systemName: "heart.fill").foregroundStyle(.red)
+                    CustomText("50", .gray).font(.caption).fontWeight(.bold)
+                    Spacer().frame(width: 20)
+                    CustomText("残り期日：", .gray).font(.caption).fontWeight(.bold)
+                    CustomText("7日", .gray).font(.caption).fontWeight(.bold)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .padding()
-            .frame(height: 80)
+            .padding(.horizontal)
+            .padding(.vertical, 14)
+            .frame(height: 130)
+            .fixedSize(horizontal: false, vertical: true) // テキストが縦方向に展開
+            .frame(maxWidth: .infinity)
             .background(RoundedRectangle(cornerRadius: 10).fill(Color.white).shadow(radius: 5))
-            .padding(.vertical, 3)
         }
     }
 }

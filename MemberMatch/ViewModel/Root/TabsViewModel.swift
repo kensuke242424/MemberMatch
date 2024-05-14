@@ -7,6 +7,6 @@
 
 import SwiftUI
 
-class RootViewModel: ObservableObject {
-    
+class TabsViewModel: ObservableObject {
+    @Published var selectionTabIndex = 1
 }

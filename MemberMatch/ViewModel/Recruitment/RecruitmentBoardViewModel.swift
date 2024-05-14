@@ -7,12 +7,6 @@
 
 import Foundation
 
-enum RecruitmentPath: Hashable {
-    case home
-    case detail(Recruitment)
-}
-
 class RecruitmentBoardViewModel: ObservableObject {
     @Published var recruitments: [Recruitment] = exampleRecruitments
-    @Published var path: [RecruitmentPath] = .init()
 }
