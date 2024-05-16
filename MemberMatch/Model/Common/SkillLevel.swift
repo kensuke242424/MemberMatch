@@ -6,7 +6,7 @@ enum SkillLevel: Int, CaseIterable, Codable {
     case advanced
     case expert
 
-    var jpNamge: String {
+    var jpName: String {
         switch self {
         case .beginner:
             return "初心者"

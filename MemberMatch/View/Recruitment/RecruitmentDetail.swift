@@ -56,7 +56,7 @@ extension RecruitmentDetail {
                 }
                 VStack(alignment: .leading, spacing: 15) {
                     CustomText(user.name ?? "", .customTextColorWhite).font(.subheadline)
-                    CustomText(user.skillLevel?.jpNamge ?? "", .customTextColorWhite).font(.caption)
+                    CustomText(user.skillLevel?.jpName ?? "", .customTextColorWhite).font(.caption)
                     CustomText(user.bio ?? "", .customTextColorWhite).font(.caption)
                         .fixedSize(horizontal: false, vertical: true) // テキストが縦方向に展開
                 }

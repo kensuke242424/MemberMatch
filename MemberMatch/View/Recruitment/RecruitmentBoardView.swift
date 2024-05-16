@@ -12,8 +12,19 @@ struct RecruitmentBoardView: View {
     @EnvironmentObject var router: Router
 
     var body: some View {
-
         VStack {
+            HStack {
+                CustomText("個人", .customTextColorWhite)
+                    .fontWeight(.bold)
+                    .frame(maxWidth: .infinity)
+                CustomText("｜", .customTextColorWhite)
+                CustomText("グループ", .customTextColorWhite)
+                    .fontWeight(.bold)
+                    .frame(maxWidth: .infinity)
+            }
+            Divider()
+                .background(.white)
+
             ScrollView(content: {
                 ForEach(vm.recruitments) { recruitment in
                     RecruitmentCard(recruitment: recruitment)
@@ -26,7 +37,6 @@ struct RecruitmentBoardView: View {
         .gradientBackground()
         .navigationTitle("メンバー募集")
         .navigationBarTitleDisplayMode(.inline)
-
     }
 }
 
@@ -73,4 +83,5 @@ extension RecruitmentBoardView {
 
 #Preview {
     RecruitmentBoardView()
+        .environmentObject(Router())
 }
