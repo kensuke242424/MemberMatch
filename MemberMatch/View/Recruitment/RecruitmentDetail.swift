@@ -6,15 +6,51 @@
 //
 
 import SwiftUI
+import SwiftUIIntrospect
+import ScalingHeaderScrollView
 
 struct RecruitmentDetail: View {
     let recruitment: Recruitment
 
     @EnvironmentObject var router: Router
 
+    @State private var resetScroll: Bool = false
+    @State private var collapseProgress: CGFloat = 0.0
+
+    @State private var isShowTopTab: Bool = false
+
+    let headerHeight: CGFloat = 300
+    let tabTopHeight: CGFloat = 80
+
     var body: some View {
-        ScrollView {
-            VStack(spacing: 50) {
+        ScalingHeaderScrollView(header: {
+            ZStack {
+                VStack {
+                    Image("music_2")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(height: headerHeight - 20)
+                        .opacity(1 - collapseProgress)
+                    Spacer()
+                }
+
+                VStack(spacing: 0) {
+                    Spacer()
+                    Rectangle()
+//                        .foregroundStyle(.customMediumGray.gradient)
+                        .frame(height: tabTopHeight)
+                        .opacity(isShowTopTab ? 1 : 0)
+                }
+                .onChange(of: collapseProgress) { newValue in
+                    if collapseProgress > 0.8 {
+                        withAnimation { isShowTopTab = true }
+                    } else {
+                        withAnimation { isShowTopTab = false }
+                    }
+                }
+            }
+        }, content: {
+            VStack {
                 UserDetail(user: mockUser).padding(.top)
                 WantedPartsDetail(title: "募集パート", desc: recruitment.description)
                 RecruitmentDetail(title: "募集の内容", desc: recruitment.description)
@@ -24,20 +60,23 @@ struct RecruitmentDetail: View {
                 Spacer().frame(height: 20)
 
                 Button("メッセージを送る") {
-
+                    resetScroll = true
                 }
                 .fontWeight(.bold)
                 .padding()
                 .background(RoundedRectangle(cornerRadius: 10).foregroundStyle(.customAccentYellow))
                 .foregroundStyle(.customWhite)
-
-                Spacer().frame(height: 20)
+                .padding()
             }
             .padding(.horizontal)
-        }
+
+        })
+        .scrollToTop(resetScroll: $resetScroll) // スクロールリセット
+        .collapseProgress($collapseProgress) // ヘッダーの折りたたみ状況
+        .height(min: tabTopHeight, max: headerHeight) // ヘッダーの可変サイズ
         .gradientBackground()
-        .navigationTitle("募集の内容")
-        .navigationBarTitleDisplayMode(.inline)
+        .ignoresSafeArea(edges: .top)
+        .navigationBarBackButtonHidden()
     }
 }
 

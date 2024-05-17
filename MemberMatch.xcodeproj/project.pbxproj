@@ -34,6 +34,7 @@
 		BED4B2522BF3D04F00C49EB5 /* SkillLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4B2512BF3D04F00C49EB5 /* SkillLevel.swift */; };
 		BED4B2552BF3D1BF00C49EB5 /* CommitmentLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4B2542BF3D1BF00C49EB5 /* CommitmentLevel.swift */; };
 		BED4B2572BF3D74B00C49EB5 /* Prefecture.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4B2562BF3D74B00C49EB5 /* Prefecture.swift */; };
+		BEE55DD62BF65BA000299883 /* ScalingHeaderScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = BEE55DD52BF65BA000299883 /* ScalingHeaderScrollView */; };
 		BEFAE4E22BDE73A000CADC73 /* MemberMatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFAE4E12BDE73A000CADC73 /* MemberMatchApp.swift */; };
 		BEFAE4E42BDE73A000CADC73 /* TabsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFAE4E32BDE73A000CADC73 /* TabsView.swift */; };
 		BEFAE4E62BDE73A200CADC73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEFAE4E52BDE73A200CADC73 /* Assets.xcassets */; };
@@ -82,6 +83,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BED4B23C2BF086CF00C49EB5 /* SDWebImageSwiftUI in Frameworks */,
+				BEE55DD62BF65BA000299883 /* ScalingHeaderScrollView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,6 +362,7 @@
 			name = MemberMatch;
 			packageProductDependencies = (
 				BED4B23B2BF086CF00C49EB5 /* SDWebImageSwiftUI */,
+				BEE55DD52BF65BA000299883 /* ScalingHeaderScrollView */,
 			);
 			productName = MemberMatch;
 			productReference = BEFAE4DE2BDE73A000CADC73 /* MemberMatch.app */;
@@ -391,6 +394,7 @@
 			mainGroup = BEFAE4D52BDE73A000CADC73;
 			packageReferences = (
 				BED4B23A2BF086CF00C49EB5 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				BEE55DD42BF65BA000299883 /* XCRemoteSwiftPackageReference "ScalingHeaderScrollView" */,
 			);
 			productRefGroup = BEFAE4DF2BDE73A000CADC73 /* Products */;
 			projectDirPath = "";
@@ -664,6 +668,14 @@
 				minimumVersion = 3.0.4;
 			};
 		};
+		BEE55DD42BF65BA000299883 /* XCRemoteSwiftPackageReference "ScalingHeaderScrollView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/ScalingHeaderScrollView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -671,6 +683,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BED4B23A2BF086CF00C49EB5 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
+		};
+		BEE55DD52BF65BA000299883 /* ScalingHeaderScrollView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BEE55DD42BF65BA000299883 /* XCRemoteSwiftPackageReference "ScalingHeaderScrollView" */;
+			productName = ScalingHeaderScrollView;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
