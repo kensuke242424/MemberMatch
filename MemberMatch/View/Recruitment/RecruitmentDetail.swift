@@ -11,72 +11,134 @@ import ScalingHeaderScrollView
 
 struct RecruitmentDetail: View {
     let recruitment: Recruitment
-
     @EnvironmentObject var router: Router
 
-    @State private var resetScroll: Bool = false
+    @State private var resetScrollToTop: Bool = false
     @State private var collapseProgress: CGFloat = 0.0
+    @State private var tabTopOpacity: CGFloat = 0.0
 
-    @State private var isShowTopTab: Bool = false
-
-    let headerHeight: CGFloat = 300
-    let tabTopHeight: CGFloat = 80
+    let maxHeaderHeight: CGFloat = 300
+    let minHeaderHeight: CGFloat = 100
+    let overlapYOffset: CGFloat = 50
 
     var body: some View {
         ScalingHeaderScrollView(header: {
-            ZStack {
-                VStack {
-                    Image("music_2")
-                        .resizable()
-                        .scaledToFill()
-                        .frame(height: headerHeight - 20)
-                        .opacity(1 - collapseProgress)
-                    Spacer()
-                }
-
-                VStack(spacing: 0) {
-                    Spacer()
-                    Rectangle()
-//                        .foregroundStyle(.customMediumGray.gradient)
-                        .frame(height: tabTopHeight)
-                        .opacity(isShowTopTab ? 1 : 0)
-                }
-                .onChange(of: collapseProgress) { newValue in
-                    if collapseProgress > 0.8 {
-                        withAnimation { isShowTopTab = true }
-                    } else {
-                        withAnimation { isShowTopTab = false }
-                    }
-                }
-            }
+            Image("music_2")
+                .resizable()
+                .scaledToFill()
+                .frame(height: maxHeaderHeight)
+                .opacity(1 - collapseProgress)
         }, content: {
-            VStack {
-                UserDetail(user: mockUser).padding(.top)
-                WantedPartsDetail(title: "募集パート", desc: recruitment.description)
-                RecruitmentDetail(title: "募集の内容", desc: recruitment.description)
-                FrequencyDetail(title: "活動頻度", desc: recruitment.description)
-                LocationDetail(title: "活動場所", desc: recruitment.rehearsalLocation)
+            VStack(spacing: -overlapYOffset) {
+                Rectangle()
+                    .foregroundStyle(
+                        LinearGradient(gradient: Gradient(colors: [.clear, .black.opacity(0.4)]),
+                                       startPoint: .init(x: 0, y: 0.7),
+                                       endPoint: .init(x: 0, y: 1))
+                    )
+                    .shadow(radius: 10)
+                    .blur(radius: 3)
+                    .opacity(1 - collapseProgress)
+                    .frame(height: maxHeaderHeight)
+                    .zIndex(200)
+                    .overlay(alignment: .bottomLeading) {
+                        CustomText("Rock climb", .customTextColorWhite)
+                            .zIndex(1000)
+                            .tracking(1)
+                            .font(.title3.bold())
+                            .frame(height: overlapYOffset)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .opacity(1 - tabTopOpacity)
+                            .padding(.horizontal)
+                    }
 
-                Spacer().frame(height: 20)
 
-                Button("メッセージを送る") {
-                    resetScroll = true
+                VStack {
+
+                    Spacer().frame(height: overlapYOffset)
+
+                    UserDetail(user: mockUser).padding(.top)
+                    WantedPartsDetail(title: "募集パート", desc: recruitment.description)
+                    RecruitmentDetail(title: "募集の内容", desc: recruitment.description)
+                    FrequencyDetail(title: "活動頻度", desc: recruitment.description)
+                    LocationDetail(title: "活動場所", desc: recruitment.rehearsalLocation)
+
+                    Button("メッセージを送る") {
+                        resetScrollToTop = true
+                    }
+                    .fontWeight(.bold)
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 10).foregroundStyle(.customAccentYellow))
+                    .foregroundStyle(.customWhite)
+                    .padding()
+
+                    Spacer().frame(height: 20)
                 }
-                .fontWeight(.bold)
-                .padding()
-                .background(RoundedRectangle(cornerRadius: 10).foregroundStyle(.customAccentYellow))
-                .foregroundStyle(.customWhite)
-                .padding()
+                .padding(.horizontal)
+                .gradientBackground()
+                .clippedToDeviceTopCorners()
             }
-            .padding(.horizontal)
-
+            .padding(.top, -maxHeaderHeight)
+            .zIndex(100)
+            .onChange(of: collapseProgress) { newValue in
+                if newValue > 0.9 {
+                    withAnimation(.spring(duration: 0.2)) { tabTopOpacity = newValue }
+                } else {
+                    withAnimation(.spring(duration: 0.2)) { tabTopOpacity = 0.0 }
+                }
+            }
         })
-        .scrollToTop(resetScroll: $resetScroll) // スクロールリセット
+        .scrollToTop(resetScroll: $resetScrollToTop) // スクロールリセット
+        .allowsHeaderCollapse(true)
+        .allowsHeaderGrowth()
+        .setHeaderSnapMode(.disabled)
         .collapseProgress($collapseProgress) // ヘッダーの折りたたみ状況
-        .height(min: tabTopHeight, max: headerHeight) // ヘッダーの可変サイズ
-        .gradientBackground()
+        .height(min: minHeaderHeight, max: maxHeaderHeight) // ヘッダーの可変サイズ
+        .overlay(alignment: .top) {
+            TabTopBarView()
+        }
+        //        .gradientBackground()
         .ignoresSafeArea(edges: .top)
         .navigationBarBackButtonHidden()
+    }
+    @ViewBuilder
+    /// タブビューのカスタムトップナビゲーションバー
+    func TabTopBarView() -> some View {
+        GeometryReader {
+            let size = $0.size
+            let iconSize: CGFloat = 30
+            HStack {
+                RoundedRectangle(cornerRadius: 10).frame(width: 30, height: 30)
+                Text("Rock climb")
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .tracking(1)
+                    .contentShape(Rectangle())
+            }
+            .opacity(tabTopOpacity)
+            .frame(maxWidth: .infinity)
+            .onTapGesture { resetScrollToTop = true }
+            .overlay {
+                HStack {
+                    Circle().frame(width: iconSize, height: iconSize).foregroundStyle(.white)
+                        .overlay(Image(systemName: "arrow.left"))
+                        .onTapGesture { router.popRecruitmentPage() }
+                    Spacer()
+                    Circle().frame(width: iconSize, height: iconSize).foregroundStyle(.white)
+                        .overlay(Image(systemName: "ellipsis"))
+                        .onTapGesture {}
+                } // HStack
+                .padding(.horizontal, 20)
+            }
+            .padding(.top, 60)
+        } // Geometry
+        .frame(height: minHeaderHeight)
+        .background(
+            Color.clear.overlay {
+                BlurView(style: .systemUltraThinMaterial).ignoresSafeArea(edges: .top)
+            }
+                .opacity(tabTopOpacity)
+        )
     }
 }
 

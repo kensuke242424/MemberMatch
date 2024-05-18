@@ -35,6 +35,9 @@
 		BED4B2552BF3D1BF00C49EB5 /* CommitmentLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4B2542BF3D1BF00C49EB5 /* CommitmentLevel.swift */; };
 		BED4B2572BF3D74B00C49EB5 /* Prefecture.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4B2562BF3D74B00C49EB5 /* Prefecture.swift */; };
 		BEE55DD62BF65BA000299883 /* ScalingHeaderScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = BEE55DD52BF65BA000299883 /* ScalingHeaderScrollView */; };
+		BEE55DDB2BF84BAE00299883 /* TopCornersRoundedRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE55DDA2BF84BAE00299883 /* TopCornersRoundedRectangle.swift */; };
+		BEE55DDD2BF84FE100299883 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE55DDC2BF84FE100299883 /* UIDevice.swift */; };
+		BEE55DDF2BF888BF00299883 /* BottomClipShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE55DDE2BF888BF00299883 /* BottomClipShape.swift */; };
 		BEFAE4E22BDE73A000CADC73 /* MemberMatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFAE4E12BDE73A000CADC73 /* MemberMatchApp.swift */; };
 		BEFAE4E42BDE73A000CADC73 /* TabsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFAE4E32BDE73A000CADC73 /* TabsView.swift */; };
 		BEFAE4E62BDE73A200CADC73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEFAE4E52BDE73A200CADC73 /* Assets.xcassets */; };
@@ -69,6 +72,9 @@
 		BED4B2512BF3D04F00C49EB5 /* SkillLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillLevel.swift; sourceTree = "<group>"; };
 		BED4B2542BF3D1BF00C49EB5 /* CommitmentLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitmentLevel.swift; sourceTree = "<group>"; };
 		BED4B2562BF3D74B00C49EB5 /* Prefecture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prefecture.swift; sourceTree = "<group>"; };
+		BEE55DDA2BF84BAE00299883 /* TopCornersRoundedRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCornersRoundedRectangle.swift; sourceTree = "<group>"; };
+		BEE55DDC2BF84FE100299883 /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
+		BEE55DDE2BF888BF00299883 /* BottomClipShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomClipShape.swift; sourceTree = "<group>"; };
 		BEFAE4DE2BDE73A000CADC73 /* MemberMatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemberMatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEFAE4E12BDE73A000CADC73 /* MemberMatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberMatchApp.swift; sourceTree = "<group>"; };
 		BEFAE4E32BDE73A000CADC73 /* TabsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabsView.swift; sourceTree = "<group>"; };
@@ -110,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				BED4B2122BEFC8C700C49EB5 /* ViewExtension.swift */,
+				BEE55DDC2BF84FE100299883 /* UIDevice.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -212,6 +219,8 @@
 				BED4B2162BEFC90800C49EB5 /* CustomText.swift */,
 				BED4B22A2BEFDECC00C49EB5 /* BlurView.swift */,
 				BED4B2382BF086B500C49EB5 /* SDWebImageCircleIcon.swift */,
+				BEE55DDA2BF84BAE00299883 /* TopCornersRoundedRectangle.swift */,
+				BEE55DDE2BF888BF00299883 /* BottomClipShape.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -440,16 +449,19 @@
 				BED4B2422BF259FA00C49EB5 /* Router.swift in Sources */,
 				BED4B2492BF3BEA100C49EB5 /* Team.swift in Sources */,
 				BED4B2252BEFD5E700C49EB5 /* MessageView.swift in Sources */,
+				BEE55DDF2BF888BF00299883 /* BottomClipShape.swift in Sources */,
 				BED4B2132BEFC8C700C49EB5 /* ViewExtension.swift in Sources */,
 				BED4B20B2BE999C700C49EB5 /* LoginView.swift in Sources */,
 				BED4B2232BEFD5DA00C49EB5 /* RecruitmentBoardView.swift in Sources */,
 				BED4B2292BEFD5FE00C49EB5 /* ProfileView.swift in Sources */,
+				BEE55DDD2BF84FE100299883 /* UIDevice.swift in Sources */,
 				BEFAE4E22BDE73A000CADC73 /* MemberMatchApp.swift in Sources */,
 				BED4B2362BF0788800C49EB5 /* User.swift in Sources */,
 				BED4B2572BF3D74B00C49EB5 /* Prefecture.swift in Sources */,
 				BED4B22F2BF059E100C49EB5 /* Recruitment.swift in Sources */,
 				BED4B2272BEFD5F400C49EB5 /* NotificationView.swift in Sources */,
 				BED4B2462BF3BCE000C49EB5 /* TeamProfileView.swift in Sources */,
+				BEE55DDB2BF84BAE00299883 /* TopCornersRoundedRectangle.swift in Sources */,
 				BED4B2332BF05D9400C49EB5 /* RecruitmentBoardViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
