@@ -66,11 +66,11 @@ struct RecruitmentDetail: View {
             .height(min: vm.isOpenHeaderContents ? vm.maxHeaderHeight : vm.minHeaderHeight,
                     max: vm.maxHeaderHeight
             )
-            .scrollToTop(resetScroll: $vm.isResetScroll) // スクロールリセット
+            .scrollToTop(resetScroll: $vm.isResetScroll)
             .allowsHeaderCollapse()
             .headerAlignment(.top)
             .allowsHeaderGrowth()
-            .collapseProgress($vm.collapseProgress) // ヘッダーの折りたたみ状況
+            .collapseProgress($vm.collapseProgress)
         }
         .gradientBackground()
         .ignoresSafeArea(edges: .top)
@@ -184,44 +184,6 @@ extension RecruitmentDetail {
             GeometryReader { geometry in
                 Color.clear.preference(key: SizePreferenceKey.self, value: geometry.size)
             }
-        }
-    }
-}
-
-extension RecruitmentDetail {
-    @ViewBuilder
-    private func UserDetail(user: User) -> some View {
-        VStack {
-            HStack(spacing: 30) {
-                SDWebImageCircleIcon(nil,
-                                     width: 130,
-                                     height: 130,
-                                     defaultIcon: "person.fill"
-                )
-                .onTapGesture {
-                    router.push([.userProfile(mockUser)])
-                }
-                VStack(alignment: .leading, spacing: 15) {
-                    CustomText(user.name ?? "", .customTextColorWhite).font(.subheadline)
-                    CustomText(user.skillLevel?.jpName ?? "", .customTextColorWhite).font(.caption)
-                    CustomText(user.bio ?? "", .customTextColorWhite).font(.caption)
-                        .fixedSize(horizontal: false, vertical: true) // テキストが縦方向に展開
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-            }
-            Spacer().frame(height: 20)
-            Divider().frame(height: 0.8).background(.black.opacity(0.4)).padding(.horizontal, 30)
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
-                    ForEach(0..<4) { _ in
-                        RoundedRectangle(cornerRadius: 20)
-                            .frame(width: 200, height: 130)
-                            .foregroundStyle(.customAccentYellow.gradient)
-                    }
-                }
-                .padding(.vertical, 5)
-            }
-            Divider().frame(height: 0.8).background(.black.opacity(0.4)).padding(.horizontal, 30)
         }
     }
 }
