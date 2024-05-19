@@ -14,6 +14,7 @@ import Foundation
 
 struct Recruitment: Identifiable, Hashable {
     let id: String
+    let user: User
     let title: String
     let description: String
     let postedDate: Date
@@ -27,6 +28,7 @@ struct Recruitment: Identifiable, Hashable {
 
     init(
         id: String = UUID().uuidString,
+        user: User,
         title: String,
         description: String,
         postedDate: Date = Date(),
@@ -39,6 +41,7 @@ struct Recruitment: Identifiable, Hashable {
         additionalInfo: String? = nil
     ) {
         self.id = id
+        self.user = user
         self.title = title
         self.description = description
         self.postedDate = postedDate
@@ -56,8 +59,9 @@ struct Recruitment: Identifiable, Hashable {
 let exampleRecruitments = [
     Recruitment(
         id: UUID().uuidString,
+        user: mockUser,
         title: "ベーシスト募集！",
-        description: "ポップスバンドで経験豊富なベーシストを探しています。",
+        description: "ポップスバンドで経験豊富なベーシストを探しています。ポップスバンドで経験豊富なベーシストを探しています。ポップスバンドで経験豊富なベーシストを探しています。ポップスバンドで経験豊富なベーシストを探しています。ポップスバンドで経験豊富なベーシストを探しています。ポップスバンドで経験豊富なベーシストを探しています。ポップスバンドで経験豊富なベーシストを探しています。ポップスバンドで経験豊富なベーシストを探しています。",
         deadline: Calendar.current.date(byAdding: .day, value: 30, to: Date())!,
         genre: "ポップス",
         instrument: "ベース",
@@ -67,8 +71,9 @@ let exampleRecruitments = [
     ),
     Recruitment(
         id: UUID().uuidString,
+        user: mockUser,
         title: "ジャズドラマー募集中",
-        description: "ジャズバンドで一緒に演奏できるドラマーを探しています。",
+        description: "ジャズバンドで一緒に演奏できるドラマーを探しています。ジャズバンドで一緒に演奏できるドラマーを探しています。ジャズバンドで一緒に演奏できるドラマーを探しています。ジャズバンドで一緒に演奏できるドラマーを探しています。ジャズバンドで一緒に演奏できるドラマーを探しています。ジャズバンドで一緒に演奏できるドラマーを探しています。ジャズバンドで一緒に演奏できるドラマーを探しています。",
         deadline: Calendar.current.date(byAdding: .day, value: 45, to: Date())!,
         genre: "ジャズ",
         instrument: "ドラム",
@@ -78,8 +83,9 @@ let exampleRecruitments = [
     ),
     Recruitment(
         id: UUID().uuidString,
-        title: "キーボーディスト求む！",
-        description: "ポップスロックバンドでキーボードを担当できるメンバーを募集しています。",
+        user: mockUser,
+        title: "凄腕のキーボーディスト求む！",
+        description: "ポップスロックバンドでキーボードを担当できるメンバーを募集しています。ポップスロックバンドでキーボードを担当できるメンバーを募集しています。",
         deadline: Calendar.current.date(byAdding: .day, value: 25, to: Date())!,
         genre: "ポップスロック",
         instrument: "キーボード",

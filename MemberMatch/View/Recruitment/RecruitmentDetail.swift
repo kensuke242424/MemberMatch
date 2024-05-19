@@ -13,58 +13,44 @@ struct RecruitmentDetail: View {
     let recruitment: Recruitment
     @EnvironmentObject var router: Router
 
-    @State private var resetScrollToTop: Bool = false
-    @State private var collapseProgress: CGFloat = 0.0
-    @State private var tabTopOpacity: CGFloat = 0.0
-
-    let maxHeaderHeight: CGFloat = 300
-    let minHeaderHeight: CGFloat = 100
-    let overlapYOffset: CGFloat = 50
+    @StateObject var vm = RecruitmentDetailViewModel()
 
     var body: some View {
-        ScalingHeaderScrollView(header: {
-            Image("music_2")
-                .resizable()
-                .scaledToFill()
-                .frame(height: maxHeaderHeight)
-                .opacity(1 - collapseProgress)
-        }, content: {
-            VStack(spacing: -overlapYOffset) {
-                Rectangle()
-                    .foregroundStyle(
-                        LinearGradient(gradient: Gradient(colors: [.clear, .black.opacity(0.4)]),
-                                       startPoint: .init(x: 0, y: 0.7),
-                                       endPoint: .init(x: 0, y: 1))
-                    )
-                    .shadow(radius: 10)
-                    .blur(radius: 3)
-                    .opacity(1 - collapseProgress)
-                    .frame(height: maxHeaderHeight)
-                    .zIndex(200)
-                    .overlay(alignment: .bottomLeading) {
-                        CustomText("Rock climb", .customTextColorWhite)
-                            .zIndex(1000)
-                            .tracking(1)
-                            .font(.title3.bold())
-                            .frame(height: overlapYOffset)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .opacity(1 - tabTopOpacity)
-                            .padding(.horizontal)
-                    }
-
-
+        VStack(spacing: 0) {
+            TabTopBarView(
+                "募集の内容",
+                leftToolbarItems: {
+                    Image(systemName: Constants.toolBarPopIconName)
+                        .foregroundStyle(.gray)
+                        .frame(width: Constants.toolBarItemSize, height: Constants.toolBarItemSize)
+                        .background(Circle().foregroundStyle(.white))
+                        .onTapGesture { router.popRecruitmentPage() }
+                },
+                rightToolbarItems: {}
+            )
+            ScalingHeaderScrollView(header: {
+                ZStack {
+                    BlurView(style: .systemUltraThinMaterial).opacity(vm.isScrolledEndPoint ? 1 : 0)
+                    RecruitmentCard(recruitment: recruitment)
+                        .padding()
+                        .onTapGesture {
+                            if vm.collapseProgress <= 0 { return }
+                            withAnimation(.spring(duration: 0.2)){ vm.isOpenHeaderContents.toggle()}
+                        }
+                        .onPreferenceChange(SizePreferenceKey.self) { size in
+                            vm.recruitmentCardSize = size
+                        }
+                        .onAppear{ vm.maxHeaderHeight = vm.recruitmentCardSize.height + 30 }
+                }
+            }, content: {
                 VStack {
-
-                    Spacer().frame(height: overlapYOffset)
-
-                    UserDetail(user: mockUser).padding(.top)
                     WantedPartsDetail(title: "募集パート", desc: recruitment.description)
                     RecruitmentDetail(title: "募集の内容", desc: recruitment.description)
                     FrequencyDetail(title: "活動頻度", desc: recruitment.description)
                     LocationDetail(title: "活動場所", desc: recruitment.rehearsalLocation)
 
                     Button("メッセージを送る") {
-                        resetScrollToTop = true
+                        vm.resetScrollToTop()
                     }
                     .fontWeight(.bold)
                     .padding()
@@ -75,70 +61,130 @@ struct RecruitmentDetail: View {
                     Spacer().frame(height: 20)
                 }
                 .padding(.horizontal)
-                .gradientBackground()
-                .clippedToDeviceTopCorners()
-            }
-            .padding(.top, -maxHeaderHeight)
-            .zIndex(100)
-            .onChange(of: collapseProgress) { newValue in
-                if newValue > 0.9 {
-                    withAnimation(.spring(duration: 0.2)) { tabTopOpacity = newValue }
-                } else {
-                    withAnimation(.spring(duration: 0.2)) { tabTopOpacity = 0.0 }
-                }
-            }
-        })
-        .scrollToTop(resetScroll: $resetScrollToTop) // スクロールリセット
-        .allowsHeaderCollapse(true)
-        .allowsHeaderGrowth()
-        .setHeaderSnapMode(.disabled)
-        .collapseProgress($collapseProgress) // ヘッダーの折りたたみ状況
-        .height(min: minHeaderHeight, max: maxHeaderHeight) // ヘッダーの可変サイズ
-        .overlay(alignment: .top) {
-            TabTopBarView()
+                .padding(.vertical)
+            })
+            .height(min: vm.isOpenHeaderContents ? vm.maxHeaderHeight : vm.minHeaderHeight,
+                    max: vm.maxHeaderHeight
+            )
+            .scrollToTop(resetScroll: $vm.isResetScroll) // スクロールリセット
+            .allowsHeaderCollapse()
+            .headerAlignment(.top)
+            .allowsHeaderGrowth()
+            .collapseProgress($vm.collapseProgress) // ヘッダーの折りたたみ状況
         }
-        //        .gradientBackground()
+        .gradientBackground()
         .ignoresSafeArea(edges: .top)
         .navigationBarBackButtonHidden()
     }
+}
+
+struct SizePreferenceKey: PreferenceKey {
+    typealias Value = CGSize
+    static var defaultValue: CGSize = .zero
+
+    static func reduce(value: inout CGSize, nextValue: () -> CGSize) {
+        value = nextValue()
+    }
+}
+
+extension RecruitmentDetail {
     @ViewBuilder
-    /// タブビューのカスタムトップナビゲーションバー
-    func TabTopBarView() -> some View {
-        GeometryReader {
-            let size = $0.size
-            let iconSize: CGFloat = 30
-            HStack {
-                RoundedRectangle(cornerRadius: 10).frame(width: 30, height: 30)
-                Text("Rock climb")
-                    .font(.title3)
-                    .fontWeight(.semibold)
-                    .tracking(1)
-                    .contentShape(Rectangle())
-            }
-            .opacity(tabTopOpacity)
-            .frame(maxWidth: .infinity)
-            .onTapGesture { resetScrollToTop = true }
-            .overlay {
+    private func RecruitmentCard(recruitment: Recruitment) -> some View {
+        ZStack {
+            // コルクボードデザイン
+            RoundedRectangle(cornerRadius: 10)
+                .fill(Color.corkTexture)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.woodFrame, lineWidth: 5)
+                )
+                .shadow(radius: 5)
+
+            // 紙デザインの要素
+            VStack(spacing: 4) {
+                CustomText(recruitment.title, .customTextColorBlack)
+                    .lineLimit(!vm.isScrolledMidPoint || vm.isOpenHeaderContents  ? 10 : 1)
+                    .font(!vm.isScrolledMidPoint || vm.isOpenHeaderContents ? .title3 : .subheadline)
+                    .frame(maxWidth: .infinity,
+                           alignment: !vm.isScrolledMidPoint || vm.isOpenHeaderContents ? .center : .leading)
+                    .fontWeight(.bold)
+                    .padding(.bottom, !vm.isScrolledMidPoint || vm.isOpenHeaderContents ? 10 : 0)
                 HStack {
-                    Circle().frame(width: iconSize, height: iconSize).foregroundStyle(.white)
-                        .overlay(Image(systemName: "arrow.left"))
-                        .onTapGesture { router.popRecruitmentPage() }
-                    Spacer()
-                    Circle().frame(width: iconSize, height: iconSize).foregroundStyle(.white)
-                        .overlay(Image(systemName: "ellipsis"))
-                        .onTapGesture {}
-                } // HStack
-                .padding(.horizontal, 20)
+                    VStack(spacing: 8) {
+                        CustomText("掲載者：\(recruitment.user.name ?? "名無し")", .black)
+                            .lineLimit(!vm.isScrolledMidPoint || vm.isOpenHeaderContents ? 100 : 2)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .multilineTextAlignment(.leading)
+                            .font(.caption)
+                        CustomText(recruitment.description, .gray)
+                            .lineLimit(!vm.isScrolledMidPoint || vm.isOpenHeaderContents ? 100 : 2)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .multilineTextAlignment(.leading)
+                            .font(.caption)
+                    }
+
+                    VStack {
+                        Circle()
+                            .foregroundStyle(.customAccentYellow)
+                            .shadow(radius: 2)
+                            .frame(width: !vm.isScrolledMidPoint || vm.isOpenHeaderContents ? 70 : 50,
+                                   height: !vm.isScrolledMidPoint || vm.isOpenHeaderContents ? 70 : 50)
+
+                        if !vm.isScrolledMidPoint || vm.isOpenHeaderContents {
+                            Button("Profile") {
+                                router.push([.userProfile(mockUser)])
+                            }
+                            .font(.caption2.bold())
+                            .buttonStyle(.borderedProminent)
+
+                        }
+                    }
+                    .padding(.leading, 5)
+                }
+                .padding(.bottom, !vm.isScrolledMidPoint || vm.isOpenHeaderContents ? 10 : 0)
+
+                HStack {
+                    CustomText("気になる", .gray).font(.caption).fontWeight(.bold)
+                    Image(systemName: "heart.fill").foregroundStyle(.red)
+                    CustomText("50", .gray).font(.caption).fontWeight(.bold)
+                    Spacer().frame(width: 20)
+                    CustomText("掲載日：あと 7日", .gray).font(.caption).fontWeight(.bold)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                if !vm.isScrolledStartPoint || vm.isOpenHeaderContents {
+                    VStack {
+                        Divider().frame(height: 0.2).background(.black.opacity(0.1)).padding(.horizontal, 30)
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack {
+                                ForEach(0..<4) { _ in
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .frame(width: 150, height: 100)
+                                        .foregroundStyle(.customAccentYellow.gradient)
+                                }
+                            }
+                            .padding(.vertical, 5)
+                        }
+                        Divider().frame(height: 0.2).background(.black.opacity(0.1)).padding(.horizontal, 30)
+                    }
+                    .padding(.top)
+                }
             }
-            .padding(.top, 60)
-        } // Geometry
-        .frame(height: minHeaderHeight)
-        .background(
-            Color.clear.overlay {
-                BlurView(style: .systemUltraThinMaterial).ignoresSafeArea(edges: .top)
+            .padding(.horizontal)
+            .padding(.vertical, 14)
+            .fixedSize(horizontal: false, vertical: true) // テキストが縦方向に展開
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+            .background(RoundedRectangle(cornerRadius: 2).fill(Color.white).shadow(radius: 5))
+            .overlay(alignment: .top) {
+                PinView(offsetX: 0, offsetY: -6)
             }
-                .opacity(tabTopOpacity)
-        )
+            .padding(8)
+        }
+        .overlay {
+            GeometryReader { geometry in
+                Color.clear.preference(key: SizePreferenceKey.self, value: geometry.size)
+            }
+        }
     }
 }
 

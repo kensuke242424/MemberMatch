@@ -17,48 +17,46 @@ struct UserProfileView: View {
     @State private var collapseProgress: CGFloat = 0.0
     @State private var tabTopOpacity: CGFloat = 0.0
 
-    let maxHeaderHeight: CGFloat = 350
+    let maxHeaderHeight: CGFloat = 320
     let minHeaderHeight: CGFloat = 100
     let overlapYOffset: CGFloat = 50
 
     var body: some View {
         ScalingHeaderScrollView(header: {
-            Image("music_2")
+            Image("music_1")
                 .resizable()
-
                 .scaledToFill()
                 .frame(width: UIScreen.main.bounds.width)
-                .clipShape(BottomClipShape())
                 .frame(height: maxHeaderHeight)
                 .opacity(1 - collapseProgress)
-                .overlay {
-                    Rectangle()
-                        .foregroundStyle(
-                            LinearGradient(gradient: Gradient(colors: [.clear, .black.opacity(0.8)]),
-                                           startPoint: .init(x: 0, y: 0.9),
-                                           endPoint: .init(x: 0, y: 1))
-                        )
-                        .shadow(radius: 10)
-                        .blur(radius: 20)
-                        .opacity(1 - collapseProgress)
-                        .frame(height: maxHeaderHeight)
-                        .overlay(alignment: .bottomLeading) {
-                            CustomText("Rock climb", .customTextColorWhite)
-                                .zIndex(1000)
-                                .tracking(1)
-                                .font(.title3.bold())
-                                .frame(height: overlapYOffset)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .opacity(1 - tabTopOpacity)
-                                .padding(.horizontal)
-                        }
-                }
-                .background(BlurView(style: .systemUltraThinMaterial).ignoresSafeArea(edges: .top))
-
         }, content: {
-            VStack {
+            VStack(spacing: -overlapYOffset) {
+                Rectangle()
+                    .foregroundStyle(
+                        LinearGradient(gradient: Gradient(colors: [.clear, .black.opacity(0.3)]),
+                                       startPoint: .init(x: 0, y: 0.7),
+                                       endPoint: .init(x: 0, y: 1))
+                    )
+                    .shadow(radius: 2)
+                    .blur(radius: 15)
+                    .opacity(1 - collapseProgress)
+                    .frame(height: maxHeaderHeight)
+                    .zIndex(200)
+                    .overlay(alignment: .bottomLeading) {
+                        CustomText("Rock climb", .customTextColorWhite)
+                            .zIndex(1000)
+                            .tracking(1)
+                            .font(.title3.bold())
+                            .frame(height: overlapYOffset)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .opacity(1 - tabTopOpacity)
+                            .padding(.horizontal)
+                    }
 
                 VStack {
+
+                    Spacer().frame(height: overlapYOffset)
+
                     UserDetail(user: mockUser).padding(.top)
                     WantedPartsDetail(title: "募集パート", desc: user.bio ?? "")
                     RecruitmentDetail(title: "募集の内容", desc: user.bio ?? "")
@@ -77,10 +75,12 @@ struct UserProfileView: View {
                     Spacer().frame(height: 20)
                 }
                 .padding(.horizontal)
-//                .gradientBackground()
+                .gradientBackground()
                 .clippedToDeviceTopCorners()
+                .shadow(radius: 6)
             }
-//            .zIndex(100)
+            .padding(.top, -maxHeaderHeight)
+            .zIndex(100)
             .onChange(of: collapseProgress) { newValue in
                 if newValue > 0.9 {
                     withAnimation(.spring(duration: 0.2)) { tabTopOpacity = newValue }
@@ -98,22 +98,22 @@ struct UserProfileView: View {
         .overlay(alignment: .top) {
             TabTopBarView()
         }
-                .gradientBackground()
         .ignoresSafeArea(edges: .top)
         .navigationBarBackButtonHidden()
     }
     @ViewBuilder
     /// タブビューのカスタムトップナビゲーションバー
     func TabTopBarView() -> some View {
-        GeometryReader {
-            let size = $0.size
+
+
             let iconSize: CGFloat = 30
             HStack {
                 RoundedRectangle(cornerRadius: 10).frame(width: 30, height: 30)
                 Text("Rock climb")
+                    .tracking(1)
+                    .lineLimit(1)
                     .font(.title3)
                     .fontWeight(.semibold)
-                    .tracking(1)
                     .contentShape(Rectangle())
             }
             .opacity(tabTopOpacity)
@@ -122,24 +122,24 @@ struct UserProfileView: View {
             .overlay {
                 HStack {
                     Circle().frame(width: iconSize, height: iconSize).foregroundStyle(.white)
-                        .overlay(Image(systemName: "arrow.left"))
+                        .overlay(Image(systemName: "arrow.left").foregroundColor(.gray))
                         .onTapGesture { router.popRecruitmentPage() }
                     Spacer()
                     Circle().frame(width: iconSize, height: iconSize).foregroundStyle(.white)
-                        .overlay(Image(systemName: "ellipsis"))
+                        .overlay(Image(systemName: "ellipsis").foregroundStyle(.gray))
                         .onTapGesture {}
                 } // HStack
                 .padding(.horizontal, 20)
             }
             .padding(.top, 60)
-        } // Geometry
+
         .frame(height: minHeaderHeight)
-        //        .background(
-        //            Color.clear.overlay {
-        //                BlurView(style: .systemUltraThinMaterial).ignoresSafeArea(edges: .top)
-        //            }
-        //                .opacity(tabTopOpacity)
-        //        )
+        .background(
+            Color.clear.overlay {
+                BlurView(style: .systemUltraThinMaterial).ignoresSafeArea(edges: .top)
+            }
+                .opacity(tabTopOpacity)
+        )
     }
 }
 
