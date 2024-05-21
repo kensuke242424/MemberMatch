@@ -100,6 +100,7 @@ extension RecruitmentBoardView {
                     Circle().foregroundStyle(.customAccentYellow).shadow(radius: 2)
                 }
                 HStack {
+                    
                     CustomText("気になる", .gray).font(.caption).fontWeight(.bold)
                     Image(systemName: "heart.fill").foregroundStyle(.red)
                     CustomText("50", .gray).font(.caption).fontWeight(.bold)
