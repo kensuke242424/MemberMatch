@@ -20,6 +20,7 @@ struct RecruitmentBoardView: View {
     @State private var browsing: Browsing = .all
 
     var body: some View {
+        
         VStack(spacing: 0) {
             TabTopBarView(
                 "メンバー募集",
