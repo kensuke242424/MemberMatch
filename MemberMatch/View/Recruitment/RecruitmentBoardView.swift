@@ -20,13 +20,14 @@ struct RecruitmentBoardView: View {
     @State private var browsing: Browsing = .all
 
     var body: some View {
-        
+
         VStack(spacing: 0) {
             TabTopBarView(
                 "メンバー募集",
                 leftToolbarItems: {},
                 rightToolbarItems: {}
             )
+            
             HStack {
                 Text("すべて")
                     .fontWeight(.bold)
