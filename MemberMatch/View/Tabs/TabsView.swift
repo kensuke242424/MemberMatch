@@ -90,7 +90,7 @@ struct TabsView: View {
             }
             .tabItem { Label("プロフ", systemImage: "person.crop.rectangle") }
             .tag(5)
-        }
+        } // TabView
     }
 }
 

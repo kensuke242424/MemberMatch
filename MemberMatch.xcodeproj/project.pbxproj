@@ -36,9 +36,10 @@
 		BED4B2572BF3D74B00C49EB5 /* Prefecture.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4B2562BF3D74B00C49EB5 /* Prefecture.swift */; };
 		BEE3F8662BFA35B4007D5328 /* TabTopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE3F8652BFA35B4007D5328 /* TabTopBarView.swift */; };
 		BEE3F8692BFA428B007D5328 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE3F8682BFA428B007D5328 /* Constants.swift */; };
+		BEE3F86E2C0AE70F007D5328 /* UIScreenExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE3F86D2C0AE70F007D5328 /* UIScreenExtension.swift */; };
 		BEE55DD62BF65BA000299883 /* ScalingHeaderScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = BEE55DD52BF65BA000299883 /* ScalingHeaderScrollView */; };
 		BEE55DDB2BF84BAE00299883 /* TopCornersRoundedRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE55DDA2BF84BAE00299883 /* TopCornersRoundedRectangle.swift */; };
-		BEE55DDD2BF84FE100299883 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE55DDC2BF84FE100299883 /* UIDevice.swift */; };
+		BEE55DDD2BF84FE100299883 /* UIDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE55DDC2BF84FE100299883 /* UIDeviceExtension.swift */; };
 		BEE55DDF2BF888BF00299883 /* BottomClipShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE55DDE2BF888BF00299883 /* BottomClipShape.swift */; };
 		BEE55DE12BF9B28200299883 /* CorkBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE55DE02BF9B28200299883 /* CorkBoardView.swift */; };
 		BEE55DE32BFA293500299883 /* RecruitmentDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE55DE22BFA293500299883 /* RecruitmentDetailViewModel.swift */; };
@@ -78,8 +79,9 @@
 		BED4B2562BF3D74B00C49EB5 /* Prefecture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prefecture.swift; sourceTree = "<group>"; };
 		BEE3F8652BFA35B4007D5328 /* TabTopBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabTopBarView.swift; sourceTree = "<group>"; };
 		BEE3F8682BFA428B007D5328 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		BEE3F86D2C0AE70F007D5328 /* UIScreenExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreenExtension.swift; sourceTree = "<group>"; };
 		BEE55DDA2BF84BAE00299883 /* TopCornersRoundedRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCornersRoundedRectangle.swift; sourceTree = "<group>"; };
-		BEE55DDC2BF84FE100299883 /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
+		BEE55DDC2BF84FE100299883 /* UIDeviceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceExtension.swift; sourceTree = "<group>"; };
 		BEE55DDE2BF888BF00299883 /* BottomClipShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomClipShape.swift; sourceTree = "<group>"; };
 		BEE55DE02BF9B28200299883 /* CorkBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorkBoardView.swift; sourceTree = "<group>"; };
 		BEE55DE22BFA293500299883 /* RecruitmentDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecruitmentDetailViewModel.swift; sourceTree = "<group>"; };
@@ -124,7 +126,8 @@
 			isa = PBXGroup;
 			children = (
 				BED4B2122BEFC8C700C49EB5 /* ViewExtension.swift */,
-				BEE55DDC2BF84FE100299883 /* UIDevice.swift */,
+				BEE55DDC2BF84FE100299883 /* UIDeviceExtension.swift */,
+				BEE3F86D2C0AE70F007D5328 /* UIScreenExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -460,6 +463,7 @@
 				BEFAE4E42BDE73A000CADC73 /* TabsView.swift in Sources */,
 				BED4B23F2BF259A600C49EB5 /* RootView.swift in Sources */,
 				BED4B2392BF086B500C49EB5 /* SDWebImageCircleIcon.swift in Sources */,
+				BEE3F86E2C0AE70F007D5328 /* UIScreenExtension.swift in Sources */,
 				BED4B20E2BE99A3F00C49EB5 /* SignUpView.swift in Sources */,
 				BED4B2522BF3D04F00C49EB5 /* SkillLevel.swift in Sources */,
 				BED4B2552BF3D1BF00C49EB5 /* CommitmentLevel.swift in Sources */,
@@ -477,7 +481,7 @@
 				BED4B20B2BE999C700C49EB5 /* LoginView.swift in Sources */,
 				BED4B2232BEFD5DA00C49EB5 /* RecruitmentBoardView.swift in Sources */,
 				BED4B2292BEFD5FE00C49EB5 /* ProfileView.swift in Sources */,
-				BEE55DDD2BF84FE100299883 /* UIDevice.swift in Sources */,
+				BEE55DDD2BF84FE100299883 /* UIDeviceExtension.swift in Sources */,
 				BEFAE4E22BDE73A000CADC73 /* MemberMatchApp.swift in Sources */,
 				BED4B2362BF0788800C49EB5 /* User.swift in Sources */,
 				BED4B2572BF3D74B00C49EB5 /* Prefecture.swift in Sources */,

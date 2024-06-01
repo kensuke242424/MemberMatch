@@ -8,8 +8,24 @@
 import SwiftUI
 import ScalingHeaderScrollView
 
-enum Browsing {
+enum Browse: CaseIterable {
     case all, single, group
+
+    var index: Int {
+        switch self {
+        case .all: 0
+        case .single: 1
+        case .group: 2
+        }
+    }
+
+    var title: String {
+        switch self {
+        case .all: "全て"
+        case .single: "個人"
+        case .group: "グループ"
+        }
+    }
 }
 
 struct RecruitmentBoardView: View {
@@ -17,66 +33,110 @@ struct RecruitmentBoardView: View {
 
     @StateObject private var vm = RecruitmentBoardViewModel()
 
-    @State private var browsing: Browsing = .all
+    @State private var browsing: Browse = .all
+    @State private var pageTabIndex = 1
+    @State private var browsingOffset: CGFloat = 0
+    @State private var indicatorWidth: CGFloat = 0
+    @State private var indicatorPosition: CGFloat = 0
 
     var body: some View {
-
         VStack(spacing: 0) {
             TabTopBarView(
-                "メンバー募集",
+                "募集掲示板",
                 leftToolbarItems: {},
                 rightToolbarItems: {}
             )
-            
             HStack {
-                Text("すべて")
-                    .fontWeight(.bold)
-                    .opacity(browsing == .all ? 1 : 0.4)
-                    .frame(maxWidth: .infinity)
-                    .overlay(alignment: .bottom) {
-                        if browsing == .all {
-                            RoundedRectangle(cornerRadius: 10).frame(height: 1).offset(y: 4)
+                ForEach(Browse.allCases, id: \.self) { browse in
+                    Text(browse.title)
+                        .fontWeight(.bold)
+                        .opacity(browsing == browse ? 1 : 0.4)
+                        .frame(maxWidth: .infinity)
+                        .overlay(alignment: .bottom) {
+                            if browsing == browse {
+                                RoundedRectangle(cornerRadius: 10).frame(height: 1).offset(y: 4)
+                            }
                         }
-                    }
-                    .onTapGesture { withAnimation(.spring(duration: 0.4)) { browsing = .all } }
-                Text("｜")
-                Text("個人")
-                    .fontWeight(.bold)
-                    .opacity(browsing == .single ? 1 : 0.4)
-                    .frame(maxWidth: .infinity)
-                    .overlay(alignment: .bottom) {
-                        if browsing == .single {
-                            RoundedRectangle(cornerRadius: 10).frame(height: 1).offset(y: 4)
+                        .background {
+                            Color.black.opacity(0.0001)
+                                .onTapGesture {
+                                    withAnimation(.spring(duration: 0.4)) { browsing = browse }
+                                }
                         }
+                    if browse != .group {
+                        Text("｜")
                     }
-                    .onTapGesture { withAnimation(.spring(duration: 0.4)) { browsing = .single } }
-                Text("｜")
-                Text("グループ")
-                    .fontWeight(.bold)
-                    .opacity(browsing == .group ? 1 : 0.4)
-                    .frame(maxWidth: .infinity)
-                    .overlay(alignment: .bottom) {
-                        if browsing == .group {
-                            RoundedRectangle(cornerRadius: 10).frame(height: 1).offset(y: 4)
-                        }
-                    }
-                    .onTapGesture { withAnimation(.spring(duration: 0.4)) { browsing = .group } }
+                }
             }
             .padding(.vertical, 10)
             .padding(.horizontal)
             .background(BlurView(style: .systemUltraThinMaterial))
 
-            ScrollView() {
-                Spacer().frame(height: 20) // スクロール下部の余白
-                ForEach(vm.recruitments) { recruitment in
-                    RecruitmentCard(recruitment: recruitment)
-                }
-                .padding(.horizontal)
-                Spacer().frame(height: 20) // スクロール下部の余白
+            TabView(selection: $browsing) {
+                BrowseContentAll().tag(Browse.all)
+                BrowseContentSingle().tag(Browse.single)
+                BrowseContentGroup().tag(Browse.group)
             }
+            .tabViewStyle(.page(indexDisplayMode: .never))
         }
         .ignoresSafeArea(edges: .top)
         .gradientBackground()
+    }
+}
+
+extension RecruitmentBoardView {
+    @ViewBuilder
+    private func BrowseContentAll() -> some View {
+        ScrollView() {
+            Spacer().frame(height: 20) // スクロール下部の余白
+            ForEach(vm.recruitments) { recruitment in
+                RecruitmentCard(recruitment: recruitment)
+            }
+            .padding(.horizontal)
+            Spacer().frame(height: 20) // スクロール下部の余白
+        }
+        .gradientBackground()
+        .offsetX { rect in
+            if browsing == .all {
+                browsingOffset = rect.minX - rect.width * CGFloat(Browse.all.index)
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func BrowseContentSingle() -> some View {
+        ScrollView() {
+            Spacer().frame(height: 20) // スクロール下部の余白
+            ForEach(vm.recruitments) { recruitment in
+                RecruitmentCard(recruitment: recruitment)
+            }
+            .padding(.horizontal)
+            Spacer().frame(height: 20) // スクロール下部の余白
+        }
+        .gradientBackground()
+        .offsetX { rect in
+            if browsing == .single {
+                browsingOffset = rect.minX - rect.width * CGFloat(Browse.single.index)
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func BrowseContentGroup() -> some View {
+        ScrollView() {
+            Spacer().frame(height: 20) // スクロール下部の余白
+            ForEach(vm.recruitments) { recruitment in
+                RecruitmentCard(recruitment: recruitment)
+            }
+            .padding(.horizontal)
+            Spacer().frame(height: 20) // スクロール下部の余白
+        }
+        .gradientBackground()
+        .offsetX { rect in
+            if browsing == .group {
+                browsingOffset = rect.minX - rect.width * CGFloat(Browse.group.index)
+            }
+        }
     }
 }
 
