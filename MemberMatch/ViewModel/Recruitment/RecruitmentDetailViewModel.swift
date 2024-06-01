@@ -20,9 +20,13 @@ class RecruitmentDetailViewModel: ObservableObject {
     @Published var isScrolledStartPoint: Bool = false
     @Published var isScrolledMidPoint: Bool = false
     @Published var isScrolledEndPoint: Bool = false
+    @Published var isAlreadyShown: Bool = false
+    @Published var isFixedCard: Bool = false
     @Published var recruitmentCardSize: CGSize = .zero
     @Published var maxHeaderHeight: CGFloat = .zero
-    @Published var minHeaderHeight: CGFloat = 160
+    var minHeaderHeight: CGFloat {
+        self.isFixedCard ? 160 : 0
+    }
 
     let toolBarHeight: CGFloat = 100
 

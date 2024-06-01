@@ -20,13 +20,20 @@ struct RecruitmentDetail: View {
             TabTopBarView(
                 "募集の内容",
                 leftToolbarItems: {
-                    Image(systemName: Constants.toolBarPopIconName)
+                    Image(systemName: Constants.Symbol_chevron_backward)
                         .foregroundStyle(.gray)
                         .frame(width: Constants.toolBarItemSize, height: Constants.toolBarItemSize)
                         .background(Circle().foregroundStyle(.white))
                         .onTapGesture { router.popRecruitmentPage() }
                 },
-                rightToolbarItems: {}
+                rightToolbarItems: {
+                    Image(systemName: vm.isFixedCard ?
+                          Constants.Symbol_pin_fill : Constants.Symbol_pin)
+                        .foregroundStyle(.gray)
+                        .frame(width: Constants.toolBarItemSize, height: Constants.toolBarItemSize)
+                        .background(Circle().foregroundStyle(.white))
+                        .onTapGesture { vm.isFixedCard.toggle() }
+                }
             )
             ScalingHeaderScrollView(header: {
                 ZStack {
@@ -40,7 +47,12 @@ struct RecruitmentDetail: View {
                         .onPreferenceChange(SizePreferenceKey.self) { size in
                             vm.recruitmentCardSize = size
                         }
-                        .onAppear{ vm.maxHeaderHeight = vm.recruitmentCardSize.height + 30 }
+                        .onAppear{
+                            //MEMO: タブ切り替えによって再度処理が走ることを防ぐ
+                            if vm.isAlreadyShown { return }
+                            vm.maxHeaderHeight = vm.recruitmentCardSize.height + 30
+                            vm.isAlreadyShown.toggle()
+                        }
                 }
             }, content: {
                 VStack {
