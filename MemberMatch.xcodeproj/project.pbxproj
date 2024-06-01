@@ -37,6 +37,7 @@
 		BEE3F8662BFA35B4007D5328 /* TabTopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE3F8652BFA35B4007D5328 /* TabTopBarView.swift */; };
 		BEE3F8692BFA428B007D5328 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE3F8682BFA428B007D5328 /* Constants.swift */; };
 		BEE3F86E2C0AE70F007D5328 /* UIScreenExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE3F86D2C0AE70F007D5328 /* UIScreenExtension.swift */; };
+		BEE3F8712C0AFBD0007D5328 /* Browse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE3F8702C0AFBD0007D5328 /* Browse.swift */; };
 		BEE55DD62BF65BA000299883 /* ScalingHeaderScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = BEE55DD52BF65BA000299883 /* ScalingHeaderScrollView */; };
 		BEE55DDB2BF84BAE00299883 /* TopCornersRoundedRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE55DDA2BF84BAE00299883 /* TopCornersRoundedRectangle.swift */; };
 		BEE55DDD2BF84FE100299883 /* UIDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE55DDC2BF84FE100299883 /* UIDeviceExtension.swift */; };
@@ -80,6 +81,7 @@
 		BEE3F8652BFA35B4007D5328 /* TabTopBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabTopBarView.swift; sourceTree = "<group>"; };
 		BEE3F8682BFA428B007D5328 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BEE3F86D2C0AE70F007D5328 /* UIScreenExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreenExtension.swift; sourceTree = "<group>"; };
+		BEE3F8702C0AFBD0007D5328 /* Browse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Browse.swift; sourceTree = "<group>"; };
 		BEE55DDA2BF84BAE00299883 /* TopCornersRoundedRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCornersRoundedRectangle.swift; sourceTree = "<group>"; };
 		BEE55DDC2BF84FE100299883 /* UIDeviceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceExtension.swift; sourceTree = "<group>"; };
 		BEE55DDE2BF888BF00299883 /* BottomClipShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomClipShape.swift; sourceTree = "<group>"; };
@@ -284,6 +286,14 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
+		BEE3F86F2C0AFBC4007D5328 /* Browse */ = {
+			isa = PBXGroup;
+			children = (
+				BEE3F8702C0AFBD0007D5328 /* Browse.swift */,
+			);
+			path = Browse;
+			sourceTree = "<group>";
+		};
 		BEFAE4D52BDE73A000CADC73 = {
 			isa = PBXGroup;
 			children = (
@@ -325,6 +335,7 @@
 		BEFAE4EF2BDE759A00CADC73 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				BEE3F86F2C0AFBC4007D5328 /* Browse */,
 				BED4B2532BF3D07E00C49EB5 /* Common */,
 				BED4B2472BF3BE9200C49EB5 /* Team */,
 				BED4B2342BF0787800C49EB5 /* User */,
@@ -477,6 +488,7 @@
 				BED4B2492BF3BEA100C49EB5 /* Team.swift in Sources */,
 				BED4B2252BEFD5E700C49EB5 /* MessageView.swift in Sources */,
 				BEE55DDF2BF888BF00299883 /* BottomClipShape.swift in Sources */,
+				BEE3F8712C0AFBD0007D5328 /* Browse.swift in Sources */,
 				BED4B2132BEFC8C700C49EB5 /* ViewExtension.swift in Sources */,
 				BED4B20B2BE999C700C49EB5 /* LoginView.swift in Sources */,
 				BED4B2232BEFD5DA00C49EB5 /* RecruitmentBoardView.swift in Sources */,

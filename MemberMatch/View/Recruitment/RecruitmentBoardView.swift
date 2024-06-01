@@ -8,26 +8,6 @@
 import SwiftUI
 import ScalingHeaderScrollView
 
-enum Browse: CaseIterable {
-    case all, single, group
-
-    var index: Int {
-        switch self {
-        case .all: 0
-        case .single: 1
-        case .group: 2
-        }
-    }
-
-    var title: String {
-        switch self {
-        case .all: "全て"
-        case .single: "個人"
-        case .group: "グループ"
-        }
-    }
-}
-
 struct RecruitmentBoardView: View {
     @EnvironmentObject var router: Router
 
@@ -36,8 +16,6 @@ struct RecruitmentBoardView: View {
     @State private var browsing: Browse = .all
     @State private var pageTabIndex = 1
     @State private var browsingOffset: CGFloat = 0
-    @State private var indicatorWidth: CGFloat = 0
-    @State private var indicatorPosition: CGFloat = 0
 
     var body: some View {
         VStack(spacing: 0) {
@@ -54,7 +32,7 @@ struct RecruitmentBoardView: View {
                         .frame(maxWidth: .infinity)
                         .overlay(alignment: .bottom) {
                             if browsing == browse {
-                                RoundedRectangle(cornerRadius: 10).frame(height: 1).offset(y: 4)
+                                Rectangle().frame(height: 1).offset(y: 4)
                             }
                         }
                         .background {
@@ -64,7 +42,7 @@ struct RecruitmentBoardView: View {
                                 }
                         }
                     if browse != .group {
-                        Text("｜")
+                        Text("｜").opacity(0.3)
                     }
                 }
             }
@@ -73,9 +51,12 @@ struct RecruitmentBoardView: View {
             .background(BlurView(style: .systemUltraThinMaterial))
 
             TabView(selection: $browsing) {
-                BrowseContentAll().tag(Browse.all)
-                BrowseContentSingle().tag(Browse.single)
-                BrowseContentGroup().tag(Browse.group)
+                Group {
+                    BrowseContentAll().tag(Browse.all)
+                    BrowseContentSingle().tag(Browse.single)
+                    BrowseContentGroup().tag(Browse.group)
+                }
+                .gradientBackground()
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
         }
@@ -95,7 +76,6 @@ extension RecruitmentBoardView {
             .padding(.horizontal)
             Spacer().frame(height: 20) // スクロール下部の余白
         }
-        .gradientBackground()
         .offsetX { rect in
             if browsing == .all {
                 browsingOffset = rect.minX - rect.width * CGFloat(Browse.all.index)
@@ -113,7 +93,6 @@ extension RecruitmentBoardView {
             .padding(.horizontal)
             Spacer().frame(height: 20) // スクロール下部の余白
         }
-        .gradientBackground()
         .offsetX { rect in
             if browsing == .single {
                 browsingOffset = rect.minX - rect.width * CGFloat(Browse.single.index)
@@ -131,7 +110,6 @@ extension RecruitmentBoardView {
             .padding(.horizontal)
             Spacer().frame(height: 20) // スクロール下部の余白
         }
-        .gradientBackground()
         .offsetX { rect in
             if browsing == .group {
                 browsingOffset = rect.minX - rect.width * CGFloat(Browse.group.index)
