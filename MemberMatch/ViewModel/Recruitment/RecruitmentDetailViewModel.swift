@@ -16,7 +16,7 @@ class RecruitmentDetailViewModel: ObservableObject {
 
     @Published var isResetScroll: Bool = false
     @Published var isShowTopBarBackground: Bool = false
-    @Published var isOpenHeaderContents: Bool = false
+    @Published var isFullOpenCard: Bool = false
     @Published var isScrolledStartPoint: Bool = false
     @Published var isScrolledMidPoint: Bool = false
     @Published var isScrolledEndPoint: Bool = false

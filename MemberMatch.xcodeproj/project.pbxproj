@@ -38,6 +38,7 @@
 		BEE3F8692BFA428B007D5328 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE3F8682BFA428B007D5328 /* Constants.swift */; };
 		BEE3F86E2C0AE70F007D5328 /* UIScreenExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE3F86D2C0AE70F007D5328 /* UIScreenExtension.swift */; };
 		BEE3F8712C0AFBD0007D5328 /* Browse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE3F8702C0AFBD0007D5328 /* Browse.swift */; };
+		BEE3F8742C0CB030007D5328 /* Policy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE3F8732C0CB030007D5328 /* Policy.swift */; };
 		BEE55DD62BF65BA000299883 /* ScalingHeaderScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = BEE55DD52BF65BA000299883 /* ScalingHeaderScrollView */; };
 		BEE55DDB2BF84BAE00299883 /* TopCornersRoundedRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE55DDA2BF84BAE00299883 /* TopCornersRoundedRectangle.swift */; };
 		BEE55DDD2BF84FE100299883 /* UIDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE55DDC2BF84FE100299883 /* UIDeviceExtension.swift */; };
@@ -82,6 +83,7 @@
 		BEE3F8682BFA428B007D5328 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BEE3F86D2C0AE70F007D5328 /* UIScreenExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreenExtension.swift; sourceTree = "<group>"; };
 		BEE3F8702C0AFBD0007D5328 /* Browse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Browse.swift; sourceTree = "<group>"; };
+		BEE3F8732C0CB030007D5328 /* Policy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Policy.swift; sourceTree = "<group>"; };
 		BEE55DDA2BF84BAE00299883 /* TopCornersRoundedRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCornersRoundedRectangle.swift; sourceTree = "<group>"; };
 		BEE55DDC2BF84FE100299883 /* UIDeviceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceExtension.swift; sourceTree = "<group>"; };
 		BEE55DDE2BF888BF00299883 /* BottomClipShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomClipShape.swift; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 				BED4B24B2BF3C17A00C49EB5 /* MusicGenre.swift */,
 				BED4B2542BF3D1BF00C49EB5 /* CommitmentLevel.swift */,
 				BED4B2562BF3D74B00C49EB5 /* Prefecture.swift */,
+				BEE3F8732C0CB030007D5328 /* Policy.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -476,6 +479,7 @@
 				BED4B2392BF086B500C49EB5 /* SDWebImageCircleIcon.swift in Sources */,
 				BEE3F86E2C0AE70F007D5328 /* UIScreenExtension.swift in Sources */,
 				BED4B20E2BE99A3F00C49EB5 /* SignUpView.swift in Sources */,
+				BEE3F8742C0CB030007D5328 /* Policy.swift in Sources */,
 				BED4B2522BF3D04F00C49EB5 /* SkillLevel.swift in Sources */,
 				BED4B2552BF3D1BF00C49EB5 /* CommitmentLevel.swift in Sources */,
 				BED4B2442BF3BCD100C49EB5 /* UserProfileView.swift in Sources */,

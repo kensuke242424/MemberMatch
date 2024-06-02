@@ -76,7 +76,7 @@ extension RecruitmentBoardView {
             .padding(.horizontal)
             Spacer().frame(height: 20) // スクロール下部の余白
         }
-        .offsetX { rect in
+        .offsetRect { rect in
             if browsing == .all {
                 browsingOffset = rect.minX - rect.width * CGFloat(Browse.all.index)
             }
@@ -93,7 +93,7 @@ extension RecruitmentBoardView {
             .padding(.horizontal)
             Spacer().frame(height: 20) // スクロール下部の余白
         }
-        .offsetX { rect in
+        .offsetRect { rect in
             if browsing == .single {
                 browsingOffset = rect.minX - rect.width * CGFloat(Browse.single.index)
             }
@@ -110,7 +110,7 @@ extension RecruitmentBoardView {
             .padding(.horizontal)
             Spacer().frame(height: 20) // スクロール下部の余白
         }
-        .offsetX { rect in
+        .offsetRect { rect in
             if browsing == .group {
                 browsingOffset = rect.minX - rect.width * CGFloat(Browse.group.index)
             }

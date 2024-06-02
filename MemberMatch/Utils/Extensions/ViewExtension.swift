@@ -19,7 +19,7 @@ extension View {
 
 extension View {
     @ViewBuilder
-    func offsetX(completion: @escaping (CGRect) -> ()) -> some View {
+    func offsetRect(completion: @escaping (CGRect) -> ()) -> some View {
         self
             .overlay {
                 GeometryReader { proxy in

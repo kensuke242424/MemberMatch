@@ -15,6 +15,8 @@ struct RecruitmentDetail: View {
 
     @StateObject var vm = RecruitmentDetailViewModel()
 
+    @State var scrollOffsetY: CGFloat = 0
+
     var body: some View {
         VStack(spacing: 0) {
             TabTopBarView(
@@ -42,12 +44,15 @@ struct RecruitmentDetail: View {
                         .padding()
                         .onTapGesture {
                             if vm.collapseProgress <= 0 { return }
-                            withAnimation(.spring(duration: 0.2)){ vm.isOpenHeaderContents.toggle()}
+                            withAnimation(.spring(duration: 0.2)){ vm.isFullOpenCard.toggle()}
                         }
                         .onPreferenceChange(SizePreferenceKey.self) { size in
                             vm.recruitmentCardSize = size
                         }
-                        .onAppear{
+                        .onChange(of: scrollOffsetY) { _ in
+                            withAnimation(.spring(duration: 0.2)){ vm.isFullOpenCard = false }
+                        }
+                        .onAppear {
                             //MEMO: タブ切り替えによって再度処理が走ることを防ぐ
                             if vm.isAlreadyShown { return }
                             vm.maxHeaderHeight = vm.recruitmentCardSize.height + 30
@@ -57,7 +62,7 @@ struct RecruitmentDetail: View {
             }, content: {
                 VStack {
                     WantedPartsDetail(title: "募集パート", desc: recruitment.description)
-                    RecruitmentDetail(title: "募集の内容", desc: recruitment.description)
+                    PolicyDetail(title: "", policy: recruitment.user.policy)
                     FrequencyDetail(title: "活動頻度", desc: recruitment.description)
                     LocationDetail(title: "活動場所", desc: recruitment.rehearsalLocation)
 
@@ -74,8 +79,11 @@ struct RecruitmentDetail: View {
                 }
                 .padding(.horizontal)
                 .padding(.vertical)
+                .offsetRect { rect in
+                    scrollOffsetY = rect.minY - rect.height
+                }
             })
-            .height(min: vm.isOpenHeaderContents ? vm.maxHeaderHeight : vm.minHeaderHeight,
+            .height(min: vm.isFullOpenCard ? vm.maxHeaderHeight : vm.minHeaderHeight,
                     max: vm.maxHeaderHeight
             )
             .scrollToTop(resetScroll: $vm.isResetScroll)
@@ -116,21 +124,21 @@ extension RecruitmentDetail {
             // 紙デザインの要素
             VStack(spacing: 4) {
                 CustomText(recruitment.title, .customTextColorBlack)
-                    .lineLimit(!vm.isScrolledMidPoint || vm.isOpenHeaderContents  ? 10 : 1)
-                    .font(!vm.isScrolledMidPoint || vm.isOpenHeaderContents ? .title3 : .subheadline)
+                    .lineLimit(!vm.isScrolledMidPoint || vm.isFullOpenCard  ? 10 : 1)
+                    .font(!vm.isScrolledMidPoint || vm.isFullOpenCard ? .title3 : .subheadline)
                     .frame(maxWidth: .infinity,
-                           alignment: !vm.isScrolledMidPoint || vm.isOpenHeaderContents ? .center : .leading)
+                           alignment: !vm.isScrolledMidPoint || vm.isFullOpenCard ? .center : .leading)
                     .fontWeight(.bold)
-                    .padding(.bottom, !vm.isScrolledMidPoint || vm.isOpenHeaderContents ? 10 : 0)
+                    .padding(.bottom, !vm.isScrolledMidPoint || vm.isFullOpenCard ? 10 : 0)
                 HStack {
                     VStack(spacing: 8) {
                         CustomText("掲載者：\(recruitment.user.name ?? "名無し")", .black)
-                            .lineLimit(!vm.isScrolledMidPoint || vm.isOpenHeaderContents ? 100 : 2)
+                            .lineLimit(!vm.isScrolledMidPoint || vm.isFullOpenCard ? 100 : 2)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .multilineTextAlignment(.leading)
                             .font(.caption)
                         CustomText(recruitment.description, .gray)
-                            .lineLimit(!vm.isScrolledMidPoint || vm.isOpenHeaderContents ? 100 : 2)
+                            .lineLimit(!vm.isScrolledMidPoint || vm.isFullOpenCard ? 100 : 2)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .multilineTextAlignment(.leading)
                             .font(.caption)
@@ -140,21 +148,20 @@ extension RecruitmentDetail {
                         Circle()
                             .foregroundStyle(.customAccentYellow)
                             .shadow(radius: 2)
-                            .frame(width: !vm.isScrolledMidPoint || vm.isOpenHeaderContents ? 70 : 50,
-                                   height: !vm.isScrolledMidPoint || vm.isOpenHeaderContents ? 70 : 50)
+                            .frame(width: !vm.isScrolledMidPoint || vm.isFullOpenCard ? 70 : 50,
+                                   height: !vm.isScrolledMidPoint || vm.isFullOpenCard ? 70 : 50)
 
-                        if !vm.isScrolledMidPoint || vm.isOpenHeaderContents {
+                        if !vm.isScrolledMidPoint || vm.isFullOpenCard {
                             Button("Profile") {
                                 router.push([.userProfile(mockUser)])
                             }
                             .font(.caption2.bold())
                             .buttonStyle(.borderedProminent)
-
                         }
                     }
                     .padding(.leading, 5)
                 }
-                .padding(.bottom, !vm.isScrolledMidPoint || vm.isOpenHeaderContents ? 10 : 0)
+                .padding(.bottom, !vm.isScrolledMidPoint || vm.isFullOpenCard ? 10 : 0)
 
                 HStack {
                     CustomText("気になる", .gray).font(.caption).fontWeight(.bold)
@@ -164,7 +171,7 @@ extension RecruitmentDetail {
                     CustomText("掲載日：あと 7日", .gray).font(.caption).fontWeight(.bold)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-                if !vm.isScrolledStartPoint || vm.isOpenHeaderContents {
+                if !vm.isScrolledStartPoint || vm.isFullOpenCard {
                     VStack {
                         Divider().frame(height: 0.2).background(.black.opacity(0.1)).padding(.horizontal, 30)
                         ScrollView(.horizontal, showsIndicators: false) {
@@ -203,6 +210,34 @@ extension RecruitmentDetail {
 extension RecruitmentDetail {
     @ViewBuilder
     private func WantedPartsDetail(title: String, desc description: String) -> some View {
+        VStack(alignment: .leading) {
+            CustomText("\(title)：", .customTextColorWhite).font(.headline)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 20) {
+                    ForEach(0..<8) { _ in
+                        Circle()
+                            .frame(width: 50, height: 50)
+                            .foregroundStyle(.customAccentYellow.gradient)
+                            .shadow(radius: 3)
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.vertical, 5)
+                .padding(.horizontal, 5)
+            }
+            .padding(8)
+            .background {
+                RoundedRectangle(cornerRadius: 5)
+                    .shadow(radius: 10)
+                    .foregroundStyle(.customWhite)
+            }
+        }
+    }
+}
+
+extension RecruitmentDetail {
+    @ViewBuilder
+    private func PolicyDetail(title: String, policy: Policy?) -> some View {
         VStack(alignment: .leading) {
             CustomText("\(title)：", .customTextColorWhite).font(.headline)
             ScrollView(.horizontal, showsIndicators: false) {
