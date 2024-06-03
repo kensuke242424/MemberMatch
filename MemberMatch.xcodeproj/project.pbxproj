@@ -443,7 +443,6 @@
 			packageReferences = (
 				BED4B23A2BF086CF00C49EB5 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				BEE55DD42BF65BA000299883 /* XCRemoteSwiftPackageReference "ScalingHeaderScrollView" */,
-				BEE3F87B2C0DF34D007D5328 /* XCRemoteSwiftPackageReference "SwiftLint" */,
 			);
 			productRefGroup = BEFAE4DF2BDE73A000CADC73 /* Products */;
 			projectDirPath = "";
@@ -469,6 +468,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		BEE3F8752C0DF018007D5328 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -482,7 +482,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export SWIFT_LINT_CONFIG_FILE=\"${SRCROOT}/.swiftlint.yaml\"\n\nif which swiftlint > /dev/null; then\n  swiftlint lint --config \"$SWIFT_LINT_CONFIG_FILE\"\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "
+";
 		};
 /* End PBXShellScriptBuildPhase section */
 
