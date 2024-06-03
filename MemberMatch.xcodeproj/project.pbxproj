@@ -400,10 +400,12 @@
 				BEFAE4DA2BDE73A000CADC73 /* Sources */,
 				BEFAE4DB2BDE73A000CADC73 /* Frameworks */,
 				BEFAE4DC2BDE73A000CADC73 /* Resources */,
+				BEE3F8752C0DF018007D5328 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				BEE3F87D2C0DF37B007D5328 /* PBXTargetDependency */,
 			);
 			name = MemberMatch;
 			packageProductDependencies = (
@@ -441,6 +443,7 @@
 			packageReferences = (
 				BED4B23A2BF086CF00C49EB5 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				BEE55DD42BF65BA000299883 /* XCRemoteSwiftPackageReference "ScalingHeaderScrollView" */,
+				BEE3F87B2C0DF34D007D5328 /* XCRemoteSwiftPackageReference "SwiftLint" */,
 			);
 			productRefGroup = BEFAE4DF2BDE73A000CADC73 /* Products */;
 			projectDirPath = "";
@@ -462,6 +465,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BEE3F8752C0DF018007D5328 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export SWIFT_LINT_CONFIG_FILE=\"${SRCROOT}/.swiftlint.yaml\"\n\nif which swiftlint > /dev/null; then\n  swiftlint lint --config \"$SWIFT_LINT_CONFIG_FILE\"\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BEFAE4DA2BDE73A000CADC73 /* Sources */ = {
@@ -511,6 +534,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BEE3F87D2C0DF37B007D5328 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = BEE3F87C2C0DF37B007D5328 /* SwiftLintBuildToolPlugin */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		BEFAE4EA2BDE73A200CADC73 /* Debug */ = {
@@ -642,6 +672,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MemberMatch/Preview Content\"";
 				DEVELOPMENT_TEAM = H999WST5QF;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -675,6 +706,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MemberMatch/Preview Content\"";
 				DEVELOPMENT_TEAM = H999WST5QF;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -730,6 +762,14 @@
 				minimumVersion = 3.0.4;
 			};
 		};
+		BEE3F87B2C0DF34D007D5328 /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/SwiftLint";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.55.1;
+			};
+		};
 		BEE55DD42BF65BA000299883 /* XCRemoteSwiftPackageReference "ScalingHeaderScrollView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/exyte/ScalingHeaderScrollView.git";
@@ -745,6 +785,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BED4B23A2BF086CF00C49EB5 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
+		};
+		BEE3F87C2C0DF37B007D5328 /* SwiftLintBuildToolPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BEE3F87B2C0DF34D007D5328 /* XCRemoteSwiftPackageReference "SwiftLint" */;
+			productName = "plugin:SwiftLintBuildToolPlugin";
 		};
 		BEE55DD52BF65BA000299883 /* ScalingHeaderScrollView */ = {
 			isa = XCSwiftPackageProductDependency;

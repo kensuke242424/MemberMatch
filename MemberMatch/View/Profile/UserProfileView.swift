@@ -57,11 +57,11 @@ struct UserProfileView: View {
 
                     Spacer().frame(height: overlapYOffset)
 
-                    UserDetail(user: mockUser).padding(.top)
-                    WantedPartsDetail(title: "募集パート", desc: user.bio ?? "")
-                    RecruitmentDetail(title: "募集の内容", desc: user.bio ?? "")
-                    FrequencyDetail(title: "活動頻度", desc: user.bio ?? "")
-                    LocationDetail(title: "活動場所", desc: user.bio ?? "")
+                    userDetail(user: mockUser).padding(.top)
+                    wantedPartsDetail(title: "募集パート", desc: user.bio ?? "")
+                    recruitmentDetail(title: "募集の内容", desc: user.bio ?? "")
+                    frequencyDetail(title: "活動頻度", desc: user.bio ?? "")
+                    locationDetail(title: "活動場所", desc: user.bio ?? "")
 
                     Button("メッセージを送る") {
                         resetScrollToTop = true
@@ -96,16 +96,13 @@ struct UserProfileView: View {
         .collapseProgress($collapseProgress) // ヘッダーの折りたたみ状況
         .height(min: minHeaderHeight, max: maxHeaderHeight) // ヘッダーの可変サイズ
         .overlay(alignment: .top) {
-            TabTopBarView()
+            tabTopBarView()
         }
         .ignoresSafeArea(edges: .top)
         .navigationBarBackButtonHidden()
     }
     @ViewBuilder
-    /// タブビューのカスタムトップナビゲーションバー
-    func TabTopBarView() -> some View {
-
-
+    private func tabTopBarView() -> some View {
             let iconSize: CGFloat = 30
             HStack {
                 RoundedRectangle(cornerRadius: 10).frame(width: 30, height: 30)
@@ -145,7 +142,7 @@ struct UserProfileView: View {
 
 extension UserProfileView {
     @ViewBuilder
-    private func UserDetail(user: User) -> some View {
+    private func userDetail(user: User) -> some View {
         VStack {
             HStack(spacing: 30) {
                 SDWebImageCircleIcon(nil,
@@ -183,7 +180,7 @@ extension UserProfileView {
 
 extension UserProfileView {
     @ViewBuilder
-    private func WantedPartsDetail(title: String, desc description: String) -> some View {
+    private func wantedPartsDetail(title: String, desc description: String) -> some View {
         VStack(alignment: .leading) {
             CustomText("\(title)：", .customTextColorWhite).font(.headline)
             ScrollView(.horizontal, showsIndicators: false) {
@@ -211,7 +208,7 @@ extension UserProfileView {
 
 extension UserProfileView {
     @ViewBuilder
-    private func RecruitmentDetail(title: String, desc description: String) -> some View {
+    private func recruitmentDetail(title: String, desc description: String) -> some View {
         VStack(alignment: .leading) {
             CustomText("\(title)：", .customTextColorWhite)
                 .font(.headline)
@@ -236,7 +233,7 @@ extension UserProfileView {
 
 extension UserProfileView {
     @ViewBuilder
-    private func FrequencyDetail(title: String, desc description: String) -> some View {
+    private func frequencyDetail(title: String, desc description: String) -> some View {
         VStack(alignment: .leading) {
             CustomText("\(title)：", .customTextColorWhite)
                 .font(.headline)
@@ -261,7 +258,7 @@ extension UserProfileView {
 
 extension UserProfileView {
     @ViewBuilder
-    private func LocationDetail(title: String, desc description: String) -> some View {
+    private func locationDetail(title: String, desc description: String) -> some View {
         VStack(alignment: .leading) {
             CustomText("\(title)：", .customTextColorWhite)
                 .font(.headline)

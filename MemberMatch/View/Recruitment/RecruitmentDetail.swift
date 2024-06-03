@@ -22,7 +22,7 @@ struct RecruitmentDetail: View {
             TabTopBarView(
                 "募集の内容",
                 leftToolbarItems: {
-                    Image(systemName: Constants.Symbol_chevron_backward)
+                    Image(systemName: Constants.symbolChevronBackword)
                         .foregroundStyle(.gray)
                         .frame(width: Constants.toolBarItemSize, height: Constants.toolBarItemSize)
                         .background(Circle().foregroundStyle(.white))
@@ -30,7 +30,7 @@ struct RecruitmentDetail: View {
                 },
                 rightToolbarItems: {
                     Image(systemName: vm.isFixedCard ?
-                          Constants.Symbol_pin_fill : Constants.Symbol_pin)
+                          Constants.symbolPinFill : Constants.symbolPin)
                         .foregroundStyle(.gray)
                         .frame(width: Constants.toolBarItemSize, height: Constants.toolBarItemSize)
                         .background(Circle().foregroundStyle(.white))
@@ -40,31 +40,31 @@ struct RecruitmentDetail: View {
             ScalingHeaderScrollView(header: {
                 ZStack {
                     BlurView(style: .systemUltraThinMaterial).opacity(vm.isScrolledEndPoint ? 1 : 0)
-                    RecruitmentCard(recruitment: recruitment)
+                    recruitmentCard(recruitment: recruitment)
                         .padding()
                         .onTapGesture {
                             if vm.collapseProgress <= 0 { return }
-                            withAnimation(.spring(duration: 0.2)){ vm.isFullOpenCard.toggle()}
+                            withAnimation(.spring(duration: 0.2)) { vm.isFullOpenCard.toggle()}
                         }
                         .onPreferenceChange(SizePreferenceKey.self) { size in
                             vm.recruitmentCardSize = size
                         }
                         .onChange(of: scrollOffsetY) { _ in
-                            withAnimation(.spring(duration: 0.2)){ vm.isFullOpenCard = false }
+                            withAnimation(.spring(duration: 0.2)) { vm.isFullOpenCard = false }
                         }
                         .onAppear {
-                            //MEMO: タブ切り替えによって再度処理が走ることを防ぐ
+                            // MEMO: タブ切り替えによって再度処理が走ることを防ぐ
                             if vm.isAlreadyShown { return }
                             vm.maxHeaderHeight = vm.recruitmentCardSize.height + 30
                             vm.isAlreadyShown.toggle()
                         }
                 }
             }, content: {
-                VStack {
-                    WantedPartsDetail(title: "募集パート", desc: recruitment.description)
-                    PolicyDetail(title: "", policy: recruitment.user.policy)
-                    FrequencyDetail(title: "活動頻度", desc: recruitment.description)
-                    LocationDetail(title: "活動場所", desc: recruitment.rehearsalLocation)
+                VStack(spacing: 30) {
+                    wantedPartsDetail(title: "募集パート", desc: recruitment.description)
+                    policyDetail(title: "活動方針", policy: recruitment.policy)
+                    frequencyDetail(title: "活動頻度", desc: recruitment.description)
+                    locationDetail(title: "活動場所", desc: recruitment.rehearsalLocation)
 
                     Button("メッセージを送る") {
                         vm.resetScrollToTop()
@@ -109,7 +109,7 @@ struct SizePreferenceKey: PreferenceKey {
 
 extension RecruitmentDetail {
     @ViewBuilder
-    private func RecruitmentCard(recruitment: Recruitment) -> some View {
+    private func recruitmentCard(recruitment: Recruitment) -> some View {
         ZStack {
             // コルクボードデザイン
             RoundedRectangle(cornerRadius: 10)
@@ -209,7 +209,7 @@ extension RecruitmentDetail {
 
 extension RecruitmentDetail {
     @ViewBuilder
-    private func WantedPartsDetail(title: String, desc description: String) -> some View {
+    private func wantedPartsDetail(title: String, desc description: String) -> some View {
         VStack(alignment: .leading) {
             CustomText("\(title)：", .customTextColorWhite).font(.headline)
             ScrollView(.horizontal, showsIndicators: false) {
@@ -235,37 +235,28 @@ extension RecruitmentDetail {
     }
 }
 
+// TODO: 各ポリシーを表すアイコンを表示
 extension RecruitmentDetail {
     @ViewBuilder
-    private func PolicyDetail(title: String, policy: Policy?) -> some View {
+    private func policyDetail(title: String, policy: Policy?) -> some View {
         VStack(alignment: .leading) {
             CustomText("\(title)：", .customTextColorWhite).font(.headline)
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 20) {
-                    ForEach(0..<8) { _ in
-                        Circle()
-                            .frame(width: 50, height: 50)
-                            .foregroundStyle(.customAccentYellow.gradient)
-                            .shadow(radius: 3)
-                    }
-                }
+            CustomText(policy?.jpName ?? "記載なし", .customTextColorBlack).font(.headline)
+                .frame(minHeight: 40)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.vertical, 5)
-                .padding(.horizontal, 5)
-            }
-            .padding(8)
-            .background {
-                RoundedRectangle(cornerRadius: 5)
-                    .shadow(radius: 10)
-                    .foregroundStyle(.customWhite)
-            }
+                .padding(8)
+                .background {
+                    RoundedRectangle(cornerRadius: 5)
+                        .shadow(radius: 10)
+                        .foregroundStyle(.customWhite)
+                }
         }
     }
 }
 
 extension RecruitmentDetail {
     @ViewBuilder
-    private func RecruitmentDetail(title: String, desc description: String) -> some View {
+    private func recruitmentDetail(title: String, desc description: String) -> some View {
         VStack(alignment: .leading) {
             CustomText("\(title)：", .customTextColorWhite)
                 .font(.headline)
@@ -290,7 +281,7 @@ extension RecruitmentDetail {
 
 extension RecruitmentDetail {
     @ViewBuilder
-    private func FrequencyDetail(title: String, desc description: String) -> some View {
+    private func frequencyDetail(title: String, desc description: String) -> some View {
         VStack(alignment: .leading) {
             CustomText("\(title)：", .customTextColorWhite)
                 .font(.headline)
@@ -315,7 +306,7 @@ extension RecruitmentDetail {
 
 extension RecruitmentDetail {
     @ViewBuilder
-    private func LocationDetail(title: String, desc description: String) -> some View {
+    private func locationDetail(title: String, desc description: String) -> some View {
         VStack(alignment: .leading) {
             CustomText("\(title)：", .customTextColorWhite)
                 .font(.headline)

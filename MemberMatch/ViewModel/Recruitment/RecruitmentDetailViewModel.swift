@@ -31,7 +31,7 @@ class RecruitmentDetailViewModel: ObservableObject {
     let toolBarHeight: CGFloat = 100
 
     func handleScrolledPoint(newValue: CGFloat) {
-        //MEMO: 最初のスクロール時、最初期値として1.0が出力されるため、弾く
+        // MEMO: 最初のスクロール時、最初期値として1.0が出力されるため、弾く
         if newValue == 1.0 { return }
 
         if newValue > 0.1 {

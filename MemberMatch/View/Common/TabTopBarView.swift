@@ -63,9 +63,9 @@ struct TabTopBarView<LeftItems: View, RightItems: View>: View {
     TabTopBarView(
         "test",
         leftToolbarItems: {
-            VStack{}
+            VStack {}
         }, rightToolbarItems: {
-            VStack{}
+            VStack {}
         }
     )
 }

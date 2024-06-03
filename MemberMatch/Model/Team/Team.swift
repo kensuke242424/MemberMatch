@@ -15,7 +15,6 @@ import Foundation
  instagramAccount: Instagramのプロフィールページへのリンク。
  youtubeVideoURL: バンドに関連するYouTube動画のURL。
  */
-import Foundation
 
 struct Team: Identifiable, Codable, Hashable {
     let id: String
@@ -33,20 +32,22 @@ struct Team: Identifiable, Codable, Hashable {
     var instagramAccount: URL?  // InstagramアカウントのURL
     var youtubeVideoURL: [URL]?  // YouTube動画のURL
 
-    init(id: String = UUID().uuidString,
-         name: String?,
-         genre: [MusicGenre]?,
-         prefecture: Prefecture?,
-         foundedDate: Date?,
-         members: [User]?,
-         bio: String?,
-         contactEmail: String?,
-         websiteURL: URL?,
-         socialMediaLinks: [String: URL]?,
-         logoURL: URL?,
-         twitterAccount: URL?,
-         instagramAccount: URL?,
-         youtubeVideoURL: [URL]?) {
+    init(
+        id: String = UUID().uuidString,
+        name: String?,
+        genre: [MusicGenre]?,
+        prefecture: Prefecture?,
+        foundedDate: Date?,
+        members: [User]?,
+        bio: String?,
+        contactEmail: String?,
+        websiteURL: URL?,
+        socialMediaLinks: [String: URL]?,
+        logoURL: URL?,
+        twitterAccount: URL?,
+        instagramAccount: URL?,
+        youtubeVideoURL: [URL]?
+    ) {
         self.id = id
         self.name = name
         self.genre = genre
@@ -86,4 +87,3 @@ let mockTeam = Team(
         URL(string: "https://www.youtube.com/watch?v=dQw4w9WgXcQ")!
     ]
 )
-

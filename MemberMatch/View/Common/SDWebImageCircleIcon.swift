@@ -4,8 +4,8 @@ import SDWebImageSwiftUI
 struct SDWebImageCircleIcon: View {
 
     let imageURL: URL?
-    let width   : CGFloat
-    let height  : CGFloat
+    let width: CGFloat
+    let height: CGFloat
     let defaultIcon: String
 
     init(_ imageURL: URL?, width: CGFloat, height: CGFloat, defaultIcon: String) {

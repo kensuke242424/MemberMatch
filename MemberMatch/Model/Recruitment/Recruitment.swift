@@ -4,6 +4,7 @@
  description: 募集内容の詳細な説明。
  postedDate: 募集が投稿された日時。
  deadline: 応募締切日。
+ policy: 募集方針。
  location: 募集の場所またはリモートワークの可能性。
  category: 募集が属するカテゴリ（例：テクノロジー、マーケティングなど）。
  contactEmail: 応募や問い合わせ用の連絡先メールアドレス。
@@ -19,12 +20,14 @@ struct Recruitment: Identifiable, Hashable {
     let description: String
     let postedDate: Date
     let deadline: Date
+    let policy: Policy?
     let genre: String
     let instrument: String
     let bandType: String
     let rehearsalLocation: String
     let contactEmail: String
     let additionalInfo: String?
+    var youtubeVideoURL: [URL]?  // YouTube動画のURL
 
     init(
         id: String = UUID().uuidString,
@@ -33,12 +36,14 @@ struct Recruitment: Identifiable, Hashable {
         description: String,
         postedDate: Date = Date(),
         deadline: Date,
+        policy: Policy?,
         genre: String,
         instrument: String,
         bandType: String,
         rehearsalLocation: String,
         contactEmail: String,
-        additionalInfo: String? = nil
+        additionalInfo: String? = nil,
+        youtubeVideoURL: [URL]? = nil
     ) {
         self.id = id
         self.user = user
@@ -46,12 +51,14 @@ struct Recruitment: Identifiable, Hashable {
         self.description = description
         self.postedDate = postedDate
         self.deadline = deadline
+        self.policy = policy
         self.genre = genre
         self.instrument = instrument
         self.bandType = bandType
         self.rehearsalLocation = rehearsalLocation
         self.contactEmail = contactEmail
         self.additionalInfo = additionalInfo
+        self.youtubeVideoURL = youtubeVideoURL
     }
 }
 
@@ -61,8 +68,15 @@ let exampleRecruitments = [
         id: UUID().uuidString,
         user: mockUser,
         title: "ベーシスト募集！",
-        description: "ポップスバンドで経験豊富なベーシストを探しています。ポップスバンドで経験豊富なベーシストを探しています。ポップスバンドで経験豊富なベーシストを探しています。ポップスバンドで経験豊富なベーシストを探しています。ポップスバンドで経験豊富なベーシストを探しています。ポップスバンドで経験豊富なベーシストを探しています。ポップスバンドで経験豊富なベーシストを探しています。ポップスバンドで経験豊富なベーシストを探しています。",
+        description:
+"""
+ポップスバンドで経験豊富なベーシストを探しています。ポップスバンドで経験豊富なベーシストを探しています。
+ポップスバンドで経験豊富なベーシストを探しています。ポップスバンドで経験豊富なベーシストを探しています。
+ポップスバンドで経験豊富なベーシストを探しています。ポップスバンドで経験豊富なベーシストを探しています。
+ポップスバンドで経験豊富なベーシストを探しています。ポップスバンドで経験豊富なベーシストを探しています。
+""",
         deadline: Calendar.current.date(byAdding: .day, value: 30, to: Date())!,
+        policy: .professional,
         genre: "ポップス",
         instrument: "ベース",
         bandType: "ポップスバンド",
@@ -73,8 +87,15 @@ let exampleRecruitments = [
         id: UUID().uuidString,
         user: mockUser,
         title: "ジャズドラマー募集中",
-        description: "ジャズバンドで一緒に演奏できるドラマーを探しています。ジャズバンドで一緒に演奏できるドラマーを探しています。ジャズバンドで一緒に演奏できるドラマーを探しています。ジャズバンドで一緒に演奏できるドラマーを探しています。ジャズバンドで一緒に演奏できるドラマーを探しています。ジャズバンドで一緒に演奏できるドラマーを探しています。ジャズバンドで一緒に演奏できるドラマーを探しています。",
+        description:
+"""
+ジャズバンドで一緒に演奏できるドラマーを探しています。ジャズバンドで一緒に演奏できるドラマーを探しています。
+ジャズバンドで一緒に演奏できるドラマーを探しています。ジャズバンドで一緒に演奏できるドラマーを探しています。
+ジャズバンドで一緒に演奏できるドラマーを探しています。ジャズバンドで一緒に演奏できるドラマーを探しています。
+ジャズバンドで一緒に演奏できるドラマーを探しています。
+""",
         deadline: Calendar.current.date(byAdding: .day, value: 45, to: Date())!,
+        policy: .professional,
         genre: "ジャズ",
         instrument: "ドラム",
         bandType: "ジャズバンド",
@@ -87,10 +108,11 @@ let exampleRecruitments = [
         title: "凄腕のキーボーディスト求む！",
         description: "ポップスロックバンドでキーボードを担当できるメンバーを募集しています。ポップスロックバンドでキーボードを担当できるメンバーを募集しています。",
         deadline: Calendar.current.date(byAdding: .day, value: 25, to: Date())!,
+        policy: .professional,
         genre: "ポップスロック",
         instrument: "キーボード",
         bandType: "ポップスロックバンド",
         rehearsalLocation: "渋谷音楽スタジオ",
         contactEmail: "contact@poprockband.com"
-    ),
+    )
 ]

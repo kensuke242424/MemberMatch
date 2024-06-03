@@ -52,9 +52,9 @@ struct RecruitmentBoardView: View {
 
             TabView(selection: $browsing) {
                 Group {
-                    BrowseContentAll().tag(Browse.all)
-                    BrowseContentSingle().tag(Browse.single)
-                    BrowseContentGroup().tag(Browse.group)
+                    browseContentAll().tag(Browse.all)
+                    browseContentSingle().tag(Browse.single)
+                    browseContentGroup().tag(Browse.group)
                 }
                 .gradientBackground()
             }
@@ -67,11 +67,11 @@ struct RecruitmentBoardView: View {
 
 extension RecruitmentBoardView {
     @ViewBuilder
-    private func BrowseContentAll() -> some View {
-        ScrollView() {
+    private func browseContentAll() -> some View {
+        ScrollView {
             Spacer().frame(height: 20) // スクロール下部の余白
             ForEach(vm.recruitments) { recruitment in
-                RecruitmentCard(recruitment: recruitment)
+                recruitmentCard(recruitment: recruitment)
             }
             .padding(.horizontal)
             Spacer().frame(height: 20) // スクロール下部の余白
@@ -84,11 +84,11 @@ extension RecruitmentBoardView {
     }
 
     @ViewBuilder
-    private func BrowseContentSingle() -> some View {
-        ScrollView() {
+    private func browseContentSingle() -> some View {
+        ScrollView {
             Spacer().frame(height: 20) // スクロール下部の余白
             ForEach(vm.recruitments) { recruitment in
-                RecruitmentCard(recruitment: recruitment)
+                recruitmentCard(recruitment: recruitment)
             }
             .padding(.horizontal)
             Spacer().frame(height: 20) // スクロール下部の余白
@@ -101,11 +101,11 @@ extension RecruitmentBoardView {
     }
 
     @ViewBuilder
-    private func BrowseContentGroup() -> some View {
-        ScrollView() {
+    private func browseContentGroup() -> some View {
+        ScrollView {
             Spacer().frame(height: 20) // スクロール下部の余白
             ForEach(vm.recruitments) { recruitment in
-                RecruitmentCard(recruitment: recruitment)
+                recruitmentCard(recruitment: recruitment)
             }
             .padding(.horizontal)
             Spacer().frame(height: 20) // スクロール下部の余白
@@ -120,7 +120,7 @@ extension RecruitmentBoardView {
 
 extension RecruitmentBoardView {
     @ViewBuilder
-    private func RecruitmentCard(recruitment: Recruitment) -> some View {
+    private func recruitmentCard(recruitment: Recruitment) -> some View {
         Button {
             router.push([.detail(recruitment)])
         } label: {

@@ -14,7 +14,7 @@
 
 import Foundation
 
-struct User: Identifiable,Hashable, Codable {
+struct User: Identifiable, Hashable, Codable {
     let id: String
     var name: String?
     var email: String?
