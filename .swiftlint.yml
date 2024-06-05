@@ -5,7 +5,6 @@ excluded:
   - Pods
 
 opt_in_rules:
-  - anyobject_protocol
 
 disabled_rules:
   - colon
