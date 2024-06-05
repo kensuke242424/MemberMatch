@@ -9,11 +9,11 @@ import SwiftUI
 
 extension View {
     func clippedToDeviceCorners() -> some View {
-        return self.clipShape(RoundedRectangle(cornerRadius: UIScreen.main.deviceCornerRadius, style: .continuous))
+        self.clipShape(RoundedRectangle(cornerRadius: UIScreen.main.deviceCornerRadius, style: .continuous))
     }
 
     func clippedToDeviceTopCorners() -> some View {
-        return self.clipShape(TopCornersRoundedRectangle(cornerRadius: UIScreen.main.deviceCornerRadius))
+        self.clipShape(TopCornersRoundedRectangle(cornerRadius: UIScreen.main.deviceCornerRadius))
     }
 }
 

@@ -1,5 +1,5 @@
-import SwiftUI
 import SDWebImageSwiftUI
+import SwiftUI
 
 struct SDWebImageCircleIcon: View {
 

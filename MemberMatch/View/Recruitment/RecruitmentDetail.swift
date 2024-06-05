@@ -5,9 +5,9 @@
 //  Created by Kensuke Nakagawa on 2024/05/12.
 //
 
+import ScalingHeaderScrollView
 import SwiftUI
 import SwiftUIIntrospect
-import ScalingHeaderScrollView
 
 struct RecruitmentDetail: View {
     let recruitment: Recruitment
@@ -44,7 +44,7 @@ struct RecruitmentDetail: View {
                         .padding()
                         .onTapGesture {
                             if vm.collapseProgress <= 0 { return }
-                            withAnimation(.spring(duration: 0.2)) { vm.isFullOpenCard.toggle()}
+                            withAnimation(.spring(duration: 0.2)) { vm.isFullOpenCard.toggle() }
                         }
                         .onPreferenceChange(SizePreferenceKey.self) { size in
                             vm.recruitmentCardSize = size
@@ -100,6 +100,7 @@ struct RecruitmentDetail: View {
 
 struct SizePreferenceKey: PreferenceKey {
     typealias Value = CGSize
+
     static var defaultValue: CGSize = .zero
 
     static func reduce(value: inout CGSize, nextValue: () -> CGSize) {
@@ -124,7 +125,7 @@ extension RecruitmentDetail {
             // 紙デザインの要素
             VStack(spacing: 4) {
                 CustomText(recruitment.title, .customTextColorBlack)
-                    .lineLimit(!vm.isScrolledMidPoint || vm.isFullOpenCard  ? 10 : 1)
+                    .lineLimit(!vm.isScrolledMidPoint || vm.isFullOpenCard ? 10 : 1)
                     .font(!vm.isScrolledMidPoint || vm.isFullOpenCard ? .title3 : .subheadline)
                     .frame(maxWidth: .infinity,
                            alignment: !vm.isScrolledMidPoint || vm.isFullOpenCard ? .center : .leading)

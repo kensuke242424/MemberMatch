@@ -66,14 +66,14 @@ extension Color {
 }
 
 #Preview {
-    CorkBoardView(content: {
-        VStack(content: {
+    CorkBoardView {
+        VStack {
             Text("Pinned Note")
             Text("Pinned Note")
             Text("Pinned Note")
             Text("Pinned Note")
             Text("Pinned Note")
-        })
+        }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-    })
+    }
 }

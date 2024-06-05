@@ -5,8 +5,8 @@
 //  Created by Kensuke Nakagawa on 2024/05/12.
 //
 
-import SwiftUI
 import ScalingHeaderScrollView
+import SwiftUI
 
 struct RecruitmentBoardView: View {
     @EnvironmentObject var router: Router

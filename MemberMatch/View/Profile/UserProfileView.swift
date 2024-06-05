@@ -5,9 +5,9 @@
 //  Created by Kensuke Nakagawa on 2024/05/12.
 //
 
+import ScalingHeaderScrollView
 import SwiftUI
 import SwiftUIIntrospect
-import ScalingHeaderScrollView
 
 struct UserProfileView: View {
     let user: User
@@ -101,6 +101,7 @@ struct UserProfileView: View {
         .ignoresSafeArea(edges: .top)
         .navigationBarBackButtonHidden()
     }
+    
     @ViewBuilder
     private func tabTopBarView() -> some View {
             let iconSize: CGFloat = 30
