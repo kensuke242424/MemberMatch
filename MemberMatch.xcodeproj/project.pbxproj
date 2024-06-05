@@ -443,6 +443,7 @@
 			packageReferences = (
 				BED4B23A2BF086CF00C49EB5 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				BEE55DD42BF65BA000299883 /* XCRemoteSwiftPackageReference "ScalingHeaderScrollView" */,
+				BE8C45862C10ABAD00BF7835 /* XCRemoteSwiftPackageReference "SwiftLint" */,
 			);
 			productRefGroup = BEFAE4DF2BDE73A000CADC73 /* Products */;
 			projectDirPath = "";
@@ -755,6 +756,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		BE8C45862C10ABAD00BF7835 /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/SwiftLint";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.55.1;
+			};
+		};
 		BED4B23A2BF086CF00C49EB5 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
