@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE71DBFB2C1538C30026F588 /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71DBFA2C1538C30026F588 /* Gender.swift */; };
+		BE71DBFD2C153B770026F588 /* Part.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71DBFC2C153B770026F588 /* Part.swift */; };
 		BED4B20B2BE999C700C49EB5 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4B20A2BE999C700C49EB5 /* LoginView.swift */; };
 		BED4B20E2BE99A3F00C49EB5 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4B20D2BE99A3F00C49EB5 /* SignUpView.swift */; };
 		BED4B2132BEFC8C700C49EB5 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4B2122BEFC8C700C49EB5 /* ViewExtension.swift */; };
@@ -53,6 +55,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BE71DBFA2C1538C30026F588 /* Gender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
+		BE71DBFC2C153B770026F588 /* Part.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Part.swift; sourceTree = "<group>"; };
 		BED4B20A2BE999C700C49EB5 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		BED4B20D2BE99A3F00C49EB5 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		BED4B2122BEFC8C700C49EB5 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
@@ -110,6 +114,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BE4C0AB82C10C3E0003614A1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		BED4B2092BE999AD00C49EB5 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -277,6 +288,8 @@
 				BED4B2542BF3D1BF00C49EB5 /* CommitmentLevel.swift */,
 				BED4B2562BF3D74B00C49EB5 /* Prefecture.swift */,
 				BEE3F8732C0CB030007D5328 /* Policy.swift */,
+				BE71DBFA2C1538C30026F588 /* Gender.swift */,
+				BE71DBFC2C153B770026F588 /* Part.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -302,6 +315,7 @@
 			children = (
 				BEFAE4E02BDE73A000CADC73 /* MemberMatch */,
 				BEFAE4DF2BDE73A000CADC73 /* Products */,
+				BE4C0AB82C10C3E0003614A1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -400,7 +414,6 @@
 				BEFAE4DA2BDE73A000CADC73 /* Sources */,
 				BEFAE4DB2BDE73A000CADC73 /* Frameworks */,
 				BEFAE4DC2BDE73A000CADC73 /* Resources */,
-				BEE3F8752C0DF018007D5328 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -466,28 +479,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		BEE3F8752C0DF018007D5328 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "
-";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		BEFAE4DA2BDE73A000CADC73 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -511,6 +502,7 @@
 				BED4B24C2BF3C17A00C49EB5 /* MusicGenre.swift in Sources */,
 				BEFAE4F52BDE768F00CADC73 /* TabsViewModel.swift in Sources */,
 				BEE55DE32BFA293500299883 /* RecruitmentDetailViewModel.swift in Sources */,
+				BE71DBFD2C153B770026F588 /* Part.swift in Sources */,
 				BED4B22D2BF056F100C49EB5 /* RecruitmentDetail.swift in Sources */,
 				BED4B2172BEFC90800C49EB5 /* CustomText.swift in Sources */,
 				BED4B2422BF259FA00C49EB5 /* Router.swift in Sources */,
@@ -529,6 +521,7 @@
 				BED4B22F2BF059E100C49EB5 /* Recruitment.swift in Sources */,
 				BED4B2272BEFD5F400C49EB5 /* NotificationView.swift in Sources */,
 				BED4B2462BF3BCE000C49EB5 /* TeamProfileView.swift in Sources */,
+				BE71DBFB2C1538C30026F588 /* Gender.swift in Sources */,
 				BEE55DDB2BF84BAE00299883 /* TopCornersRoundedRectangle.swift in Sources */,
 				BED4B2332BF05D9400C49EB5 /* RecruitmentBoardViewModel.swift in Sources */,
 				BEE3F8692BFA428B007D5328 /* Constants.swift in Sources */,

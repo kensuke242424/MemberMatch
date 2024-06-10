@@ -22,7 +22,7 @@ struct RecruitmentDetail: View {
             TabTopBarView(
                 "募集の内容",
                 leftToolbarItems: {
-                    Image(systemName: Constants.symbolChevronBackword)
+                    Image(systemName: Constants.SF_chevron_backward)
                         .foregroundStyle(.gray)
                         .frame(width: Constants.toolBarItemSize, height: Constants.toolBarItemSize)
                         .background(Circle().foregroundStyle(.white))
@@ -30,7 +30,7 @@ struct RecruitmentDetail: View {
                 },
                 rightToolbarItems: {
                     Image(systemName: vm.isFixedCard ?
-                          Constants.symbolPinFill : Constants.symbolPin)
+                          Constants.SF_pin_fill : Constants.SF_pin)
                         .foregroundStyle(.gray)
                         .frame(width: Constants.toolBarItemSize, height: Constants.toolBarItemSize)
                         .background(Circle().foregroundStyle(.white))
@@ -61,7 +61,7 @@ struct RecruitmentDetail: View {
                 }
             }, content: {
                 VStack(spacing: 30) {
-                    wantedPartsDetail(title: "募集パート", desc: recruitment.description)
+                    wantedPartsDetail(title: "募集パート", parts: recruitment.wantedParts)
                     policyDetail(title: "活動方針", policy: recruitment.policy)
                     frequencyDetail(title: "活動頻度", desc: recruitment.description)
                     locationDetail(title: "活動場所", desc: recruitment.rehearsalLocation)
@@ -133,7 +133,7 @@ extension RecruitmentDetail {
                     .padding(.bottom, !vm.isScrolledMidPoint || vm.isFullOpenCard ? 10 : 0)
                 HStack {
                     VStack(spacing: 8) {
-                        CustomText("掲載者：\(recruitment.user.name ?? "名無し")", .black)
+                        CustomText("掲載者：\(recruitment.author.name ?? "名無し")", .black)
                             .lineLimit(!vm.isScrolledMidPoint || vm.isFullOpenCard ? 100 : 2)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .multilineTextAlignment(.leading)
@@ -210,12 +210,34 @@ extension RecruitmentDetail {
 
 extension RecruitmentDetail {
     @ViewBuilder
-    private func wantedPartsDetail(title: String, desc description: String) -> some View {
+    private func wantedPartsDetail(title: String, parts: [Part]?) -> some View {
         VStack(alignment: .leading) {
             CustomText("\(title)：", .customTextColorWhite).font(.headline)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 20) {
-                    ForEach(0..<8) { _ in
+                    if let parts {
+                        ForEach(parts) { part in
+                            VStack(spacing: 10) {
+                                // TODO: 性別指定なしの場合は、currentUserの性別を使う
+                                Image(part.instrument.iconName(for: part.gender ?? Gender.male))
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 150, height: 150)
+                                    .shadow(radius: 3)
+                                HStack(spacing: 0) {
+                                    Text(part.instrument.jpName)
+                                        .font(.caption)
+                                        .foregroundStyle(Color.gray)
+                                    if let gender = part.gender {
+                                        Text("(\(gender.jpName))")
+                                            .font(.caption)
+                                            .foregroundStyle(Color.gray)
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        // TODO: 募集パートなしの場合のアイコン
                         Circle()
                             .frame(width: 50, height: 50)
                             .foregroundStyle(.customAccentYellow.gradient)
@@ -236,21 +258,27 @@ extension RecruitmentDetail {
     }
 }
 
-// TODO: 各ポリシーを表すアイコンを表示
 extension RecruitmentDetail {
     @ViewBuilder
     private func policyDetail(title: String, policy: Policy?) -> some View {
         VStack(alignment: .leading) {
             CustomText("\(title)：", .customTextColorWhite).font(.headline)
-            CustomText(policy?.jpName ?? "記載なし", .customTextColorBlack).font(.headline)
-                .frame(minHeight: 40)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(8)
-                .background {
-                    RoundedRectangle(cornerRadius: 5)
-                        .shadow(radius: 10)
-                        .foregroundStyle(.customWhite)
-                }
+            VStack {
+                Text(policy?.jpName ?? "")
+                    .tracking(4)
+                    .font(.headline)
+                Image(Constants.band_enjoy)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: .infinity)
+                    .shadow(radius: 3)
+            }
+            .padding(8)
+            .background {
+                RoundedRectangle(cornerRadius: 5)
+                    .shadow(radius: 10)
+                    .foregroundStyle(.customWhite)
+            }
         }
     }
 }

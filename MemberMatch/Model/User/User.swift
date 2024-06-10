@@ -17,6 +17,7 @@ import Foundation
 struct User: Identifiable, Hashable, Codable {
     let id: String
     var name: String?
+    var gender: Gender
     var email: String?
     var prefecture: Prefecture?
     var selfIntroduction: String?
@@ -31,6 +32,7 @@ struct User: Identifiable, Hashable, Codable {
     init(
         id: String = UUID().uuidString,
         name: String?,
+        gender: Gender,
         email: String?,
         prefecture: Prefecture?,
         selfIntroduction: String?,
@@ -43,6 +45,7 @@ struct User: Identifiable, Hashable, Codable {
     ) {
         self.id = id
         self.name = name
+        self.gender = gender
         self.email = email
         self.prefecture = prefecture
         self.selfIntroduction = selfIntroduction
@@ -56,12 +59,13 @@ struct User: Identifiable, Hashable, Codable {
 }
 
 let mockUser = User(
-    name: "John Doe",
+    name: "Arris",
+    gender: Gender.female,
     email: "john.doe@example.com",
-    prefecture: .aichi,
+    prefecture: .tokyo,
     selfIntroduction: "",
     instrument: [.guitar, .vocal],
-    skillLevel: .intermediate,
+    skillLevel: .expert,
     preferredGenre: [.rock, .jazz],
     policy: .professional,
     profileImageURL: URL(string: "https://example.com/images/john.jpg"),

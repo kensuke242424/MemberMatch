@@ -1,10 +1,12 @@
 /*
  id: 募集情報を一意に識別するためのID。
- title: 募集のタイトル。
- description: 募集内容の詳細な説明。
  postedDate: 募集が投稿された日時。
  deadline: 応募締切日。
+ user: 投稿したユーザー。
+ title: 募集のタイトル。
+ description: 募集内容の詳細な説明。
  policy: 募集方針。
+ genre: ジャンル。
  location: 募集の場所またはリモートワークの可能性。
  category: 募集が属するカテゴリ（例：テクノロジー、マーケティングなど）。
  contactEmail: 応募や問い合わせ用の連絡先メールアドレス。
@@ -15,46 +17,43 @@ import Foundation
 
 struct Recruitment: Identifiable, Hashable {
     let id: String
-    let user: User
-    let title: String
-    let description: String
     let postedDate: Date
-    let deadline: Date
-    let policy: Policy?
-    let genre: String
-    let instrument: String
-    let bandType: String
-    let rehearsalLocation: String
-    let contactEmail: String
-    let additionalInfo: String?
+    var deadlineDate: Date
+    let author: User
+    var title: String
+    var description: String
+    var policy: Policy?
+    var genre: [MusicGenre]?
+    var wantedParts: [Part]?
+    var rehearsalLocation: String
+    var contactEmail: String
+    var additionalInfo: String?
     var youtubeVideoURL: [URL]?  // YouTube動画のURL
 
     init(
         id: String = UUID().uuidString,
-        user: User,
-        title: String,
-        description: String,
         postedDate: Date = Date(),
         deadline: Date,
+        author: User,
+        title: String,
+        description: String,
         policy: Policy?,
-        genre: String,
-        instrument: String,
-        bandType: String,
+        genre: [MusicGenre]? = nil,
+        wantedParts: [Part]? = nil,
         rehearsalLocation: String,
         contactEmail: String,
         additionalInfo: String? = nil,
         youtubeVideoURL: [URL]? = nil
     ) {
         self.id = id
-        self.user = user
+        self.author = author
         self.title = title
         self.description = description
         self.postedDate = postedDate
-        self.deadline = deadline
+        self.deadlineDate = deadline
         self.policy = policy
         self.genre = genre
-        self.instrument = instrument
-        self.bandType = bandType
+        self.wantedParts = wantedParts
         self.rehearsalLocation = rehearsalLocation
         self.contactEmail = contactEmail
         self.additionalInfo = additionalInfo
@@ -66,7 +65,53 @@ struct Recruitment: Identifiable, Hashable {
 let exampleRecruitments = [
     Recruitment(
         id: UUID().uuidString,
-        user: mockUser,
+        deadline: Calendar.current.date(byAdding: .day, value: 30, to: Date())!,
+        author: mockUser,
+        title: "POPバンドのメンバー大募集！ガチでやろうぜ！",
+        description:
+"""
+ポップスバンドで経験豊富なバンドメンバーを探しています。ポップスバンドで経験豊富なバンドメンバーを探しています。
+ポップスバンドで経験豊富なバンドメンバーを探しています。ポップスバンドで経験豊富なバンドメンバーを探しています。
+""",
+        policy: .hobby,
+        genre: [MusicGenre.pop],
+        wantedParts: [
+            Part(instrument: .songWriter, gender: Gender.male),
+            Part(instrument: .songWriter, gender: Gender.female),
+            Part(instrument: .guitar, gender: Gender.male),
+            Part(instrument: .guitar, gender: Gender.female),
+            Part(instrument: .bass, gender: Gender.male),
+            Part(instrument: .bass, gender: Gender.female),
+            Part(instrument: .drums, gender: Gender.male),
+            Part(instrument: .drums, gender: Gender.female),
+            Part(instrument: .keyboard, gender: Gender.male),
+            Part(instrument: .keyboard, gender: Gender.female),
+            Part(instrument: .piano, gender: Gender.male),
+            Part(instrument: .piano, gender: Gender.female),
+            Part(instrument: .saxophone, gender: Gender.male),
+            Part(instrument: .saxophone, gender: Gender.female),
+            Part(instrument: .trumpet, gender: Gender.male),
+            Part(instrument: .trumpet, gender: Gender.female),
+            Part(instrument: .violin, gender: Gender.male),
+            Part(instrument: .violin, gender: Gender.female),
+            Part(instrument: .cello, gender: Gender.male),
+            Part(instrument: .cello, gender: Gender.female),
+            Part(instrument: .flute, gender: Gender.male),
+            Part(instrument: .flute, gender: Gender.female),
+            Part(instrument: .clarinet, gender: Gender.male),
+            Part(instrument: .clarinet, gender: Gender.female),
+            Part(instrument: .vocal, gender: Gender.male),
+            Part(instrument: .vocal, gender: Gender.female),
+            Part(instrument: .synthesizer, gender: Gender.male),
+            Part(instrument: .synthesizer, gender: Gender.female)
+        ],
+        rehearsalLocation: "新宿スタジオ",
+        contactEmail: "join@popsband.com"
+    ),
+    Recruitment(
+        id: UUID().uuidString,
+        deadline: Calendar.current.date(byAdding: .day, value: 30, to: Date())!,
+        author: mockUser,
         title: "ベーシスト募集！",
         description:
 """
@@ -75,17 +120,16 @@ let exampleRecruitments = [
 ポップスバンドで経験豊富なベーシストを探しています。ポップスバンドで経験豊富なベーシストを探しています。
 ポップスバンドで経験豊富なベーシストを探しています。ポップスバンドで経験豊富なベーシストを探しています。
 """,
-        deadline: Calendar.current.date(byAdding: .day, value: 30, to: Date())!,
-        policy: .professional,
-        genre: "ポップス",
-        instrument: "ベース",
-        bandType: "ポップスバンド",
+        policy: Policy.professional,
+        genre: [MusicGenre.pop],
+        wantedParts: [Part(instrument: .bass, gender: Gender.male)],
         rehearsalLocation: "新宿スタジオ",
         contactEmail: "join@popsband.com"
     ),
     Recruitment(
         id: UUID().uuidString,
-        user: mockUser,
+        deadline: Calendar.current.date(byAdding: .day, value: 45, to: Date())!,
+        author: mockUser,
         title: "ジャズドラマー募集中",
         description:
 """
@@ -94,24 +138,21 @@ let exampleRecruitments = [
 ジャズバンドで一緒に演奏できるドラマーを探しています。ジャズバンドで一緒に演奏できるドラマーを探しています。
 ジャズバンドで一緒に演奏できるドラマーを探しています。
 """,
-        deadline: Calendar.current.date(byAdding: .day, value: 45, to: Date())!,
         policy: .professional,
-        genre: "ジャズ",
-        instrument: "ドラム",
-        bandType: "ジャズバンド",
+        genre: [MusicGenre.jazz],
+        wantedParts: [Part(instrument: .drums, gender: Gender.female)],
         rehearsalLocation: "銀座リハーサルスタジオ",
         contactEmail: "apply@jazzband.com"
     ),
     Recruitment(
         id: UUID().uuidString,
-        user: mockUser,
+        deadline: Calendar.current.date(byAdding: .day, value: 25, to: Date())!,
+        author: mockUser,
         title: "凄腕のキーボーディスト求む！",
         description: "ポップスロックバンドでキーボードを担当できるメンバーを募集しています。ポップスロックバンドでキーボードを担当できるメンバーを募集しています。",
-        deadline: Calendar.current.date(byAdding: .day, value: 25, to: Date())!,
         policy: .professional,
-        genre: "ポップスロック",
-        instrument: "キーボード",
-        bandType: "ポップスロックバンド",
+        genre: [MusicGenre.pop, MusicGenre.rock],
+        wantedParts: [Part(instrument: .keyboard, gender: .male)],
         rehearsalLocation: "渋谷音楽スタジオ",
         contactEmail: "contact@poprockband.com"
     )
