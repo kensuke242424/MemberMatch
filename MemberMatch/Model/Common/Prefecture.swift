@@ -55,7 +55,7 @@ enum Prefecture: String, CaseIterable, Codable {
     case okinawa = "Okinawa"
 
     // 日本語名を返すプロパティ
-    var japaneseName: String {
+    var text: String {
         switch self {
         case .hokkaido: return "北海道"
         case .aomori: return "青森県"

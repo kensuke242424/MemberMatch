@@ -12,11 +12,11 @@ enum Policy: String, CaseIterable, Codable {
     case hobby = "Hobby"
     case professional = "Professional"
 
-    var jpName: String {
+    var text: String {
         switch self {
-        case .nothing: "こだわらない"
-        case .hobby: "趣味として楽しむ"
-        case .professional: "本気でやる"
+        case .nothing: Constants.Strings.policy_nothing
+        case .hobby: Constants.Strings.policy_hobby
+        case .professional: Constants.Strings.policy_professional
         }
     }
 }

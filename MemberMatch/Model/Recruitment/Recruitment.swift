@@ -19,8 +19,8 @@ import Foundation
 struct Recruitment: Identifiable, Hashable {
     let id: String
     let postedDate: Date
-    var deadlineDate: Date
     let author: User
+    var favorite: Int
     var title: String
     var description: String
     var policy: Policy?
@@ -35,8 +35,8 @@ struct Recruitment: Identifiable, Hashable {
     init(
         id: String = UUID().uuidString,
         postedDate: Date = Date(),
-        deadline: Date,
         author: User,
+        favorite: Int = 0,
         title: String,
         description: String,
         policy: Policy?,
@@ -50,10 +50,10 @@ struct Recruitment: Identifiable, Hashable {
     ) {
         self.id = id
         self.author = author
+        self.favorite = favorite
         self.title = title
         self.description = description
         self.postedDate = postedDate
-        self.deadlineDate = deadline
         self.policy = policy
         self.genre = genre
         self.frequency = frequency
@@ -69,8 +69,8 @@ struct Recruitment: Identifiable, Hashable {
 let exampleRecruitments = [
     Recruitment(
         id: UUID().uuidString,
-        deadline: Calendar.current.date(byAdding: .day, value: 30, to: Date())!,
         author: mockUser,
+        favorite: 40,
         title: "POPバンドのメンバー大募集！ガチでやろうぜ！",
         description:
 """
@@ -114,8 +114,8 @@ let exampleRecruitments = [
     ),
     Recruitment(
         id: UUID().uuidString,
-        deadline: Calendar.current.date(byAdding: .day, value: 30, to: Date())!,
         author: mockUser,
+        favorite: 20,
         title: "ベーシスト募集！",
         description:
 """
@@ -133,7 +133,6 @@ let exampleRecruitments = [
     ),
     Recruitment(
         id: UUID().uuidString,
-        deadline: Calendar.current.date(byAdding: .day, value: 45, to: Date())!,
         author: mockUser,
         title: "ジャズドラマー募集中",
         description:
@@ -152,8 +151,8 @@ let exampleRecruitments = [
     ),
     Recruitment(
         id: UUID().uuidString,
-        deadline: Calendar.current.date(byAdding: .day, value: 25, to: Date())!,
         author: mockUser,
+        favorite: 70,
         title: "凄腕のキーボーディスト求む！",
         description: "ポップスロックバンドでキーボードを担当できるメンバーを募集しています。ポップスロックバンドでキーボードを担当できるメンバーを募集しています。",
         policy: .professional,

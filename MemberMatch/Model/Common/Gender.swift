@@ -12,7 +12,7 @@ enum Gender: String, CaseIterable, Codable {
     case female = "Female"
     case unknown = "Unknown"
 
-    var jpName: String {
+    var text: String {
         switch self {
         case .male:
             "男性"

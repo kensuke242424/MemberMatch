@@ -21,36 +21,36 @@ enum Instrument: String, CaseIterable, Codable {
     case vocal = "Vocal"
     case synthesizer = "Synthesizer"
 
-    var jpName: String {
+    var text: String {
         switch self {
         case .songWriter:
-            return "ソングライター"
+            return Constants.Strings.instrument_song_writer
         case .guitar:
-            return "ギター"
+            return Constants.Strings.instrument_guitar
         case .bass:
-            return "ベース"
+            return Constants.Strings.instrument_bass
         case .drums:
-            return "ドラム"
+            return Constants.Strings.instrument_drums
         case .keyboard:
-            return "キーボード"
+            return Constants.Strings.instrument_keyboard
         case .piano:
-            return "ピアノ"
+            return Constants.Strings.instrument_piano
         case .saxophone:
-            return "サックス"
+            return Constants.Strings.instrument_saxophone
         case .trumpet:
-            return "トランペット"
+            return Constants.Strings.instrument_trumpet
         case .violin:
-            return "バイオリン"
+            return Constants.Strings.instrument_violin
         case .cello:
-            return "チェロ"
+            return Constants.Strings.instrument_cello
         case .flute:
-            return "フルート"
+            return Constants.Strings.instrument_flute
         case .clarinet:
-            return "クラリネット"
+            return Constants.Strings.instrument_clarinet
         case .vocal:
-            return "ボーカル"
+            return Constants.Strings.instrument_vocal
         case .synthesizer:
-            return "シンセサイザー"
+            return Constants.Strings.instrument_synthesizer
         }
     }
 

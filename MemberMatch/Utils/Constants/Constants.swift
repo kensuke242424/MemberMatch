@@ -10,7 +10,88 @@ import SwiftUI
 struct Constants {
     // ツールバー
     static let toolBarItemSize: CGFloat = 30
+}
 
+extension Constants {
+    struct Strings {
+        // --- View ---
+        // 掲示板ページ
+        static let recruitmentPageTitle = String(localized: "recruitment_page_title")
+        static let author = String(localized: "author")
+        static let favorite = String(localized: "favorite")
+        static let publicDeadline = String(localized: "public_deadline")
+        static let publicDeadlineDesc1 = String(localized: "public_deadline_desc1")
+        static let publicDeadlineDesc2 = String(localized: "public_deadline_desc2")
+        static let wantedPartsTitle = String(localized: "wanted_parts_title")
+        static let policyTitle = String(localized: "policy_title")
+        static let frequencyTitle = String(localized: "frequency_title")
+        static let locationTitle = String(localized: "location_title")
+        static let sendMessage = String(localized: "send_message")
+
+        // Empty
+        static let emptyName = String(localized: "empty_name")
+        static let emptyDescription = String(localized: "empty_professional")
+
+        // --- Model ---
+        // Policy
+        static let policy_nothing = String(localized: "policy_nothing")
+        static let policy_hobby = String(localized: "policy_hobby")
+        static let policy_professional = String(localized: "policy_professional")
+
+        // SkillLevel
+        static let skill_level_beginner = String(localized: "skill_level_beginner")
+        static let skill_level_novice = String(localized: "skill_level_novice")
+        static let skill_level_intermediate = String(localized: "skill_level_intermediate")
+        static let skill_level_advanced = String(localized: "skill_level_advanced")
+        static let skill_level_expert = String(localized: "skill_level_expert")
+
+        // Instrument
+        static let instrument_song_writer = String(localized: "instrument_song_writer")
+        static let instrument_guitar = String(localized: "instrument_guitar")
+        static let instrument_bass = String(localized: "instrument_bass")
+        static let instrument_drums = String(localized: "instrument_drums")
+        static let instrument_keyboard = String(localized: "instrument_keyboard")
+        static let instrument_piano = String(localized: "instrument_piano")
+        static let instrument_saxophone = String(localized: "instrument_saxophone")
+        static let instrument_trumpet = String(localized: "instrument_trumpet")
+        static let instrument_violin = String(localized: "instrument_violin")
+        static let instrument_cello = String(localized: "instrument_cello")
+        static let instrument_flute = String(localized: "instrument_flute")
+        static let instrument_clarinet = String(localized: "instrument_clarinet")
+        static let instrument_vocal = String(localized: "instrument_vocal")
+        static let instrument_synthesizer = String(localized: "instrument_synthesizer")
+
+        // MusicGenre
+        static let music_genre_rock = String(localized: "music_genre_rock")
+        static let music_genre_pop = String(localized: "music_genre_pop")
+        static let music_genre_jazz = String(localized: "music_genre_jazz")
+        static let music_genre_classical = String(localized: "music_genre_classical")
+        static let music_genre_hipHop = String(localized: "music_genre_hipHop")
+        static let music_genre_country = String(localized: "music_genre_country")
+        static let music_genre_electronic = String(localized: "music_genre_electronic")
+        static let music_genre_reggae = String(localized: "music_genre_reggae")
+        static let music_genre_blues = String(localized: "music_genre_blues")
+        static let music_genre_folk = String(localized: "music_genre_folk")
+        static let music_genre_heavyMetal = String(localized: "music_genre_heavyMetal")
+        static let music_genre_punk = String(localized: "music_genre_punk")
+        static let music_genre_rAndB = String(localized: "music_genre_rAndB")
+        static let music_genre_latin = String(localized: "music_genre_latin")
+        static let music_genre_indie = String(localized: "music_genre_indie")
+        static let music_genre_others = String(localized: "music_genre_others")
+
+        // CommitmentLevel
+        static let commitment_level_casual = String(localized: "commitment_level_casual")
+        static let commitment_level_serious = String(localized: "commitment_level_serious")
+        static let commitment_level_professional = String(localized: "commitment_level_professional")
+
+        // Gender
+        static let gender_male = String(localized: "gender_male")
+        static let gender_female = String(localized: "gender_female")
+        static let gender_unknown = String(localized: "gender_unknown")
+    }
+}
+
+extension Constants {
     struct Symbols {
         // SF Symbols
         static let chevron_backward: String = "chevron.backward"
@@ -18,8 +99,12 @@ struct Constants {
         static let chevron_down: String = "chevron.down"
         static let pin: String = "pin"
         static let pin_fill: String = "pin.fill"
+        static let heart: String = "heart"
+        static let heart_fill: String = "heart.fill"
     }
+}
 
+extension Constants {
     struct Images {
         // 楽器パート
         // シンガーソングライター

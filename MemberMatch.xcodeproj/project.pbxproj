@@ -10,6 +10,9 @@
 		BE71DBFB2C1538C30026F588 /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71DBFA2C1538C30026F588 /* Gender.swift */; };
 		BE71DBFD2C153B770026F588 /* Part.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71DBFC2C153B770026F588 /* Part.swift */; };
 		BE71DBFF2C1D3F070026F588 /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71DBFE2C1D3F070026F588 /* Mocks.swift */; };
+		BE71DC062C1D4CD50026F588 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE71DC042C1D4CD50026F588 /* Localizable.strings */; };
+		BE71DC0B2C1D4D380026F588 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE71DC092C1D4D380026F588 /* Localizable.strings */; };
+		BE71DC0D2C1D576E0026F588 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71DC0C2C1D576E0026F588 /* Util.swift */; };
 		BED4B20B2BE999C700C49EB5 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4B20A2BE999C700C49EB5 /* LoginView.swift */; };
 		BED4B20E2BE99A3F00C49EB5 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4B20D2BE99A3F00C49EB5 /* SignUpView.swift */; };
 		BED4B2132BEFC8C700C49EB5 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4B2122BEFC8C700C49EB5 /* ViewExtension.swift */; };
@@ -59,6 +62,9 @@
 		BE71DBFA2C1538C30026F588 /* Gender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
 		BE71DBFC2C153B770026F588 /* Part.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Part.swift; sourceTree = "<group>"; };
 		BE71DBFE2C1D3F070026F588 /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
+		BE71DC052C1D4CD50026F588 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = Localizable.strings; sourceTree = "<group>"; };
+		BE71DC0A2C1D4D380026F588 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
+		BE71DC0C2C1D576E0026F588 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		BED4B20A2BE999C700C49EB5 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		BED4B20D2BE99A3F00C49EB5 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		BED4B2122BEFC8C700C49EB5 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
@@ -123,6 +129,39 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		BE71DC002C1D4C4E0026F588 /* Localizables */ = {
+			isa = PBXGroup;
+			children = (
+				BE71DC012C1D4C880026F588 /* Base.lproj */,
+				BE71DC022C1D4C940026F588 /* en.lproj */,
+				BE71DC032C1D4CA30026F588 /* ja.lproj */,
+			);
+			path = Localizables;
+			sourceTree = "<group>";
+		};
+		BE71DC012C1D4C880026F588 /* Base.lproj */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Base.lproj;
+			sourceTree = "<group>";
+		};
+		BE71DC022C1D4C940026F588 /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				BE71DC092C1D4D380026F588 /* Localizable.strings */,
+			);
+			path = en.lproj;
+			sourceTree = "<group>";
+		};
+		BE71DC032C1D4CA30026F588 /* ja.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				BE71DC042C1D4CD50026F588 /* Localizable.strings */,
+			);
+			path = ja.lproj;
+			sourceTree = "<group>";
+		};
 		BED4B2092BE999AD00C49EB5 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -156,6 +195,7 @@
 				BED4B2152BEFC8FA00C49EB5 /* Common */,
 				BED4B20F2BEFC56900C49EB5 /* Extensions */,
 				BED4B2182BEFCF4E00C49EB5 /* Modifiers */,
+				BE71DC0C2C1D576E0026F588 /* Util.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -333,8 +373,9 @@
 		BEFAE4E02BDE73A000CADC73 /* MemberMatch */ = {
 			isa = PBXGroup;
 			children = (
-				BED4B2142BEFC8F100C49EB5 /* Utils */,
 				BEFAE4E12BDE73A000CADC73 /* MemberMatchApp.swift */,
+				BE71DC002C1D4C4E0026F588 /* Localizables */,
+				BED4B2142BEFC8F100C49EB5 /* Utils */,
 				BEFAE4EF2BDE759A00CADC73 /* Model */,
 				BEFAE4F02BDE75A100CADC73 /* View */,
 				BEFAE4F12BDE75AC00CADC73 /* ViewModel */,
@@ -454,6 +495,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
 			);
 			mainGroup = BEFAE4D52BDE73A000CADC73;
 			packageReferences = (
@@ -476,6 +518,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEFAE4E92BDE73A200CADC73 /* Preview Assets.xcassets in Resources */,
+				BE71DC0B2C1D4D380026F588 /* Localizable.strings in Resources */,
+				BE71DC062C1D4CD50026F588 /* Localizable.strings in Resources */,
 				BEFAE4E62BDE73A200CADC73 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -519,6 +563,7 @@
 				BED4B2232BEFD5DA00C49EB5 /* RecruitmentBoardView.swift in Sources */,
 				BED4B2292BEFD5FE00C49EB5 /* ProfileView.swift in Sources */,
 				BEE55DDD2BF84FE100299883 /* UIDeviceExtension.swift in Sources */,
+				BE71DC0D2C1D576E0026F588 /* Util.swift in Sources */,
 				BEFAE4E22BDE73A000CADC73 /* MemberMatchApp.swift in Sources */,
 				BED4B2362BF0788800C49EB5 /* User.swift in Sources */,
 				BED4B2572BF3D74B00C49EB5 /* Prefecture.swift in Sources */,
@@ -540,6 +585,25 @@
 			productRef = BEE3F87C2C0DF37B007D5328 /* SwiftLintBuildToolPlugin */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		BE71DC042C1D4CD50026F588 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BE71DC052C1D4CD50026F588 /* ja */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		BE71DC092C1D4D380026F588 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BE71DC0A2C1D4D380026F588 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		BEFAE4EA2BDE73A200CADC73 /* Debug */ = {

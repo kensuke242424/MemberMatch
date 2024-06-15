@@ -6,24 +6,19 @@
 //
 
 enum SkillLevel: Int, CaseIterable, Codable {
-    case beginner = 1
+    case beginner
     case novice
     case intermediate
     case advanced
     case expert
 
-    var jpName: String {
+    var text: String {
         switch self {
-        case .beginner:
-            return "初心者"
-        case .novice:
-            return "初級"
-        case .intermediate:
-            return "中級"
-        case .advanced:
-            return "上級"
-        case .expert:
-            return "プロ"
+        case .beginner: Constants.Strings.skill_level_beginner
+        case .novice: Constants.Strings.skill_level_novice
+        case .intermediate: Constants.Strings.skill_level_intermediate
+        case .advanced: Constants.Strings.skill_level_advanced
+        case .expert: Constants.Strings.skill_level_expert
         }
     }
 }

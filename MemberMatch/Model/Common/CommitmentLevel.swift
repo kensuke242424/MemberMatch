@@ -10,7 +10,7 @@ enum CommitmentLevel: String, CaseIterable, Codable {
     case serious = "Serious"
     case professional = "Professional"
 
-    var jpName: String {
+    var text: String {
         switch self {
         case .casual:
             return "エンジョイ"
