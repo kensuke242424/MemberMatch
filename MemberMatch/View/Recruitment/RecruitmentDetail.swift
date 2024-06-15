@@ -13,14 +13,14 @@ struct RecruitmentDetail: View {
     let recruitment: Recruitment
     @EnvironmentObject var router: Router
 
-    @StateObject var vm = RecruitmentDetailViewModel()
+    @StateObject private var vm = RecruitmentDetailViewModel()
 
-    @State var scrollOffsetY: CGFloat = 0
+    @State private var scrollOffsetY: CGFloat = 0
 
     var body: some View {
         VStack(spacing: 0) {
             TabTopBarView(
-                "募集の内容",
+                Constants.Strings.recruitmentPageTitle,
                 leftToolbarItems: {
                     Image(systemName: Constants.Symbols.chevron_backward)
                         .foregroundStyle(.gray)
@@ -62,12 +62,12 @@ struct RecruitmentDetail: View {
                 }
             }, content: {
                 VStack(spacing: 30) {
-                    wantedPartsDetail(title: "募集パート", parts: recruitment.wantedParts)
-                    policyDetail(title: "活動方針", policy: recruitment.policy)
-                    frequencyDetail(title: "活動頻度", text: recruitment.frequency)
-                    locationDetail(title: "活動場所", desc: recruitment.rehearsalLocation)
+                    wantedPartsDetail(title: Constants.Strings.wantedPartsTitle, parts: recruitment.wantedParts)
+                    policyDetail(recruitment.policy)
+                    frequencyDetail(recruitment.frequency)
+                    locationDetail(title: Constants.Strings.locationTitle, desc: recruitment.rehearsalLocation)
 
-                    Button("メッセージを送る") {
+                    Button(Constants.Strings.sendMessage) {
                         vm.resetScrollToTop()
                     }
                     .fontWeight(.bold)
@@ -134,7 +134,9 @@ extension RecruitmentDetail {
                     .padding(.bottom, !vm.isScrolledMidPoint || vm.isFullOpenCard ? 10 : 0)
                 HStack {
                     VStack(spacing: 8) {
-                        CustomText("掲載者：\(recruitment.author.name ?? "名無し")", .black)
+                        Text(
+                            "\(Constants.Strings.author)：\(recruitment.author.name ?? Constants.Strings.emptyName)"
+                        )
                             .lineLimit(!vm.isScrolledMidPoint || vm.isFullOpenCard ? 100 : 2)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .multilineTextAlignment(.leading)
@@ -166,11 +168,17 @@ extension RecruitmentDetail {
                 .padding(.bottom, !vm.isScrolledMidPoint || vm.isFullOpenCard ? 10 : 0)
 
                 HStack {
-                    CustomText("気になる", .gray).font(.caption).fontWeight(.bold)
-                    Image(systemName: "heart.fill").foregroundStyle(.red)
-                    CustomText("50", .gray).font(.caption).fontWeight(.bold)
+                    CustomText(Constants.Strings.favorite, .gray).font(.caption).fontWeight(.bold)
+                    Image(systemName: Constants.Symbols.heart_fill).foregroundStyle(.red)
+                    CustomText(String(recruitment.favorite), .gray).font(.caption).fontWeight(.bold)
                     Spacer().frame(width: 20)
-                    CustomText("掲載日：あと 7日", .gray).font(.caption).fontWeight(.bold)
+                    CustomText("\(Constants.Strings.publicDeadline):", .gray).font(.caption).fontWeight(.bold)
+                    HStack(spacing: 5) {
+                        CustomText(Constants.Strings.publicDeadlineDesc1, .gray).font(.caption).fontWeight(.bold)
+                        CustomText(String(Util.daysUntilDeadline(from: recruitment.postedDate)), .gray)
+                            .font(.caption).fontWeight(.bold)
+                        CustomText(Constants.Strings.publicDeadlineDesc2, .gray).font(.caption).fontWeight(.bold)
+                    }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 if !vm.isScrolledStartPoint || vm.isFullOpenCard {
@@ -226,11 +234,11 @@ extension RecruitmentDetail {
                                     .frame(width: 150, height: 150)
                                     .shadow(radius: 3)
                                 HStack(spacing: 0) {
-                                    Text(part.instrument.jpName)
+                                    Text(part.instrument.text)
                                         .font(.caption)
                                         .foregroundStyle(Color.gray)
                                     if let gender = part.gender {
-                                        Text("(\(gender.jpName))")
+                                        Text("(\(gender.text))")
                                             .font(.caption)
                                             .foregroundStyle(Color.gray)
                                     }
@@ -261,11 +269,11 @@ extension RecruitmentDetail {
 
 extension RecruitmentDetail {
     @ViewBuilder
-    private func policyDetail(title: String, policy: Policy?) -> some View {
+    private func policyDetail(_ policy: Policy?) -> some View {
         VStack(alignment: .leading) {
-            CustomText("\(title)：", .customTextColorWhite).font(.headline)
+            CustomText("\(Constants.Strings.policyTitle)：", .customTextColorWhite).font(.headline)
             VStack {
-                Text(policy?.jpName ?? "")
+                Text(policy?.text ?? "")
                     .tracking(4)
                     .font(.headline)
                 Image(Constants.Images.band_enjoy)
@@ -311,11 +319,11 @@ extension RecruitmentDetail {
 
 extension RecruitmentDetail {
     @ViewBuilder
-    private func frequencyDetail(title: String, text: String?) -> some View {
+    private func frequencyDetail(_ content: String?) -> some View {
         VStack(alignment: .leading) {
-            CustomText("\(title)：", .customTextColorWhite)
+            CustomText("\(Constants.Strings.frequencyTitle)：", .customTextColorWhite)
                 .font(.headline)
-            CustomText(text ?? "記載なし", .customTextColorBlack)
+            CustomText(content ?? Constants.Strings.emptyDescription, .customTextColorBlack)
                 .font(.subheadline)
                 .frame(maxHeight: .infinity)
                 .frame(maxWidth: .infinity, alignment: .leading)

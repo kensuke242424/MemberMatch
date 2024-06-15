@@ -30,7 +30,7 @@ struct TabTopBarView<LeftItems: View, RightItems: View>: View {
 
     var body: some View {
         HStack {
-            Text(title ?? "")
+            Text(NSLocalizedString(title ?? "", comment: title ?? ""))
                 .tracking(1)
                 .lineLimit(1)
                 .fontWeight(.semibold)
