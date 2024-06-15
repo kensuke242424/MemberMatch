@@ -16,6 +16,8 @@ struct RecruitmentDetail: View {
     @StateObject private var vm = RecruitmentDetailViewModel()
 
     @State private var scrollOffsetY: CGFloat = 0
+    //TODO: ユーザーデータの投稿お気に入りパラメータから算出する
+    @State private var favorite: Bool = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -31,17 +33,24 @@ struct RecruitmentDetail: View {
                 rightToolbarItems: {
                     Image(systemName: vm.isFixedCard ?
                           Constants.Symbols.pin_fill : Constants.Symbols.pin)
-                        .foregroundStyle(.gray)
-                        .frame(width: Constants.toolBarItemSize, height: Constants.toolBarItemSize)
-                        .background(Circle().foregroundStyle(.white))
-                        .onTapGesture { vm.isFixedCard.toggle() }
+                    .foregroundStyle(.gray)
+                    .frame(width: Constants.toolBarItemSize, height: Constants.toolBarItemSize)
+                    .background(Circle().foregroundStyle(.white))
+                    .onTapGesture { vm.isFixedCard.toggle() }
                 }
             )
             ScalingHeaderScrollView(header: {
                 ZStack {
                     BlurView(style: .systemUltraThinMaterial).opacity(vm.isScrolledEndPoint ? 1 : 0)
-                    recruitmentCard(recruitment: recruitment)
+                    recruitmentBoard(recruitment: recruitment)
                         .padding()
+                        .onAppear {
+                            // MEMO: タブ切り替えによって再度処理が走ることを防ぐ
+                            if vm.isAlreadyShown { return }
+
+                            vm.maxHeaderHeight = vm.recruitmentCardSize.height + 30
+                            vm.isAlreadyShown.toggle()
+                        }
                         .onTapGesture {
                             if vm.collapseProgress <= 0 { return }
                             withAnimation(.spring(duration: 0.2)) { vm.isFullOpenCard.toggle() }
@@ -52,34 +61,53 @@ struct RecruitmentDetail: View {
                         .onChange(of: scrollOffsetY) { _ in
                             withAnimation(.spring(duration: 0.2)) { vm.isFullOpenCard = false }
                         }
-                        .onAppear {
-                            // MEMO: タブ切り替えによって再度処理が走ることを防ぐ
-                            if vm.isAlreadyShown { return }
-
-                            vm.maxHeaderHeight = vm.recruitmentCardSize.height + 30
-                            vm.isAlreadyShown.toggle()
-                        }
                 }
             }, content: {
                 VStack(spacing: 30) {
-                    wantedPartsDetail(title: Constants.Strings.wantedPartsTitle, parts: recruitment.wantedParts)
+                    youtubeVideoDetail(url: recruitment.youtubeVideoURL)
+                    wantedPartsDetail(recruitment.wantedParts)
                     policyDetail(recruitment.policy)
                     frequencyDetail(recruitment.frequency)
-                    locationDetail(title: Constants.Strings.locationTitle, desc: recruitment.rehearsalLocation)
+                    locationDetail(recruitment.rehearsalLocation)
+                    additionalInfoDetail(recruitment.additionalInfo)
 
-                    Button(Constants.Strings.sendMessage) {
-                        vm.resetScrollToTop()
+                    HStack {
+                        // 気になる
+                        Button {
+                            withAnimation { favorite.toggle() }
+                        } label: {
+                            HStack {
+                                Text(Constants.Strings.favorite)
+                                Image(systemName: favorite ? Constants.Symbols.heart_fill : Constants.Symbols.heart)
+                            }
+                            .opacity(favorite ? 1 : 0.7)
+                        }
+                        .fontWeight(.bold)
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .foregroundStyle(favorite ? .red : .gray)
+                        )
+                        .foregroundStyle(.customWhite)
+                        .padding(4)
+                        // メッセージを送る
+                        Button {
+                            vm.resetScrollToTop()
+                        } label: {
+                            HStack {
+                                Text(Constants.Strings.sendMessage)
+                                Image(systemName: Constants.Symbols.bubble_left_fill)
+                            }
+                        }
+                        .fontWeight(.bold)
+                        .padding()
+                        .background(RoundedRectangle(cornerRadius: 10).foregroundStyle(.customAccentYellow))
+                        .foregroundStyle(.customWhite)
+                        .padding(4)
                     }
-                    .fontWeight(.bold)
-                    .padding()
-                    .background(RoundedRectangle(cornerRadius: 10).foregroundStyle(.customAccentYellow))
-                    .foregroundStyle(.customWhite)
-                    .padding()
-
-                    Spacer().frame(height: 20)
+                    .padding(.vertical, 20)
                 }
-                .padding(.horizontal)
-                .padding(.vertical)
+                .padding()
                 .offsetRect { rect in
                     scrollOffsetY = rect.minY - rect.height
                 }
@@ -102,18 +130,19 @@ struct RecruitmentDetail: View {
 struct SizePreferenceKey: PreferenceKey {
     typealias Value = CGSize
 
-    static var defaultValue: CGSize = .zero
+    static var defaultValue: Value = .zero
 
-    static func reduce(value: inout CGSize, nextValue: () -> CGSize) {
+    static func reduce(value: inout Value, nextValue: () -> Value) {
         value = nextValue()
     }
 }
 
+// 募集ボード
 extension RecruitmentDetail {
     @ViewBuilder
-    private func recruitmentCard(recruitment: Recruitment) -> some View {
+    private func recruitmentBoard(recruitment: Recruitment) -> some View {
         ZStack {
-            // コルクボードデザイン
+            // 募集コルクボード
             RoundedRectangle(cornerRadius: 10)
                 .fill(Color.corkTexture)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -134,13 +163,14 @@ extension RecruitmentDetail {
                     .padding(.bottom, !vm.isScrolledMidPoint || vm.isFullOpenCard ? 10 : 0)
                 HStack {
                     VStack(spacing: 8) {
-                        Text(
-                            "\(Constants.Strings.author)：\(recruitment.author.name ?? Constants.Strings.emptyName)"
+                        CustomText(
+                            "\(Constants.Strings.author)：\(recruitment.author.name ?? Constants.Strings.emptyName)",
+                            .customTextColorBlack
                         )
-                            .lineLimit(!vm.isScrolledMidPoint || vm.isFullOpenCard ? 100 : 2)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .multilineTextAlignment(.leading)
-                            .font(.caption)
+                        .lineLimit(!vm.isScrolledMidPoint || vm.isFullOpenCard ? 100 : 2)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .multilineTextAlignment(.leading)
+                        .font(.caption)
                         CustomText(recruitment.description, .gray)
                             .lineLimit(!vm.isScrolledMidPoint || vm.isFullOpenCard ? 100 : 2)
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -156,7 +186,7 @@ extension RecruitmentDetail {
                                    height: !vm.isScrolledMidPoint || vm.isFullOpenCard ? 70 : 50)
 
                         if !vm.isScrolledMidPoint || vm.isFullOpenCard {
-                            Button("Profile") {
+                            Button(Constants.Strings.profileText) {
                                 router.push([.userProfile(mockUser)])
                             }
                             .font(.caption2.bold())
@@ -169,7 +199,9 @@ extension RecruitmentDetail {
 
                 HStack {
                     CustomText(Constants.Strings.favorite, .gray).font(.caption).fontWeight(.bold)
-                    Image(systemName: Constants.Symbols.heart_fill).foregroundStyle(.red)
+                    Image(systemName: favorite ? Constants.Symbols.heart_fill : Constants.Symbols.heart)
+                        .foregroundStyle(favorite ? .red : .gray)
+                        .onTapGesture { withAnimation { favorite.toggle() } }
                     CustomText(String(recruitment.favorite), .gray).font(.caption).fontWeight(.bold)
                     Spacer().frame(width: 20)
                     CustomText("\(Constants.Strings.publicDeadline):", .gray).font(.caption).fontWeight(.bold)
@@ -217,11 +249,25 @@ extension RecruitmentDetail {
     }
 }
 
+// Youtube動画
 extension RecruitmentDetail {
     @ViewBuilder
-    private func wantedPartsDetail(title: String, parts: [Part]?) -> some View {
+    private func youtubeVideoDetail(url videoURL: [URL]?) -> some View {
         VStack(alignment: .leading) {
-            CustomText("\(title)：", .customTextColorWhite).font(.headline)
+            RoundedRectangle(cornerRadius: 10)
+                .foregroundStyle(.customAccentYellow.gradient)
+                .frame(maxWidth: .infinity)
+                .frame(height: 250)
+        }
+    }
+}
+
+// 募集パート
+extension RecruitmentDetail {
+    @ViewBuilder
+    private func wantedPartsDetail(_ parts: [Part]?) -> some View {
+        VStack(alignment: .leading) {
+            CustomText("\(Constants.Strings.wantedPartsTitle)：", .customTextColorWhite).font(.headline)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 20) {
                     if let parts {
@@ -267,13 +313,14 @@ extension RecruitmentDetail {
     }
 }
 
+// 活動方針
 extension RecruitmentDetail {
     @ViewBuilder
     private func policyDetail(_ policy: Policy?) -> some View {
         VStack(alignment: .leading) {
             CustomText("\(Constants.Strings.policyTitle)：", .customTextColorWhite).font(.headline)
             VStack {
-                Text(policy?.text ?? "")
+                CustomText(policy?.text ?? "", .customTextColorBlack)
                     .tracking(4)
                     .font(.headline)
                 Image(Constants.Images.band_enjoy)
@@ -292,6 +339,7 @@ extension RecruitmentDetail {
     }
 }
 
+// 募集詳細
 extension RecruitmentDetail {
     @ViewBuilder
     private func recruitmentDetail(title: String, desc description: String) -> some View {
@@ -317,44 +365,68 @@ extension RecruitmentDetail {
     }
 }
 
+// 活動頻度
 extension RecruitmentDetail {
     @ViewBuilder
-    private func frequencyDetail(_ content: String?) -> some View {
+    private func frequencyDetail(_ description: String?) -> some View {
         VStack(alignment: .leading) {
             CustomText("\(Constants.Strings.frequencyTitle)：", .customTextColorWhite)
                 .font(.headline)
-            CustomText(content ?? Constants.Strings.emptyDescription, .customTextColorBlack)
-                .font(.subheadline)
-                .frame(maxHeight: .infinity)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding()
-                .background {
-                    RoundedRectangle(cornerRadius: 5)
-                        .shadow(radius: 10)
-                        .foregroundStyle(.customWhite)
-                }
-            VStack {
-
+            CustomText(
+                description ?? Constants.Strings.emptyDescription,
+                description == nil ? .gray : .customTextColorBlack
+            )
+            .font(.subheadline)
+            .frame(maxHeight: .infinity)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding()
+            .background {
+                RoundedRectangle(cornerRadius: 5)
+                    .shadow(radius: 10)
+                    .foregroundStyle(.customWhite)
             }
         }
     }
 }
 
+// 活動拠点
 extension RecruitmentDetail {
     @ViewBuilder
-    private func locationDetail(title: String, desc description: String) -> some View {
+    private func locationDetail(_ description: String?) -> some View {
         VStack(alignment: .leading) {
-            CustomText("\(title)：", .customTextColorWhite)
+            CustomText("\(Constants.Strings.locationTitle)：", .customTextColorWhite)
                 .font(.headline)
-            VStack {
-                CustomText(recruitment.title, .customTextColorBlack).fontWeight(.bold)
-                CustomText(description, .customTextColorBlack)
-                    .font(.subheadline)
-                    .frame(minHeight: 50)
-                    .frame(maxHeight: .infinity)
-                Spacer().frame(height: 40)
+            CustomText(
+                description ?? Constants.Strings.emptyDescription,
+                description == nil ? .gray : .customTextColorBlack
+            )
+            .font(.subheadline)
+            .frame(maxHeight: .infinity)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding()
+            .background {
+                RoundedRectangle(cornerRadius: 5)
+                    .shadow(radius: 10)
+                    .foregroundStyle(.customWhite)
             }
-            .frame(maxWidth: .infinity)
+        }
+    }
+}
+
+// 活動拠点
+extension RecruitmentDetail {
+    @ViewBuilder
+    private func additionalInfoDetail(_ description: String?) -> some View {
+        VStack(alignment: .leading) {
+            CustomText("\(Constants.Strings.additionalInfoTitle)：", .customTextColorWhite)
+                .font(.headline)
+            CustomText(
+                description ?? Constants.Strings.emptyDescription,
+                description == nil ? .gray : .customTextColorBlack
+            )
+            .font(.subheadline)
+            .frame(maxHeight: .infinity)
+            .frame(maxWidth: .infinity, alignment: .leading)
             .padding()
             .background {
                 RoundedRectangle(cornerRadius: 5)

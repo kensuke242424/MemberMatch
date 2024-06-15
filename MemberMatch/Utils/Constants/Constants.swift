@@ -26,11 +26,13 @@ extension Constants {
         static let policyTitle = String(localized: "policy_title")
         static let frequencyTitle = String(localized: "frequency_title")
         static let locationTitle = String(localized: "location_title")
+        static let additionalInfoTitle = String(localized: "additional_info_title")
         static let sendMessage = String(localized: "send_message")
+        static let profileText = String(localized: "profile")
 
         // Empty
         static let emptyName = String(localized: "empty_name")
-        static let emptyDescription = String(localized: "empty_professional")
+        static let emptyDescription = String(localized: "empty_description")
 
         // --- Model ---
         // Policy
@@ -88,6 +90,11 @@ extension Constants {
         static let gender_male = String(localized: "gender_male")
         static let gender_female = String(localized: "gender_female")
         static let gender_unknown = String(localized: "gender_unknown")
+
+        // Browse
+        static let browse_all = String(localized: "browse_all")
+        static let browse_single = String(localized: "browse_single")
+        static let browse_group = String(localized: "browse_group")
     }
 }
 
@@ -101,6 +108,7 @@ extension Constants {
         static let pin_fill: String = "pin.fill"
         static let heart: String = "heart"
         static let heart_fill: String = "heart.fill"
+        static let bubble_left_fill: String = "bubble.left.fill"
     }
 }
 

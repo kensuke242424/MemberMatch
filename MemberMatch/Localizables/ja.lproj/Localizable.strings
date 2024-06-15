@@ -18,7 +18,9 @@
 "policy_title" = "活動目的";
 "frequency_title" = "活動頻度";
 "location_title" = "活動拠点";
+"additional_info_title" = "その他/備考";
 "send_message" = "メッセージを送る";
+"profile" = "Profile";
 
 // Empty
 "empty_name" = "名無し";
@@ -81,4 +83,9 @@
 "gender_male" = "男性";
 "gender_female" = "女性";
 "gender_unknown" = "回答なし";
+
+// Browse
+"browse_all" = "全て";
+"browse_single" = "個人";
+"browse_group" = "グループ";
 

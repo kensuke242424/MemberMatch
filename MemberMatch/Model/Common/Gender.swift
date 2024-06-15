@@ -15,11 +15,11 @@ enum Gender: String, CaseIterable, Codable {
     var text: String {
         switch self {
         case .male:
-            "男性"
+            Constants.Strings.gender_male
         case .female:
-            "女性"
+            Constants.Strings.gender_female
         case .unknown:
-            "回答なし"
+            Constants.Strings.gender_unknown
         }
     }
 }
