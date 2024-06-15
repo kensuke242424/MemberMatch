@@ -22,7 +22,7 @@ struct RecruitmentDetail: View {
             TabTopBarView(
                 "募集の内容",
                 leftToolbarItems: {
-                    Image(systemName: Constants.SF_chevron_backward)
+                    Image(systemName: Constants.Symbols.chevron_backward)
                         .foregroundStyle(.gray)
                         .frame(width: Constants.toolBarItemSize, height: Constants.toolBarItemSize)
                         .background(Circle().foregroundStyle(.white))
@@ -30,7 +30,7 @@ struct RecruitmentDetail: View {
                 },
                 rightToolbarItems: {
                     Image(systemName: vm.isFixedCard ?
-                          Constants.SF_pin_fill : Constants.SF_pin)
+                          Constants.Symbols.pin_fill : Constants.Symbols.pin)
                         .foregroundStyle(.gray)
                         .frame(width: Constants.toolBarItemSize, height: Constants.toolBarItemSize)
                         .background(Circle().foregroundStyle(.white))
@@ -55,6 +55,7 @@ struct RecruitmentDetail: View {
                         .onAppear {
                             // MEMO: タブ切り替えによって再度処理が走ることを防ぐ
                             if vm.isAlreadyShown { return }
+
                             vm.maxHeaderHeight = vm.recruitmentCardSize.height + 30
                             vm.isAlreadyShown.toggle()
                         }
@@ -63,7 +64,7 @@ struct RecruitmentDetail: View {
                 VStack(spacing: 30) {
                     wantedPartsDetail(title: "募集パート", parts: recruitment.wantedParts)
                     policyDetail(title: "活動方針", policy: recruitment.policy)
-                    frequencyDetail(title: "活動頻度", desc: recruitment.description)
+                    frequencyDetail(title: "活動頻度", text: recruitment.frequency)
                     locationDetail(title: "活動場所", desc: recruitment.rehearsalLocation)
 
                     Button("メッセージを送る") {
@@ -267,7 +268,7 @@ extension RecruitmentDetail {
                 Text(policy?.jpName ?? "")
                     .tracking(4)
                     .font(.headline)
-                Image(Constants.band_enjoy)
+                Image(Constants.Images.band_enjoy)
                     .resizable()
                     .scaledToFit()
                     .frame(maxWidth: .infinity)
@@ -310,24 +311,22 @@ extension RecruitmentDetail {
 
 extension RecruitmentDetail {
     @ViewBuilder
-    private func frequencyDetail(title: String, desc description: String) -> some View {
+    private func frequencyDetail(title: String, text: String?) -> some View {
         VStack(alignment: .leading) {
             CustomText("\(title)：", .customTextColorWhite)
                 .font(.headline)
+            CustomText(text ?? "記載なし", .customTextColorBlack)
+                .font(.subheadline)
+                .frame(maxHeight: .infinity)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding()
+                .background {
+                    RoundedRectangle(cornerRadius: 5)
+                        .shadow(radius: 10)
+                        .foregroundStyle(.customWhite)
+                }
             VStack {
-                CustomText(recruitment.title, .customTextColorBlack).fontWeight(.bold)
-                CustomText(description, .customTextColorBlack)
-                    .font(.subheadline)
-                    .frame(minHeight: 50)
-                    .frame(maxHeight: .infinity)
-                Spacer().frame(height: 40)
-            }
-            .frame(maxWidth: .infinity)
-            .padding()
-            .background {
-                RoundedRectangle(cornerRadius: 5)
-                    .shadow(radius: 10)
-                    .foregroundStyle(.customWhite)
+
             }
         }
     }
@@ -359,6 +358,6 @@ extension RecruitmentDetail {
 }
 
 #Preview {
-    RecruitmentDetail(recruitment: exampleRecruitments.first!)
+    RecruitmentDetail(recruitment: exampleRecruitments[1])
         .environmentObject(Router())
 }

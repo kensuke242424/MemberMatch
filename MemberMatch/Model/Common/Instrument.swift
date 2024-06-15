@@ -57,33 +57,33 @@ enum Instrument: String, CaseIterable, Codable {
     func iconName(for gender: Gender) -> String {
         switch self {
         case .songWriter: 
-            gender == .male ? Constants.singer_song_writer_male : Constants.singer_song_writer_female
+            gender == .male ? Constants.Images.singer_song_writer_male : Constants.Images.singer_song_writer_female
         case .guitar:
-            gender == .male ? Constants.guitar_male : Constants.guitar_female
+            gender == .male ? Constants.Images.guitar_male : Constants.Images.guitar_female
         case .bass:
-            gender == .male ? Constants.bass_male : Constants.bass_female
+            gender == .male ? Constants.Images.bass_male : Constants.Images.bass_female
         case .drums:
-            gender == .male ? Constants.drums_male : Constants.drums_female
+            gender == .male ? Constants.Images.drums_male : Constants.Images.drums_female
         case .keyboard:
-            gender == .male ? Constants.keyboard_male : Constants.keyboard_female
+            gender == .male ? Constants.Images.keyboard_male : Constants.Images.keyboard_female
         case .piano:
-            gender == .male ? Constants.piano_male : Constants.piano_female
+            gender == .male ? Constants.Images.piano_male : Constants.Images.piano_female
         case .saxophone:
-            gender == .male ? Constants.saxophone_male : Constants.saxophone_female
+            gender == .male ? Constants.Images.saxophone_male : Constants.Images.saxophone_female
         case .trumpet:
-            gender == .male ? Constants.trumpet_male : Constants.trumpet_female
+            gender == .male ? Constants.Images.trumpet_male : Constants.Images.trumpet_female
         case .violin:
-            gender == .male ? Constants.violin_male : Constants.violin_female
+            gender == .male ? Constants.Images.violin_male : Constants.Images.violin_female
         case .cello:
-            gender == .male ? Constants.cello_male : Constants.cello_female
+            gender == .male ? Constants.Images.cello_male : Constants.Images.cello_female
         case .flute:
-            gender == .male ? Constants.flute_male : Constants.flute_female
+            gender == .male ? Constants.Images.flute_male : Constants.Images.flute_female
         case .clarinet:
-            gender == .male ? Constants.clarinet_male : Constants.clarinet_female
+            gender == .male ? Constants.Images.clarinet_male : Constants.Images.clarinet_female
         case .vocal:
-            gender == .male ? Constants.vocal_male : Constants.vocal_female
+            gender == .male ? Constants.Images.vocal_male : Constants.Images.vocal_female
         case .synthesizer:
-            gender == .male ? Constants.synthesizer_male : Constants.synthesizer_female
+            gender == .male ? Constants.Images.synthesizer_male : Constants.Images.synthesizer_female
         }
     }
 }

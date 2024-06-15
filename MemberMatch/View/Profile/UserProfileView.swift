@@ -234,13 +234,13 @@ extension UserProfileView {
 
 extension UserProfileView {
     @ViewBuilder
-    private func frequencyDetail(title: String, desc description: String) -> some View {
+    private func frequencyDetail(title: String, desc description: String?) -> some View {
         VStack(alignment: .leading) {
             CustomText("\(title)：", .customTextColorWhite)
                 .font(.headline)
             VStack {
                 CustomText(user.name ?? "", .customTextColorBlack).fontWeight(.bold)
-                CustomText(description, .customTextColorBlack)
+                CustomText(description ?? "記載なし", .customTextColorBlack)
                     .font(.subheadline)
                     .frame(minHeight: 50)
                     .frame(maxHeight: .infinity)

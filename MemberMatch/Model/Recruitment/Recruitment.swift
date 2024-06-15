@@ -6,6 +6,7 @@
  title: 募集のタイトル。
  description: 募集内容の詳細な説明。
  policy: 募集方針。
+ frequency: 活動頻度。
  genre: ジャンル。
  location: 募集の場所またはリモートワークの可能性。
  category: 募集が属するカテゴリ（例：テクノロジー、マーケティングなど）。
@@ -23,6 +24,7 @@ struct Recruitment: Identifiable, Hashable {
     var title: String
     var description: String
     var policy: Policy?
+    var frequency: String?
     var genre: [MusicGenre]?
     var wantedParts: [Part]?
     var rehearsalLocation: String
@@ -38,6 +40,7 @@ struct Recruitment: Identifiable, Hashable {
         title: String,
         description: String,
         policy: Policy?,
+        frequency: String? = nil,
         genre: [MusicGenre]? = nil,
         wantedParts: [Part]? = nil,
         rehearsalLocation: String,
@@ -53,6 +56,7 @@ struct Recruitment: Identifiable, Hashable {
         self.deadlineDate = deadline
         self.policy = policy
         self.genre = genre
+        self.frequency = frequency
         self.wantedParts = wantedParts
         self.rehearsalLocation = rehearsalLocation
         self.contactEmail = contactEmail
@@ -121,6 +125,7 @@ let exampleRecruitments = [
 ポップスバンドで経験豊富なベーシストを探しています。ポップスバンドで経験豊富なベーシストを探しています。
 """,
         policy: Policy.professional,
+        frequency: "週１回",
         genre: [MusicGenre.pop],
         wantedParts: [Part(instrument: .bass, gender: Gender.male)],
         rehearsalLocation: "新宿スタジオ",
@@ -139,6 +144,7 @@ let exampleRecruitments = [
 ジャズバンドで一緒に演奏できるドラマーを探しています。
 """,
         policy: .professional,
+        frequency: "週２〜３回",
         genre: [MusicGenre.jazz],
         wantedParts: [Part(instrument: .drums, gender: Gender.female)],
         rehearsalLocation: "銀座リハーサルスタジオ",
@@ -151,6 +157,7 @@ let exampleRecruitments = [
         title: "凄腕のキーボーディスト求む！",
         description: "ポップスロックバンドでキーボードを担当できるメンバーを募集しています。ポップスロックバンドでキーボードを担当できるメンバーを募集しています。",
         policy: .professional,
+        frequency: "週１〜２回",
         genre: [MusicGenre.pop, MusicGenre.rock],
         wantedParts: [Part(instrument: .keyboard, gender: .male)],
         rehearsalLocation: "渋谷音楽スタジオ",
