@@ -14,6 +14,7 @@ import Foundation
  twitterAccount: Twitterのプロフィールページへのリンク。
  instagramAccount: Instagramのプロフィールページへのリンク。
  youtubeVideoURL: バンドに関連するYouTube動画のURL。
+ socialMediaLinks: SNSリンク。
  */
 
 struct Team: Identifiable, Codable, Hashable {
@@ -22,15 +23,13 @@ struct Team: Identifiable, Codable, Hashable {
     var genre: [MusicGenre]?
     var prefecture: Prefecture?
     var foundedDate: Date?
-    var members: [User]?  // Userモデルはバンドメンバーの情報を持つ構造体
+    var members: [User]?
     var bio: String?
     var contactEmail: String?
     var websiteURL: URL?
-    var socialMediaLinks: [String: URL]?  // ソーシャルメディアのリンクはキーとURLで管理
-    var logoURL: URL?  // バンドのロゴ画像のURL
-    var twitterAccount: URL?  // TwitterアカウントのURL
-    var instagramAccount: URL?  // InstagramアカウントのURL
-    var youtubeVideoURL: [URL]?  // YouTube動画のURL
+    var logoURL: URL?
+    var youtubeVideoURL: [URL]?
+    var socialMediaLinks: SocialMediaLinks
 
     init(
         id: String = UUID().uuidString,
@@ -42,11 +41,11 @@ struct Team: Identifiable, Codable, Hashable {
         bio: String?,
         contactEmail: String?,
         websiteURL: URL?,
-        socialMediaLinks: [String: URL]?,
         logoURL: URL?,
         twitterAccount: URL?,
         instagramAccount: URL?,
-        youtubeVideoURL: [URL]?
+        youtubeVideoURL: [URL]?,
+        socialMediaLinks: SocialMediaLinks
     ) {
         self.id = id
         self.name = name
@@ -57,11 +56,9 @@ struct Team: Identifiable, Codable, Hashable {
         self.bio = bio
         self.contactEmail = contactEmail
         self.websiteURL = websiteURL
-        self.socialMediaLinks = socialMediaLinks
         self.logoURL = logoURL
-        self.twitterAccount = twitterAccount
-        self.instagramAccount = instagramAccount
         self.youtubeVideoURL = youtubeVideoURL
+        self.socialMediaLinks = socialMediaLinks
     }
 }
 
@@ -76,14 +73,15 @@ let mockTeam = Team(
     bio: "「Echoes of the Future」はエレクトロニック・ロックを融合させたバンドで、彼らのエネルギッシュなパフォーマンスと深い歌詞で知られています。",
     contactEmail: "contact@echoesfuture.com",
     websiteURL: URL(string: "https://www.echoesfuture.com"),
-    socialMediaLinks: [
-        "Twitter": URL(string: "https://twitter.com/echoesfuture")!,
-        "Instagram": URL(string: "https://instagram.com/echoesfuture")!
-    ],
     logoURL: URL(string: "https://www.echoesfuture.com/logo.png"),
     twitterAccount: URL(string: "https://twitter.com/echoesfuture"),
     instagramAccount: URL(string: "https://instagram.com/echoesfuture"),
     youtubeVideoURL: [
         URL(string: "https://www.youtube.com/watch?v=dQw4w9WgXcQ")!
-    ]
+    ],
+    socialMediaLinks: SocialMediaLinks(
+        twitter: URL(string: "https://twitter.com/echoesfuture"),
+        instagram: URL(string: "https://instagram.com/echoesfuture"),
+        facebook: nil
+    )
 )

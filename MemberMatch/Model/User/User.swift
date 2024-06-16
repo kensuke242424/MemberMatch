@@ -28,6 +28,7 @@ struct User: Identifiable, Hashable, Codable {
     var policy: Policy?
     var profileImageURL: URL?
     var bio: String?
+    var socialMediaLinks: SocialMediaLinks
 
     init(
         id: String = UUID().uuidString,
@@ -41,7 +42,8 @@ struct User: Identifiable, Hashable, Codable {
         preferredGenre: [MusicGenre]?,
         policy: Policy?,
         profileImageURL: URL?,
-        bio: String?
+        bio: String?,
+        socialMediaLinks: SocialMediaLinks
     ) {
         self.id = id
         self.name = name
@@ -55,6 +57,7 @@ struct User: Identifiable, Hashable, Codable {
         self.policy = policy
         self.profileImageURL = profileImageURL
         self.bio = bio
+        self.socialMediaLinks = socialMediaLinks
     }
 }
 
@@ -69,5 +72,10 @@ let mockUser = User(
     preferredGenre: [.rock, .jazz],
     policy: .professional,
     profileImageURL: URL(string: "https://example.com/images/john.jpg"),
-    bio: "ギターと歌をこよなく愛するミュージシャン。ロックとジャズの融合に情熱を注いでいます。"
+    bio: "ギターと歌をこよなく愛するミュージシャン。ロックとジャズの融合に情熱を注いでいます。",
+    socialMediaLinks: SocialMediaLinks(
+        twitter: URL(string: "https://twitter.com/echoesfuture"),
+        instagram: URL(string: "https://instagram.com/echoesfuture"),
+        facebook: nil
+    )
 )

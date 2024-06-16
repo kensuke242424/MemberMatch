@@ -64,11 +64,11 @@ struct RecruitmentDetail: View {
                 }
             }, content: {
                 VStack(spacing: 30) {
-                    youtubeVideoDetail(url: recruitment.youtubeVideoURL)
                     wantedPartsDetail(recruitment.wantedParts)
                     policyDetail(recruitment.policy)
                     frequencyDetail(recruitment.frequency)
                     locationDetail(recruitment.rehearsalLocation)
+                    youtubeVideoDetail(recruitment.youtubeVideoURL)
                     additionalInfoDetail(recruitment.additionalInfo)
 
                     HStack {
@@ -105,7 +105,10 @@ struct RecruitmentDetail: View {
                         .foregroundStyle(.customWhite)
                         .padding(4)
                     }
-                    .padding(.vertical, 20)
+                    .padding(.vertical, 15)
+
+                    socialMediaLinks(recruitment.author.socialMediaLinks)
+                        .padding(.bottom, 15)
                 }
                 .padding()
                 .offsetRect { rect in
@@ -127,18 +130,18 @@ struct RecruitmentDetail: View {
     }
 }
 
-struct SizePreferenceKey: PreferenceKey {
-    typealias Value = CGSize
-
-    static var defaultValue: Value = .zero
-
-    static func reduce(value: inout Value, nextValue: () -> Value) {
-        value = nextValue()
-    }
-}
-
 // 募集ボード
 extension RecruitmentDetail {
+    struct SizePreferenceKey: PreferenceKey {
+        typealias Value = CGSize
+
+        static var defaultValue: Value = .zero
+
+        static func reduce(value: inout Value, nextValue: () -> Value) {
+            value = nextValue()
+        }
+    }
+
     @ViewBuilder
     private func recruitmentBoard(recruitment: Recruitment) -> some View {
         ZStack {
@@ -245,19 +248,6 @@ extension RecruitmentDetail {
             GeometryReader { geometry in
                 Color.clear.preference(key: SizePreferenceKey.self, value: geometry.size)
             }
-        }
-    }
-}
-
-// Youtube動画
-extension RecruitmentDetail {
-    @ViewBuilder
-    private func youtubeVideoDetail(url videoURL: [URL]?) -> some View {
-        VStack(alignment: .leading) {
-            RoundedRectangle(cornerRadius: 10)
-                .foregroundStyle(.customAccentYellow.gradient)
-                .frame(maxWidth: .infinity)
-                .frame(height: 250)
         }
     }
 }
@@ -433,6 +423,49 @@ extension RecruitmentDetail {
                     .shadow(radius: 10)
                     .foregroundStyle(.customWhite)
             }
+        }
+    }
+}
+
+// Youtube動画
+extension RecruitmentDetail {
+    @ViewBuilder
+    private func youtubeVideoDetail(_ videoURL: [URL]?) -> some View {
+        VStack(alignment: .leading) {
+            RoundedRectangle(cornerRadius: 10)
+                .foregroundStyle(.white)
+                .frame(maxWidth: .infinity)
+                .frame(height: 220)
+                .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
+                .overlay { Text("YouTube") }
+        }
+    }
+}
+
+extension RecruitmentDetail {
+    @ViewBuilder
+    private func socialMediaLinks(_ links: SocialMediaLinks) -> some View {
+        let iconSize: CGFloat = 50
+
+        HStack(spacing: 30) {
+            Button {
+                vm.openURL(links.twitter)
+            } label: {
+                Circle().frame(width: iconSize, height: iconSize)
+            }
+            .disabled(links.twitter == nil)
+            Button {
+                vm.openURL(links.instagram)
+            } label: {
+                Circle().frame(width: iconSize, height: iconSize)
+            }
+            .disabled(links.instagram == nil)
+            Button {
+                vm.openURL(links.facebook)
+            } label: {
+                Circle().frame(width: iconSize, height: iconSize)
+            }
+            .disabled(links.facebook == nil)
         }
     }
 }
