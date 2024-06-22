@@ -8,12 +8,14 @@
 import SwiftUI
 
 class RecruitmentDetailViewModel: ObservableObject {
-    @Published var collapseProgress: CGFloat = .zero {
-        didSet {
-            self.handleScrolledPoint(newValue: collapseProgress)
-        }
-    }
 
+    // Editing
+    @Published var isEditing: Bool = false
+    @Published var inputTwitterUrl: String = ""
+    @Published var inputInstagramUrl: String = ""
+    @Published var inputFacebookUrl: String = ""
+
+    // View Property
     @Published var isResetScroll: Bool = false
     @Published var isShowTopBarBackground: Bool = false
     @Published var isFullOpenCard: Bool = false
@@ -24,10 +26,14 @@ class RecruitmentDetailViewModel: ObservableObject {
     @Published var isFixedCard: Bool = false
     @Published var recruitmentCardSize: CGSize = .zero
     @Published var maxHeaderHeight: CGFloat = .zero
+    @Published var collapseProgress: CGFloat = .zero {
+        didSet {
+            self.handleScrolledPoint(newValue: collapseProgress)
+        }
+    }
     var minHeaderHeight: CGFloat {
         self.isFixedCard ? 160 : 0
     }
-
     let toolBarHeight: CGFloat = 100
 
     func handleScrolledPoint(newValue: CGFloat) {

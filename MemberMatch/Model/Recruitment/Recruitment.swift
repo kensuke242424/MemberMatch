@@ -25,7 +25,7 @@ struct Recruitment: Identifiable, Hashable {
     var description: String
     var policy: Policy?
     var frequency: String?
-    var genre: [MusicGenre]?
+    var genre: [MusicGenre]
     var wantedParts: [Part]?
     var rehearsalLocation: String
     var contactEmail: String
@@ -41,7 +41,7 @@ struct Recruitment: Identifiable, Hashable {
         description: String,
         policy: Policy?,
         frequency: String? = nil,
-        genre: [MusicGenre]? = nil,
+        genre: [MusicGenre] = [],
         wantedParts: [Part]? = nil,
         rehearsalLocation: String,
         contactEmail: String,

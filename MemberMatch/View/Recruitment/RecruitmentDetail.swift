@@ -16,7 +16,7 @@ struct RecruitmentDetail: View {
     @StateObject private var vm = RecruitmentDetailViewModel()
 
     @State private var scrollOffsetY: CGFloat = 0
-    //TODO: ユーザーデータの投稿お気に入りパラメータから算出する
+    // TODO: ユーザーデータの投稿お気に入りパラメータから算出する
     @State private var favorite: Bool = false
 
     var body: some View {
@@ -31,12 +31,21 @@ struct RecruitmentDetail: View {
                         .onTapGesture { router.popRecruitmentPage() }
                 },
                 rightToolbarItems: {
-                    Image(systemName: vm.isFixedCard ?
-                          Constants.Symbols.pin_fill : Constants.Symbols.pin)
-                    .foregroundStyle(.gray)
-                    .frame(width: Constants.toolBarItemSize, height: Constants.toolBarItemSize)
-                    .background(Circle().foregroundStyle(.white))
-                    .onTapGesture { vm.isFixedCard.toggle() }
+                    // TODO: 自身の投稿の場合のみ編集可能
+                    // 編集ボタン
+                    Image(systemName:Constants.Symbols.square_and_pencil)
+                        .foregroundStyle(.gray)
+                        .frame(width: Constants.toolBarItemSize, height: Constants.toolBarItemSize)
+                        .background(Circle().foregroundStyle(vm.isEditing ? .customAccentYellow : .white))
+                        .onTapGesture {
+                            withAnimation { vm.isEditing.toggle() }
+                        }
+                    // ピン留めボタン
+                    Image(systemName: vm.isFixedCard ? Constants.Symbols.pin_fill : Constants.Symbols.pin)
+                        .foregroundStyle(.gray)
+                        .frame(width: Constants.toolBarItemSize, height: Constants.toolBarItemSize)
+                        .background(Circle().foregroundStyle(.white))
+                        .onTapGesture { vm.isFixedCard.toggle() }
                 }
             )
             ScalingHeaderScrollView(header: {
@@ -64,13 +73,15 @@ struct RecruitmentDetail: View {
                 }
             }, content: {
                 VStack(spacing: 30) {
+                    musicGenreDetail(recruitment.genre)
                     wantedPartsDetail(recruitment.wantedParts)
                     policyDetail(recruitment.policy)
                     frequencyDetail(recruitment.frequency)
                     locationDetail(recruitment.rehearsalLocation)
                     youtubeVideoDetail(recruitment.youtubeVideoURL)
                     additionalInfoDetail(recruitment.additionalInfo)
-
+                    socialMediaLinks(recruitment.author.socialMediaLinks)
+                        .padding(.vertical, 15)
                     HStack {
                         // 気になる
                         Button {
@@ -105,11 +116,9 @@ struct RecruitmentDetail: View {
                         .foregroundStyle(.customWhite)
                         .padding(4)
                     }
-                    .padding(.vertical, 15)
-
-                    socialMediaLinks(recruitment.author.socialMediaLinks)
-                        .padding(.bottom, 15)
+                    .padding(.bottom, 15)
                 }
+                .editingScaleEffect(isEditing: $vm.isEditing)
                 .padding()
                 .offsetRect { rect in
                     scrollOffsetY = rect.minY - rect.height
@@ -123,6 +132,11 @@ struct RecruitmentDetail: View {
             .headerAlignment(.top)
             .allowsHeaderGrowth()
             .collapseProgress($vm.collapseProgress)
+        }
+        .background {
+            if vm.isEditing {
+                Color.black.opacity(0.4).ignoresSafeArea()
+            }
         }
         .gradientBackground()
         .ignoresSafeArea(edges: .top)
@@ -175,7 +189,7 @@ extension RecruitmentDetail {
                         .multilineTextAlignment(.leading)
                         .font(.caption)
                         CustomText(recruitment.description, .gray)
-                            .lineLimit(!vm.isScrolledMidPoint || vm.isFullOpenCard ? 100 : 2)
+                            .lineLimit(!vm.isScrolledMidPoint || vm.isFullOpenCard ? 4 : 2)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .multilineTextAlignment(.leading)
                             .font(.caption)
@@ -252,6 +266,22 @@ extension RecruitmentDetail {
     }
 }
 
+// ジャンル
+extension RecruitmentDetail {
+    @ViewBuilder
+    private func musicGenreDetail(_ genre: [MusicGenre]) -> some View {
+        VStack(alignment: .leading) {
+            CustomText("\(Constants.Strings.musicGenreTitle)：", .customTextColorWhite)
+                .font(.headline)
+            Spacer().frame(height: 16)
+            CapsuleView(texts: Constants.musicGenreTexts,
+                        highlightedTexts: genre.map { $0.text }
+            )
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+}
+
 // 募集パート
 extension RecruitmentDetail {
     @ViewBuilder
@@ -267,7 +297,7 @@ extension RecruitmentDetail {
                                 Image(part.instrument.iconName(for: part.gender ?? Gender.male))
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(width: 150, height: 150)
+                                    .frame(width: 120, height: 120)
                                     .shadow(radius: 3)
                                 HStack(spacing: 0) {
                                     Text(part.instrument.text)
@@ -424,6 +454,7 @@ extension RecruitmentDetail {
                     .foregroundStyle(.customWhite)
             }
         }
+        .editingScaleEffect(isEditing: $vm.isEditing)
     }
 }
 
@@ -442,30 +473,73 @@ extension RecruitmentDetail {
     }
 }
 
+// SNSリンク
 extension RecruitmentDetail {
     @ViewBuilder
     private func socialMediaLinks(_ links: SocialMediaLinks) -> some View {
         let iconSize: CGFloat = 50
 
-        HStack(spacing: 30) {
-            Button {
-                vm.openURL(links.twitter)
-            } label: {
-                Circle().frame(width: iconSize, height: iconSize)
+        if vm.isEditing {
+            VStack(spacing: 12) {
+                textFieldForm(title: "X(Twitter)",
+                              text: $vm.inputTwitterUrl,
+                              Constants.Strings.placeHolderTwitterURL
+                )
+                textFieldForm(title: "Instagram",
+                              text: $vm.inputInstagramUrl,
+                              Constants.Strings.placeHolderInstagramURL
+                )
+                textFieldForm(title: "Facebook",
+                              text: $vm.inputFacebookUrl,
+                              Constants.Strings.placeHolderFacebookURL
+                )
             }
-            .disabled(links.twitter == nil)
-            Button {
-                vm.openURL(links.instagram)
-            } label: {
-                Circle().frame(width: iconSize, height: iconSize)
+        } else {
+            HStack(spacing: 30) {
+                Button {
+                    vm.openURL(links.twitter)
+                } label: {
+                    Circle().frame(width: iconSize, height: iconSize)
+                }
+                .disabled(links.twitter == nil)
+                Button {
+                    vm.openURL(links.instagram)
+                } label: {
+                    Circle().frame(width: iconSize, height: iconSize)
+                }
+                .disabled(links.instagram == nil)
+                Button {
+                    vm.openURL(links.facebook)
+                } label: {
+                    Circle().frame(width: iconSize, height: iconSize)
+                }
+                .disabled(links.facebook == nil)
             }
-            .disabled(links.instagram == nil)
-            Button {
-                vm.openURL(links.facebook)
-            } label: {
-                Circle().frame(width: iconSize, height: iconSize)
-            }
-            .disabled(links.facebook == nil)
+        }
+    }
+}
+
+extension RecruitmentDetail {
+    @ViewBuilder
+    private func textFieldForm(title: String, text: Binding<String>, _ placeHolder: String) -> some View {
+        VStack(alignment: .leading) {
+            CustomText(title, .customTextColorWhite)
+                .font(.headline)
+
+            TextField("", text: text)
+                .overlay(alignment:  .leading) {
+                    if text.wrappedValue.isEmpty {
+                        Text(placeHolder)
+                            .foregroundStyle(.gray.opacity(0.7))
+                            .allowsHitTesting(false)
+                    }
+                }
+                .padding(8)
+                .background {
+                    RoundedRectangle(cornerRadius: 8)
+                        .foregroundStyle(.white)
+                }
+                .foregroundStyle(.customTextColorBlack)
         }
     }
 }

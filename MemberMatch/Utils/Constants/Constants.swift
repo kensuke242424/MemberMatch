@@ -10,6 +10,8 @@ import SwiftUI
 struct Constants {
     // ツールバー
     static let toolBarItemSize: CGFloat = 30
+
+    static let musicGenreTexts = MusicGenre.allCases.map { $0.text }
 }
 
 extension Constants {
@@ -22,6 +24,7 @@ extension Constants {
         static let publicDeadline = String(localized: "public_deadline")
         static let publicDeadlineDesc1 = String(localized: "public_deadline_desc1")
         static let publicDeadlineDesc2 = String(localized: "public_deadline_desc2")
+        static let musicGenreTitle = String(localized: "music_genre_title")
         static let wantedPartsTitle = String(localized: "wanted_parts_title")
         static let policyTitle = String(localized: "policy_title")
         static let frequencyTitle = String(localized: "frequency_title")
@@ -29,6 +32,10 @@ extension Constants {
         static let additionalInfoTitle = String(localized: "additional_info_title")
         static let sendMessage = String(localized: "send_message")
         static let profileText = String(localized: "profile")
+
+        static let placeHolderTwitterURL: String = "https://twitter.com/example"
+        static let placeHolderInstagramURL: String = "https://instagram.com/example"
+        static let placeHolderFacebookURL: String = "https://facebook.com/example"
 
         // Empty
         static let emptyName = String(localized: "empty_name")
@@ -109,6 +116,7 @@ extension Constants {
         static let heart: String = "heart"
         static let heart_fill: String = "heart.fill"
         static let bubble_left_fill: String = "bubble.left.fill"
+        static let square_and_pencil: String = "square.and.pencil"
     }
 }
 

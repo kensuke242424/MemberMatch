@@ -42,7 +42,7 @@ struct TabTopBarView<LeftItems: View, RightItems: View>: View {
             // vm.resetScrollToTop()
         }
         .overlay {
-            HStack {
+            HStack(spacing: 12) {
                 leftToolbarItems
                 Spacer()
                 rightToolbarItems
