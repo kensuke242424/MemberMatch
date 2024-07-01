@@ -9,7 +9,7 @@ import ScalingHeaderScrollView
 import SwiftUI
 import SwiftUIIntrospect
 
-struct RecruitmentDetail: View {
+struct RecruitmentDetailView: View {
     let recruitment: Recruitment
     @EnvironmentObject var router: Router
 
@@ -31,15 +31,14 @@ struct RecruitmentDetail: View {
                         .onTapGesture { router.popRecruitmentPage() }
                 },
                 rightToolbarItems: {
-                    // TODO: 自身の投稿の場合のみ編集可能
+                    // TODO: 自身の投稿の場合のみ表示
                     // 編集ボタン
-                    Image(systemName:Constants.Symbols.square_and_pencil)
-                        .foregroundStyle(.gray)
-                        .frame(width: Constants.toolBarItemSize, height: Constants.toolBarItemSize)
-                        .background(Circle().foregroundStyle(vm.isEditing ? .customAccentYellow : .white))
-                        .onTapGesture {
-                            withAnimation { vm.isEditing.toggle() }
-                        }
+                    NavigationLink(destination: RecruitmentEditView()) {
+                        Image(systemName:Constants.Symbols.square_and_pencil)
+                            .foregroundStyle(.gray)
+                            .frame(width: Constants.toolBarItemSize, height: Constants.toolBarItemSize)
+                            .background(Circle().foregroundStyle(.white))
+                    }
                     // ピン留めボタン
                     Image(systemName: vm.isFixedCard ? Constants.Symbols.pin_fill : Constants.Symbols.pin)
                         .foregroundStyle(.gray)
@@ -75,6 +74,7 @@ struct RecruitmentDetail: View {
                 VStack(spacing: 30) {
                     musicGenreDetail(recruitment.genre)
                     wantedPartsDetail(recruitment.wantedParts)
+                    recruitmentDetail(recruitment.description)
                     policyDetail(recruitment.policy)
                     frequencyDetail(recruitment.frequency)
                     locationDetail(recruitment.rehearsalLocation)
@@ -118,7 +118,6 @@ struct RecruitmentDetail: View {
                     }
                     .padding(.bottom, 15)
                 }
-                .editingScaleEffect(isEditing: $vm.isEditing)
                 .padding()
                 .offsetRect { rect in
                     scrollOffsetY = rect.minY - rect.height
@@ -133,11 +132,6 @@ struct RecruitmentDetail: View {
             .allowsHeaderGrowth()
             .collapseProgress($vm.collapseProgress)
         }
-        .background {
-            if vm.isEditing {
-                Color.black.opacity(0.4).ignoresSafeArea()
-            }
-        }
         .gradientBackground()
         .ignoresSafeArea(edges: .top)
         .navigationBarBackButtonHidden()
@@ -145,7 +139,7 @@ struct RecruitmentDetail: View {
 }
 
 // 募集ボード
-extension RecruitmentDetail {
+extension RecruitmentDetailView {
     struct SizePreferenceKey: PreferenceKey {
         typealias Value = CGSize
 
@@ -267,7 +261,7 @@ extension RecruitmentDetail {
 }
 
 // ジャンル
-extension RecruitmentDetail {
+extension RecruitmentDetailView {
     @ViewBuilder
     private func musicGenreDetail(_ genre: [MusicGenre]) -> some View {
         VStack(alignment: .leading) {
@@ -283,7 +277,7 @@ extension RecruitmentDetail {
 }
 
 // 募集パート
-extension RecruitmentDetail {
+extension RecruitmentDetailView {
     @ViewBuilder
     private func wantedPartsDetail(_ parts: [Part]?) -> some View {
         VStack(alignment: .leading) {
@@ -334,7 +328,7 @@ extension RecruitmentDetail {
 }
 
 // 活動方針
-extension RecruitmentDetail {
+extension RecruitmentDetailView {
     @ViewBuilder
     private func policyDetail(_ policy: Policy?) -> some View {
         VStack(alignment: .leading) {
@@ -360,11 +354,11 @@ extension RecruitmentDetail {
 }
 
 // 募集詳細
-extension RecruitmentDetail {
+extension RecruitmentDetailView {
     @ViewBuilder
-    private func recruitmentDetail(title: String, desc description: String) -> some View {
+    private func recruitmentDetail(_ description: String) -> some View {
         VStack(alignment: .leading) {
-            CustomText("\(title)：", .customTextColorWhite)
+            CustomText("\(Constants.Strings.recruitmentDescTitle)：", .customTextColorWhite)
                 .font(.headline)
             VStack {
                 CustomText(recruitment.title, .customTextColorBlack).fontWeight(.bold)
@@ -386,7 +380,7 @@ extension RecruitmentDetail {
 }
 
 // 活動頻度
-extension RecruitmentDetail {
+extension RecruitmentDetailView {
     @ViewBuilder
     private func frequencyDetail(_ description: String?) -> some View {
         VStack(alignment: .leading) {
@@ -410,7 +404,7 @@ extension RecruitmentDetail {
 }
 
 // 活動拠点
-extension RecruitmentDetail {
+extension RecruitmentDetailView {
     @ViewBuilder
     private func locationDetail(_ description: String?) -> some View {
         VStack(alignment: .leading) {
@@ -434,7 +428,7 @@ extension RecruitmentDetail {
 }
 
 // 活動拠点
-extension RecruitmentDetail {
+extension RecruitmentDetailView {
     @ViewBuilder
     private func additionalInfoDetail(_ description: String?) -> some View {
         VStack(alignment: .leading) {
@@ -454,12 +448,11 @@ extension RecruitmentDetail {
                     .foregroundStyle(.customWhite)
             }
         }
-        .editingScaleEffect(isEditing: $vm.isEditing)
     }
 }
 
 // Youtube動画
-extension RecruitmentDetail {
+extension RecruitmentDetailView {
     @ViewBuilder
     private func youtubeVideoDetail(_ videoURL: [URL]?) -> some View {
         VStack(alignment: .leading) {
@@ -474,7 +467,7 @@ extension RecruitmentDetail {
 }
 
 // SNSリンク
-extension RecruitmentDetail {
+extension RecruitmentDetailView {
     @ViewBuilder
     private func socialMediaLinks(_ links: SocialMediaLinks) -> some View {
         let iconSize: CGFloat = 50
@@ -519,7 +512,7 @@ extension RecruitmentDetail {
     }
 }
 
-extension RecruitmentDetail {
+extension RecruitmentDetailView {
     @ViewBuilder
     private func textFieldForm(title: String, text: Binding<String>, _ placeHolder: String) -> some View {
         VStack(alignment: .leading) {
@@ -545,6 +538,6 @@ extension RecruitmentDetail {
 }
 
 #Preview {
-    RecruitmentDetail(recruitment: exampleRecruitments[1])
+    RecruitmentDetailView(recruitment: exampleRecruitments[1])
         .environmentObject(Router())
 }

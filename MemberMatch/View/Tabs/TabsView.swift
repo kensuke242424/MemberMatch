@@ -29,7 +29,7 @@ struct TabsView: View {
                             RecruitmentBoardView()
 
                         case .detail(let recruitment):
-                            RecruitmentDetail(recruitment: recruitment)
+                            RecruitmentDetailView(recruitment: recruitment)
 
                         case .userProfile(let user):
                             UserProfileView(user: user)

@@ -45,7 +45,7 @@ struct FlexibleCapsuleView: View {
 
         for text in texts {
             let textWidth = text.size(withAttributes: [.font: UIFont.systemFont(ofSize: 17)]).width + 20
-            if currentWidth + textWidth + 10 > UIScreen.main.bounds.width - 50 { // パディングを考慮
+            if currentWidth + textWidth + 10 > UIScreen.main.bounds.width - 30 { // パディングを考慮
                 // Current row is full, create a new row
                 rows.append(currentRow)
                 currentRow = [text]

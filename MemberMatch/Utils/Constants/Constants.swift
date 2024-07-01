@@ -25,6 +25,7 @@ extension Constants {
         static let publicDeadlineDesc1 = String(localized: "public_deadline_desc1")
         static let publicDeadlineDesc2 = String(localized: "public_deadline_desc2")
         static let musicGenreTitle = String(localized: "music_genre_title")
+        static let recruitmentDescTitle = String(localized: "recruitment_desc_title")
         static let wantedPartsTitle = String(localized: "wanted_parts_title")
         static let policyTitle = String(localized: "policy_title")
         static let frequencyTitle = String(localized: "frequency_title")

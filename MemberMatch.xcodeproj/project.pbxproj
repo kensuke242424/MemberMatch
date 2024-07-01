@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE00ED7A2C32D83800572B98 /* RecruitmentEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE00ED792C32D83800572B98 /* RecruitmentEditView.swift */; };
 		BE71DBFB2C1538C30026F588 /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71DBFA2C1538C30026F588 /* Gender.swift */; };
 		BE71DBFD2C153B770026F588 /* Part.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71DBFC2C153B770026F588 /* Part.swift */; };
 		BE71DBFF2C1D3F070026F588 /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71DBFE2C1D3F070026F588 /* Mocks.swift */; };
@@ -24,7 +25,7 @@
 		BED4B2272BEFD5F400C49EB5 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4B2262BEFD5F400C49EB5 /* NotificationView.swift */; };
 		BED4B2292BEFD5FE00C49EB5 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4B2282BEFD5FE00C49EB5 /* ProfileView.swift */; };
 		BED4B22B2BEFDECC00C49EB5 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4B22A2BEFDECC00C49EB5 /* BlurView.swift */; };
-		BED4B22D2BF056F100C49EB5 /* RecruitmentDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4B22C2BF056F100C49EB5 /* RecruitmentDetail.swift */; };
+		BED4B22D2BF056F100C49EB5 /* RecruitmentDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4B22C2BF056F100C49EB5 /* RecruitmentDetailView.swift */; };
 		BED4B22F2BF059E100C49EB5 /* Recruitment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4B22E2BF059E100C49EB5 /* Recruitment.swift */; };
 		BED4B2332BF05D9400C49EB5 /* RecruitmentBoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4B2322BF05D9400C49EB5 /* RecruitmentBoardViewModel.swift */; };
 		BED4B2362BF0788800C49EB5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4B2352BF0788800C49EB5 /* User.swift */; };
@@ -62,6 +63,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BE00ED792C32D83800572B98 /* RecruitmentEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecruitmentEditView.swift; sourceTree = "<group>"; };
 		BE71DBFA2C1538C30026F588 /* Gender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
 		BE71DBFC2C153B770026F588 /* Part.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Part.swift; sourceTree = "<group>"; };
 		BE71DBFE2C1D3F070026F588 /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
@@ -79,7 +81,7 @@
 		BED4B2262BEFD5F400C49EB5 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		BED4B2282BEFD5FE00C49EB5 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		BED4B22A2BEFDECC00C49EB5 /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
-		BED4B22C2BF056F100C49EB5 /* RecruitmentDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecruitmentDetail.swift; sourceTree = "<group>"; };
+		BED4B22C2BF056F100C49EB5 /* RecruitmentDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecruitmentDetailView.swift; sourceTree = "<group>"; };
 		BED4B22E2BF059E100C49EB5 /* Recruitment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recruitment.swift; sourceTree = "<group>"; };
 		BED4B2322BF05D9400C49EB5 /* RecruitmentBoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecruitmentBoardViewModel.swift; sourceTree = "<group>"; };
 		BED4B2352BF0788800C49EB5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -252,7 +254,8 @@
 			isa = PBXGroup;
 			children = (
 				BED4B2222BEFD5DA00C49EB5 /* RecruitmentBoardView.swift */,
-				BED4B22C2BF056F100C49EB5 /* RecruitmentDetail.swift */,
+				BED4B22C2BF056F100C49EB5 /* RecruitmentDetailView.swift */,
+				BE00ED792C32D83800572B98 /* RecruitmentEditView.swift */,
 			);
 			path = Recruitment;
 			sourceTree = "<group>";
@@ -556,11 +559,12 @@
 				BED4B2522BF3D04F00C49EB5 /* SkillLevel.swift in Sources */,
 				BED4B2552BF3D1BF00C49EB5 /* CommitmentLevel.swift in Sources */,
 				BED4B2442BF3BCD100C49EB5 /* UserProfileView.swift in Sources */,
+				BE00ED7A2C32D83800572B98 /* RecruitmentEditView.swift in Sources */,
 				BED4B24C2BF3C17A00C49EB5 /* MusicGenre.swift in Sources */,
 				BEFAE4F52BDE768F00CADC73 /* TabsViewModel.swift in Sources */,
 				BEE55DE32BFA293500299883 /* RecruitmentDetailViewModel.swift in Sources */,
 				BE71DBFD2C153B770026F588 /* Part.swift in Sources */,
-				BED4B22D2BF056F100C49EB5 /* RecruitmentDetail.swift in Sources */,
+				BED4B22D2BF056F100C49EB5 /* RecruitmentDetailView.swift in Sources */,
 				BED4B2172BEFC90800C49EB5 /* CustomText.swift in Sources */,
 				BEE95D2C2C2065D100EBB934 /* CapsuleView.swift in Sources */,
 				BED4B2422BF259FA00C49EB5 /* Router.swift in Sources */,
