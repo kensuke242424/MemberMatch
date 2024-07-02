@@ -7,26 +7,32 @@
 
 import SwiftUI
 
-struct CapsuleView: View {
-    var texts: [String]
-    var highlightedTexts: [String] // 色をオレンジにするテキストのリスト
+struct MusicGenresCapsuleView: View {
+    let genres: [MusicGenre]
+    @Binding var highlightedGenres: [MusicGenre] // 色をオレンジにするジャンルのリスト
+    let isEditing: Bool
 
     @State private var totalHeight: CGFloat = .zero
 
     var body: some View {
-        FlexibleCapsuleView(texts: texts, highlightedTexts: highlightedTexts, totalHeight: $totalHeight)
-            .frame(height: totalHeight)
+        FlexibleCapsuleView(genres: genres,
+                            highlightedGenres: $highlightedGenres,
+                            totalHeight: $totalHeight,
+                            isEditing: isEditing
+        )
+        .frame(height: totalHeight)
     }
 }
 
 struct FlexibleCapsuleView: View {
-    var texts: [String]
-    var highlightedTexts: [String]
+    var genres: [MusicGenre]
+    @Binding var highlightedGenres: [MusicGenre]
     @Binding var totalHeight: CGFloat
+    let isEditing: Bool
 
     var body: some View {
         VStack(alignment: .leading) {
-            generateRows(for: texts)
+            generateRows(for: genres)
                 .background(
                     GeometryReader { geometry in
                         Color.clear
@@ -38,21 +44,21 @@ struct FlexibleCapsuleView: View {
         }
     }
 
-    private func generateRows(for texts: [String]) -> some View {
-        var currentRow: [String] = []
+    private func generateRows(for genres: [MusicGenre]) -> some View {
+        var currentRow: [MusicGenre] = []
         var currentWidth: CGFloat = 0
-        var rows: [[String]] = []
+        var rows: [[MusicGenre]] = []
 
-        for text in texts {
-            let textWidth = text.size(withAttributes: [.font: UIFont.systemFont(ofSize: 17)]).width + 20
+        for genre in genres {
+            let textWidth = genre.text.size(withAttributes: [.font: UIFont.systemFont(ofSize: 17)]).width + 20
             if currentWidth + textWidth + 10 > UIScreen.main.bounds.width - 30 { // パディングを考慮
                 // Current row is full, create a new row
                 rows.append(currentRow)
-                currentRow = [text]
+                currentRow = [genre]
                 currentWidth = textWidth
             } else {
                 // Add to current row
-                currentRow.append(text)
+                currentRow.append(genre)
                 currentWidth += textWidth + 10
             }
         }
@@ -64,41 +70,52 @@ struct FlexibleCapsuleView: View {
 
         return VStack(alignment: .leading) {
             ForEach(rows, id: \.self) { row in
-                RowView(texts: row, highlightedTexts: highlightedTexts)
+                RowView(genres: row, highlightedGenres: $highlightedGenres, isEditing: isEditing)
             }
         }
     }
 }
 
 struct RowView: View {
-    var texts: [String]
-    var highlightedTexts: [String]
+    let genres: [MusicGenre]
+    @Binding var highlightedGenres: [MusicGenre]
+    let isEditing: Bool
 
     var body: some View {
         HStack {
-            ForEach(texts, id: \.self) { text in
-                Text(text)
+            ForEach(genres, id: \.self) { genre in
+                Text(genre.text)
                     .padding(.horizontal, 10)
                     .padding(.vertical, 5)
-                    .background(Capsule().fill(isHighlighted(text) ? Color.customAccentYellow : Color.gray))
+                    .background(Capsule().fill(isHighlighted(genre) ? Color.customAccentYellow : Color.gray))
                     .foregroundStyle(.white)
-                    .opacity(isHighlighted(text) ? 1 : 0.6)
+                    .opacity(isHighlighted(genre) ? 1 : 0.6)
                     .fixedSize() // テキストの省略を防ぐ
+                    .onTapGesture {
+                        if !isEditing { return }
+
+                        if isHighlighted(genre) {
+                            highlightedGenres.removeAll { $0 == genre }
+                        } else {
+                            highlightedGenres.append(genre)
+                        }
+                    }
             }
         }
     }
 
-    private func isHighlighted(_ text: String) -> Bool {
-        highlightedTexts.contains(text)
+    private func isHighlighted(_ genre: MusicGenre) -> Bool {
+        highlightedGenres.contains(genre)
     }
 }
 
 #Preview {
     VStack {
         Rectangle().frame(width: 300, height: 300)
-        CapsuleView(
-            texts: Constants.musicGenreTexts,
-            highlightedTexts: ["ロック", "ジャズ", "ブルース"]
+        MusicGenresCapsuleView(
+            genres: MusicGenre.allCases,
+            highlightedGenres: .constant([.rock, .jazz, .blues]),
+            isEditing: true
         )
         Rectangle().frame(width: 300, height: 300)
     }

@@ -10,7 +10,6 @@
  genre: ジャンル。
  location: 募集の場所またはリモートワークの可能性。
  category: 募集が属するカテゴリ（例：テクノロジー、マーケティングなど）。
- contactEmail: 応募や問い合わせ用の連絡先メールアドレス。
  additionalInfo: 追加情報（任意）。
  */
 
@@ -21,14 +20,13 @@ struct Recruitment: Identifiable, Hashable {
     let postedDate: Date
     let author: User
     var favorite: Int
-    var title: String
-    var description: String
+    var title: String?
+    var description: String?
     var policy: Policy?
     var frequency: String?
-    var genre: [MusicGenre]
+    var genre: [MusicGenre]?
     var wantedParts: [Part]?
-    var rehearsalLocation: String
-    var contactEmail: String
+    var rehearsalLocation: String?
     var additionalInfo: String?
     var youtubeVideoURL: [URL]?  // YouTube動画のURL
 
@@ -44,7 +42,6 @@ struct Recruitment: Identifiable, Hashable {
         genre: [MusicGenre] = [],
         wantedParts: [Part]? = nil,
         rehearsalLocation: String,
-        contactEmail: String,
         additionalInfo: String? = nil,
         youtubeVideoURL: [URL]? = nil
     ) {
@@ -59,7 +56,6 @@ struct Recruitment: Identifiable, Hashable {
         self.frequency = frequency
         self.wantedParts = wantedParts
         self.rehearsalLocation = rehearsalLocation
-        self.contactEmail = contactEmail
         self.additionalInfo = additionalInfo
         self.youtubeVideoURL = youtubeVideoURL
     }
@@ -109,8 +105,7 @@ let exampleRecruitments = [
             Part(instrument: .synthesizer, gender: Gender.male),
             Part(instrument: .synthesizer, gender: Gender.female)
         ],
-        rehearsalLocation: "新宿スタジオ",
-        contactEmail: "join@popsband.com"
+        rehearsalLocation: "新宿スタジオ"
     ),
     Recruitment(
         id: UUID().uuidString,
@@ -128,8 +123,7 @@ let exampleRecruitments = [
         frequency: "週１回",
         genre: [MusicGenre.pop],
         wantedParts: [Part(instrument: .bass, gender: Gender.male)],
-        rehearsalLocation: "新宿スタジオ",
-        contactEmail: "join@popsband.com"
+        rehearsalLocation: "新宿スタジオ"
     ),
     Recruitment(
         id: UUID().uuidString,
@@ -146,8 +140,7 @@ let exampleRecruitments = [
         frequency: "週２〜３回",
         genre: [MusicGenre.jazz],
         wantedParts: [Part(instrument: .drums, gender: Gender.female)],
-        rehearsalLocation: "銀座リハーサルスタジオ",
-        contactEmail: "apply@jazzband.com"
+        rehearsalLocation: "銀座リハーサルスタジオ"
     ),
     Recruitment(
         id: UUID().uuidString,
@@ -159,7 +152,6 @@ let exampleRecruitments = [
         frequency: "週１〜２回",
         genre: [MusicGenre.pop, MusicGenre.rock],
         wantedParts: [Part(instrument: .keyboard, gender: .male)],
-        rehearsalLocation: "渋谷音楽スタジオ",
-        contactEmail: "contact@poprockband.com"
+        rehearsalLocation: "渋谷音楽スタジオ"
     )
 ]

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		BE00ED7A2C32D83800572B98 /* CreateRecruitmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE00ED792C32D83800572B98 /* CreateRecruitmentView.swift */; };
 		BE00ED7E2C32DF5B00572B98 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE00ED7D2C32DF5B00572B98 /* UserManager.swift */; };
+		BE00ED802C34404300572B98 /* CreateRecruitmentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE00ED7F2C34404300572B98 /* CreateRecruitmentViewModel.swift */; };
 		BE71DBFB2C1538C30026F588 /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71DBFA2C1538C30026F588 /* Gender.swift */; };
 		BE71DBFD2C153B770026F588 /* Part.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71DBFC2C153B770026F588 /* Part.swift */; };
 		BE71DBFF2C1D3F070026F588 /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71DBFE2C1D3F070026F588 /* Mocks.swift */; };
@@ -65,6 +66,7 @@
 /* Begin PBXFileReference section */
 		BE00ED792C32D83800572B98 /* CreateRecruitmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRecruitmentView.swift; sourceTree = "<group>"; };
 		BE00ED7D2C32DF5B00572B98 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		BE00ED7F2C34404300572B98 /* CreateRecruitmentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRecruitmentViewModel.swift; sourceTree = "<group>"; };
 		BE71DBFA2C1538C30026F588 /* Gender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
 		BE71DBFC2C153B770026F588 /* Part.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Part.swift; sourceTree = "<group>"; };
 		BE71DBFE2C1D3F070026F588 /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
@@ -217,19 +219,11 @@
 			isa = PBXGroup;
 			children = (
 				BEE3F8672BFA427E007D5328 /* Constants */,
-				BED4B2152BEFC8FA00C49EB5 /* Common */,
 				BED4B20F2BEFC56900C49EB5 /* Extensions */,
 				BED4B2182BEFCF4E00C49EB5 /* Modifiers */,
 				BE71DC0C2C1D576E0026F588 /* Util.swift */,
 			);
 			path = Utils;
-			sourceTree = "<group>";
-		};
-		BED4B2152BEFC8FA00C49EB5 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Common;
 			sourceTree = "<group>";
 		};
 		BED4B2182BEFCF4E00C49EB5 /* Modifiers */ = {
@@ -290,6 +284,7 @@
 			children = (
 				BED4B2322BF05D9400C49EB5 /* RecruitmentBoardViewModel.swift */,
 				BEE55DE22BFA293500299883 /* RecruitmentDetailViewModel.swift */,
+				BE00ED7F2C34404300572B98 /* CreateRecruitmentViewModel.swift */,
 			);
 			path = Recruitment;
 			sourceTree = "<group>";
@@ -323,13 +318,6 @@
 				BEE95D2B2C2065D100EBB934 /* CapsuleView.swift */,
 			);
 			path = Common;
-			sourceTree = "<group>";
-		};
-		BED4B23D2BF2599600C49EB5 /* Root */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Root;
 			sourceTree = "<group>";
 		};
 		BED4B2402BF259EF00C49EB5 /* Router */ = {
@@ -437,7 +425,6 @@
 			isa = PBXGroup;
 			children = (
 				BED4B2372BF0868600C49EB5 /* Common */,
-				BED4B23D2BF2599600C49EB5 /* Root */,
 				BEFAE4F22BDE767100CADC73 /* Tabs */,
 				BED4B20C2BE99A3200C49EB5 /* SignUp */,
 				BED4B2092BE999AD00C49EB5 /* Login */,
@@ -585,6 +572,7 @@
 				BEE95D2C2C2065D100EBB934 /* CapsuleView.swift in Sources */,
 				BED4B2422BF259FA00C49EB5 /* Router.swift in Sources */,
 				BED4B2492BF3BEA100C49EB5 /* Team.swift in Sources */,
+				BE00ED802C34404300572B98 /* CreateRecruitmentViewModel.swift in Sources */,
 				BED4B2252BEFD5E700C49EB5 /* MessageView.swift in Sources */,
 				BEE95D2A2C1ECA1A00EBB934 /* File.swift in Sources */,
 				BEE55DDF2BF888BF00299883 /* BottomClipShape.swift in Sources */,

@@ -20,7 +20,7 @@ struct RecruitmentBoardView: View {
     var body: some View {
         VStack(spacing: 0) {
             TabTopBarView(
-                "募集掲示板",
+                Constants.Strings.recruitmentPageTitle,
                 leftToolbarItems: {},
                 rightToolbarItems: {}
             )
@@ -127,10 +127,10 @@ extension RecruitmentBoardView {
             VStack(spacing: 4) {
                 HStack {
                     VStack(alignment: .leading, spacing: 8) {
-                        CustomText(recruitment.title, .customTextColorBlack)
+                        CustomText(recruitment.title ?? Constants.Strings.emptyTitle, .customTextColorBlack)
                             .lineLimit(1)
                             .fontWeight(.bold)
-                        CustomText(recruitment.description, .gray)
+                        CustomText(recruitment.description ?? Constants.Strings.emptyDescription, .gray)
                             .lineLimit(2)
                             .multilineTextAlignment(.leading)
                             .font(.caption)

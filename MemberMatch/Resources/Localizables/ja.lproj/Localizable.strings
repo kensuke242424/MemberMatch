@@ -8,12 +8,16 @@
 
 // --- View ---
 // 掲示板タブ
-"recruitment_page_title" = "募集の内容";
+"recruitment_page_title" = "募集掲示板";
+"recruitment_detail_page_title" = "募集の内容";
+"create_recruitment_page_title" = "募集掲示板に投稿";
+"edit_recruitment_page_title" = "募集内容の編集";
 "author" = "掲載者";
 "favorite" = "気になる";
 "public_deadline" = "公開期限";
 "public_deadline_desc1" = "あと";
 "public_deadline_desc2" = "日";
+"recruitment_title_title" = "タイトル";
 "music_genre_title" = "ジャンル";
 "wanted_parts_title" = "募集パート";
 "recruitment_desc_title" = "募集詳細";
@@ -24,8 +28,16 @@
 "send_message" = "メッセージを送る";
 "profile" = "Profile";
 
+// PlaceHolder
+"place_holder_title" = "タイトルを入力";
+"place_holder_description" = "募集詳細を入力";
+"place_holder_frequency" = "活動頻度を入力";
+"place_holder_rehearsal_location" = "活動拠点を入力";
+"place_holder_additional_info" = "その他の情報を入力";
+
 // Empty
 "empty_name" = "名無し";
+"empty_title" = "タイトルなし";
 "empty_description" = "記載なし";
 "empty_policy" = "特になし";
 

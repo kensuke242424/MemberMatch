@@ -23,7 +23,7 @@ struct RecruitmentDetailView: View {
     var body: some View {
         VStack(spacing: 0) {
             TabTopBarView(
-                Constants.Strings.recruitmentPageTitle,
+                Constants.Strings.recruitmentDetailPageTitle,
                 leftToolbarItems: {
                     Image(systemName: Constants.Symbols.chevron_backward)
                         .foregroundStyle(.gray)
@@ -34,7 +34,7 @@ struct RecruitmentDetailView: View {
                 rightToolbarItems: {
                     // 編集ボタン
                     if recruitment.author.id == userManager.currentUser?.id {
-                        NavigationLink(destination: CreateRecruitmentView()) {
+                        NavigationLink(destination: CreateRecruitmentView(editData: recruitment)) {
                             Image(systemName:Constants.Symbols.square_and_pencil)
                                 .foregroundStyle(.gray)
                                 .frame(width: Constants.toolBarItemSize, height: Constants.toolBarItemSize)
@@ -167,7 +167,7 @@ extension RecruitmentDetailView {
 
             // 紙デザインの要素
             VStack(spacing: 4) {
-                CustomText(recruitment.title, .customTextColorBlack)
+                CustomText(recruitment.title ?? "タイトルなし", .customTextColorBlack)
                     .lineLimit(!vm.isScrolledMidPoint || vm.isFullOpenCard ? 10 : 1)
                     .font(!vm.isScrolledMidPoint || vm.isFullOpenCard ? .title3 : .subheadline)
                     .frame(maxWidth: .infinity,
@@ -184,7 +184,7 @@ extension RecruitmentDetailView {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .multilineTextAlignment(.leading)
                         .font(.caption)
-                        CustomText(recruitment.description, .gray)
+                        CustomText(recruitment.description ?? "入力なし", .gray)
                             .lineLimit(!vm.isScrolledMidPoint || vm.isFullOpenCard ? 4 : 2)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .multilineTextAlignment(.leading)
@@ -265,13 +265,14 @@ extension RecruitmentDetailView {
 // ジャンル
 extension RecruitmentDetailView {
     @ViewBuilder
-    private func musicGenreDetail(_ genre: [MusicGenre]) -> some View {
+    private func musicGenreDetail(_ genre: [MusicGenre]?) -> some View {
         VStack(alignment: .leading) {
             CustomText("\(Constants.Strings.musicGenreTitle)：", .customTextColorWhite)
                 .font(.headline)
             Spacer().frame(height: 16)
-            CapsuleView(texts: Constants.musicGenreTexts,
-                        highlightedTexts: genre.map { $0.text }
+            MusicGenresCapsuleView(genres: MusicGenre.allCases,
+                                   highlightedGenres: .constant(genre ?? []),
+                                   isEditing: false
             )
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -358,13 +359,13 @@ extension RecruitmentDetailView {
 // 募集詳細
 extension RecruitmentDetailView {
     @ViewBuilder
-    private func recruitmentDetail(_ description: String) -> some View {
+    private func recruitmentDetail(_ description: String?) -> some View {
         VStack(alignment: .leading) {
             CustomText("\(Constants.Strings.recruitmentDescTitle)：", .customTextColorWhite)
                 .font(.headline)
             VStack {
-                CustomText(recruitment.title, .customTextColorBlack).fontWeight(.bold)
-                CustomText(description, .customTextColorBlack)
+                CustomText(recruitment.title ?? "タイトルなし", .customTextColorBlack).fontWeight(.bold)
+                CustomText(description ?? "入力なし", .customTextColorBlack)
                     .font(.subheadline)
                     .frame(minHeight: 50)
                     .frame(maxHeight: .infinity)

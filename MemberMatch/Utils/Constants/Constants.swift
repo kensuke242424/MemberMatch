@@ -19,12 +19,14 @@ extension Constants {
         // --- View ---
         // 掲示板ページ
         static let recruitmentPageTitle = String(localized: "recruitment_page_title")
+        static let recruitmentDetailPageTitle = String(localized: "recruitment_detail_page_title")
         static let author = String(localized: "author")
         static let favorite = String(localized: "favorite")
         static let publicDeadline = String(localized: "public_deadline")
         static let publicDeadlineDesc1 = String(localized: "public_deadline_desc1")
         static let publicDeadlineDesc2 = String(localized: "public_deadline_desc2")
         static let musicGenreTitle = String(localized: "music_genre_title")
+        static let recruitmentTitleTitle = String(localized: "recruitment_title_title")
         static let recruitmentDescTitle = String(localized: "recruitment_desc_title")
         static let wantedPartsTitle = String(localized: "wanted_parts_title")
         static let policyTitle = String(localized: "policy_title")
@@ -34,13 +36,25 @@ extension Constants {
         static let sendMessage = String(localized: "send_message")
         static let profileText = String(localized: "profile")
 
+        // placeHolder
+        static let placeHolderTitle = String(localized: "place_holder_title")
+        static let placeHolderDescription = String(localized: "place_holder_description")
+        static let placeHolderFrequency = String(localized: "place_holder_frequency")
+        static let placeHolderRehearsalLocation = String(localized: "place_holder_rehearsal_location")
+        static let placeHolderAdditionalInfo = String(localized: "place_holder_additional_info")
         static let placeHolderTwitterURL: String = "https://twitter.com/example"
         static let placeHolderInstagramURL: String = "https://instagram.com/example"
         static let placeHolderFacebookURL: String = "https://facebook.com/example"
 
+        // 募集作成ページ
+        static let createRecruitmentPageTitle = String(localized: "create_recruitment_page_title")
+        static let editRecruitmentPageTitle = String(localized: "edit_recruitment_page_title")
+
         // Empty
         static let emptyName = String(localized: "empty_name")
+        static let emptyTitle = String(localized: "empty_title")
         static let emptyDescription = String(localized: "empty_description")
+        static let emptyPolicy = String(localized: "empty_policy")
 
         // --- Model ---
         // Policy

@@ -8,17 +8,109 @@
 import SwiftUI
 
 struct CreateRecruitmentView: View {
-    let editData: Recruitment? = nil
+    var editData: Recruitment?
+    @EnvironmentObject var router: Router
+    @EnvironmentObject var userManager: UserManager
+
+    @Environment(\.presentationMode)
+    var presentationMode
+
+    @StateObject private var vm = CreateRecruitmentViewModel()
 
     var body: some View {
         VStack {
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-        }
-        .onAppear {
-            if let editData {
-                // TODO: 編集アイテムが渡されている場合は、各項目に値をセット
+            TabTopBarView(
+                editData == nil ?
+                Constants.Strings.createRecruitmentPageTitle : Constants.Strings.editRecruitmentPageTitle,
+                leftToolbarItems: {
+                    Image(systemName: Constants.Symbols.chevron_backward)
+                        .foregroundStyle(.gray)
+                        .frame(width: Constants.toolBarItemSize, height: Constants.toolBarItemSize)
+                        .background(Circle().foregroundStyle(.white))
+                        .onTapGesture { presentationMode.wrappedValue.dismiss() }
+                },
+                rightToolbarItems: {
+                    // ピン留めボタン
+                    Image(systemName: Constants.Symbols.pin_fill)
+                        .foregroundStyle(.gray)
+                        .frame(width: Constants.toolBarItemSize, height: Constants.toolBarItemSize)
+                        .background(Circle().foregroundStyle(.white))
+                }
+            )
+
+            ScrollView {
+                VStack(spacing: 30) {
+                    // タイトル
+                    singleLineTextFormField(Constants.Strings.placeHolderTitle,
+                                            title: Constants.Strings.recruitmentTitleTitle,
+                                            text: $vm.inputTitle
+                    )
+                    // ジャンル
+                    musicGenreSelectForm(title: Constants.Strings.musicGenreTitle,
+                                         genres: MusicGenre.allCases,
+                                         highlightedGenres: $vm.inputMusicGenre,
+                                         isEditing: true
+                    )
+                    // 募集詳細
+                    singleLineTextFormField(Constants.Strings.placeHolderDescription,
+                                            title: Constants.Strings.recruitmentDescTitle,
+                                            text: $vm.inputDescription
+                    )
+                }
+                .padding()
             }
         }
+        .gradientBackground()
+        .ignoresSafeArea(edges: .top)
+        .navigationBarBackButtonHidden()
+        .onAppear {
+            if let editData {
+                vm.setEditData(editData)
+            }
+        }
+    }
+}
+
+extension CreateRecruitmentView {
+    @ViewBuilder
+    private func singleLineTextFormField(_ placeHolder: String, title: String, text: Binding<String>) -> some View {
+        VStack(alignment: .leading) {
+            CustomText("▫️\(title)：", .customTextColorWhite)
+                .font(.headline)
+
+            TextField("", text: text)
+                .overlay(alignment:  .leading) {
+                    if text.wrappedValue.isEmpty {
+                        Text(placeHolder)
+                            .foregroundStyle(.gray.opacity(0.5))
+                            .allowsHitTesting(false)
+                    }
+                }
+                .padding(8)
+                .background {
+                    RoundedRectangle(cornerRadius: 8)
+                        .foregroundStyle(.white)
+                }
+                .foregroundStyle(.customTextColorBlack)
+        }
+    }
+}
+
+extension CreateRecruitmentView {
+    @ViewBuilder
+    private func musicGenreSelectForm(title: String,
+                                      genres: [MusicGenre],
+                                      highlightedGenres: Binding<[MusicGenre]>,
+                                      isEditing: Bool
+    ) -> some View {
+        VStack(alignment: .leading) {
+            CustomText("▫️\(title)：", .customTextColorWhite).font(.headline)
+            MusicGenresCapsuleView(genres: genres,
+                                   highlightedGenres: highlightedGenres,
+                                   isEditing: isEditing
+            )
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
