@@ -1,0 +1,93 @@
+/* 
+  Localizable.strings
+  MemberMatch
+
+  Created by Kensuke Nakagawa on 2024/06/15.
+  
+*/
+
+// --- View ---
+// 掲示板タブ
+"recruitment_page_title" = "募集の内容";
+"author" = "掲載者";
+"favorite" = "気になる";
+"public_deadline" = "公開期限";
+"public_deadline_desc1" = "あと";
+"public_deadline_desc2" = "日";
+"music_genre_title" = "ジャンル";
+"wanted_parts_title" = "募集パート";
+"recruitment_desc_title" = "募集詳細";
+"policy_title" = "活動目的";
+"frequency_title" = "活動頻度";
+"location_title" = "活動拠点";
+"additional_info_title" = "その他/備考";
+"send_message" = "メッセージを送る";
+"profile" = "Profile";
+
+// Empty
+"empty_name" = "名無し";
+"empty_description" = "記載なし";
+"empty_policy" = "特になし";
+
+// --- Model ---
+// Policy
+"policy_nothing" = "こだわらない";
+"policy_hobby" = "趣味として楽しむ";
+"policy_professional" = "本気でやる";
+
+// SkillLevel
+"skill_level_beginner" = "初心者";
+"skill_level_novice" = "初級";
+"skill_level_intermediate" = "中級";
+"skill_level_advanced" = "上級";
+"skill_level_expert" = "プロ";
+
+// Instrument
+"instrument_song_writer" = "ソングライター";
+"instrument_guitar" = "ギター";
+"instrument_bass" = "ベース";
+"instrument_drums" = "ドラム";
+"instrument_keyboard" = "キーボード";
+"instrument_piano" = "ピアノ";
+"instrument_saxophone" = "サックス";
+"instrument_trumpet" = "トランペット";
+"instrument_violin" = "バイオリン";
+"instrument_cello" = "チェロ";
+"instrument_flute" = "フルート";
+"instrument_clarinet" = "クラリネット";
+"instrument_vocal" = "ボーカル";
+"instrument_synthesizer" = "シンセサイザー";
+
+// MusicGenre
+"music_genre_rock" = "ロック";
+"music_genre_pop" = "ポップ";
+"music_genre_jazz" = "ジャズ";
+"music_genre_classical" = "クラシック";
+"music_genre_hipHop" = "ヒップホップ";
+"music_genre_country" = "カントリー";
+"music_genre_electronic" = "エレクトロニック";
+"music_genre_reggae" = "レゲエ";
+"music_genre_blues" = "ブルース";
+"music_genre_folk" = "フォーク";
+"music_genre_heavyMetal" = "ヘヴィメタル";
+"music_genre_punk" = "パンク";
+"music_genre_rAndB" = "R&B";
+"music_genre_latin" = "ラテン";
+"music_genre_indie" = "インディ";
+"music_genre_others" = "その他";
+
+// CommitmentLevel
+"commitment_level_casual" = "エンジョイ";
+"commitment_level_serious" = "がっつり";
+"commitment_level_professional" = "プロ志望";
+
+// Gender
+"gender_male" = "男性";
+"gender_female" = "女性";
+"gender_unknown" = "回答なし";
+
+// Browse
+"browse_all" = "全て";
+"browse_single" = "個人";
+"browse_group" = "グループ";
+
