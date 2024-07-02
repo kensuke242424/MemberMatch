@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BE00ED7A2C32D83800572B98 /* RecruitmentEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE00ED792C32D83800572B98 /* RecruitmentEditView.swift */; };
+		BE00ED7A2C32D83800572B98 /* CreateRecruitmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE00ED792C32D83800572B98 /* CreateRecruitmentView.swift */; };
 		BE00ED7E2C32DF5B00572B98 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE00ED7D2C32DF5B00572B98 /* UserManager.swift */; };
 		BE71DBFB2C1538C30026F588 /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71DBFA2C1538C30026F588 /* Gender.swift */; };
 		BE71DBFD2C153B770026F588 /* Part.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71DBFC2C153B770026F588 /* Part.swift */; };
@@ -63,7 +63,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		BE00ED792C32D83800572B98 /* RecruitmentEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecruitmentEditView.swift; sourceTree = "<group>"; };
+		BE00ED792C32D83800572B98 /* CreateRecruitmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRecruitmentView.swift; sourceTree = "<group>"; };
 		BE00ED7D2C32DF5B00572B98 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		BE71DBFA2C1538C30026F588 /* Gender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
 		BE71DBFC2C153B770026F588 /* Part.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Part.swift; sourceTree = "<group>"; };
@@ -272,7 +272,7 @@
 			children = (
 				BED4B2222BEFD5DA00C49EB5 /* RecruitmentBoardView.swift */,
 				BED4B22C2BF056F100C49EB5 /* RecruitmentDetailView.swift */,
-				BE00ED792C32D83800572B98 /* RecruitmentEditView.swift */,
+				BE00ED792C32D83800572B98 /* CreateRecruitmentView.swift */,
 			);
 			path = Recruitment;
 			sourceTree = "<group>";
@@ -575,7 +575,7 @@
 				BED4B2522BF3D04F00C49EB5 /* SkillLevel.swift in Sources */,
 				BED4B2552BF3D1BF00C49EB5 /* CommitmentLevel.swift in Sources */,
 				BED4B2442BF3BCD100C49EB5 /* UserProfileView.swift in Sources */,
-				BE00ED7A2C32D83800572B98 /* RecruitmentEditView.swift in Sources */,
+				BE00ED7A2C32D83800572B98 /* CreateRecruitmentView.swift in Sources */,
 				BED4B24C2BF3C17A00C49EB5 /* MusicGenre.swift in Sources */,
 				BEFAE4F52BDE768F00CADC73 /* TabsViewModel.swift in Sources */,
 				BEE55DE32BFA293500299883 /* RecruitmentDetailViewModel.swift in Sources */,

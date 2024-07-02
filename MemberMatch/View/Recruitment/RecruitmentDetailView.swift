@@ -34,7 +34,7 @@ struct RecruitmentDetailView: View {
                 rightToolbarItems: {
                     // 編集ボタン
                     if recruitment.author.id == userManager.currentUser?.id {
-                        NavigationLink(destination: RecruitmentEditView()) {
+                        NavigationLink(destination: CreateRecruitmentView()) {
                             Image(systemName:Constants.Symbols.square_and_pencil)
                                 .foregroundStyle(.gray)
                                 .frame(width: Constants.toolBarItemSize, height: Constants.toolBarItemSize)
