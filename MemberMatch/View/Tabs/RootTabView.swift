@@ -7,7 +7,9 @@
 
 import SwiftUI
 
-struct TabsView: View {
+struct RootTabView: View {
+    @EnvironmentObject var router: Router
+    @EnvironmentObject var userManager: UserManager
 
     // タブアイコン非選択時のカラー
     init() {
@@ -15,7 +17,6 @@ struct TabsView: View {
     }
 
     @StateObject private var vm = TabsViewModel()
-    @EnvironmentObject var router: Router
 
     var body: some View {
 
@@ -91,16 +92,19 @@ struct TabsView: View {
             .tabItem { Label("プロフ", systemImage: "person.crop.rectangle") }
             .tag(5)
         } // TabView
+        .onAppear {
+            userManager.fetchUserData(userId: mockUser.id)
+        }
     }
 }
 
-extension TabsView {
+extension RootTabView {
     func customTabItem() {
 
     }
 }
 
 #Preview {
-    TabsView()
-        .environmentObject(Router())
+    RootTabView()
+        .environmentObject(Router.shared)
 }

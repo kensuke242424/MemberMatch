@@ -62,7 +62,7 @@ struct User: Identifiable, Hashable, Codable {
 }
 
 let mockUser = User(
-    name: "Arris",
+    name: "モック沢あきこ",
     gender: Gender.female,
     email: "john.doe@example.com",
     prefecture: .tokyo,
@@ -77,5 +77,24 @@ let mockUser = User(
         twitter: URL(string: "https://twitter.com/echoesfuture"),
         instagram: URL(string: "https://instagram.com/echoesfuture"),
         facebook: nil
+    )
+)
+
+let mockUser2 = User(
+    name: "モック原健太",
+    gender: Gender.male,
+    email: "kenta.music@example.com",
+    prefecture: .osaka,
+    selfIntroduction: "初心者ですが、一緒に音楽を楽しみたいです！",
+    instrument: [.bass, .drums],
+    skillLevel: .beginner,
+    preferredGenre: [.pop],
+    policy: .hobby,
+    profileImageURL: URL(string: "https://example.com/images/kenta.jpg"),
+    bio: "ポップとファンクが大好きな初心者ミュージシャン。楽しく音楽を演奏することを大切にしています。",
+    socialMediaLinks: SocialMediaLinks(
+        twitter: URL(string: "https://twitter.com/music_kenta"),
+        instagram: URL(string: "https://instagram.com/music_kenta"),
+        facebook: URL(string: "https://facebook.com/music.kenta")
     )
 )

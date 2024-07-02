@@ -12,6 +12,7 @@ import SwiftUIIntrospect
 struct RecruitmentDetailView: View {
     let recruitment: Recruitment
     @EnvironmentObject var router: Router
+    @EnvironmentObject var userManager: UserManager
 
     @StateObject private var vm = RecruitmentDetailViewModel()
 
@@ -31,13 +32,14 @@ struct RecruitmentDetailView: View {
                         .onTapGesture { router.popRecruitmentPage() }
                 },
                 rightToolbarItems: {
-                    // TODO: 自身の投稿の場合のみ表示
                     // 編集ボタン
-                    NavigationLink(destination: RecruitmentEditView()) {
-                        Image(systemName:Constants.Symbols.square_and_pencil)
-                            .foregroundStyle(.gray)
-                            .frame(width: Constants.toolBarItemSize, height: Constants.toolBarItemSize)
-                            .background(Circle().foregroundStyle(.white))
+                    if recruitment.author.id == userManager.currentUser?.id {
+                        NavigationLink(destination: RecruitmentEditView()) {
+                            Image(systemName:Constants.Symbols.square_and_pencil)
+                                .foregroundStyle(.gray)
+                                .frame(width: Constants.toolBarItemSize, height: Constants.toolBarItemSize)
+                                .background(Circle().foregroundStyle(.white))
+                        }
                     }
                     // ピン留めボタン
                     Image(systemName: vm.isFixedCard ? Constants.Symbols.pin_fill : Constants.Symbols.pin)
@@ -539,5 +541,6 @@ extension RecruitmentDetailView {
 
 #Preview {
     RecruitmentDetailView(recruitment: exampleRecruitments[1])
-        .environmentObject(Router())
+        .environmentObject(Router.shared)
+        .environmentObject(UserManager.shared)
 }

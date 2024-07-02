@@ -161,5 +161,5 @@ extension RecruitmentBoardView {
 
 #Preview {
     RecruitmentBoardView()
-        .environmentObject(Router())
+        .environmentObject(Router.shared)
 }

@@ -114,7 +114,7 @@ let exampleRecruitments = [
     ),
     Recruitment(
         id: UUID().uuidString,
-        author: mockUser,
+        author: mockUser2,
         favorite: 20,
         title: "ベーシスト募集！",
         description:
@@ -151,7 +151,7 @@ let exampleRecruitments = [
     ),
     Recruitment(
         id: UUID().uuidString,
-        author: mockUser,
+        author: mockUser2,
         favorite: 70,
         title: "凄腕のキーボーディスト求む！",
         description: "ポップスロックバンドでキーボードを担当できるメンバーを募集しています。ポップスロックバンドでキーボードを担当できるメンバーを募集しています。",

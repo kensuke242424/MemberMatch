@@ -284,5 +284,5 @@ extension UserProfileView {
 
 #Preview {
     UserProfileView(user: mockUser)
-        .environmentObject(Router())
+        .environmentObject(Router.shared)
 }

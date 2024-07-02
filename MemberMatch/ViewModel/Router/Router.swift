@@ -31,6 +31,10 @@ enum NotificationPagePath: Hashable {
 }
 
 class Router: ObservableObject {
+    static let shared = Router()
+
+    private init() {}
+    
     @Published var recruitmentPagePath: [RecruitmentPagePath] = []
     @Published var memberScoutPagePath: [MemberScoutPagePath] = []
     @Published var messagePagePath: [MessagePagePath] = []
