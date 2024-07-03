@@ -46,6 +46,9 @@ extension Constants {
         static let placeHolderInstagramURL: String = "https://instagram.com/example"
         static let placeHolderFacebookURL: String = "https://facebook.com/example"
 
+        // ViewParts
+        static let hideKeyboardToolBarButtonText = String(localized: "hide_keyboard_tool_bar_button_text")
+
         // 募集作成ページ
         static let createRecruitmentPageTitle = String(localized: "create_recruitment_page_title")
         static let editRecruitmentPageTitle = String(localized: "edit_recruitment_page_title")

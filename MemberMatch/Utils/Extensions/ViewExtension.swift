@@ -40,3 +40,10 @@ struct OffsetKey: PreferenceKey {
         value = nextValue()
     }
 }
+
+// 現在表示されているキーボードを閉じる
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}

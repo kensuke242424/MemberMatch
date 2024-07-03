@@ -17,10 +17,10 @@
 "public_deadline" = "公開期限";
 "public_deadline_desc1" = "あと";
 "public_deadline_desc2" = "日";
-"recruitment_title_title" = "タイトル";
+"recruitment_title_title" = "募集タイトル";
 "music_genre_title" = "ジャンル";
 "wanted_parts_title" = "募集パート";
-"recruitment_desc_title" = "募集詳細";
+"recruitment_desc_title" = "募集の詳細";
 "policy_title" = "活動目的";
 "frequency_title" = "活動頻度";
 "location_title" = "活動拠点";
@@ -30,10 +30,13 @@
 
 // PlaceHolder
 "place_holder_title" = "タイトルを入力";
-"place_holder_description" = "募集詳細を入力";
-"place_holder_frequency" = "活動頻度を入力";
-"place_holder_rehearsal_location" = "活動拠点を入力";
+"place_holder_description" = "一緒に音楽を楽しみませんか？\n私たちはロックバンドで演奏する情熱的なドラマーを募集しています！興味のある方はぜひご連絡ください！";
+"place_holder_frequency" = "月に１〜２回";
+"place_holder_rehearsal_location" = "東京";
 "place_holder_additional_info" = "その他の情報を入力";
+
+// ViewParts
+"hide_keyboard_tool_bar_button_text" = "閉じる";
 
 // Empty
 "empty_name" = "名無し";

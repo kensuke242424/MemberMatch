@@ -17,6 +17,9 @@ struct CreateRecruitmentView: View {
 
     @StateObject private var vm = CreateRecruitmentViewModel()
 
+    // 募集の内容入力フィールド専用のフォーカス制御
+    @FocusState var descriptionFocused: Bool?
+
     var body: some View {
         VStack {
             TabTopBarView(
@@ -39,7 +42,7 @@ struct CreateRecruitmentView: View {
             )
 
             ScrollView {
-                VStack(spacing: 30) {
+                VStack(spacing: 40) {
                     // タイトル
                     singleLineTextFormField(Constants.Strings.placeHolderTitle,
                                             title: Constants.Strings.recruitmentTitleTitle,
@@ -52,9 +55,9 @@ struct CreateRecruitmentView: View {
                                          isEditing: true
                     )
                     // 募集詳細
-                    singleLineTextFormField(Constants.Strings.placeHolderDescription,
-                                            title: Constants.Strings.recruitmentDescTitle,
-                                            text: $vm.inputDescription
+                    multiLineTextFormField(Constants.Strings.placeHolderDescription,
+                                           title: Constants.Strings.recruitmentDescTitle,
+                                           text: $vm.inputDescription
                     )
                 }
                 .padding()
@@ -75,7 +78,7 @@ extension CreateRecruitmentView {
     @ViewBuilder
     private func singleLineTextFormField(_ placeHolder: String, title: String, text: Binding<String>) -> some View {
         VStack(alignment: .leading) {
-            CustomText("▫️\(title)：", .customTextColorWhite)
+            CustomText("▫️\(title)", .customTextColorWhite)
                 .font(.headline)
 
             TextField("", text: text)
@@ -86,7 +89,54 @@ extension CreateRecruitmentView {
                             .allowsHitTesting(false)
                     }
                 }
-                .padding(8)
+                .padding(16)
+                .background {
+                    RoundedRectangle(cornerRadius: 8)
+                        .foregroundStyle(.white)
+                }
+                .foregroundStyle(.customTextColorBlack)
+        }
+    }
+}
+
+extension CreateRecruitmentView {
+    @ViewBuilder
+    private func multiLineTextFormField(_ placeHolder: String, title: String, text: Binding<String>) -> some View {
+        VStack(alignment: .leading) {
+            CustomText("▫️\(title)", .customTextColorWhite)
+                .font(.headline)
+
+            TextField("", text: text, axis: .vertical)
+                .overlay(alignment:  .topLeading) {
+                    if text.wrappedValue.isEmpty {
+                        Text(placeHolder)
+                            .foregroundStyle(.gray.opacity(0.5))
+                            .frame(height: 100, alignment: .topLeading)
+                            .lineLimit(nil)
+                            .allowsHitTesting(false)
+                    }
+                }
+                .toolbar {
+                    ToolbarItemGroup(placement: .keyboard) {
+                        Spacer()
+                        Button(Constants.Strings.hideKeyboardToolBarButtonText) {
+                            hideKeyboard()
+                        }
+                        .foregroundStyle(.white)
+                        .padding(.vertical, 4)
+                        .padding(.horizontal, 8)
+                        .background {
+                            Capsule().foregroundStyle(.blue.gradient)
+                        }
+                    }
+                }
+                .focused($descriptionFocused, equals: true)
+                .padding(16)
+                .padding(.bottom, 60)
+                .font(.subheadline)
+                .kerning(0.5)
+                .lineSpacing(4)
+                .textInputAutocapitalization(.never)
                 .background {
                     RoundedRectangle(cornerRadius: 8)
                         .foregroundStyle(.white)
@@ -104,7 +154,7 @@ extension CreateRecruitmentView {
                                       isEditing: Bool
     ) -> some View {
         VStack(alignment: .leading) {
-            CustomText("▫️\(title)：", .customTextColorWhite).font(.headline)
+            CustomText("▫️\(title)", .customTextColorWhite).font(.headline)
             MusicGenresCapsuleView(genres: genres,
                                    highlightedGenres: highlightedGenres,
                                    isEditing: isEditing
