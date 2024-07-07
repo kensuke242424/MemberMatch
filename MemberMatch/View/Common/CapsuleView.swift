@@ -95,9 +95,14 @@ struct RowView: View {
                         if !isEditing { return }
 
                         if isHighlighted(genre) {
-                            highlightedGenres.removeAll { $0 == genre }
+                            withAnimation(.spring) {
+                                highlightedGenres.removeAll { $0 == genre }
+                            }
+
                         } else {
-                            highlightedGenres.append(genre)
+                            withAnimation(.spring) {
+                                highlightedGenres.append(genre)
+                            }
                         }
                     }
             }

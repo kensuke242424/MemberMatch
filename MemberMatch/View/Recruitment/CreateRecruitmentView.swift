@@ -17,9 +17,6 @@ struct CreateRecruitmentView: View {
 
     @StateObject private var vm = CreateRecruitmentViewModel()
 
-    // 募集の内容入力フィールド専用のフォーカス制御
-    @FocusState var descriptionFocused: Bool?
-
     var body: some View {
         VStack {
             TabTopBarView(
@@ -33,11 +30,16 @@ struct CreateRecruitmentView: View {
                         .onTapGesture { presentationMode.wrappedValue.dismiss() }
                 },
                 rightToolbarItems: {
-                    // ピン留めボタン
-                    Image(systemName: Constants.Symbols.pin_fill)
-                        .foregroundStyle(.gray)
-                        .frame(width: Constants.toolBarItemSize, height: Constants.toolBarItemSize)
-                        .background(Circle().foregroundStyle(.white))
+                    Button(Constants.Strings.draftButtonText) {
+                        // TODO: 下書き保存処理
+                    }
+                    .font(.subheadline)
+                    .foregroundStyle(.black)
+                    .padding(.vertical, 4)
+                    .padding(.horizontal, 10)
+                    .background {
+                        Capsule().foregroundStyle(.white.gradient)
+                    }
                 }
             )
 
@@ -48,19 +50,39 @@ struct CreateRecruitmentView: View {
                                             title: Constants.Strings.recruitmentTitleTitle,
                                             text: $vm.inputTitle
                     )
-                    // ジャンル
-                    musicGenreSelectForm(title: Constants.Strings.musicGenreTitle,
-                                         genres: MusicGenre.allCases,
-                                         highlightedGenres: $vm.inputMusicGenre,
-                                         isEditing: true
-                    )
                     // 募集詳細
                     multiLineTextFormField(Constants.Strings.placeHolderDescription,
                                            title: Constants.Strings.recruitmentDescTitle,
                                            text: $vm.inputDescription
                     )
+                    // 写真
+                    selectImagesFormField(title: Constants.Strings.photoTitle,
+                                          images: vm.inputImages
+                    )
+                    // ジャンル
+                    musicGenreSelectFormField(title: Constants.Strings.musicGenreTitle,
+                                              genres: MusicGenre.allCases,
+                                              highlightedGenres: $vm.inputMusicGenre
+                    )
+                    // 活動頻度
+                    singleLineTextFormField(Constants.Strings.placeHolderFrequency,
+                                            title: Constants.Strings.frequencyTitle,
+                                            text: $vm.inputFrequency
+                    )
+                    // 活動拠点
+                    singleLineTextFormField(Constants.Strings.placeHolderRehearsalLocation,
+                                            title: Constants.Strings.locationTitle,
+                                            text: $vm.inputRehearsalLocation
+                    )
+                    // その他/備考
+                    multiLineTextFormField(Constants.Strings.placeHolderAdditionalInfo,
+                                           title: Constants.Strings.additionalInfoTitle,
+                                           text: $vm.inputAdditionalInfo
+                    )
                 }
                 .padding()
+                .padding(.vertical, 30)
+                .hideKeyboardToolbarButton()
             }
         }
         .gradientBackground()
@@ -74,6 +96,7 @@ struct CreateRecruitmentView: View {
     }
 }
 
+// 一行テキストフィールド
 extension CreateRecruitmentView {
     @ViewBuilder
     private func singleLineTextFormField(_ placeHolder: String, title: String, text: Binding<String>) -> some View {
@@ -99,13 +122,13 @@ extension CreateRecruitmentView {
     }
 }
 
+// 複数行、改行が可能なテキストフィールド
 extension CreateRecruitmentView {
     @ViewBuilder
     private func multiLineTextFormField(_ placeHolder: String, title: String, text: Binding<String>) -> some View {
         VStack(alignment: .leading) {
             CustomText("▫️\(title)", .customTextColorWhite)
                 .font(.headline)
-
             TextField("", text: text, axis: .vertical)
                 .overlay(alignment:  .topLeading) {
                     if text.wrappedValue.isEmpty {
@@ -116,21 +139,6 @@ extension CreateRecruitmentView {
                             .allowsHitTesting(false)
                     }
                 }
-                .toolbar {
-                    ToolbarItemGroup(placement: .keyboard) {
-                        Spacer()
-                        Button(Constants.Strings.hideKeyboardToolBarButtonText) {
-                            hideKeyboard()
-                        }
-                        .foregroundStyle(.white)
-                        .padding(.vertical, 4)
-                        .padding(.horizontal, 8)
-                        .background {
-                            Capsule().foregroundStyle(.blue.gradient)
-                        }
-                    }
-                }
-                .focused($descriptionFocused, equals: true)
                 .padding(16)
                 .padding(.bottom, 60)
                 .font(.subheadline)
@@ -146,21 +154,60 @@ extension CreateRecruitmentView {
     }
 }
 
+// ジャンル選択カプセルボタン
 extension CreateRecruitmentView {
     @ViewBuilder
-    private func musicGenreSelectForm(title: String,
-                                      genres: [MusicGenre],
-                                      highlightedGenres: Binding<[MusicGenre]>,
-                                      isEditing: Bool
+    private func musicGenreSelectFormField(title: String,
+                                           genres: [MusicGenre],
+                                           highlightedGenres: Binding<[MusicGenre]>
     ) -> some View {
         VStack(alignment: .leading) {
             CustomText("▫️\(title)", .customTextColorWhite).font(.headline)
             MusicGenresCapsuleView(genres: genres,
                                    highlightedGenres: highlightedGenres,
-                                   isEditing: isEditing
+                                   isEditing: true
             )
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+}
+
+extension CreateRecruitmentView {
+    @ViewBuilder
+    private func selectImagesFormField(title: String, images: [ImageData]) -> some View {
+        VStack(alignment: .leading) {
+            CustomText("▫️\(title)", .customTextColorWhite)
+                .font(.headline)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack {
+                    ForEach(images, id: \.self.path) { image in
+                        AsyncImage(url: image.url)
+                            .scaledToFit()
+                            .frame(width: 200, height: 150)
+                    }
+                    // 写真追加ボタン
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 20)
+                            .frame(width: 200, height: 150)
+                            .foregroundStyle(.gray.gradient)
+                        Image(systemName: Constants.Symbols.photo_on_rectangle_angled)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 50, height: 50)
+                            .foregroundStyle(.black.opacity(0.3))
+                            .overlay(alignment: .topTrailing) {
+                                Image(systemName: Constants.Symbols.plus_circle_fill)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 20, height: 20)
+                                    .foregroundStyle(.black.opacity(0.4))
+                                    .offset(x: 15, y: -5)
+                            }
+                    }
+                }
+                .padding(.vertical, 5)
+            }
+        }
     }
 }
 

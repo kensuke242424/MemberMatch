@@ -167,7 +167,7 @@ extension RecruitmentDetailView {
 
             // 紙デザインの要素
             VStack(spacing: 4) {
-                CustomText(recruitment.title ?? "タイトルなし", .customTextColorBlack)
+                CustomText(recruitment.title ?? Constants.Strings.emptyTitle, .customTextColorBlack)
                     .lineLimit(!vm.isScrolledMidPoint || vm.isFullOpenCard ? 10 : 1)
                     .font(!vm.isScrolledMidPoint || vm.isFullOpenCard ? .title3 : .subheadline)
                     .frame(maxWidth: .infinity,

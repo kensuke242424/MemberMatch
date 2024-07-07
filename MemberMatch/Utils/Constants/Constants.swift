@@ -29,11 +29,13 @@ extension Constants {
         static let recruitmentTitleTitle = String(localized: "recruitment_title_title")
         static let recruitmentDescTitle = String(localized: "recruitment_desc_title")
         static let wantedPartsTitle = String(localized: "wanted_parts_title")
+        static let photoTitle = String(localized: "photo_title")
         static let policyTitle = String(localized: "policy_title")
         static let frequencyTitle = String(localized: "frequency_title")
         static let locationTitle = String(localized: "location_title")
         static let additionalInfoTitle = String(localized: "additional_info_title")
         static let sendMessage = String(localized: "send_message")
+        static let draftButtonText = String(localized: "draft_button_text")
         static let profileText = String(localized: "profile")
 
         // placeHolder
@@ -135,6 +137,8 @@ extension Constants {
         static let heart_fill: String = "heart.fill"
         static let bubble_left_fill: String = "bubble.left.fill"
         static let square_and_pencil: String = "square.and.pencil"
+        static let photo_on_rectangle_angled: String = "photo.on.rectangle.angled"
+        static let plus_circle_fill: String = "plus.circle.fill"
     }
 }
 

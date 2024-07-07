@@ -15,6 +15,7 @@ class CreateRecruitmentViewModel: ObservableObject {
     @Published var inputFrequency: String = ""
     @Published var inputMusicGenre: [MusicGenre] = []
     @Published var inputWantedParts: [Part] = []
+    @Published var inputImages: [ImageData] = []
     @Published var inputRehearsalLocation: String = ""
     @Published var inputAdditionalInfo: String = ""
 
@@ -25,6 +26,7 @@ class CreateRecruitmentViewModel: ObservableObject {
         self.inputFrequency = editData.frequency ?? ""
         self.inputMusicGenre = editData.genre ?? []
         self.inputWantedParts = editData.wantedParts ?? []
+        self.inputImages = editData.images ?? []
         self.inputRehearsalLocation = editData.rehearsalLocation ?? ""
         self.inputAdditionalInfo = editData.additionalInfo ?? ""
     }

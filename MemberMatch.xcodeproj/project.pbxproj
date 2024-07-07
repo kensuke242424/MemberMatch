@@ -10,6 +10,8 @@
 		BE00ED7A2C32D83800572B98 /* CreateRecruitmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE00ED792C32D83800572B98 /* CreateRecruitmentView.swift */; };
 		BE00ED7E2C32DF5B00572B98 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE00ED7D2C32DF5B00572B98 /* UserManager.swift */; };
 		BE00ED802C34404300572B98 /* CreateRecruitmentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE00ED7F2C34404300572B98 /* CreateRecruitmentViewModel.swift */; };
+		BE00ED822C38BB6A00572B98 /* HideKeyboardToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE00ED812C38BB6A00572B98 /* HideKeyboardToolbarButton.swift */; };
+		BE00ED842C38D58B00572B98 /* ImageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE00ED832C38D58B00572B98 /* ImageData.swift */; };
 		BE71DBFB2C1538C30026F588 /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71DBFA2C1538C30026F588 /* Gender.swift */; };
 		BE71DBFD2C153B770026F588 /* Part.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71DBFC2C153B770026F588 /* Part.swift */; };
 		BE71DBFF2C1D3F070026F588 /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71DBFE2C1D3F070026F588 /* Mocks.swift */; };
@@ -54,7 +56,7 @@
 		BEE55DE12BF9B28200299883 /* CorkBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE55DE02BF9B28200299883 /* CorkBoardView.swift */; };
 		BEE55DE32BFA293500299883 /* RecruitmentDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE55DE22BFA293500299883 /* RecruitmentDetailViewModel.swift */; };
 		BEE95D282C1EA13800EBB934 /* SocialMediaLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE95D272C1EA13800EBB934 /* SocialMediaLinks.swift */; };
-		BEE95D2A2C1ECA1A00EBB934 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE95D292C1ECA1A00EBB934 /* File.swift */; };
+		BEE95D2A2C1ECA1A00EBB934 /* EditingScaleEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE95D292C1ECA1A00EBB934 /* EditingScaleEffect.swift */; };
 		BEE95D2C2C2065D100EBB934 /* CapsuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE95D2B2C2065D100EBB934 /* CapsuleView.swift */; };
 		BEFAE4E22BDE73A000CADC73 /* MemberMatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFAE4E12BDE73A000CADC73 /* MemberMatchApp.swift */; };
 		BEFAE4E42BDE73A000CADC73 /* RootTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFAE4E32BDE73A000CADC73 /* RootTabView.swift */; };
@@ -67,6 +69,8 @@
 		BE00ED792C32D83800572B98 /* CreateRecruitmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRecruitmentView.swift; sourceTree = "<group>"; };
 		BE00ED7D2C32DF5B00572B98 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		BE00ED7F2C34404300572B98 /* CreateRecruitmentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRecruitmentViewModel.swift; sourceTree = "<group>"; };
+		BE00ED812C38BB6A00572B98 /* HideKeyboardToolbarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyboardToolbarButton.swift; sourceTree = "<group>"; };
+		BE00ED832C38D58B00572B98 /* ImageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageData.swift; sourceTree = "<group>"; };
 		BE71DBFA2C1538C30026F588 /* Gender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
 		BE71DBFC2C153B770026F588 /* Part.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Part.swift; sourceTree = "<group>"; };
 		BE71DBFE2C1D3F070026F588 /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
@@ -109,7 +113,7 @@
 		BEE55DE02BF9B28200299883 /* CorkBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorkBoardView.swift; sourceTree = "<group>"; };
 		BEE55DE22BFA293500299883 /* RecruitmentDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecruitmentDetailViewModel.swift; sourceTree = "<group>"; };
 		BEE95D272C1EA13800EBB934 /* SocialMediaLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMediaLinks.swift; sourceTree = "<group>"; };
-		BEE95D292C1ECA1A00EBB934 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		BEE95D292C1ECA1A00EBB934 /* EditingScaleEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingScaleEffect.swift; sourceTree = "<group>"; };
 		BEE95D2B2C2065D100EBB934 /* CapsuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleView.swift; sourceTree = "<group>"; };
 		BEFAE4DE2BDE73A000CADC73 /* MemberMatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemberMatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEFAE4E12BDE73A000CADC73 /* MemberMatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberMatchApp.swift; sourceTree = "<group>"; };
@@ -230,7 +234,8 @@
 			isa = PBXGroup;
 			children = (
 				BED4B2192BEFCF7D00C49EB5 /* GradientBackgroundModifier.swift */,
-				BEE95D292C1ECA1A00EBB934 /* File.swift */,
+				BEE95D292C1ECA1A00EBB934 /* EditingScaleEffect.swift */,
+				BE00ED812C38BB6A00572B98 /* HideKeyboardToolbarButton.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -348,6 +353,7 @@
 				BE71DBFA2C1538C30026F588 /* Gender.swift */,
 				BE71DBFC2C153B770026F588 /* Part.swift */,
 				BEE95D272C1EA13800EBB934 /* SocialMediaLinks.swift */,
+				BE00ED832C38D58B00572B98 /* ImageData.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -569,12 +575,14 @@
 				BE71DBFD2C153B770026F588 /* Part.swift in Sources */,
 				BED4B22D2BF056F100C49EB5 /* RecruitmentDetailView.swift in Sources */,
 				BED4B2172BEFC90800C49EB5 /* CustomText.swift in Sources */,
+				BE00ED842C38D58B00572B98 /* ImageData.swift in Sources */,
 				BEE95D2C2C2065D100EBB934 /* CapsuleView.swift in Sources */,
 				BED4B2422BF259FA00C49EB5 /* Router.swift in Sources */,
+				BE00ED822C38BB6A00572B98 /* HideKeyboardToolbarButton.swift in Sources */,
 				BED4B2492BF3BEA100C49EB5 /* Team.swift in Sources */,
 				BE00ED802C34404300572B98 /* CreateRecruitmentViewModel.swift in Sources */,
 				BED4B2252BEFD5E700C49EB5 /* MessageView.swift in Sources */,
-				BEE95D2A2C1ECA1A00EBB934 /* File.swift in Sources */,
+				BEE95D2A2C1ECA1A00EBB934 /* EditingScaleEffect.swift in Sources */,
 				BEE55DDF2BF888BF00299883 /* BottomClipShape.swift in Sources */,
 				BEE3F8712C0AFBD0007D5328 /* Browse.swift in Sources */,
 				BED4B2132BEFC8C700C49EB5 /* ViewExtension.swift in Sources */,

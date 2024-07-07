@@ -22,15 +22,17 @@
 "wanted_parts_title" = "募集パート";
 "recruitment_desc_title" = "募集の詳細";
 "policy_title" = "活動目的";
+"photo_title" = "写真";
 "frequency_title" = "活動頻度";
 "location_title" = "活動拠点";
 "additional_info_title" = "その他/備考";
 "send_message" = "メッセージを送る";
+"draft_button_text" = "下書き";
 "profile" = "Profile";
 
 // PlaceHolder
-"place_holder_title" = "タイトルを入力";
-"place_holder_description" = "一緒に音楽を楽しみませんか？\n私たちはロックバンドで演奏する情熱的なドラマーを募集しています！興味のある方はぜひご連絡ください！";
+"place_holder_title" = "ボーカル募集！";
+"place_holder_description" = "一緒に音楽を楽しみませんか？\n私たちはロックバンドのボーカルを募集しています！興味のある方はぜひご連絡ください！";
 "place_holder_frequency" = "月に１〜２回";
 "place_holder_rehearsal_location" = "東京";
 "place_holder_additional_info" = "その他の情報を入力";

@@ -22,6 +22,7 @@ struct Recruitment: Identifiable, Hashable {
     var favorite: Int
     var title: String?
     var description: String?
+    var images: [ImageData]?
     var policy: Policy?
     var frequency: String?
     var genre: [MusicGenre]?
@@ -37,6 +38,7 @@ struct Recruitment: Identifiable, Hashable {
         favorite: Int = 0,
         title: String,
         description: String,
+        images: [ImageData]? = [],
         policy: Policy?,
         frequency: String? = nil,
         genre: [MusicGenre] = [],
@@ -46,11 +48,12 @@ struct Recruitment: Identifiable, Hashable {
         youtubeVideoURL: [URL]? = nil
     ) {
         self.id = id
+        self.postedDate = postedDate
         self.author = author
         self.favorite = favorite
         self.title = title
         self.description = description
-        self.postedDate = postedDate
+        self.images = images
         self.policy = policy
         self.genre = genre
         self.frequency = frequency
