@@ -30,7 +30,8 @@
 "instagram_title" = "Instagram";
 "facebook_title" = "Facebook";
 "additional_info_title" = "その他/備考";
-"send_message" = "メッセージを送る";
+"send_message_button_text" = "メッセージを送る";
+"edit_recruitment_button_text" = "募集内容を編集する";
 "draft_button_text" = "下書き";
 "profile" = "Profile";
 

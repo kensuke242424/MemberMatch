@@ -38,7 +38,8 @@ extension Constants {
         static let instagramTitle = String(localized: "instagram_title")
         static let facebookTitle = String(localized: "facebook_title")
         static let additionalInfoTitle = String(localized: "additional_info_title")
-        static let sendMessage = String(localized: "send_message")
+        static let sendMessageButtonText = String(localized: "send_message_button_text")
+        static let editRecruitmentButtonText = String(localized: "edit_recruitment_button_text")
         static let draftButtonText = String(localized: "draft_button_text")
         static let profileText = String(localized: "profile")
 
@@ -200,5 +201,10 @@ extension Constants {
 
         // 活動方針
         static let band_enjoy: String = "band_enjoy"
+
+        // SNS Logos
+        static let logo_X: String = "logo_X"
+        static let logo_Instagram: String = "logo_Instagram"
+        static let logo_Facebook: String = "logo_Facebook"
     }
 }

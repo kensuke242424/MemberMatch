@@ -82,43 +82,8 @@ struct RecruitmentDetailView: View {
                     locationDetail(recruitment.rehearsalLocation)
                     youtubeVideoDetail(recruitment.youtubeVideoURL)
                     additionalInfoDetail(recruitment.additionalInfo)
-                    socialMediaLinks(recruitment.author.socialMediaLinks)
-                        .padding(.vertical, 15)
-                    HStack {
-                        // 気になる
-                        Button {
-                            withAnimation { favorite.toggle() }
-                        } label: {
-                            HStack {
-                                Text(Constants.Strings.favorite)
-                                Image(systemName: favorite ? Constants.Symbols.heart_fill : Constants.Symbols.heart)
-                            }
-                            .opacity(favorite ? 1 : 0.7)
-                        }
-                        .fontWeight(.bold)
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .foregroundStyle(favorite ? .red : .gray)
-                        )
-                        .foregroundStyle(.customWhite)
-                        .padding(4)
-                        // メッセージを送る
-                        Button {
-                            vm.resetScrollToTop()
-                        } label: {
-                            HStack {
-                                Text(Constants.Strings.sendMessage)
-                                Image(systemName: Constants.Symbols.bubble_left_fill)
-                            }
-                        }
-                        .fontWeight(.bold)
-                        .padding()
-                        .background(RoundedRectangle(cornerRadius: 10).foregroundStyle(.customAccentYellow))
-                        .foregroundStyle(.customWhite)
-                        .padding(4)
-                    }
-                    .padding(.bottom, 15)
+                    socialMediaLinks(recruitment.author.socialMediaLinks).padding(.vertical, 16)
+                    bottomActionButtons(author: recruitment.author).padding(.bottom, 16)
                 }
                 .padding()
                 .offsetRect { rect in
@@ -479,46 +444,110 @@ extension RecruitmentDetailView {
             Button {
                 vm.openURL(links.twitter)
             } label: {
-                Circle().frame(width: iconSize, height: iconSize)
+                Image(Constants.Images.logo_X)
+                    .resizable()
+                    .scaledToFit()
+                    .scaleEffect(0.6)
+                    .frame(width: iconSize, height: iconSize)
+                    .background(Circle().foregroundStyle(Color.black))
+                    .overlay {
+                        if links.twitter == nil {
+                            Circle().foregroundStyle(Color.gray.opacity(0.7))
+                        }
+                    }
             }
             .disabled(links.twitter == nil)
             Button {
                 vm.openURL(links.instagram)
             } label: {
-                Circle().frame(width: iconSize, height: iconSize)
+                Image(Constants.Images.logo_Instagram)
+                    .resizable()
+                    .scaledToFit()
+                    .scaleEffect(0.6)
+                    .frame(width: iconSize, height: iconSize)
+                    .background(Circle().foregroundStyle(Color.white))
+                    .overlay {
+                        if links.instagram == nil {
+                            Circle().foregroundStyle(Color.gray.opacity(0.7))
+                        }
+                    }
             }
             .disabled(links.instagram == nil)
             Button {
                 vm.openURL(links.facebook)
             } label: {
-                Circle().frame(width: iconSize, height: iconSize)
+                Image(Constants.Images.logo_Facebook)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: iconSize, height: iconSize)
+                    .overlay {
+                        if links.facebook == nil {
+                            Circle().foregroundStyle(Color.gray.opacity(0.7))
+                        }
+                    }
             }
             .disabled(links.facebook == nil)
+        }
+        .padding()
+        .background {
+            RoundedRectangle(cornerRadius: 24).foregroundStyle(.gray.opacity(0.3))
         }
     }
 }
 
 extension RecruitmentDetailView {
     @ViewBuilder
-    private func textFieldForm(title: String, text: Binding<String>, _ placeHolder: String) -> some View {
-        VStack(alignment: .leading) {
-            CustomText(title, .customTextColorWhite)
-                .font(.headline)
-
-            TextField("", text: text)
-                .overlay(alignment:  .leading) {
-                    if text.wrappedValue.isEmpty {
-                        Text(placeHolder)
-                            .foregroundStyle(.gray.opacity(0.7))
-                            .allowsHitTesting(false)
+    private func bottomActionButtons(author: User) -> some View {
+        if author.id == UserManager.shared.currentUser?.id {
+            // 募集内容を編集する
+            Button {
+                vm.resetScrollToTop()
+            } label: {
+                HStack {
+                    Text(Constants.Strings.editRecruitmentButtonText)
+                    Image(systemName: Constants.Symbols.square_and_pencil)
+                }
+            }
+            .fontWeight(.bold)
+            .padding()
+            .background(RoundedRectangle(cornerRadius: 10).foregroundStyle(.customAccentYellow))
+            .foregroundStyle(.customWhite)
+            .padding(4)
+        } else {
+            HStack {
+                // 気になる
+                Button {
+                    withAnimation { favorite.toggle() }
+                } label: {
+                    HStack {
+                        Text(Constants.Strings.favorite)
+                        Image(systemName: favorite ? Constants.Symbols.heart_fill : Constants.Symbols.heart)
+                    }
+                    .opacity(favorite ? 1 : 0.7)
+                }
+                .fontWeight(.bold)
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 10)
+                        .foregroundStyle(favorite ? .red : .gray)
+                )
+                .foregroundStyle(.customWhite)
+                .padding(4)
+                // メッセージを送る
+                Button {
+                    vm.resetScrollToTop()
+                } label: {
+                    HStack {
+                        Text(Constants.Strings.sendMessageButtonText)
+                        Image(systemName: Constants.Symbols.bubble_left_fill)
                     }
                 }
-                .padding(8)
-                .background {
-                    RoundedRectangle(cornerRadius: 8)
-                        .foregroundStyle(.white)
-                }
-                .foregroundStyle(.customTextColorBlack)
+                .fontWeight(.bold)
+                .padding()
+                .background(RoundedRectangle(cornerRadius: 10).foregroundStyle(.customAccentYellow))
+                .foregroundStyle(.customWhite)
+                .padding(4)
+            }
         }
     }
 }
