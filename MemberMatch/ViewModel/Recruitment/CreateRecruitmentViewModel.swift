@@ -40,9 +40,4 @@ class CreateRecruitmentViewModel: ObservableObject {
         self.inputRehearsalLocation = editData.rehearsalLocation ?? ""
         self.inputAdditionalInfo = editData.additionalInfo ?? ""
     }
-
-    func startPickerImage() {
-        self.selectedImage = nil
-        self.isShowPicker = true
-    }
 }

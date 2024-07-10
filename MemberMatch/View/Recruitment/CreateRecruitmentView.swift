@@ -244,10 +244,7 @@ extension CreateRecruitmentView {
                         AsyncImage(url: image.url)
                             .scaledToFit()
                             .frame(width: 200, height: 150)
-                            .onTapGesture {
-                                // TODO: 仮でピッカー表示。選択画像をセットし編集画面を開けるようにする
-                                vm.startPickerImage()
-                            }
+                            .onTapGesture { vm.isShowPicker = true }
                     }
                     // 新しく選択追加された写真
                     ForEach(selectionImagesData, id: \.self) { uiImage in
@@ -257,8 +254,7 @@ extension CreateRecruitmentView {
                             .frame(width: 200, height: 150)
                             .clipShape(RoundedRectangle(cornerRadius: 20))
                             .onTapGesture {
-                                // TODO: 仮でピッカー表示。選択画像をセットし編集画面を開けるようにする
-                                vm.startPickerImage()
+                                vm.isShowPicker = true
                             }
                     }
                     // 写真追加ボタン
@@ -280,9 +276,7 @@ extension CreateRecruitmentView {
                                     .offset(x: 15, y: -5)
                             }
                     }
-                    .onTapGesture {
-                        vm.isShowPicker = true
-                    }
+                    .onTapGesture { vm.isShowPicker = true }
                 }
                 .padding(.vertical, 5)
             }
