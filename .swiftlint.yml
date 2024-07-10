@@ -9,6 +9,8 @@ disabled_rules:
 - colon
 - trailing_whitespace
 - nesting
+- identifier_name
+- attributes
 - multiple_closures_with_trailing_closure # 複数のクロージャーの場合でも、trailing closureを利用したいため
 - empty_enum_arguments # enumの引数を省略したいため
 

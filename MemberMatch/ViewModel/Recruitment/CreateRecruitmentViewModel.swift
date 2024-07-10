@@ -5,7 +5,8 @@
 //  Created by Kensuke Nakagawa on 2024/07/02.
 //
 
-import Foundation
+import PhotosUI
+import SwiftUI
 
 class CreateRecruitmentViewModel: ObservableObject {
     // input Properties
@@ -17,7 +18,16 @@ class CreateRecruitmentViewModel: ObservableObject {
     @Published var inputWantedParts: [Part] = []
     @Published var inputImages: [ImageData] = []
     @Published var inputRehearsalLocation: String = ""
+    @Published var inputYoutubeURL: String = ""
+    @Published var inputTwitterURL: String = ""
+    @Published var inputInstagramURL: String = ""
+    @Published var inputFacebookURL: String = ""
     @Published var inputAdditionalInfo: String = ""
+
+    // View Properties
+    @Published var isShowPicker: Bool = false
+    @Published var selectedImage: UIImage? = nil
+    @Published var selectionImages: [UIImage] = []
 
     func setEditData(_ editData: Recruitment) {
         self.inputTitle = editData.title ?? ""
@@ -29,5 +39,10 @@ class CreateRecruitmentViewModel: ObservableObject {
         self.inputImages = editData.images ?? []
         self.inputRehearsalLocation = editData.rehearsalLocation ?? ""
         self.inputAdditionalInfo = editData.additionalInfo ?? ""
+    }
+
+    func startPickerImage() {
+        self.selectedImage = nil
+        self.isShowPicker = true
     }
 }

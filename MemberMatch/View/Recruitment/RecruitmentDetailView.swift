@@ -475,42 +475,25 @@ extension RecruitmentDetailView {
     private func socialMediaLinks(_ links: SocialMediaLinks) -> some View {
         let iconSize: CGFloat = 50
 
-        if vm.isEditing {
-            VStack(spacing: 12) {
-                textFieldForm(title: "X(Twitter)",
-                              text: $vm.inputTwitterUrl,
-                              Constants.Strings.placeHolderTwitterURL
-                )
-                textFieldForm(title: "Instagram",
-                              text: $vm.inputInstagramUrl,
-                              Constants.Strings.placeHolderInstagramURL
-                )
-                textFieldForm(title: "Facebook",
-                              text: $vm.inputFacebookUrl,
-                              Constants.Strings.placeHolderFacebookURL
-                )
+        HStack(spacing: 30) {
+            Button {
+                vm.openURL(links.twitter)
+            } label: {
+                Circle().frame(width: iconSize, height: iconSize)
             }
-        } else {
-            HStack(spacing: 30) {
-                Button {
-                    vm.openURL(links.twitter)
-                } label: {
-                    Circle().frame(width: iconSize, height: iconSize)
-                }
-                .disabled(links.twitter == nil)
-                Button {
-                    vm.openURL(links.instagram)
-                } label: {
-                    Circle().frame(width: iconSize, height: iconSize)
-                }
-                .disabled(links.instagram == nil)
-                Button {
-                    vm.openURL(links.facebook)
-                } label: {
-                    Circle().frame(width: iconSize, height: iconSize)
-                }
-                .disabled(links.facebook == nil)
+            .disabled(links.twitter == nil)
+            Button {
+                vm.openURL(links.instagram)
+            } label: {
+                Circle().frame(width: iconSize, height: iconSize)
             }
+            .disabled(links.instagram == nil)
+            Button {
+                vm.openURL(links.facebook)
+            } label: {
+                Circle().frame(width: iconSize, height: iconSize)
+            }
+            .disabled(links.facebook == nil)
         }
     }
 }

@@ -18,6 +18,9 @@
 		BE71DC062C1D4CD50026F588 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE71DC042C1D4CD50026F588 /* Localizable.strings */; };
 		BE71DC0B2C1D4D380026F588 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE71DC092C1D4D380026F588 /* Localizable.strings */; };
 		BE71DC0D2C1D576E0026F588 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71DC0C2C1D576E0026F588 /* Util.swift */; };
+		BEC24F5B2C3DFAA200524CAF /* CustomImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC24F5A2C3DFAA200524CAF /* CustomImagePicker.swift */; };
+		BEC24F5D2C3DFAE900524CAF /* Crop.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC24F5C2C3DFAE900524CAF /* Crop.swift */; };
+		BEC24F612C3E00DA00524CAF /* ScreenUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC24F602C3E00DA00524CAF /* ScreenUtil.swift */; };
 		BED4B20B2BE999C700C49EB5 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4B20A2BE999C700C49EB5 /* LoginView.swift */; };
 		BED4B20E2BE99A3F00C49EB5 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4B20D2BE99A3F00C49EB5 /* SignUpView.swift */; };
 		BED4B2132BEFC8C700C49EB5 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4B2122BEFC8C700C49EB5 /* ViewExtension.swift */; };
@@ -77,6 +80,9 @@
 		BE71DC052C1D4CD50026F588 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = Localizable.strings; sourceTree = "<group>"; };
 		BE71DC0A2C1D4D380026F588 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		BE71DC0C2C1D576E0026F588 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		BEC24F5A2C3DFAA200524CAF /* CustomImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImagePicker.swift; sourceTree = "<group>"; };
+		BEC24F5C2C3DFAE900524CAF /* Crop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crop.swift; sourceTree = "<group>"; };
+		BEC24F602C3E00DA00524CAF /* ScreenUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenUtil.swift; sourceTree = "<group>"; };
 		BED4B20A2BE999C700C49EB5 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		BED4B20D2BE99A3F00C49EB5 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		BED4B2122BEFC8C700C49EB5 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
@@ -193,6 +199,24 @@
 			path = ja.lproj;
 			sourceTree = "<group>";
 		};
+		BEC24F5E2C3DFAF500524CAF /* CustomImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				BEC24F5A2C3DFAA200524CAF /* CustomImagePicker.swift */,
+				BEC24F5C2C3DFAE900524CAF /* Crop.swift */,
+			);
+			path = CustomImagePicker;
+			sourceTree = "<group>";
+		};
+		BEC24F5F2C3E00C700524CAF /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				BE71DC0C2C1D576E0026F588 /* Util.swift */,
+				BEC24F602C3E00DA00524CAF /* ScreenUtil.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		BED4B2092BE999AD00C49EB5 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -222,10 +246,10 @@
 		BED4B2142BEFC8F100C49EB5 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				BEC24F5F2C3E00C700524CAF /* Utils */,
 				BEE3F8672BFA427E007D5328 /* Constants */,
 				BED4B20F2BEFC56900C49EB5 /* Extensions */,
 				BED4B2182BEFCF4E00C49EB5 /* Modifiers */,
-				BE71DC0C2C1D576E0026F588 /* Util.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -313,6 +337,7 @@
 		BED4B2372BF0868600C49EB5 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				BEC24F5E2C3DFAF500524CAF /* CustomImagePicker */,
 				BED4B2162BEFC90800C49EB5 /* CustomText.swift */,
 				BED4B22A2BEFDECC00C49EB5 /* BlurView.swift */,
 				BED4B2382BF086B500C49EB5 /* SDWebImageCircleIcon.swift */,
@@ -561,6 +586,7 @@
 				BE00ED7E2C32DF5B00572B98 /* UserManager.swift in Sources */,
 				BEFAE4E42BDE73A000CADC73 /* RootTabView.swift in Sources */,
 				BED4B2392BF086B500C49EB5 /* SDWebImageCircleIcon.swift in Sources */,
+				BEC24F5D2C3DFAE900524CAF /* Crop.swift in Sources */,
 				BEE3F86E2C0AE70F007D5328 /* UIScreenExtension.swift in Sources */,
 				BED4B20E2BE99A3F00C49EB5 /* SignUpView.swift in Sources */,
 				BE71DBFF2C1D3F070026F588 /* Mocks.swift in Sources */,
@@ -592,10 +618,12 @@
 				BEE55DDD2BF84FE100299883 /* UIDeviceExtension.swift in Sources */,
 				BE71DC0D2C1D576E0026F588 /* Util.swift in Sources */,
 				BEE95D282C1EA13800EBB934 /* SocialMediaLinks.swift in Sources */,
+				BEC24F612C3E00DA00524CAF /* ScreenUtil.swift in Sources */,
 				BEFAE4E22BDE73A000CADC73 /* MemberMatchApp.swift in Sources */,
 				BED4B2362BF0788800C49EB5 /* User.swift in Sources */,
 				BED4B2572BF3D74B00C49EB5 /* Prefecture.swift in Sources */,
 				BED4B22F2BF059E100C49EB5 /* Recruitment.swift in Sources */,
+				BEC24F5B2C3DFAA200524CAF /* CustomImagePicker.swift in Sources */,
 				BED4B2272BEFD5F400C49EB5 /* NotificationView.swift in Sources */,
 				BED4B2462BF3BCE000C49EB5 /* TeamProfileView.swift in Sources */,
 				BE71DBFB2C1538C30026F588 /* Gender.swift in Sources */,

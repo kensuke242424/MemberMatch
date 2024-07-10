@@ -33,6 +33,10 @@ extension Constants {
         static let policyTitle = String(localized: "policy_title")
         static let frequencyTitle = String(localized: "frequency_title")
         static let locationTitle = String(localized: "location_title")
+        static let youtubeTitle = String(localized: "youtube_title")
+        static let twitterTitle = String(localized: "twitter_title")
+        static let instagramTitle = String(localized: "instagram_title")
+        static let facebookTitle = String(localized: "facebook_title")
         static let additionalInfoTitle = String(localized: "additional_info_title")
         static let sendMessage = String(localized: "send_message")
         static let draftButtonText = String(localized: "draft_button_text")
@@ -44,9 +48,10 @@ extension Constants {
         static let placeHolderFrequency = String(localized: "place_holder_frequency")
         static let placeHolderRehearsalLocation = String(localized: "place_holder_rehearsal_location")
         static let placeHolderAdditionalInfo = String(localized: "place_holder_additional_info")
-        static let placeHolderTwitterURL: String = "https://twitter.com/example"
-        static let placeHolderInstagramURL: String = "https://instagram.com/example"
-        static let placeHolderFacebookURL: String = "https://facebook.com/example"
+        static let placeHolderYoutubeURL = String(localized: "placeHolder_youtube_url")
+        static let placeHolderTwitterURL = String(localized: "placeHolder_twitter_url")
+        static let placeHolderInstagramURL = String(localized: "placeHolder_instagram_url")
+        static let placeHolderFacebookURL = String(localized: "placeHolder_facebook_url")
 
         // ViewParts
         static let hideKeyboardToolBarButtonText = String(localized: "hide_keyboard_tool_bar_button_text")
@@ -139,6 +144,8 @@ extension Constants {
         static let square_and_pencil: String = "square.and.pencil"
         static let photo_on_rectangle_angled: String = "photo.on.rectangle.angled"
         static let plus_circle_fill: String = "plus.circle.fill"
+        static let checkmark: String = "checkmark"
+        static let xmark: String = "xmark"
     }
 }
 
