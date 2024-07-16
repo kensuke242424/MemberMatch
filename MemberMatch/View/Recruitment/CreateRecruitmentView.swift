@@ -51,6 +51,10 @@ struct CreateRecruitmentView: View {
                                             title: Constants.Strings.recruitmentTitleTitle,
                                             text: $vm.inputTitle
                     )
+                    // 募集パート
+                    wantedPartsSelectionForm(title: Constants.Strings.wantedPartsTitle,
+                                             parts: vm.inputWantedParts
+                    )
                     // 募集詳細
                     multiLineTextFormField(Constants.Strings.placeHolderDescription,
                                            title: Constants.Strings.recruitmentDescTitle,
@@ -190,6 +194,7 @@ extension CreateRecruitmentView {
     }
 }
 
+// YouTube動画を添付表示するフィールド
 extension CreateRecruitmentView {
     private func youtubeFormField(title: String, url: Binding<String>) -> some View {
         VStack(spacing: 16) {
@@ -227,6 +232,56 @@ extension CreateRecruitmentView {
             )
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+}
+
+extension CreateRecruitmentView {
+    @ViewBuilder
+    private func wantedPartsSelectionForm(title: String, parts: [Part]?) -> some View {
+        VStack(alignment: .leading) {
+            CustomText("\(Constants.Strings.wantedPartsTitle)：", .customTextColorWhite).font(.headline)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 20) {
+                    if let parts {
+                        ForEach(parts) { part in
+                            VStack(spacing: 10) {
+                                // TODO: 性別指定なしの場合は、currentUserの性別を使う
+                                Image(part.instrument.iconName(for: part.gender ?? Gender.male))
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 120, height: 120)
+                                    .shadow(radius: 3)
+                                HStack(spacing: 0) {
+                                    Text(part.instrument.text)
+                                        .font(.caption)
+                                        .foregroundStyle(Color.gray)
+                                    if let gender = part.gender {
+                                        Text("(\(gender.text))")
+                                            .font(.caption)
+                                            .foregroundStyle(Color.gray)
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        // TODO: 募集パートなしの場合のアイコン
+                        Circle()
+                            .frame(width: 50, height: 50)
+                            .foregroundStyle(.customAccentYellow.gradient)
+                            .shadow(radius: 3)
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.vertical, 5)
+                .padding(.horizontal, 5)
+            }
+            .padding(8)
+            .background {
+                RoundedRectangle(cornerRadius: 5)
+                    .shadow(radius: 10)
+                    .foregroundStyle(.customWhite)
+            }
+        }
     }
 }
 

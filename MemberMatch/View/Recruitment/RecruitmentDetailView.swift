@@ -83,7 +83,7 @@ struct RecruitmentDetailView: View {
                     youtubeVideoDetail(recruitment.youtubeVideoURL)
                     additionalInfoDetail(recruitment.additionalInfo)
                     socialMediaLinks(recruitment.author.socialMediaLinks).padding(.vertical, 16)
-                    bottomActionButtons(author: recruitment.author).padding(.bottom, 16)
+                    bottomActionButtons(recruitment).padding(.bottom, 16)
                 }
                 .padding()
                 .offsetRect { rect in
@@ -497,22 +497,20 @@ extension RecruitmentDetailView {
 
 extension RecruitmentDetailView {
     @ViewBuilder
-    private func bottomActionButtons(author: User) -> some View {
-        if author.id == UserManager.shared.currentUser?.id {
+    private func bottomActionButtons(_ recruitment: Recruitment) -> some View {
+        if recruitment.author.id == UserManager.shared.currentUser?.id {
             // 募集内容を編集する
-            Button {
-                vm.resetScrollToTop()
-            } label: {
+            NavigationLink(destination: CreateRecruitmentView(editData: recruitment)) {
                 HStack {
                     Text(Constants.Strings.editRecruitmentButtonText)
                     Image(systemName: Constants.Symbols.square_and_pencil)
                 }
+                .fontWeight(.bold)
+                .foregroundStyle(.customWhite)
+                .padding()
+                .background(RoundedRectangle(cornerRadius: 10).foregroundStyle(.customAccentYellow))
+                .padding(4)
             }
-            .fontWeight(.bold)
-            .padding()
-            .background(RoundedRectangle(cornerRadius: 10).foregroundStyle(.customAccentYellow))
-            .foregroundStyle(.customWhite)
-            .padding(4)
         } else {
             HStack {
                 // 気になる
@@ -534,19 +532,17 @@ extension RecruitmentDetailView {
                 .foregroundStyle(.customWhite)
                 .padding(4)
                 // メッセージを送る
-                Button {
-                    vm.resetScrollToTop()
-                } label: {
+                NavigationLink(destination: MessageView()) {
                     HStack {
                         Text(Constants.Strings.sendMessageButtonText)
                         Image(systemName: Constants.Symbols.bubble_left_fill)
                     }
+                    .fontWeight(.bold)
+                    .foregroundStyle(.customWhite)
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 10).foregroundStyle(.customAccentYellow))
+                    .padding(4)
                 }
-                .fontWeight(.bold)
-                .padding()
-                .background(RoundedRectangle(cornerRadius: 10).foregroundStyle(.customAccentYellow))
-                .foregroundStyle(.customWhite)
-                .padding(4)
             }
         }
     }
