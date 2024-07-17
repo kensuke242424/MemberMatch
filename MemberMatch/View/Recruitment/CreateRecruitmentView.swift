@@ -237,19 +237,45 @@ extension CreateRecruitmentView {
 
 extension CreateRecruitmentView {
     @ViewBuilder
-    private func wantedPartsSelectionForm(title: String, parts: [Part]?) -> some View {
+    private func wantedPartsSelectionForm(title: String, parts: [Part]) -> some View {
+        let iconSize: CGFloat = 120
+
         VStack(alignment: .leading) {
-            CustomText("\(Constants.Strings.wantedPartsTitle)：", .customTextColorWhite).font(.headline)
+            HStack {
+                CustomText("\(Constants.Strings.wantedPartsTitle)：", .customTextColorWhite).font(.headline)
+                Button("選択") {
+                    
+                }
+                .buttonStyle(.borderedProminent)
+                .font(.caption.bold())
+            }
+
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 20) {
-                    if let parts {
+                    if parts.isEmpty {
+                        // TODO: 募集パートなしの場合のアイコン
+                        VStack(spacing: 10) {
+                            RoundedRectangle(cornerRadius: 6)
+                                .frame(width: iconSize, height: iconSize)
+                                .foregroundStyle(.white.gradient)
+                                .shadow(radius: 3)
+                                .overlay {
+                                    Image(systemName: Constants.Symbols.questionmark)
+                                        .font(.title)
+                                        .foregroundStyle(.gray)
+                                }
+                            Text("未選択")
+                                .font(.caption)
+                                .foregroundStyle(Color.gray)
+                        }
+                    } else {
                         ForEach(parts) { part in
                             VStack(spacing: 10) {
                                 // TODO: 性別指定なしの場合は、currentUserの性別を使う
                                 Image(part.instrument.iconName(for: part.gender ?? Gender.male))
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(width: 120, height: 120)
+                                    .frame(width: iconSize, height: iconSize)
                                     .shadow(radius: 3)
                                 HStack(spacing: 0) {
                                     Text(part.instrument.text)
@@ -263,12 +289,6 @@ extension CreateRecruitmentView {
                                 }
                             }
                         }
-                    } else {
-                        // TODO: 募集パートなしの場合のアイコン
-                        Circle()
-                            .frame(width: 50, height: 50)
-                            .foregroundStyle(.customAccentYellow.gradient)
-                            .shadow(radius: 3)
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)

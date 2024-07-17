@@ -147,6 +147,7 @@ extension Constants {
         static let plus_circle_fill: String = "plus.circle.fill"
         static let checkmark: String = "checkmark"
         static let xmark: String = "xmark"
+        static let questionmark: String = "questionmark"
     }
 }
 
