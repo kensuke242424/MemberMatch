@@ -26,7 +26,8 @@ class CreateRecruitmentViewModel: ObservableObject {
 
     // View Properties
     @Published var isShowPicker: Bool = false
-    @Published var selectedImage: UIImage? = nil
+    @Published var isShowSelectPartSheet: Bool = false
+    @Published var selectedImage: UIImage?
     @Published var selectionImages: [UIImage] = []
 
     func setEditData(_ editData: Recruitment) {

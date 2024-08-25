@@ -120,6 +120,9 @@ struct CreateRecruitmentView: View {
                         vm.selectedImage = nil
                     }
                 }
+                .sheet(isPresented: $vm.isShowSelectPartSheet) {
+                    SelectWantedPartView(selectionPart: $vm.inputWantedParts)
+                }
             }
         }
         .gradientBackground()
@@ -244,7 +247,7 @@ extension CreateRecruitmentView {
             HStack {
                 CustomText("\(Constants.Strings.wantedPartsTitle)：", .customTextColorWhite).font(.headline)
                 Button("選択") {
-                    
+                    vm.isShowSelectPartSheet.toggle()
                 }
                 .buttonStyle(.borderedProminent)
                 .font(.caption.bold())
