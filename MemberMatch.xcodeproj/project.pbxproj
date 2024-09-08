@@ -15,6 +15,7 @@
 		BE71DC062C1D4CD50026F588 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE71DC042C1D4CD50026F588 /* Localizable.strings */; };
 		BE71DC0B2C1D4D380026F588 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE71DC092C1D4D380026F588 /* Localizable.strings */; };
 		BE71DC0D2C1D576E0026F588 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71DC0C2C1D576E0026F588 /* Util.swift */; };
+		BEC24F6E2C8D65E400524CAF /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC24F6D2C8D65E400524CAF /* Logger.swift */; };
 		BED4B20B2BE999C700C49EB5 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4B20A2BE999C700C49EB5 /* LoginView.swift */; };
 		BED4B20E2BE99A3F00C49EB5 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4B20D2BE99A3F00C49EB5 /* SignUpView.swift */; };
 		BED4B2132BEFC8C700C49EB5 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4B2122BEFC8C700C49EB5 /* ViewExtension.swift */; };
@@ -71,6 +72,7 @@
 		BE71DC052C1D4CD50026F588 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = Localizable.strings; sourceTree = "<group>"; };
 		BE71DC0A2C1D4D380026F588 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		BE71DC0C2C1D576E0026F588 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		BEC24F6D2C8D65E400524CAF /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		BED4B20A2BE999C700C49EB5 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		BED4B20D2BE99A3F00C49EB5 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		BED4B2122BEFC8C700C49EB5 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
@@ -187,6 +189,14 @@
 			path = ja.lproj;
 			sourceTree = "<group>";
 		};
+		BEC24F6C2C8D65DB00524CAF /* Logger */ = {
+			isa = PBXGroup;
+			children = (
+				BEC24F6D2C8D65E400524CAF /* Logger.swift */,
+			);
+			path = Logger;
+			sourceTree = "<group>";
+		};
 		BED4B2092BE999AD00C49EB5 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -216,6 +226,7 @@
 		BED4B2142BEFC8F100C49EB5 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				BEC24F6C2C8D65DB00524CAF /* Logger */,
 				BEE3F8672BFA427E007D5328 /* Constants */,
 				BED4B2152BEFC8FA00C49EB5 /* Common */,
 				BED4B20F2BEFC56900C49EB5 /* Extensions */,
@@ -566,6 +577,7 @@
 				BED4B21A2BEFCF7D00C49EB5 /* GradientBackgroundModifier.swift in Sources */,
 				BEE3F8662BFA35B4007D5328 /* TabTopBarView.swift in Sources */,
 				BE00ED7E2C32DF5B00572B98 /* UserManager.swift in Sources */,
+				BEC24F6E2C8D65E400524CAF /* Logger.swift in Sources */,
 				BEFAE4E42BDE73A000CADC73 /* RootTabView.swift in Sources */,
 				BED4B2392BF086B500C49EB5 /* SDWebImageCircleIcon.swift in Sources */,
 				BEE3F86E2C0AE70F007D5328 /* UIScreenExtension.swift in Sources */,
