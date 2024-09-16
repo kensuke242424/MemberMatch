@@ -13,16 +13,15 @@ struct CreateRecruitmentView: View {
     @EnvironmentObject var router: Router
     @EnvironmentObject var userManager: UserManager
 
-    @Environment(\.presentationMode)
-    var presentationMode
+    @Environment(\.presentationMode) var presentationMode
 
     @StateObject private var vm = CreateRecruitmentViewModel()
+    private let l10n = Constants.Strings.self
 
     var body: some View {
         VStack {
             TabTopBarView(
-                editData == nil ?
-                Constants.Strings.createRecruitmentPageTitle : Constants.Strings.editRecruitmentPageTitle,
+                editData == nil ? l10n.createRecruitmentPageTitle : l10n.editRecruitmentPageTitle,
                 leftToolbarItems: {
                     Image(systemName: Constants.Symbols.chevron_backward)
                         .foregroundStyle(.gray)
@@ -31,15 +30,16 @@ struct CreateRecruitmentView: View {
                         .onTapGesture { presentationMode.wrappedValue.dismiss() }
                 },
                 rightToolbarItems: {
-                    Button(Constants.Strings.draftButtonText) {
-                        // TODO: 下書き保存処理
-                    }
-                    .font(.subheadline)
-                    .foregroundStyle(.gray)
-                    .padding(.vertical, 4)
-                    .padding(.horizontal, 10)
-                    .background {
-                        Capsule().foregroundStyle(.white.gradient)
+                    if let editData {
+                        createRecruitmentToolbarButton(l10n.editRecruitmentToolbarButtonText) {
+                            vm.editRecruitment(editData: editData)
+                            presentationMode.wrappedValue.dismiss()
+                        }
+                    } else {
+                        createRecruitmentToolbarButton(l10n.createRecruitmentToolbarButtonText) {
+                            vm.createRecruitment()
+                            presentationMode.wrappedValue.dismiss()
+                        }
                     }
                 }
             )
@@ -47,63 +47,63 @@ struct CreateRecruitmentView: View {
             ScrollView {
                 VStack(spacing: 40) {
                     // タイトル
-                    singleLineTextFormField(Constants.Strings.placeHolderTitle,
-                                            title: Constants.Strings.recruitmentTitleTitle,
+                    singleLineTextFormField(l10n.placeHolderTitle,
+                                            title: l10n.recruitmentTitleTitle,
                                             text: $vm.inputTitle
                     )
                     // 募集パート
-                    wantedPartsSelectionForm(title: Constants.Strings.wantedPartsTitle,
+                    wantedPartsSelectionForm(title: l10n.wantedPartsTitle,
                                              parts: vm.inputWantedParts
                     )
                     // 募集詳細
-                    multiLineTextFormField(Constants.Strings.placeHolderDescription,
-                                           title: Constants.Strings.recruitmentDescTitle,
+                    multiLineTextFormField(l10n.placeHolderDescription,
+                                           title: l10n.recruitmentDescTitle,
                                            text: $vm.inputDescription
                     )
                     // 写真
-                    selectImagesFormField(title: Constants.Strings.photoTitle,
+                    selectImagesFormField(title: l10n.photoTitle,
                                           images: vm.inputImages,
                                           selection: vm.selectionImages
                     )
                     // ジャンル
-                    musicGenreSelectFormField(title: Constants.Strings.musicGenreTitle,
+                    musicGenreSelectFormField(title: l10n.musicGenreTitle,
                                               genres: MusicGenre.allCases,
                                               highlightedGenres: $vm.inputMusicGenre
                     )
                     // 活動頻度
-                    singleLineTextFormField(Constants.Strings.placeHolderFrequency,
-                                            title: Constants.Strings.frequencyTitle,
+                    singleLineTextFormField(l10n.placeHolderFrequency,
+                                            title: l10n.frequencyTitle,
                                             text: $vm.inputFrequency
                     )
                     // 活動拠点
-                    singleLineTextFormField(Constants.Strings.placeHolderRehearsalLocation,
-                                            title: Constants.Strings.locationTitle,
+                    singleLineTextFormField(l10n.placeHolderRehearsalLocation,
+                                            title: l10n.locationTitle,
                                             text: $vm.inputRehearsalLocation
                     )
                     // その他/備考
-                    multiLineTextFormField(Constants.Strings.placeHolderAdditionalInfo,
-                                           title: Constants.Strings.additionalInfoTitle,
+                    multiLineTextFormField(l10n.placeHolderAdditionalInfo,
+                                           title: l10n.additionalInfoTitle,
                                            text: $vm.inputAdditionalInfo
                     )
                     // Youtube
-                    youtubeFormField(title: Constants.Strings.youtubeTitle,
+                    youtubeFormField(title: l10n.youtubeTitle,
                                      url: $vm.inputYoutubeURL
                     )
                     // SNS URLs
                     VStack(spacing: 16) {
                         // X(Twitter)
-                        singleLineTextFormField(Constants.Strings.placeHolderTwitterURL,
-                                                title: Constants.Strings.twitterTitle,
+                        singleLineTextFormField(l10n.placeHolderTwitterURL,
+                                                title: l10n.twitterTitle,
                                                 text: $vm.inputTwitterURL
                         )
                         // Instagram
-                        singleLineTextFormField(Constants.Strings.placeHolderInstagramURL,
-                                                title: Constants.Strings.instagramTitle,
+                        singleLineTextFormField(l10n.placeHolderInstagramURL,
+                                                title: l10n.instagramTitle,
                                                 text: $vm.inputInstagramURL
                         )
                         // Facebook
-                        singleLineTextFormField(Constants.Strings.placeHolderFacebookURL,
-                                                title: Constants.Strings.facebookTitle,
+                        singleLineTextFormField(l10n.placeHolderFacebookURL,
+                                                title: l10n.facebookTitle,
                                                 text: $vm.inputFacebookURL
                         )
                     }
@@ -133,6 +133,20 @@ struct CreateRecruitmentView: View {
                 // すでに存在するデータの編集の場合は、データの各値をinputにセット
                 vm.setEditData(editData)
             }
+        }
+    }
+
+    @ViewBuilder
+    private func createRecruitmentToolbarButton(_ text: String, _ action: @escaping () -> Void) -> some View {
+        Button(text) {
+            action()
+        }
+        .font(.subheadline.bold())
+        .foregroundStyle(.white)
+        .padding(.vertical, 4)
+        .padding(.horizontal, 10)
+        .background {
+            Capsule().foregroundStyle(.customAccentYellow.gradient)
         }
     }
 }
@@ -202,8 +216,8 @@ extension CreateRecruitmentView {
     private func youtubeFormField(title: String, url: Binding<String>) -> some View {
         VStack(spacing: 16) {
             // YouTube
-            singleLineTextFormField(Constants.Strings.placeHolderYoutubeURL,
-                                    title: Constants.Strings.youtubeTitle,
+            singleLineTextFormField(l10n.placeHolderYoutubeURL,
+                                    title: l10n.youtubeTitle,
                                     text: $vm.inputYoutubeURL
             )
             if !url.wrappedValue.isEmpty {
@@ -245,7 +259,7 @@ extension CreateRecruitmentView {
 
         VStack(alignment: .leading) {
             HStack {
-                CustomText("\(Constants.Strings.wantedPartsTitle)：", .customTextColorWhite).font(.headline)
+                CustomText("\(l10n.wantedPartsTitle)：", .customTextColorWhite).font(.headline)
                 Button("選択") {
                     vm.isShowSelectPartSheet.toggle()
                 }

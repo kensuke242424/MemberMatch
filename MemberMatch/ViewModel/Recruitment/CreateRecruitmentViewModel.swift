@@ -41,4 +41,12 @@ class CreateRecruitmentViewModel: ObservableObject {
         self.inputRehearsalLocation = editData.rehearsalLocation ?? ""
         self.inputAdditionalInfo = editData.additionalInfo ?? ""
     }
+
+    func createRecruitment() {
+        //TODO: Model経由で募集を作成
+    }
+
+    func editRecruitment(editData: Recruitment) {
+        //TODO: Model経由で募集を更新
+    }
 }

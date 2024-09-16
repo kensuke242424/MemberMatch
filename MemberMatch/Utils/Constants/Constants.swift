@@ -41,6 +41,8 @@ extension Constants {
         static let sendMessageButtonText = String(localized: "send_message_button_text")
         static let editRecruitmentButtonText = String(localized: "edit_recruitment_button_text")
         static let draftButtonText = String(localized: "draft_button_text")
+        static let createRecruitmentToolbarButtonText = String(localized: "create_recruitment_toolbar_button_text")
+        static let editRecruitmentToolbarButtonText = String(localized: "edit_recruitment_toolbar_button_text")
         static let profileText = String(localized: "profile")
 
         // 募集パート選択ページ

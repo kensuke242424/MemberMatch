@@ -33,6 +33,8 @@
 "send_message_button_text" = "メッセージを送る";
 "edit_recruitment_button_text" = "募集内容を編集する";
 "draft_button_text" = "下書き";
+"create_recruitment_toolbar_button_text" = "作成";
+"edit_recruitment_toolbar_button_text" = "更新";
 "profile" = "Profile";
 
 // 募集パート選択ページ
