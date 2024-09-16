@@ -43,6 +43,11 @@ extension Constants {
         static let draftButtonText = String(localized: "draft_button_text")
         static let profileText = String(localized: "profile")
 
+        // 募集パート選択ページ
+        static let selectWantedPartPageTitle = String(localized: "select_wanted_part_page_title")
+        static let sheetDismissButtonText = String(localized: "sheet_dismiss_button_text")
+        static let selectGenderUnknownMenuText = String(localized: "select_gender_unknown_menu_text")
+
         // placeHolder
         static let placeHolderTitle = String(localized: "place_holder_title")
         static let placeHolderDescription = String(localized: "place_holder_description")
@@ -153,7 +158,7 @@ extension Constants {
 
 extension Constants {
     struct Images {
-        // 楽器パート
+        // --- 楽器パート ---
         // シンガーソングライター
         static let singer_song_writer_male: String = "singer_song_writer_male"
         static let singer_song_writer_female: String = "singer_song_writer_female"
@@ -203,9 +208,15 @@ extension Constants {
         // 活動方針
         static let band_enjoy: String = "band_enjoy"
 
-        // SNS Logos
+        // --- ロゴ ---
+        // SNS
         static let logo_X: String = "logo_X"
         static let logo_Instagram: String = "logo_Instagram"
         static let logo_Facebook: String = "logo_Facebook"
+
+        // 性別
+        static let logo_male: String = "male_icon"
+        static let logo_female: String = "female_icon"
+        static let logo_male_and_female: String = "male_and_female_icon"
     }
 }

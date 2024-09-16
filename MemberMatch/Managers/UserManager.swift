@@ -7,20 +7,33 @@
 
 import Foundation
 
+enum UserState {
+    case loggedIn(User)
+    case guest
+}
+
 class UserManager: ObservableObject {
     static let shared = UserManager()
 
-    @Published var currentUser: User?
+    @Published var userState: UserState = .guest
+    var currentUser: User {
+        switch userState {
+        case .loggedIn(let user):
+            return user
+        case .guest:
+            return guestUser
+        }
+    }
 
     private init() {}
 
     // TODO: Firebaseから取得
     func fetchUserData(userId: String) {
-        self.currentUser = mockUser
+        self.userState = .loggedIn(mockUser)
     }
 
     // TODO: Firebaseにアタッチ
     func updateUserData(newData: User) {
-        self.currentUser = newData
+        self.userState = .loggedIn(newData)
     }
 }

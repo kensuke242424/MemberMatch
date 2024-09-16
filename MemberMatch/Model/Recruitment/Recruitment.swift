@@ -26,7 +26,7 @@ struct Recruitment: Identifiable, Hashable {
     var policy: Policy?
     var frequency: String?
     var genre: [MusicGenre]?
-    var wantedParts: [Part]?
+    var wantedParts: [Part]
     var rehearsalLocation: String?
     var additionalInfo: String?
     var youtubeVideoURL: [URL]?  // YouTube動画のURL
@@ -42,7 +42,7 @@ struct Recruitment: Identifiable, Hashable {
         policy: Policy?,
         frequency: String? = nil,
         genre: [MusicGenre] = [],
-        wantedParts: [Part]? = nil,
+        wantedParts: [Part] = Part.getAllContent(),
         rehearsalLocation: String,
         additionalInfo: String? = nil,
         youtubeVideoURL: [URL]? = nil
@@ -62,6 +62,10 @@ struct Recruitment: Identifiable, Hashable {
         self.additionalInfo = additionalInfo
         self.youtubeVideoURL = youtubeVideoURL
     }
+
+    var isWantedPart: Bool {
+        return wantedParts.contains(where: { $0.isWanted == true })
+    }
 }
 
 // ダミーデータ
@@ -78,36 +82,6 @@ let exampleRecruitments = [
 """,
         policy: .hobby,
         genre: [MusicGenre.pop],
-        wantedParts: [
-            Part(instrument: .songWriter, gender: Gender.male),
-            Part(instrument: .songWriter, gender: Gender.female),
-            Part(instrument: .guitar, gender: Gender.male),
-            Part(instrument: .guitar, gender: Gender.female),
-            Part(instrument: .bass, gender: Gender.male),
-            Part(instrument: .bass, gender: Gender.female),
-            Part(instrument: .drums, gender: Gender.male),
-            Part(instrument: .drums, gender: Gender.female),
-            Part(instrument: .keyboard, gender: Gender.male),
-            Part(instrument: .keyboard, gender: Gender.female),
-            Part(instrument: .piano, gender: Gender.male),
-            Part(instrument: .piano, gender: Gender.female),
-            Part(instrument: .saxophone, gender: Gender.male),
-            Part(instrument: .saxophone, gender: Gender.female),
-            Part(instrument: .trumpet, gender: Gender.male),
-            Part(instrument: .trumpet, gender: Gender.female),
-            Part(instrument: .violin, gender: Gender.male),
-            Part(instrument: .violin, gender: Gender.female),
-            Part(instrument: .cello, gender: Gender.male),
-            Part(instrument: .cello, gender: Gender.female),
-            Part(instrument: .flute, gender: Gender.male),
-            Part(instrument: .flute, gender: Gender.female),
-            Part(instrument: .clarinet, gender: Gender.male),
-            Part(instrument: .clarinet, gender: Gender.female),
-            Part(instrument: .vocal, gender: Gender.male),
-            Part(instrument: .vocal, gender: Gender.female),
-            Part(instrument: .synthesizer, gender: Gender.male),
-            Part(instrument: .synthesizer, gender: Gender.female)
-        ],
         rehearsalLocation: "新宿スタジオ"
     ),
     Recruitment(
@@ -125,7 +99,6 @@ let exampleRecruitments = [
         policy: Policy.professional,
         frequency: "週１回",
         genre: [MusicGenre.pop],
-        wantedParts: [Part(instrument: .bass, gender: Gender.male)],
         rehearsalLocation: "新宿スタジオ"
     ),
     Recruitment(
@@ -142,7 +115,6 @@ let exampleRecruitments = [
         policy: .professional,
         frequency: "週２〜３回",
         genre: [MusicGenre.jazz],
-        wantedParts: [Part(instrument: .drums, gender: Gender.female)],
         rehearsalLocation: "銀座リハーサルスタジオ"
     ),
     Recruitment(
@@ -154,7 +126,6 @@ let exampleRecruitments = [
         policy: .professional,
         frequency: "週１〜２回",
         genre: [MusicGenre.pop, MusicGenre.rock],
-        wantedParts: [Part(instrument: .keyboard, gender: .male)],
         rehearsalLocation: "渋谷音楽スタジオ"
     )
 ]

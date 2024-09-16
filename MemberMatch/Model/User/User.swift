@@ -61,6 +61,21 @@ struct User: Identifiable, Hashable, Codable {
     }
 }
 
+let guestUser = User(
+    name: "ゲスト",
+    gender: Gender.unknown,
+    email: "guest@example.com",
+    prefecture: .tokyo,
+    selfIntroduction: "",
+    instrument: [],
+    skillLevel: .none,
+    preferredGenre: [],
+    policy: .none,
+    profileImageURL: URL(string: ""),
+    bio: "",
+    socialMediaLinks: SocialMediaLinks()
+)
+
 let mockUser = User(
     name: "モック沢あきこ",
     gender: Gender.female,

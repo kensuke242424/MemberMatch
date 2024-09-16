@@ -35,6 +35,11 @@
 "draft_button_text" = "下書き";
 "profile" = "Profile";
 
+// 募集パート選択ページ
+"select_wanted_part_page_title" = "募集パートの選択";
+"sheet_dismiss_button_text" = "閉じる";
+"select_gender_unknown_menu_text" = "指定なし";
+
 // PlaceHolder
 "place_holder_title" = "ボーカル募集！";
 "place_holder_description" = "一緒に音楽を楽しみませんか？\n私たちはロックバンドのボーカルを募集しています！興味のある方はぜひご連絡ください！";

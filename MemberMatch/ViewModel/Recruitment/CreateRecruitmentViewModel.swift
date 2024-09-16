@@ -15,7 +15,7 @@ class CreateRecruitmentViewModel: ObservableObject {
     @Published var inputPolicy: Policy = .nothing
     @Published var inputFrequency: String = ""
     @Published var inputMusicGenre: [MusicGenre] = []
-    @Published var inputWantedParts: [Part] = []
+    @Published var inputWantedParts: [Part] = Part.getAllContent()
     @Published var inputImages: [ImageData] = []
     @Published var inputRehearsalLocation: String = ""
     @Published var inputYoutubeURL: String = ""
@@ -36,7 +36,7 @@ class CreateRecruitmentViewModel: ObservableObject {
         self.inputPolicy = editData.policy ?? .nothing
         self.inputFrequency = editData.frequency ?? ""
         self.inputMusicGenre = editData.genre ?? []
-        self.inputWantedParts = editData.wantedParts ?? []
+        self.inputWantedParts = editData.wantedParts
         self.inputImages = editData.images ?? []
         self.inputRehearsalLocation = editData.rehearsalLocation ?? ""
         self.inputAdditionalInfo = editData.additionalInfo ?? ""

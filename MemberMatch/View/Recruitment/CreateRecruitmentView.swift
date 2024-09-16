@@ -255,7 +255,30 @@ extension CreateRecruitmentView {
 
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 20) {
-                    if parts.isEmpty {
+                    if parts.contains(where: { $0.isWanted == true }) {
+                        ForEach(parts) { part in
+                            if part.isWanted {
+                                VStack(spacing: 10) {
+                                    // TODO: 性別指定なしの場合は、currentUserの性別を使う
+                                    Image(part.iconName)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: iconSize, height: iconSize)
+                                        .shadow(radius: 3)
+                                    HStack(spacing: 0) {
+                                        Text(part.instrument.text)
+                                            .font(.caption)
+                                            .foregroundStyle(Color.gray)
+                                        if part.gender != Gender.unknown {
+                                            Text("(\(part.gender.text))")
+                                                .font(.caption)
+                                                .foregroundStyle(Color.gray)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } else {
                         // TODO: 募集パートなしの場合のアイコン
                         VStack(spacing: 10) {
                             RoundedRectangle(cornerRadius: 6)
@@ -270,27 +293,6 @@ extension CreateRecruitmentView {
                             Text("未選択")
                                 .font(.caption)
                                 .foregroundStyle(Color.gray)
-                        }
-                    } else {
-                        ForEach(parts) { part in
-                            VStack(spacing: 10) {
-                                // TODO: 性別指定なしの場合は、currentUserの性別を使う
-                                Image(part.instrument.iconName(for: part.gender ?? Gender.male))
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: iconSize, height: iconSize)
-                                    .shadow(radius: 3)
-                                HStack(spacing: 0) {
-                                    Text(part.instrument.text)
-                                        .font(.caption)
-                                        .foregroundStyle(Color.gray)
-                                    if let gender = part.gender {
-                                        Text("(\(gender.text))")
-                                            .font(.caption)
-                                            .foregroundStyle(Color.gray)
-                                    }
-                                }
-                            }
                         }
                     }
                 }

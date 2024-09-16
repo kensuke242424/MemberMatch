@@ -22,4 +22,15 @@ enum Gender: String, CaseIterable, Codable {
             Constants.Strings.gender_unknown
         }
     }
+
+    var iconName: String {
+        switch self {
+        case .male:
+            Constants.Images.logo_male
+        case .female:
+            Constants.Images.logo_female
+        case .unknown:
+            Constants.Images.logo_male_and_female
+        }
+    }
 }

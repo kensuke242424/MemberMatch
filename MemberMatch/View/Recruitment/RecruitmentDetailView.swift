@@ -33,7 +33,7 @@ struct RecruitmentDetailView: View {
                 },
                 rightToolbarItems: {
                     // 編集ボタン
-                    if recruitment.author.id == userManager.currentUser?.id {
+                    if recruitment.author.id == userManager.currentUser.id {
                         NavigationLink(destination: CreateRecruitmentView(editData: recruitment)) {
                             Image(systemName:Constants.Symbols.square_and_pencil)
                                 .foregroundStyle(.gray)
@@ -247,28 +247,30 @@ extension RecruitmentDetailView {
 // 募集パート
 extension RecruitmentDetailView {
     @ViewBuilder
-    private func wantedPartsDetail(_ parts: [Part]?) -> some View {
+    private func wantedPartsDetail(_ parts: [Part]) -> some View {
         VStack(alignment: .leading) {
             CustomText("\(Constants.Strings.wantedPartsTitle)：", .customTextColorWhite).font(.headline)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 20) {
-                    if let parts {
+                    if parts.contains(where: { $0.isWanted == true }) {
                         ForEach(parts) { part in
-                            VStack(spacing: 10) {
-                                // TODO: 性別指定なしの場合は、currentUserの性別を使う
-                                Image(part.instrument.iconName(for: part.gender ?? Gender.male))
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 120, height: 120)
-                                    .shadow(radius: 3)
-                                HStack(spacing: 0) {
-                                    Text(part.instrument.text)
-                                        .font(.caption)
-                                        .foregroundStyle(Color.gray)
-                                    if let gender = part.gender {
-                                        Text("(\(gender.text))")
+                            if part.isWanted {
+                                VStack(spacing: 10) {
+                                    // TODO: 性別指定なしの場合は、currentUserの性別を使う
+                                    Image(part.iconName)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 120, height: 120)
+                                        .shadow(radius: 3)
+                                    HStack(spacing: 0) {
+                                        Text(part.instrument.text)
                                             .font(.caption)
                                             .foregroundStyle(Color.gray)
+                                        if part.gender != Gender.unknown {
+                                            Text("(\(part.gender.text))")
+                                                .font(.caption)
+                                                .foregroundStyle(Color.gray)
+                                        }
                                     }
                                 }
                             }
@@ -498,7 +500,7 @@ extension RecruitmentDetailView {
 extension RecruitmentDetailView {
     @ViewBuilder
     private func bottomActionButtons(_ recruitment: Recruitment) -> some View {
-        if recruitment.author.id == UserManager.shared.currentUser?.id {
+        if recruitment.author.id == UserManager.shared.currentUser.id {
             // 募集内容を編集する
             NavigationLink(destination: CreateRecruitmentView(editData: recruitment)) {
                 HStack {
