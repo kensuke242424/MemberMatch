@@ -38,6 +38,7 @@ extension Constants {
         static let instagramTitle = String(localized: "instagram_title")
         static let facebookTitle = String(localized: "facebook_title")
         static let additionalInfoTitle = String(localized: "additional_info_title")
+        static let partSelectButtonText = String(localized: "part_select_button_text")
         static let sendMessageButtonText = String(localized: "send_message_button_text")
         static let editRecruitmentButtonText = String(localized: "edit_recruitment_button_text")
         static let draftButtonText = String(localized: "draft_button_text")
@@ -71,6 +72,7 @@ extension Constants {
         // Empty
         static let emptyName = String(localized: "empty_name")
         static let emptyTitle = String(localized: "empty_title")
+        static let emptyPart = String(localized: "empty_part")
         static let emptyDescription = String(localized: "empty_description")
         static let emptyPolicy = String(localized: "empty_policy")
 

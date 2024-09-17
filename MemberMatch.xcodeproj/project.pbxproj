@@ -12,6 +12,7 @@
 		BE00ED802C34404300572B98 /* CreateRecruitmentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE00ED7F2C34404300572B98 /* CreateRecruitmentViewModel.swift */; };
 		BE00ED822C38BB6A00572B98 /* HideKeyboardToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE00ED812C38BB6A00572B98 /* HideKeyboardToolbarButton.swift */; };
 		BE00ED842C38D58B00572B98 /* ImageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE00ED832C38D58B00572B98 /* ImageData.swift */; };
+		BE5179A62C99A29300BFF9AD /* EmptyPartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5179A52C99A29300BFF9AD /* EmptyPartView.swift */; };
 		BE71DBFB2C1538C30026F588 /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71DBFA2C1538C30026F588 /* Gender.swift */; };
 		BE71DBFD2C153B770026F588 /* Part.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71DBFC2C153B770026F588 /* Part.swift */; };
 		BE71DBFF2C1D3F070026F588 /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71DBFE2C1D3F070026F588 /* Mocks.swift */; };
@@ -75,6 +76,7 @@
 		BE00ED7F2C34404300572B98 /* CreateRecruitmentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRecruitmentViewModel.swift; sourceTree = "<group>"; };
 		BE00ED812C38BB6A00572B98 /* HideKeyboardToolbarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyboardToolbarButton.swift; sourceTree = "<group>"; };
 		BE00ED832C38D58B00572B98 /* ImageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageData.swift; sourceTree = "<group>"; };
+		BE5179A52C99A29300BFF9AD /* EmptyPartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyPartView.swift; sourceTree = "<group>"; };
 		BE71DBFA2C1538C30026F588 /* Gender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
 		BE71DBFC2C153B770026F588 /* Part.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Part.swift; sourceTree = "<group>"; };
 		BE71DBFE2C1D3F070026F588 /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
@@ -166,6 +168,14 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BE5179A42C99A28000BFF9AD /* Empty */ = {
+			isa = PBXGroup;
+			children = (
+				BE5179A52C99A29300BFF9AD /* EmptyPartView.swift */,
+			);
+			path = Empty;
 			sourceTree = "<group>";
 		};
 		BE71DC002C1D4C4E0026F588 /* Localizables */ = {
@@ -340,6 +350,7 @@
 		BED4B2372BF0868600C49EB5 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				BE5179A42C99A28000BFF9AD /* Empty */,
 				BEC24F5E2C3DFAF500524CAF /* CustomImagePicker */,
 				BED4B2162BEFC90800C49EB5 /* CustomText.swift */,
 				BED4B22A2BEFDECC00C49EB5 /* BlurView.swift */,
@@ -598,6 +609,7 @@
 				BED4B2552BF3D1BF00C49EB5 /* CommitmentLevel.swift in Sources */,
 				BED4B2442BF3BCD100C49EB5 /* UserProfileView.swift in Sources */,
 				BE00ED7A2C32D83800572B98 /* CreateRecruitmentView.swift in Sources */,
+				BE5179A62C99A29300BFF9AD /* EmptyPartView.swift in Sources */,
 				BED4B24C2BF3C17A00C49EB5 /* MusicGenre.swift in Sources */,
 				BEFAE4F52BDE768F00CADC73 /* TabsViewModel.swift in Sources */,
 				BEE55DE32BFA293500299883 /* RecruitmentDetailViewModel.swift in Sources */,

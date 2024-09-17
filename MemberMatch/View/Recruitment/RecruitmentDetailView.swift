@@ -15,15 +15,15 @@ struct RecruitmentDetailView: View {
     @EnvironmentObject var userManager: UserManager
 
     @StateObject private var vm = RecruitmentDetailViewModel()
-
     @State private var scrollOffsetY: CGFloat = 0
-    // TODO: ユーザーデータの投稿お気に入りパラメータから算出する
     @State private var favorite: Bool = false
+
+    let l10n = Constants.Strings.self
 
     var body: some View {
         VStack(spacing: 0) {
             TabTopBarView(
-                Constants.Strings.recruitmentDetailPageTitle,
+                l10n.recruitmentDetailPageTitle,
                 leftToolbarItems: {
                     Image(systemName: Constants.Symbols.chevron_backward)
                         .foregroundStyle(.gray)
@@ -77,7 +77,6 @@ struct RecruitmentDetailView: View {
                     musicGenreDetail(recruitment.genre)
                     wantedPartsDetail(recruitment.wantedParts)
                     recruitmentDetail(recruitment.description)
-                    policyDetail(recruitment.policy)
                     frequencyDetail(recruitment.frequency)
                     locationDetail(recruitment.rehearsalLocation)
                     youtubeVideoDetail(recruitment.youtubeVideoURL)
@@ -132,7 +131,7 @@ extension RecruitmentDetailView {
 
             // 紙デザインの要素
             VStack(spacing: 4) {
-                CustomText(recruitment.title ?? Constants.Strings.emptyTitle, .customTextColorBlack)
+                CustomText(recruitment.title ?? l10n.emptyTitle, .customTextColorBlack)
                     .lineLimit(!vm.isScrolledMidPoint || vm.isFullOpenCard ? 10 : 1)
                     .font(!vm.isScrolledMidPoint || vm.isFullOpenCard ? .title3 : .subheadline)
                     .frame(maxWidth: .infinity,
@@ -142,7 +141,7 @@ extension RecruitmentDetailView {
                 HStack {
                     VStack(spacing: 8) {
                         CustomText(
-                            "\(Constants.Strings.author)：\(recruitment.author.name ?? Constants.Strings.emptyName)",
+                            "\(l10n.author)：\(recruitment.author.name ?? l10n.emptyName)",
                             .customTextColorBlack
                         )
                         .lineLimit(!vm.isScrolledMidPoint || vm.isFullOpenCard ? 100 : 2)
@@ -164,7 +163,7 @@ extension RecruitmentDetailView {
                                    height: !vm.isScrolledMidPoint || vm.isFullOpenCard ? 70 : 50)
 
                         if !vm.isScrolledMidPoint || vm.isFullOpenCard {
-                            Button(Constants.Strings.profileText) {
+                            Button(l10n.profileText) {
                                 router.push([.userProfile(mockUser)])
                             }
                             .font(.caption2.bold())
@@ -176,18 +175,18 @@ extension RecruitmentDetailView {
                 .padding(.bottom, !vm.isScrolledMidPoint || vm.isFullOpenCard ? 10 : 0)
 
                 HStack {
-                    CustomText(Constants.Strings.favorite, .gray).font(.caption).fontWeight(.bold)
+                    CustomText(l10n.favorite, .gray).font(.caption).fontWeight(.bold)
                     Image(systemName: favorite ? Constants.Symbols.heart_fill : Constants.Symbols.heart)
                         .foregroundStyle(favorite ? .red : .gray)
                         .onTapGesture { withAnimation { favorite.toggle() } }
                     CustomText(String(recruitment.favorite), .gray).font(.caption).fontWeight(.bold)
                     Spacer().frame(width: 20)
-                    CustomText("\(Constants.Strings.publicDeadline):", .gray).font(.caption).fontWeight(.bold)
+                    CustomText("\(l10n.publicDeadline):", .gray).font(.caption).fontWeight(.bold)
                     HStack(spacing: 5) {
-                        CustomText(Constants.Strings.publicDeadlineDesc1, .gray).font(.caption).fontWeight(.bold)
+                        CustomText(l10n.publicDeadlineDesc1, .gray).font(.caption).fontWeight(.bold)
                         CustomText(String(Util.daysUntilDeadline(from: recruitment.postedDate)), .gray)
                             .font(.caption).fontWeight(.bold)
-                        CustomText(Constants.Strings.publicDeadlineDesc2, .gray).font(.caption).fontWeight(.bold)
+                        CustomText(l10n.publicDeadlineDesc2, .gray).font(.caption).fontWeight(.bold)
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -232,7 +231,7 @@ extension RecruitmentDetailView {
     @ViewBuilder
     private func musicGenreDetail(_ genre: [MusicGenre]?) -> some View {
         VStack(alignment: .leading) {
-            CustomText("\(Constants.Strings.musicGenreTitle)：", .customTextColorWhite)
+            CustomText("\(l10n.musicGenreTitle)：", .customTextColorWhite)
                 .font(.headline)
             Spacer().frame(height: 16)
             MusicGenresCapsuleView(genres: MusicGenre.allCases,
@@ -248,39 +247,40 @@ extension RecruitmentDetailView {
 extension RecruitmentDetailView {
     @ViewBuilder
     private func wantedPartsDetail(_ parts: [Part]) -> some View {
+        let iconSize: CGFloat = 120
+        var isWantedParts: [Part] {
+            parts.filter { $0.isWanted == true }
+        }
+
         VStack(alignment: .leading) {
-            CustomText("\(Constants.Strings.wantedPartsTitle)：", .customTextColorWhite).font(.headline)
+            CustomText("\(l10n.wantedPartsTitle)：", .customTextColorWhite).font(.headline)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 20) {
-                    if parts.contains(where: { $0.isWanted == true }) {
-                        ForEach(parts) { part in
-                            if part.isWanted {
-                                VStack(spacing: 10) {
-                                    // TODO: 性別指定なしの場合は、currentUserの性別を使う
-                                    Image(part.iconName)
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 120, height: 120)
-                                        .shadow(radius: 3)
-                                    HStack(spacing: 0) {
-                                        Text(part.instrument.text)
+                    if isWantedParts.isEmpty {
+                        EmptyPartView(l10n.emptyPart,
+                                      symbolName: Constants.Symbols.questionmark,
+                                      iconSize: iconSize
+                        )
+                    } else {
+                        ForEach(isWantedParts) { part in
+                            VStack(spacing: 10) {
+                                Image(part.iconName)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 120, height: 120)
+                                    .shadow(radius: 3)
+                                HStack(spacing: 0) {
+                                    Text(part.instrument.text)
+                                        .font(.caption)
+                                        .foregroundStyle(Color.gray)
+                                    if part.gender != Gender.unknown {
+                                        Text("(\(part.gender.text))")
                                             .font(.caption)
                                             .foregroundStyle(Color.gray)
-                                        if part.gender != Gender.unknown {
-                                            Text("(\(part.gender.text))")
-                                                .font(.caption)
-                                                .foregroundStyle(Color.gray)
-                                        }
                                     }
                                 }
                             }
                         }
-                    } else {
-                        // TODO: 募集パートなしの場合のアイコン
-                        Circle()
-                            .frame(width: 50, height: 50)
-                            .foregroundStyle(.customAccentYellow.gradient)
-                            .shadow(radius: 3)
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -302,7 +302,7 @@ extension RecruitmentDetailView {
     @ViewBuilder
     private func policyDetail(_ policy: Policy?) -> some View {
         VStack(alignment: .leading) {
-            CustomText("\(Constants.Strings.policyTitle)：", .customTextColorWhite).font(.headline)
+            CustomText("\(l10n.policyTitle)：", .customTextColorWhite).font(.headline)
             VStack {
                 CustomText(policy?.text ?? "", .customTextColorBlack)
                     .tracking(4)
@@ -328,11 +328,11 @@ extension RecruitmentDetailView {
     @ViewBuilder
     private func recruitmentDetail(_ description: String?) -> some View {
         VStack(alignment: .leading) {
-            CustomText("\(Constants.Strings.recruitmentDescTitle)：", .customTextColorWhite)
+            CustomText("\(l10n.recruitmentDescTitle)：", .customTextColorWhite)
                 .font(.headline)
             VStack {
-                CustomText(recruitment.title ?? "タイトルなし", .customTextColorBlack).fontWeight(.bold)
-                CustomText(description ?? "入力なし", .customTextColorBlack)
+                CustomText(recruitment.title ?? l10n.emptyTitle, .customTextColorBlack).fontWeight(.bold)
+                CustomText(description ?? l10n.emptyDescription, .customTextColorBlack)
                     .font(.subheadline)
                     .frame(minHeight: 50)
                     .frame(maxHeight: .infinity)
@@ -354,10 +354,10 @@ extension RecruitmentDetailView {
     @ViewBuilder
     private func frequencyDetail(_ description: String?) -> some View {
         VStack(alignment: .leading) {
-            CustomText("\(Constants.Strings.frequencyTitle)：", .customTextColorWhite)
+            CustomText("\(l10n.frequencyTitle)：", .customTextColorWhite)
                 .font(.headline)
             CustomText(
-                description ?? Constants.Strings.emptyDescription,
+                description ?? l10n.emptyDescription,
                 description == nil ? .gray : .customTextColorBlack
             )
             .font(.subheadline)
@@ -378,10 +378,10 @@ extension RecruitmentDetailView {
     @ViewBuilder
     private func locationDetail(_ description: String?) -> some View {
         VStack(alignment: .leading) {
-            CustomText("\(Constants.Strings.locationTitle)：", .customTextColorWhite)
+            CustomText("\(l10n.locationTitle)：", .customTextColorWhite)
                 .font(.headline)
             CustomText(
-                description ?? Constants.Strings.emptyDescription,
+                description ?? l10n.emptyDescription,
                 description == nil ? .gray : .customTextColorBlack
             )
             .font(.subheadline)
@@ -402,10 +402,10 @@ extension RecruitmentDetailView {
     @ViewBuilder
     private func additionalInfoDetail(_ description: String?) -> some View {
         VStack(alignment: .leading) {
-            CustomText("\(Constants.Strings.additionalInfoTitle)：", .customTextColorWhite)
+            CustomText("\(l10n.additionalInfoTitle)：", .customTextColorWhite)
                 .font(.headline)
             CustomText(
-                description ?? Constants.Strings.emptyDescription,
+                description ?? l10n.emptyDescription,
                 description == nil ? .gray : .customTextColorBlack
             )
             .font(.subheadline)
@@ -442,57 +442,62 @@ extension RecruitmentDetailView {
     private func socialMediaLinks(_ links: SocialMediaLinks) -> some View {
         let iconSize: CGFloat = 50
 
-        HStack(spacing: 30) {
-            Button {
-                vm.openURL(links.twitter)
-            } label: {
-                Image(Constants.Images.logo_X)
-                    .resizable()
-                    .scaledToFit()
-                    .scaleEffect(0.6)
-                    .frame(width: iconSize, height: iconSize)
-                    .background(Circle().foregroundStyle(Color.black))
-                    .overlay {
-                        if links.twitter == nil {
-                            Circle().foregroundStyle(Color.gray.opacity(0.7))
+        VStack {
+            Text("- SNS -")
+                .tracking(2)
+                .foregroundStyle(.customWhite)
+            HStack(spacing: 30) {
+                Button {
+                    vm.openURL(links.twitter)
+                } label: {
+                    Image(Constants.Images.logo_X)
+                        .resizable()
+                        .scaledToFit()
+                        .scaleEffect(0.6)
+                        .frame(width: iconSize, height: iconSize)
+                        .background(Circle().foregroundStyle(Color.black))
+                        .overlay {
+                            if links.twitter == nil {
+                                Circle().foregroundStyle(Color.gray.opacity(0.7))
+                            }
                         }
-                    }
-            }
-            .disabled(links.twitter == nil)
-            Button {
-                vm.openURL(links.instagram)
-            } label: {
-                Image(Constants.Images.logo_Instagram)
-                    .resizable()
-                    .scaledToFit()
-                    .scaleEffect(0.6)
-                    .frame(width: iconSize, height: iconSize)
-                    .background(Circle().foregroundStyle(Color.white))
-                    .overlay {
-                        if links.instagram == nil {
-                            Circle().foregroundStyle(Color.gray.opacity(0.7))
+                }
+                .disabled(links.twitter == nil)
+                Button {
+                    vm.openURL(links.instagram)
+                } label: {
+                    Image(Constants.Images.logo_Instagram)
+                        .resizable()
+                        .scaledToFit()
+                        .scaleEffect(0.6)
+                        .frame(width: iconSize, height: iconSize)
+                        .background(Circle().foregroundStyle(Color.white))
+                        .overlay {
+                            if links.instagram == nil {
+                                Circle().foregroundStyle(Color.gray.opacity(0.7))
+                            }
                         }
-                    }
-            }
-            .disabled(links.instagram == nil)
-            Button {
-                vm.openURL(links.facebook)
-            } label: {
-                Image(Constants.Images.logo_Facebook)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: iconSize, height: iconSize)
-                    .overlay {
-                        if links.facebook == nil {
-                            Circle().foregroundStyle(Color.gray.opacity(0.7))
+                }
+                .disabled(links.instagram == nil)
+                Button {
+                    vm.openURL(links.facebook)
+                } label: {
+                    Image(Constants.Images.logo_Facebook)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: iconSize, height: iconSize)
+                        .overlay {
+                            if links.facebook == nil {
+                                Circle().foregroundStyle(Color.gray.opacity(0.7))
+                            }
                         }
-                    }
+                }
+                .disabled(links.facebook == nil)
             }
-            .disabled(links.facebook == nil)
-        }
-        .padding()
-        .background {
-            RoundedRectangle(cornerRadius: 24).foregroundStyle(.gray.opacity(0.3))
+            .padding()
+            .background {
+                RoundedRectangle(cornerRadius: 24).foregroundStyle(.gray.opacity(0.3))
+            }
         }
     }
 }
@@ -504,7 +509,7 @@ extension RecruitmentDetailView {
             // 募集内容を編集する
             NavigationLink(destination: CreateRecruitmentView(editData: recruitment)) {
                 HStack {
-                    Text(Constants.Strings.editRecruitmentButtonText)
+                    Text(l10n.editRecruitmentButtonText)
                     Image(systemName: Constants.Symbols.square_and_pencil)
                 }
                 .fontWeight(.bold)
@@ -520,7 +525,7 @@ extension RecruitmentDetailView {
                     withAnimation { favorite.toggle() }
                 } label: {
                     HStack {
-                        Text(Constants.Strings.favorite)
+                        Text(l10n.favorite)
                         Image(systemName: favorite ? Constants.Symbols.heart_fill : Constants.Symbols.heart)
                     }
                     .opacity(favorite ? 1 : 0.7)
@@ -536,7 +541,7 @@ extension RecruitmentDetailView {
                 // メッセージを送る
                 NavigationLink(destination: MessageView()) {
                     HStack {
-                        Text(Constants.Strings.sendMessageButtonText)
+                        Text(l10n.sendMessageButtonText)
                         Image(systemName: Constants.Symbols.bubble_left_fill)
                     }
                     .fontWeight(.bold)

@@ -256,11 +256,14 @@ extension CreateRecruitmentView {
     @ViewBuilder
     private func wantedPartsSelectionForm(title: String, parts: [Part]) -> some View {
         let iconSize: CGFloat = 120
+        var isWantedParts: [Part] {
+            parts.filter { $0.isWanted == true }
+        }
 
         VStack(alignment: .leading) {
             HStack {
                 CustomText("\(l10n.wantedPartsTitle)：", .customTextColorWhite).font(.headline)
-                Button("選択") {
+                Button(l10n.partSelectButtonText) {
                     vm.isShowSelectPartSheet.toggle()
                 }
                 .buttonStyle(.borderedProminent)
@@ -269,44 +272,30 @@ extension CreateRecruitmentView {
 
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 20) {
-                    if parts.contains(where: { $0.isWanted == true }) {
-                        ForEach(parts) { part in
-                            if part.isWanted {
-                                VStack(spacing: 10) {
-                                    // TODO: 性別指定なしの場合は、currentUserの性別を使う
-                                    Image(part.iconName)
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: iconSize, height: iconSize)
-                                        .shadow(radius: 3)
-                                    HStack(spacing: 0) {
-                                        Text(part.instrument.text)
+                    if isWantedParts.isEmpty {
+                        EmptyPartView(l10n.emptyPart,
+                                      symbolName: Constants.Symbols.questionmark,
+                                      iconSize: iconSize
+                        )
+                    } else {
+                        ForEach(isWantedParts) { part in
+                            VStack(spacing: 10) {
+                                Image(part.iconName)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: iconSize, height: iconSize)
+                                    .shadow(radius: 3)
+                                HStack(spacing: 0) {
+                                    Text(part.instrument.text)
+                                        .font(.caption)
+                                        .foregroundStyle(Color.gray)
+                                    if part.gender != Gender.unknown {
+                                        Text("(\(part.gender.text))")
                                             .font(.caption)
                                             .foregroundStyle(Color.gray)
-                                        if part.gender != Gender.unknown {
-                                            Text("(\(part.gender.text))")
-                                                .font(.caption)
-                                                .foregroundStyle(Color.gray)
-                                        }
                                     }
                                 }
                             }
-                        }
-                    } else {
-                        // TODO: 募集パートなしの場合のアイコン
-                        VStack(spacing: 10) {
-                            RoundedRectangle(cornerRadius: 6)
-                                .frame(width: iconSize, height: iconSize)
-                                .foregroundStyle(.white.gradient)
-                                .shadow(radius: 3)
-                                .overlay {
-                                    Image(systemName: Constants.Symbols.questionmark)
-                                        .font(.title)
-                                        .foregroundStyle(.gray)
-                                }
-                            Text("未選択")
-                                .font(.caption)
-                                .foregroundStyle(Color.gray)
                         }
                     }
                 }
@@ -327,7 +316,10 @@ extension CreateRecruitmentView {
 // 写真選択ビュー
 extension CreateRecruitmentView {
     @ViewBuilder
-    private func selectImagesFormField(title: String, images: [ImageData], selection selectionImagesData: [UIImage]) -> some View {
+    private func selectImagesFormField(title: String,
+                                       images: [ImageData],
+                                       selection selectionImagesData: [UIImage]
+    ) -> some View {
         VStack(alignment: .leading) {
             CustomText("▫️\(title)", .customTextColorWhite)
                 .font(.headline)

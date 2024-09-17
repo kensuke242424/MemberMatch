@@ -24,12 +24,13 @@
 "policy_title" = "活動目的";
 "photo_title" = "写真";
 "frequency_title" = "活動頻度";
-"location_title" = "活動拠点";
+"location_title" = "主な活動場所";
 "youtube_title" = "YouTube";
 "twitter_title" = "X(Twitter)";
 "instagram_title" = "Instagram";
 "facebook_title" = "Facebook";
 "additional_info_title" = "その他/備考";
+"part_select_button_text" = "選択";
 "send_message_button_text" = "メッセージを送る";
 "edit_recruitment_button_text" = "募集内容を編集する";
 "draft_button_text" = "下書き";
@@ -59,6 +60,7 @@
 // Empty
 "empty_name" = "名無し";
 "empty_title" = "タイトルなし";
+"empty_part" = "指定なし";
 "empty_description" = "記載なし";
 "empty_policy" = "特になし";
 
@@ -92,11 +94,11 @@
 "instrument_synthesizer" = "シンセサイザー";
 
 // MusicGenre
-"music_genre_rock" = "ロック";
-"music_genre_pop" = "ポップ";
-"music_genre_jazz" = "ジャズ";
+"music_genre_rock" = "ROCK";
+"music_genre_pop" = "POP";
+"music_genre_jazz" = "Jazz";
 "music_genre_classical" = "クラシック";
-"music_genre_hipHop" = "ヒップホップ";
+"music_genre_hipHop" = "HIP-HOP";
 "music_genre_country" = "カントリー";
 "music_genre_electronic" = "エレクトロニック";
 "music_genre_reggae" = "レゲエ";
