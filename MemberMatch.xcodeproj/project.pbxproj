@@ -13,6 +13,7 @@
 		BE00ED822C38BB6A00572B98 /* HideKeyboardToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE00ED812C38BB6A00572B98 /* HideKeyboardToolbarButton.swift */; };
 		BE00ED842C38D58B00572B98 /* ImageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE00ED832C38D58B00572B98 /* ImageData.swift */; };
 		BE5179A62C99A29300BFF9AD /* EmptyPartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5179A52C99A29300BFF9AD /* EmptyPartView.swift */; };
+		BE5179A82C99B1FE00BFF9AD /* InputFieldValidater.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5179A72C99B1FE00BFF9AD /* InputFieldValidater.swift */; };
 		BE71DBFB2C1538C30026F588 /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71DBFA2C1538C30026F588 /* Gender.swift */; };
 		BE71DBFD2C153B770026F588 /* Part.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71DBFC2C153B770026F588 /* Part.swift */; };
 		BE71DBFF2C1D3F070026F588 /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71DBFE2C1D3F070026F588 /* Mocks.swift */; };
@@ -77,6 +78,7 @@
 		BE00ED812C38BB6A00572B98 /* HideKeyboardToolbarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyboardToolbarButton.swift; sourceTree = "<group>"; };
 		BE00ED832C38D58B00572B98 /* ImageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageData.swift; sourceTree = "<group>"; };
 		BE5179A52C99A29300BFF9AD /* EmptyPartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyPartView.swift; sourceTree = "<group>"; };
+		BE5179A72C99B1FE00BFF9AD /* InputFieldValidater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFieldValidater.swift; sourceTree = "<group>"; };
 		BE71DBFA2C1538C30026F588 /* Gender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
 		BE71DBFC2C153B770026F588 /* Part.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Part.swift; sourceTree = "<group>"; };
 		BE71DBFE2C1D3F070026F588 /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 			children = (
 				BE71DC0C2C1D576E0026F588 /* Util.swift */,
 				BEC24F602C3E00DA00524CAF /* ScreenUtil.swift */,
+				BE5179A72C99B1FE00BFF9AD /* InputFieldValidater.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -611,6 +614,7 @@
 				BE00ED7A2C32D83800572B98 /* CreateRecruitmentView.swift in Sources */,
 				BE5179A62C99A29300BFF9AD /* EmptyPartView.swift in Sources */,
 				BED4B24C2BF3C17A00C49EB5 /* MusicGenre.swift in Sources */,
+				BE5179A82C99B1FE00BFF9AD /* InputFieldValidater.swift in Sources */,
 				BEFAE4F52BDE768F00CADC73 /* TabsViewModel.swift in Sources */,
 				BEE55DE32BFA293500299883 /* RecruitmentDetailViewModel.swift in Sources */,
 				BE71DBFD2C153B770026F588 /* Part.swift in Sources */,
