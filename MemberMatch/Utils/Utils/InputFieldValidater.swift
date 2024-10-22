@@ -19,8 +19,19 @@ enum ValidateStatus {
 
 /// 受け取った入力値のバリデーションチェックを行うクラス。
 class InputFieldValidator {
-    // 募集内容テキストのバリデーション
-    static func validateDescription(_ text: String) {
 
+    // メールアドレス
+    static func validateEmail(_ email: String) -> ValidateStatus {
+        return ValidateStatus.valid
+    }
+
+    // パスワード
+    static func validatePassword(_ password: String) -> ValidateStatus {
+        return ValidateStatus.valid
+    }
+
+    // 募集内容テキストのバリデーション
+    static func validateDescription(_ text: String) -> ValidateStatus {
+        return ValidateStatus.valid
     }
 }
