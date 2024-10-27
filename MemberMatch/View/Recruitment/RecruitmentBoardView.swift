@@ -27,7 +27,7 @@ struct RecruitmentBoardView: View {
             HStack {
                 ForEach(Browse.allCases, id: \.self) { browse in
                     Text(browse.title)
-                        .fontWeight(.bold)
+                        .font(.subheadline)
                         .opacity(browsing == browse ? 1 : 0.4)
                         .frame(maxWidth: .infinity)
                         .overlay(alignment: .bottom) {
@@ -41,20 +41,20 @@ struct RecruitmentBoardView: View {
                                     withAnimation(.spring(duration: 0.4)) { browsing = browse }
                                 }
                         }
-                    if browse != .group {
+                    if browse != .myself {
                         Text("｜").opacity(0.3)
                     }
                 }
             }
-            .padding(.vertical, 10)
+            .padding(.vertical, 5)
             .padding(.horizontal)
             .background(BlurView(style: .systemUltraThinMaterial))
 
             TabView(selection: $browsing) {
                 Group {
                     browseContentAll().tag(Browse.all)
-                    browseContentSingle().tag(Browse.single)
-                    browseContentGroup().tag(Browse.group)
+                    browseContentSingle().tag(Browse.favorite)
+                    browseContentGroup().tag(Browse.myself)
                 }
                 .gradientBackground()
             }
@@ -94,8 +94,8 @@ extension RecruitmentBoardView {
             Spacer().frame(height: 20) // スクロール下部の余白
         }
         .offsetRect { rect in
-            if browsing == .single {
-                browsingOffset = rect.minX - rect.width * CGFloat(Browse.single.index)
+            if browsing == .favorite {
+                browsingOffset = rect.minX - rect.width * CGFloat(Browse.favorite.index)
             }
         }
     }
@@ -111,8 +111,8 @@ extension RecruitmentBoardView {
             Spacer().frame(height: 20) // スクロール下部の余白
         }
         .offsetRect { rect in
-            if browsing == .group {
-                browsingOffset = rect.minX - rect.width * CGFloat(Browse.group.index)
+            if browsing == .myself {
+                browsingOffset = rect.minX - rect.width * CGFloat(Browse.myself.index)
             }
         }
     }

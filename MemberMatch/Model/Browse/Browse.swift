@@ -6,21 +6,21 @@
 //
 
 enum Browse: CaseIterable {
-    case all, single, group
+    case all, favorite, myself
 
     var index: Int {
         switch self {
         case .all: 0
-        case .single: 1
-        case .group: 2
+        case .favorite: 1
+        case .myself: 2
         }
     }
 
     var title: String {
         switch self {
         case .all: "全て"
-        case .single: "個人"
-        case .group: "グループ"
+        case .favorite: "気になる"
+        case .myself: "自分の投稿"
         }
     }
 }

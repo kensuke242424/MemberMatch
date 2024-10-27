@@ -9,6 +9,7 @@ import Foundation
 
 /// 入力値のバリデーションチェックステータス。
 enum ValidateStatus {
+    case initial            // 初期状態
     case success            // バリデーション成功
     case exceedMaxLength    // 入力文字数超過
     case doesNotMeetCriteria // 入力要件を満たしていない

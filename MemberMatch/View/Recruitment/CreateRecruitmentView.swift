@@ -220,7 +220,7 @@ extension CreateRecruitmentView {
                                     title: l10n.youtubeTitle,
                                     text: $vm.inputYoutubeURL
             )
-            if !url.wrappedValue.isEmpty {
+            if InputFieldValidator.validateYouTubeURL(url.wrappedValue) == .success {
                 // TODO: 入力されたurlが有効だった場合、リンク先の動画を表示
                 RoundedRectangle(cornerRadius: 10)
                     .foregroundStyle(.customAccentYellow)
