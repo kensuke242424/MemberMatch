@@ -28,6 +28,7 @@ struct RecruitmentBoardView: View {
                 ForEach(Browse.allCases, id: \.self) { browse in
                     Text(browse.title)
                         .font(.subheadline)
+                        .tracking(2)
                         .opacity(browsing == browse ? 1 : 0.4)
                         .frame(maxWidth: .infinity)
                         .overlay(alignment: .bottom) {
@@ -144,8 +145,8 @@ extension RecruitmentBoardView {
                     Image(systemName: "heart.fill").foregroundStyle(.red)
                     CustomText("50", .gray).font(.caption).fontWeight(.bold)
                     Spacer().frame(width: 20)
-                    CustomText("残り期日：", .gray).font(.caption).fontWeight(.bold)
-                    CustomText("7日", .gray).font(.caption).fontWeight(.bold)
+                    Text("投稿日：").foregroundStyle(.gray).font(.caption).fontWeight(.bold)
+                    Text(recruitment.postedDate.format()).foregroundStyle(.gray).font(.caption).fontWeight(.bold)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
