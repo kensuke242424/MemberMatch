@@ -30,6 +30,10 @@ enum NotificationPagePath: Hashable {
     case home
 }
 
+enum SystemSettingPagePath: Hashable {
+    case home
+}
+
 class Router: ObservableObject {
     static let shared = Router()
 
@@ -40,6 +44,7 @@ class Router: ObservableObject {
     @Published var messagePagePath: [MessagePagePath] = []
     @Published var notificationPagePath: [NotificationPagePath] = []
     @Published var profilePagePath: [ProfilePagePath] = []
+    @Published var systemSettingPagePath: [SystemSettingPagePath] = []
 
     func push(_ path: [RecruitmentPagePath]) {
         recruitmentPagePath.append(contentsOf: path)
@@ -56,6 +61,9 @@ class Router: ObservableObject {
     func push(_ path: [ProfilePagePath]) {
         profilePagePath.append(contentsOf: path)
     }
+    func push(_ path: [SystemSettingPagePath]) {
+        systemSettingPagePath.append(contentsOf: path)
+    }
 
     func popRecruitmentPage() {
         recruitmentPagePath.removeLast()
@@ -71,5 +79,8 @@ class Router: ObservableObject {
     }
     func popProfilePage() {
         profilePagePath.removeLast()
+    }
+    func popSystemSettingPage() {
+        systemSettingPagePath.removeLast()
     }
 }
