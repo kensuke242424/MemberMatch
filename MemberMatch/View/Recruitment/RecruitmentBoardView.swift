@@ -47,7 +47,7 @@ struct RecruitmentBoardView: View {
                     }
                 }
             }
-            .padding(.vertical, 5)
+            .padding(.vertical, 10)
             .padding(.horizontal)
             .background(BlurView(style: .systemUltraThinMaterial))
 
