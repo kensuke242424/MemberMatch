@@ -10,6 +10,7 @@ import SwiftUI
 struct Constants {
     // ツールバー
     static let toolBarItemSize: CGFloat = 30
+    static let ytVideoHeight: CGFloat = 190
 
     static let musicGenreTexts = MusicGenre.allCases.map { $0.text }
 }
@@ -25,6 +26,7 @@ extension Constants {
         static let publicDeadline = String(localized: "public_deadline")
         static let publicDeadlineDesc1 = String(localized: "public_deadline_desc1")
         static let publicDeadlineDesc2 = String(localized: "public_deadline_desc2")
+        static let postedDayTitle = String(localized: "posted_day_title")
         static let musicGenreTitle = String(localized: "music_genre_title")
         static let recruitmentTitleTitle = String(localized: "recruitment_title_title")
         static let recruitmentDescTitle = String(localized: "recruitment_desc_title")
@@ -45,6 +47,10 @@ extension Constants {
         static let createRecruitmentToolbarButtonText = String(localized: "create_recruitment_toolbar_button_text")
         static let editRecruitmentToolbarButtonText = String(localized: "edit_recruitment_toolbar_button_text")
         static let profileText = String(localized: "profile")
+        static let isEmptyVideoUrlText = String(localized: "is_empty_video_url_text")
+        static let isFailedVideoUrlText = String(localized: "is_failed_video_url_text")
+        static let isLoadingVideoText = String(localized: "is_loading_video_text")
+        static let isFailedLoadVideoText = String(localized: "is_failed_load_video_text")
 
         // 募集パート選択ページ
         static let selectWantedPartPageTitle = String(localized: "select_wanted_part_page_title")
@@ -157,6 +163,8 @@ extension Constants {
         static let checkmark: String = "checkmark"
         static let xmark: String = "xmark"
         static let questionmark: String = "questionmark"
+        static let play_fill: String = "play.fill"
+        static let play_slash_fill: String = "play.slash.fill"
     }
 }
 

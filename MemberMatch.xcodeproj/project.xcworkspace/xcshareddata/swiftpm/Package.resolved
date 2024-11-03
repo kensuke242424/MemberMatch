@@ -116,6 +116,15 @@
         "revision" : "9234124cff5e22e178988c18d8b95a8ae8007f76",
         "version" : "5.1.2"
       }
+    },
+    {
+      "identity" : "youtubekit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dcas796/YouTubeKit.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "be459b65468d447f9312ecc41e5da4d8f5caa14f"
+      }
     }
   ],
   "version" : 2

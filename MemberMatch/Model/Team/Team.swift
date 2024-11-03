@@ -26,9 +26,9 @@ struct Team: Identifiable, Codable, Hashable {
     var members: [User]?
     var bio: String?
     var contactEmail: String?
-    var websiteURL: URL?
-    var logoURL: URL?
-    var youtubeVideoURL: [URL]?
+    var websiteURL: String?
+    var logoURL: String?
+    var youtubeVideoURL: [String]?
     var socialMediaLinks: SocialMediaLinks
 
     init(
@@ -40,11 +40,11 @@ struct Team: Identifiable, Codable, Hashable {
         members: [User]?,
         bio: String?,
         contactEmail: String?,
-        websiteURL: URL?,
-        logoURL: URL?,
-        twitterAccount: URL?,
-        instagramAccount: URL?,
-        youtubeVideoURL: [URL]?,
+        websiteURL: String?,
+        logoURL: String?,
+        twitterAccount: String?,
+        instagramAccount: String?,
+        youtubeVideoURL: [String]?,
         socialMediaLinks: SocialMediaLinks
     ) {
         self.id = id
@@ -72,16 +72,16 @@ let mockTeam = Team(
     members: [mockUser],
     bio: "「Echoes of the Future」はエレクトロニック・ロックを融合させたバンドで、彼らのエネルギッシュなパフォーマンスと深い歌詞で知られています。",
     contactEmail: "contact@echoesfuture.com",
-    websiteURL: URL(string: "https://www.echoesfuture.com"),
-    logoURL: URL(string: "https://www.echoesfuture.com/logo.png"),
-    twitterAccount: URL(string: "https://twitter.com/echoesfuture"),
-    instagramAccount: URL(string: "https://instagram.com/echoesfuture"),
+    websiteURL: "https://www.echoesfuture.com",
+    logoURL: "https://www.echoesfuture.com/logo.png",
+    twitterAccount: "https://twitter.com/echoesfuture",
+    instagramAccount: "https://instagram.com/echoesfuture",
     youtubeVideoURL: [
-        URL(string: "https://www.youtube.com/watch?v=dQw4w9WgXcQ")!
+        "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     ],
     socialMediaLinks: SocialMediaLinks(
-        twitter: URL(string: "https://twitter.com/echoesfuture"),
-        instagram: URL(string: "https://instagram.com/echoesfuture"),
+        twitter: "https://twitter.com/echoesfuture",
+        instagram: "https://instagram.com/echoesfuture",
         facebook: nil
     )
 )

@@ -89,8 +89,8 @@ let mockUser = User(
     profileImageURL: URL(string: "https://example.com/images/john.jpg"),
     bio: "ギターと歌をこよなく愛するミュージシャン。ロックとジャズの融合に情熱を注いでいます。",
     socialMediaLinks: SocialMediaLinks(
-        twitter: URL(string: "https://twitter.com/echoesfuture"),
-        instagram: URL(string: "https://instagram.com/echoesfuture"),
+        twitter: "https://twitter.com/echoesfuture",
+        instagram: "https://instagram.com/echoesfuture",
         facebook: nil
     )
 )
@@ -108,8 +108,8 @@ let mockUser2 = User(
     profileImageURL: URL(string: "https://example.com/images/kenta.jpg"),
     bio: "ポップとファンクが大好きな初心者ミュージシャン。楽しく音楽を演奏することを大切にしています。",
     socialMediaLinks: SocialMediaLinks(
-        twitter: URL(string: "https://twitter.com/music_kenta"),
-        instagram: URL(string: "https://instagram.com/music_kenta"),
-        facebook: URL(string: "https://facebook.com/music.kenta")
+        twitter: "https://twitter.com/music_kenta",
+        instagram: "https://instagram.com/music_kenta",
+        facebook: "https://facebook.com/music.kenta"
     )
 )

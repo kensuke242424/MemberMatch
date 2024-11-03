@@ -16,6 +16,9 @@
 		BE5179A82C99B1FE00BFF9AD /* InputFieldValidater.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5179A72C99B1FE00BFF9AD /* InputFieldValidater.swift */; };
 		BE5179AB2CCE81F300BFF9AD /* SystemSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5179AA2CCE81F300BFF9AD /* SystemSettingView.swift */; };
 		BE5179AD2CCE8FA000BFF9AD /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5179AC2CCE8FA000BFF9AD /* DateExtension.swift */; };
+		BE5179B02CCFC2B500BFF9AD /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5179AF2CCFC2B500BFF9AD /* Video.swift */; };
+		BE5179B32CCFC64200BFF9AD /* YouTubeKit in Frameworks */ = {isa = PBXBuildFile; productRef = BE5179B22CCFC64200BFF9AD /* YouTubeKit */; };
+		BE5179B52CCFCBC400BFF9AD /* CustomYTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5179B42CCFCBC400BFF9AD /* CustomYTView.swift */; };
 		BE71DBFB2C1538C30026F588 /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71DBFA2C1538C30026F588 /* Gender.swift */; };
 		BE71DBFD2C153B770026F588 /* Part.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71DBFC2C153B770026F588 /* Part.swift */; };
 		BE71DBFF2C1D3F070026F588 /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71DBFE2C1D3F070026F588 /* Mocks.swift */; };
@@ -83,6 +86,8 @@
 		BE5179A72C99B1FE00BFF9AD /* InputFieldValidater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFieldValidater.swift; sourceTree = "<group>"; };
 		BE5179AA2CCE81F300BFF9AD /* SystemSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemSettingView.swift; sourceTree = "<group>"; };
 		BE5179AC2CCE8FA000BFF9AD /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		BE5179AF2CCFC2B500BFF9AD /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
+		BE5179B42CCFCBC400BFF9AD /* CustomYTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomYTView.swift; sourceTree = "<group>"; };
 		BE71DBFA2C1538C30026F588 /* Gender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
 		BE71DBFC2C153B770026F588 /* Part.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Part.swift; sourceTree = "<group>"; };
 		BE71DBFE2C1D3F070026F588 /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
@@ -146,6 +151,7 @@
 			files = (
 				BED4B23C2BF086CF00C49EB5 /* SDWebImageSwiftUI in Frameworks */,
 				BEE55DD62BF65BA000299883 /* ScalingHeaderScrollView in Frameworks */,
+				BE5179B32CCFC64200BFF9AD /* YouTubeKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,6 +196,15 @@
 				BE5179AA2CCE81F300BFF9AD /* SystemSettingView.swift */,
 			);
 			path = SystemSetting;
+			sourceTree = "<group>";
+		};
+		BE5179AE2CCFC29700BFF9AD /* VideoPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				BE5179AF2CCFC2B500BFF9AD /* Video.swift */,
+				BE5179B42CCFCBC400BFF9AD /* CustomYTView.swift */,
+			);
+			path = VideoPlayer;
 			sourceTree = "<group>";
 		};
 		BE71DC002C1D4C4E0026F588 /* Localizables */ = {
@@ -366,6 +381,7 @@
 		BED4B2372BF0868600C49EB5 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				BE5179AE2CCFC29700BFF9AD /* VideoPlayer */,
 				BE5179A42C99A28000BFF9AD /* Empty */,
 				BEC24F5E2C3DFAF500524CAF /* CustomImagePicker */,
 				BED4B2162BEFC90800C49EB5 /* CustomText.swift */,
@@ -545,6 +561,7 @@
 			packageProductDependencies = (
 				BED4B23B2BF086CF00C49EB5 /* SDWebImageSwiftUI */,
 				BEE55DD52BF65BA000299883 /* ScalingHeaderScrollView */,
+				BE5179B22CCFC64200BFF9AD /* YouTubeKit */,
 			);
 			productName = MemberMatch;
 			productReference = BEFAE4DE2BDE73A000CADC73 /* MemberMatch.app */;
@@ -579,6 +596,7 @@
 				BED4B23A2BF086CF00C49EB5 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				BEE55DD42BF65BA000299883 /* XCRemoteSwiftPackageReference "ScalingHeaderScrollView" */,
 				BE8C45862C10ABAD00BF7835 /* XCRemoteSwiftPackageReference "SwiftLint" */,
+				BE5179B12CCFC64200BFF9AD /* XCRemoteSwiftPackageReference "YouTubeKit" */,
 			);
 			productRefGroup = BEFAE4DF2BDE73A000CADC73 /* Products */;
 			projectDirPath = "";
@@ -647,6 +665,7 @@
 				BEE55DDF2BF888BF00299883 /* BottomClipShape.swift in Sources */,
 				BEE3F8712C0AFBD0007D5328 /* Browse.swift in Sources */,
 				BED4B2132BEFC8C700C49EB5 /* ViewExtension.swift in Sources */,
+				BE5179B52CCFCBC400BFF9AD /* CustomYTView.swift in Sources */,
 				BED4B20B2BE999C700C49EB5 /* LoginView.swift in Sources */,
 				BED4B2232BEFD5DA00C49EB5 /* RecruitmentBoardView.swift in Sources */,
 				BED4B2292BEFD5FE00C49EB5 /* ProfileView.swift in Sources */,
@@ -658,6 +677,7 @@
 				BED4B2362BF0788800C49EB5 /* User.swift in Sources */,
 				BED4B2572BF3D74B00C49EB5 /* Prefecture.swift in Sources */,
 				BEC24F632C4D5EA800524CAF /* SelectWantedPartView.swift in Sources */,
+				BE5179B02CCFC2B500BFF9AD /* Video.swift in Sources */,
 				BED4B22F2BF059E100C49EB5 /* Recruitment.swift in Sources */,
 				BEC24F5B2C3DFAA200524CAF /* CustomImagePicker.swift in Sources */,
 				BED4B2272BEFD5F400C49EB5 /* NotificationView.swift in Sources */,
@@ -909,6 +929,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		BE5179B12CCFC64200BFF9AD /* XCRemoteSwiftPackageReference "YouTubeKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dcas796/YouTubeKit.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		BE8C45862C10ABAD00BF7835 /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/SwiftLint";
@@ -944,6 +972,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		BE5179B22CCFC64200BFF9AD /* YouTubeKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BE5179B12CCFC64200BFF9AD /* XCRemoteSwiftPackageReference "YouTubeKit" */;
+			productName = YouTubeKit;
+		};
 		BED4B23B2BF086CF00C49EB5 /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = BED4B23A2BF086CF00C49EB5 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;

@@ -61,8 +61,8 @@ class RecruitmentDetailViewModel: ObservableObject {
         isResetScroll = true
     }
 
-    func openURL(_ url: URL?) {
-        if let url {
+    func openURL(_ urlString: String?) {
+        if let urlString, let url = URL(string: urlString) {
             UIApplication.shared.open(url)
         }
     }

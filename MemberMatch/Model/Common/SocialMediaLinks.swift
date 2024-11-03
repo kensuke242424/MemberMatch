@@ -8,7 +8,7 @@
 import Foundation
 
 struct SocialMediaLinks: Codable, Equatable, Hashable {
-    var twitter: URL?
-    var instagram: URL?
-    var facebook: URL?
+    var twitter: String?
+    var instagram: String?
+    var facebook: String?
 }

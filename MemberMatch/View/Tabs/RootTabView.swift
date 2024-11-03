@@ -65,7 +65,7 @@ struct RootTabView: View {
             .tabItem { Label("プロフ", systemImage: "person.crop.rectangle") }
             .tag(3)
 
-            NavigationStack(path: $router.profilePagePath) {
+            NavigationStack(path: $router.systemSettingPagePath) {
                 SystemSettingView()
                     .navigationDestination(for: SystemSettingPagePath.self) { path in
                         switch path {

@@ -29,7 +29,7 @@ struct Recruitment: Identifiable, Hashable {
     var wantedParts: [Part]
     var rehearsalLocation: String?
     var additionalInfo: String?
-    var youtubeVideoURL: [URL]?  // YouTube動画のURL
+    var youtubeVideoURL: [String]?  // YouTube動画のURL
 
     init(
         id: String = UUID().uuidString,
@@ -45,7 +45,7 @@ struct Recruitment: Identifiable, Hashable {
         wantedParts: [Part] = Part.getAllContent(),
         rehearsalLocation: String,
         additionalInfo: String? = nil,
-        youtubeVideoURL: [URL]? = nil
+        youtubeVideoURL: [String]? = nil
     ) {
         self.id = id
         self.postedDate = postedDate
@@ -82,7 +82,8 @@ let exampleRecruitments = [
 """,
         policy: .hobby,
         genre: [MusicGenre.pop],
-        rehearsalLocation: "新宿スタジオ"
+        rehearsalLocation: "新宿スタジオ",
+        youtubeVideoURL: ["https://www.youtube.com/watch?v=42G-xzIlr6M"]
     ),
     Recruitment(
         id: UUID().uuidString,
@@ -99,7 +100,8 @@ let exampleRecruitments = [
         policy: Policy.professional,
         frequency: "週１回",
         genre: [MusicGenre.pop],
-        rehearsalLocation: "新宿スタジオ"
+        rehearsalLocation: "新宿スタジオ",
+        youtubeVideoURL: ["https://www.youtube.com/watch?v=NcwGg44KboU"]
     ),
     Recruitment(
         id: UUID().uuidString,

@@ -74,6 +74,20 @@ struct RecruitmentDetailView: View {
                 }
             }, content: {
                 VStack(spacing: 30) {
+                    VStack {
+                        Divider().frame(height: 1).background(.white.opacity(0.3)).padding(.horizontal, 20)
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack {
+                                ForEach(0..<4) { _ in
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .frame(width: 150, height: 110)
+                                        .foregroundStyle(.customAccentYellow.gradient)
+                                }
+                            }
+                            .padding(.vertical, 5)
+                        }
+                        Divider().frame(height: 1).background(.white.opacity(0.3)).padding(.horizontal, 20)
+                    }
                     musicGenreDetail(recruitment.genre)
                     wantedPartsDetail(recruitment.wantedParts)
                     recruitmentDetail(recruitment.description)
@@ -149,7 +163,7 @@ extension RecruitmentDetailView {
                         .multilineTextAlignment(.leading)
                         .font(.caption)
                         CustomText(recruitment.description ?? "入力なし", .gray)
-                            .lineLimit(!vm.isScrolledMidPoint || vm.isFullOpenCard ? 4 : 2)
+                            .lineLimit(!vm.isScrolledMidPoint || vm.isFullOpenCard ? nil : 2)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .multilineTextAlignment(.leading)
                             .font(.caption)
@@ -181,32 +195,12 @@ extension RecruitmentDetailView {
                         .onTapGesture { withAnimation { favorite.toggle() } }
                     CustomText(String(recruitment.favorite), .gray).font(.caption).fontWeight(.bold)
                     Spacer().frame(width: 20)
-                    CustomText("\(l10n.publicDeadline):", .gray).font(.caption).fontWeight(.bold)
-                    HStack(spacing: 5) {
-                        CustomText(l10n.publicDeadlineDesc1, .gray).font(.caption).fontWeight(.bold)
-                        CustomText(String(Util.daysUntilDeadline(from: recruitment.postedDate)), .gray)
-                            .font(.caption).fontWeight(.bold)
-                        CustomText(l10n.publicDeadlineDesc2, .gray).font(.caption).fontWeight(.bold)
-                    }
+                    CustomText("\(l10n.postedDayTitle):", .gray).font(.caption).fontWeight(.bold)
+                    Text(recruitment.postedDate.format())
+                        .foregroundStyle(.gray)
+                        .font(.caption).fontWeight(.bold)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-                if !vm.isScrolledStartPoint || vm.isFullOpenCard {
-                    VStack {
-                        Divider().frame(height: 0.2).background(.black.opacity(0.1)).padding(.horizontal, 30)
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack {
-                                ForEach(0..<4) { _ in
-                                    RoundedRectangle(cornerRadius: 20)
-                                        .frame(width: 150, height: 100)
-                                        .foregroundStyle(.customAccentYellow.gradient)
-                                }
-                            }
-                            .padding(.vertical, 5)
-                        }
-                        Divider().frame(height: 0.2).background(.black.opacity(0.1)).padding(.horizontal, 30)
-                    }
-                    .padding(.top)
-                }
             }
             .padding(.horizontal)
             .padding(.vertical, 14)
@@ -424,14 +418,9 @@ extension RecruitmentDetailView {
 // Youtube動画
 extension RecruitmentDetailView {
     @ViewBuilder
-    private func youtubeVideoDetail(_ videoURL: [URL]?) -> some View {
-        VStack(alignment: .leading) {
-            RoundedRectangle(cornerRadius: 10)
-                .foregroundStyle(.white)
-                .frame(maxWidth: .infinity)
-                .frame(height: 220)
-                .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
-                .overlay { Text("YouTube") }
+    private func youtubeVideoDetail(_ videoURL: [String]?) -> some View {
+        if let videoURL, let urlString = videoURL.first {
+            CustomYTView(urlString: urlString)
         }
     }
 }

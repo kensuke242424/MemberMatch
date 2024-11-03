@@ -26,7 +26,7 @@ struct TabTopBarView<LeftItems: View, RightItems: View>: View {
     }
 
     let iconSize: CGFloat = 30
-    let toolBarHeight: CGFloat = 80
+    let toolBarHeight: CGFloat = 100
 
     var body: some View {
         HStack {

@@ -40,6 +40,10 @@ class CreateRecruitmentViewModel: ObservableObject {
         self.inputImages = editData.images ?? []
         self.inputRehearsalLocation = editData.rehearsalLocation ?? ""
         self.inputAdditionalInfo = editData.additionalInfo ?? ""
+        self.inputYoutubeURL = editData.youtubeVideoURL?.first ?? ""
+        self.inputTwitterURL = editData.author.socialMediaLinks.twitter ?? ""
+        self.inputInstagramURL = editData.author.socialMediaLinks.instagram ?? ""
+        self.inputFacebookURL = editData.author.socialMediaLinks.facebook ?? ""
     }
 
     func createRecruitment() {

@@ -17,6 +17,7 @@
 "public_deadline" = "公開期限";
 "public_deadline_desc1" = "あと";
 "public_deadline_desc2" = "日";
+"posted_day_title" = "投稿日";
 "recruitment_title_title" = "募集タイトル";
 "music_genre_title" = "ジャンル";
 "wanted_parts_title" = "募集パート";
@@ -37,6 +38,10 @@
 "create_recruitment_toolbar_button_text" = "作成";
 "edit_recruitment_toolbar_button_text" = "更新";
 "profile" = "Profile";
+"is_empty_video_url_text" = "ここに動画が表示されます";
+"is_failed_video_url_text" = "無効なURLです";
+"is_failed_load_video_text" = "動画の取得に失敗しました";
+"is_loading_video_text" = "読み込み中...";
 
 // 募集パート選択ページ
 "select_wanted_part_page_title" = "募集パートの選択";
