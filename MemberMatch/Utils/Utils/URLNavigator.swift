@@ -17,4 +17,13 @@ class URLNavigator {
         }
         UIApplication.shared.open(url)
     }
+
+    static func isExternalLink(urlString: String) -> Bool {
+        // URLかどうかをチェック
+        guard let url = URL(string: urlString), url.scheme != nil, url.host != nil else {
+            return false
+        }
+
+        return true
+    }
 }

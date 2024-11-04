@@ -173,6 +173,7 @@ extension Constants {
         static let play_slash_fill: String = "play.slash.fill"
         static let checkmark_seal_fill: String = "checkmark.seal.fill"
         static let xmark_seal_fill: String = "xmark.seal.fill"
+        static let link_circle_fill: String = "link.circle.fill"
     }
 }
 

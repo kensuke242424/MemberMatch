@@ -188,6 +188,15 @@ extension CreateRecruitmentView {
                         .font(.caption)
                         .foregroundStyle(.red)
                 }
+
+                if validate == .success && URLNavigator.isExternalLink(urlString: text.wrappedValue) {
+                    Button {
+                        URLNavigator.openURL(text.wrappedValue)
+                    } label: {
+                        Image(systemName: Constants.Symbols.link_circle_fill)
+                            .foregroundStyle(.customAccentYellow)
+                    }
+                }
             }
 
             TextField("", text: text)
