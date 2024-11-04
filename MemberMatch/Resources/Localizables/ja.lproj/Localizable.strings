@@ -59,6 +59,12 @@
 "placeHolder_facebook_url" = "Facebookのリンクをここに入力";
 "place_holder_additional_info" = "その他の情報を入力";
 
+// バリデーション
+"exceed_max_length" = "文字数が超過しています";
+"does_not_meet_criteria" = "入力要件を満たしていません";
+"empty_field" = "入力が空です";
+"invalid_format" = "フォーマットが正しくありません";
+
 // ViewParts
 "hide_keyboard_tool_bar_button_text" = "閉じる";
 

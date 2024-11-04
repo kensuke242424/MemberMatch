@@ -15,6 +15,23 @@ enum ValidateStatus {
     case doesNotMeetCriteria // 入力要件を満たしていない
     case emptyField         // 必須フィールドが空
     case invalidFormat      // フォーマットが無効 (例: メールアドレスのフォーマットが不正)
+
+    var description: String {
+        switch self {
+        case .initial:
+            ""
+        case .success:
+            ""
+        case .exceedMaxLength:
+            Constants.Strings.exceedMaxLength
+        case .doesNotMeetCriteria:
+            Constants.Strings.doesNotMeetCriteria
+        case .emptyField:
+            Constants.Strings.emptyField
+        case .invalidFormat:
+            Constants.Strings.invalidFormat
+        }
+    }
 }
 
 /// 受け取った入力値のバリデーションチェックを行うクラス。
@@ -80,17 +97,58 @@ class InputFieldValidator {
         return .success
     }
 
-    // 募集内容テキストのバリデーション
+    // ✏️　----- 募集作成時の入力値チェック ------ ✏️
+
+    static func validateTitle(_ text: String) -> ValidateStatus {
+        let maxLength = 60
+        if text.count > maxLength {
+            return .exceedMaxLength
+        }
+
+        return .success
+    }
+
     static func validateDescription(_ text: String) -> ValidateStatus {
-        return ValidateStatus.success
+        let maxLength = 400
+        if text.count > maxLength {
+            return .exceedMaxLength
+        }
+
+        return .success
+    }
+
+    static func validateFrequency(_ text: String) -> ValidateStatus {
+        let maxLength = 80
+        if text.count > maxLength {
+            return .exceedMaxLength
+        }
+
+        return .success
+    }
+
+    static func validateRehearsalLocation(_ text: String) -> ValidateStatus {
+        let maxLength = 80
+        if text.count > maxLength {
+            return .exceedMaxLength
+        }
+
+        return .success
+    }
+
+    static func validateAdditionalInfo(_ text: String) -> ValidateStatus {
+        let maxLength = 200
+        if text.count > maxLength {
+            return .exceedMaxLength
+        }
+
+        return .success
     }
 
     static func validateTwitterURL(_ urlString: String) -> ValidateStatus {
         // フィールドが空かどうかをチェック
         if urlString.isEmpty {
-            return .emptyField
+            return .success
         }
-
         // 最大文字数をチェック（例：Twitter URL の長さの制限に応じて調整可能）
         let maxLength = 100
         if urlString.count > maxLength {
@@ -122,9 +180,8 @@ class InputFieldValidator {
     static func validateInstagramURL(_ urlString: String) -> ValidateStatus {
         // フィールドが空かどうかをチェック
         if urlString.isEmpty {
-            return .emptyField
+            return .success
         }
-
         // 最大文字数をチェック（例：Instagram URL の長さの制限に応じて調整可能）
         let maxLength = 100 // 必要に応じて maxLength を変更
         if urlString.count > maxLength {
@@ -157,9 +214,8 @@ class InputFieldValidator {
     static func validateFacebookURL(_ urlString: String) -> ValidateStatus {
         // フィールドが空かどうかをチェック
         if urlString.isEmpty {
-            return .emptyField
+            return .success
         }
-
         // 最大文字数をチェック（例：Facebook URL の長さの制限に応じて調整可能）
         let maxLength = 100 // 必要に応じて maxLength を変更
         if urlString.count > maxLength {
@@ -191,9 +247,8 @@ class InputFieldValidator {
     static func validateYouTubeURL(_ urlString: String) -> ValidateStatus {
         // フィールドが空かどうかをチェック
         if urlString.isEmpty {
-            return .emptyField
+            return .success
         }
-
         // 最大文字数をチェック（例：YouTube URLの長さの制限に応じて調整可能）
         let maxLength = 100 // 必要に応じてmaxLengthを変更
         if urlString.count > maxLength {

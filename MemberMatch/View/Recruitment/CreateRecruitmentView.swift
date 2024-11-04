@@ -32,11 +32,19 @@ struct CreateRecruitmentView: View {
                 rightToolbarItems: {
                     if let editData {
                         createRecruitmentToolbarButton(l10n.editRecruitmentToolbarButtonText) {
+                            guard vm.isValidSubmission() else {
+                                // TODO: 入力値に条件を満たしていない項目があることを知らせるトースト
+                                return
+                            }
                             vm.editRecruitment(editData: editData)
                             presentationMode.wrappedValue.dismiss()
                         }
                     } else {
                         createRecruitmentToolbarButton(l10n.createRecruitmentToolbarButtonText) {
+                            guard vm.isValidSubmission() else {
+                                // TODO: 入力値に条件を満たしていない項目があることを知らせるトースト
+                                return
+                            }
                             vm.createRecruitment()
                             presentationMode.wrappedValue.dismiss()
                         }
@@ -49,7 +57,13 @@ struct CreateRecruitmentView: View {
                     // タイトル
                     singleLineTextFormField(l10n.placeHolderTitle,
                                             title: l10n.recruitmentTitleTitle,
-                                            text: $vm.inputTitle
+                                            text: $vm.inputTitle,
+                                            validate: InputFieldValidator.validateTitle(vm.inputTitle)
+                    )
+                    // 写真
+                    selectImagesFormField(title: l10n.photoTitle,
+                                          images: vm.inputImages,
+                                          selection: vm.selectionImages
                     )
                     // 募集パート
                     wantedPartsSelectionForm(title: l10n.wantedPartsTitle,
@@ -58,12 +72,8 @@ struct CreateRecruitmentView: View {
                     // 募集詳細
                     multiLineTextFormField(l10n.placeHolderDescription,
                                            title: l10n.recruitmentDescTitle,
-                                           text: $vm.inputDescription
-                    )
-                    // 写真
-                    selectImagesFormField(title: l10n.photoTitle,
-                                          images: vm.inputImages,
-                                          selection: vm.selectionImages
+                                           text: $vm.inputDescription,
+                                           validate: InputFieldValidator.validateDescription(vm.inputDescription)
                     )
                     // ジャンル
                     musicGenreSelectFormField(title: l10n.musicGenreTitle,
@@ -73,17 +83,20 @@ struct CreateRecruitmentView: View {
                     // 活動頻度
                     singleLineTextFormField(l10n.placeHolderFrequency,
                                             title: l10n.frequencyTitle,
-                                            text: $vm.inputFrequency
+                                            text: $vm.inputFrequency,
+                                            validate: InputFieldValidator.validateFrequency(vm.inputFrequency)
                     )
                     // 活動拠点
                     singleLineTextFormField(l10n.placeHolderRehearsalLocation,
                                             title: l10n.locationTitle,
-                                            text: $vm.inputRehearsalLocation
+                                            text: $vm.inputRehearsalLocation,
+                                            validate: InputFieldValidator.validateRehearsalLocation(vm.inputRehearsalLocation)
                     )
                     // その他/備考
                     multiLineTextFormField(l10n.placeHolderAdditionalInfo,
                                            title: l10n.additionalInfoTitle,
-                                           text: $vm.inputAdditionalInfo
+                                           text: $vm.inputAdditionalInfo,
+                                           validate: InputFieldValidator.validateAdditionalInfo(vm.inputAdditionalInfo)
                     )
                     // Youtube
                     youtubeFormField(title: l10n.youtubeTitle,
@@ -94,17 +107,20 @@ struct CreateRecruitmentView: View {
                         // X(Twitter)
                         singleLineTextFormField(l10n.placeHolderTwitterURL,
                                                 title: l10n.twitterTitle,
-                                                text: $vm.inputTwitterURL
+                                                text: $vm.inputTwitterURL,
+                                                validate: InputFieldValidator.validateTwitterURL(vm.inputTwitterURL)
                         )
                         // Instagram
                         singleLineTextFormField(l10n.placeHolderInstagramURL,
                                                 title: l10n.instagramTitle,
-                                                text: $vm.inputInstagramURL
+                                                text: $vm.inputInstagramURL,
+                                                validate: InputFieldValidator.validateInstagramURL(vm.inputInstagramURL)
                         )
                         // Facebook
                         singleLineTextFormField(l10n.placeHolderFacebookURL,
                                                 title: l10n.facebookTitle,
-                                                text: $vm.inputFacebookURL
+                                                text: $vm.inputFacebookURL,
+                                                validate: InputFieldValidator.validateFacebookURL(vm.inputFacebookURL)
                         )
                     }
                     .padding(12)
@@ -130,7 +146,7 @@ struct CreateRecruitmentView: View {
         .navigationBarBackButtonHidden()
         .onAppear {
             if let editData {
-                // すでに存在するデータの編集の場合は、データの各値をinputにセット
+                // 投稿内容の編集の場合は、各フィールドに内容をセット
                 vm.setEditData(editData)
             }
         }
@@ -154,10 +170,25 @@ struct CreateRecruitmentView: View {
 // 一行テキストフィールド
 extension CreateRecruitmentView {
     @ViewBuilder
-    private func singleLineTextFormField(_ placeHolder: String, title: String, text: Binding<String>) -> some View {
+    private func singleLineTextFormField(_ placeHolder: String, title: String, text: Binding<String>, validate: ValidateStatus) -> some View {
         VStack(alignment: .leading) {
-            CustomText("▫️\(title)", .customTextColorWhite)
-                .font(.headline)
+            HStack {
+                CustomText("▫️\(title)", .customTextColorWhite)
+                    .font(.headline)
+
+                if text.wrappedValue.isEmpty {
+                    EmptyView()
+                } else if validate == .success {
+                    Image(systemName: Constants.Symbols.checkmark_seal_fill)
+                        .foregroundStyle(.green)
+                } else {
+                    Image(systemName: Constants.Symbols.xmark_seal_fill)
+                        .foregroundStyle(.red)
+                    Text(validate.description)
+                        .font(.caption)
+                        .foregroundStyle(.red)
+                }
+            }
 
             TextField("", text: text)
                 .autocapitalization(.none)
@@ -172,8 +203,13 @@ extension CreateRecruitmentView {
                 .background {
                     RoundedRectangle(cornerRadius: 8)
                         .foregroundStyle(.white)
+                        .overlay {
+                            if validate != .success {
+                                Color.red.opacity(0.5)
+                            }
+                        }
                 }
-                .foregroundStyle(.customTextColorBlack)
+                .foregroundStyle(.black)
         }
     }
 }
@@ -181,11 +217,26 @@ extension CreateRecruitmentView {
 // 複数行、改行が可能なテキストフィールド
 extension CreateRecruitmentView {
     @ViewBuilder
-    private func multiLineTextFormField(_ placeHolder: String, title: String, text: Binding<String>) -> some View {
+    private func multiLineTextFormField(_ placeHolder: String, title: String, text: Binding<String>, validate: ValidateStatus) -> some View {
         VStack(alignment: .leading) {
-            CustomText("▫️\(title)", .customTextColorWhite)
-                .autocapitalization(.none)
-                .font(.headline)
+            HStack {
+                CustomText("▫️\(title)", .customTextColorWhite)
+                    .autocapitalization(.none)
+                    .font(.headline)
+
+                if text.wrappedValue.isEmpty {
+                    EmptyView()
+                } else if validate == .success {
+                    Image(systemName: Constants.Symbols.checkmark_seal_fill)
+                        .foregroundStyle(.green)
+                } else {
+                    Image(systemName: Constants.Symbols.xmark_seal_fill)
+                        .foregroundStyle(.red)
+                    Text(validate.description)
+                        .font(.caption)
+                        .foregroundStyle(.red)
+                }
+            }
             TextField("", text: text, axis: .vertical)
                 .overlay(alignment:  .topLeading) {
                     if text.wrappedValue.isEmpty {
@@ -205,8 +256,13 @@ extension CreateRecruitmentView {
                 .background {
                     RoundedRectangle(cornerRadius: 8)
                         .foregroundStyle(.white)
+                        .overlay {
+                            if validate != .success {
+                                Color.red.opacity(0.5)
+                            }
+                        }
                 }
-                .foregroundStyle(.customTextColorBlack)
+                .foregroundStyle(.black)
         }
     }
 }
@@ -218,7 +274,8 @@ extension CreateRecruitmentView {
             // YouTube
             singleLineTextFormField(l10n.placeHolderYoutubeURL,
                                     title: l10n.youtubeTitle,
-                                    text: $vm.inputYoutubeURL
+                                    text: $vm.inputYoutubeURL,
+                                    validate: InputFieldValidator.validateYouTubeURL(url.wrappedValue)
             )
             CustomYTView(urlString: url.wrappedValue)
         }

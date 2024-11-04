@@ -82,6 +82,12 @@ extension Constants {
         static let emptyDescription = String(localized: "empty_description")
         static let emptyPolicy = String(localized: "empty_policy")
 
+        // バリデーション
+        static let exceedMaxLength = String(localized: "exceed_max_length")
+        static let doesNotMeetCriteria = String(localized: "does_not_meet_criteria")
+        static let emptyField = String(localized: "empty_field")
+        static let invalidFormat = String(localized: "invalid_format")
+
         // --- Model ---
         // Policy
         static let policy_nothing = String(localized: "policy_nothing")
@@ -165,6 +171,8 @@ extension Constants {
         static let questionmark: String = "questionmark"
         static let play_fill: String = "play.fill"
         static let play_slash_fill: String = "play.slash.fill"
+        static let checkmark_seal_fill: String = "checkmark.seal.fill"
+        static let xmark_seal_fill: String = "xmark.seal.fill"
     }
 }
 
