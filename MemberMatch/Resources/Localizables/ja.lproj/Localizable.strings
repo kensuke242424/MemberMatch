@@ -65,6 +65,9 @@
 "empty_field" = "入力が空です";
 "invalid_format" = "フォーマットが正しくありません";
 
+// トースト
+"invalid_create_recruitment_toast_message" = "条件を満たしていない項目があります。";
+
 // ViewParts
 "hide_keyboard_tool_bar_button_text" = "閉じる";
 

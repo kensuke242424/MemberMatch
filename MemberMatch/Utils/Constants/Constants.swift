@@ -88,6 +88,9 @@ extension Constants {
         static let emptyField = String(localized: "empty_field")
         static let invalidFormat = String(localized: "invalid_format")
 
+        // トースト
+        static let invalidCreateRecruitmentToastMessage = String(localized: "invalid_create_recruitment_toast_message")
+
         // --- Model ---
         // Policy
         static let policy_nothing = String(localized: "policy_nothing")

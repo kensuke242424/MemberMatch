@@ -18,6 +18,9 @@ struct CreateRecruitmentView: View {
     @StateObject private var vm = CreateRecruitmentViewModel()
     private let l10n = Constants.Strings.self
 
+    @State private var toastMessage: String = ""
+    @State private var toastDismissTask: Task<Void, Never>?
+
     var body: some View {
         VStack {
             TabTopBarView(
@@ -33,7 +36,7 @@ struct CreateRecruitmentView: View {
                     if let editData {
                         createRecruitmentToolbarButton(l10n.editRecruitmentToolbarButtonText) {
                             guard vm.isValidSubmission() else {
-                                // TODO: 入力値に条件を満たしていない項目があることを知らせるトースト
+                                showToastMessage(Constants.Strings.invalidCreateRecruitmentToastMessage)
                                 return
                             }
                             vm.editRecruitment(editData: editData)
@@ -42,7 +45,7 @@ struct CreateRecruitmentView: View {
                     } else {
                         createRecruitmentToolbarButton(l10n.createRecruitmentToolbarButtonText) {
                             guard vm.isValidSubmission() else {
-                                // TODO: 入力値に条件を満たしていない項目があることを知らせるトースト
+                                showToastMessage(Constants.Strings.invalidCreateRecruitmentToastMessage)
                                 return
                             }
                             vm.createRecruitment()
@@ -90,7 +93,9 @@ struct CreateRecruitmentView: View {
                     singleLineTextFormField(l10n.placeHolderRehearsalLocation,
                                             title: l10n.locationTitle,
                                             text: $vm.inputRehearsalLocation,
-                                            validate: InputFieldValidator.validateRehearsalLocation(vm.inputRehearsalLocation)
+                                            validate: InputFieldValidator.validateRehearsalLocation(
+                                                vm.inputRehearsalLocation
+                                            )
                     )
                     // その他/備考
                     multiLineTextFormField(l10n.placeHolderAdditionalInfo,
@@ -125,7 +130,7 @@ struct CreateRecruitmentView: View {
                     }
                     .padding(12)
                     .background(RoundedRectangle(cornerRadius: 10).foregroundStyle(.gray).opacity(0.2))
-                }
+                } // VStack
                 .padding()
                 .padding(.vertical, 20)
                 .hideKeyboardToolbarButton()
@@ -139,6 +144,17 @@ struct CreateRecruitmentView: View {
                 .sheet(isPresented: $vm.isShowSelectPartSheet) {
                     SelectWantedPartView(selectionPart: $vm.inputWantedParts)
                 }
+            } // ScrollView
+            .overlay {
+                if vm.showToast {
+                    VStack {
+                        ToastView(message: toastMessage,
+                                  backGroundColor: Color.red,
+                                  foregroundColor: Color.white
+                        )
+                        Spacer()
+                    }
+                }
             }
         }
         .gradientBackground()
@@ -149,6 +165,18 @@ struct CreateRecruitmentView: View {
                 // 投稿内容の編集の場合は、各フィールドに内容をセット
                 vm.setEditData(editData)
             }
+        }
+    }
+
+    func showToastMessage(_ message: String) {
+        toastMessage = message
+        withAnimation { vm.showToast = true }
+        HapticFeedback.shared.trigger(.notification(type: .error))
+
+        // 一定時間後にトーストを非表示にする処理を開始
+        toastDismissTask = Task {
+            try? await Task.sleep(nanoseconds: 2 * 1_000_000_000) // 2秒
+            withAnimation { vm.showToast = false }
         }
     }
 
