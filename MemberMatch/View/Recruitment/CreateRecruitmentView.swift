@@ -16,10 +16,11 @@ struct CreateRecruitmentView: View {
     @Environment(\.presentationMode) var presentationMode
 
     @StateObject private var vm = CreateRecruitmentViewModel()
-    private let l10n = Constants.Strings.self
 
     @State private var toastMessage: String = ""
     @State private var toastDismissTask: Task<Void, Never>?
+
+    private let l10n = Constants.Strings.self
 
     var body: some View {
         VStack {
@@ -198,7 +199,10 @@ struct CreateRecruitmentView: View {
 // 一行テキストフィールド
 extension CreateRecruitmentView {
     @ViewBuilder
-    private func singleLineTextFormField(_ placeHolder: String, title: String, text: Binding<String>, validate: ValidateStatus) -> some View {
+    private func singleLineTextFormField(_ placeHolder: String,
+                                         title: String,
+                                         text: Binding<String>,
+                                         validate: ValidateStatus) -> some View {
         VStack(alignment: .leading) {
             HStack {
                 CustomText("▫️\(title)", .customTextColorWhite)
@@ -254,7 +258,10 @@ extension CreateRecruitmentView {
 // 複数行、改行が可能なテキストフィールド
 extension CreateRecruitmentView {
     @ViewBuilder
-    private func multiLineTextFormField(_ placeHolder: String, title: String, text: Binding<String>, validate: ValidateStatus) -> some View {
+    private func multiLineTextFormField(_ placeHolder: String,
+                                        title: String,
+                                        text: Binding<String>,
+                                        validate: ValidateStatus) -> some View {
         VStack(alignment: .leading) {
             HStack {
                 CustomText("▫️\(title)", .customTextColorWhite)
