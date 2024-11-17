@@ -9,21 +9,10 @@ import SwiftUI
 
 @main
 struct MemberMatchApp: App {
-    @StateObject var router: Router = Router.shared
-    @StateObject private var userManager = UserManager.shared
-
-    // TODO: Firebase.AuthのcurrentUserを使う
-    @State private var dummyAuthCurrentUser: Bool = true
-
     var body: some Scene {
         WindowGroup {
-            if dummyAuthCurrentUser {
-                RootTabView()
-                    .environmentObject(router)
-                    .environmentObject(userManager)
-            } else {
-                // TODO: ログイン画面
-            }
+            ContentView()
+                .preferredColorScheme(.dark)
         }
     }
 }

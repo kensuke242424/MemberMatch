@@ -8,9 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var appState: AppState = AppState.shared
+    @StateObject private var router: Router = Router.shared
+    @StateObject private var userManager = UserManager.shared
+
     var body: some View {
-        RootTabView()
-            .preferredColorScheme(.dark)
+        if appState.isAuthenticated {
+            RootTabView()
+                .environmentObject(appState)
+                .environmentObject(router)
+                .environmentObject(userManager)
+        } else {
+            // TODO: ログイン画面
+        }
     }
 }
 
