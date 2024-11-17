@@ -8,30 +8,30 @@
 import SwiftUI
 
 enum RecruitmentPagePath: Hashable {
-    case home
+    case top
     case detail(Recruitment)
     case userProfile(User)
     case teamProfile(Team)
 }
 
 enum MemberScoutPagePath: Hashable {
-    case home
+    case top
 }
 
 enum MessagePagePath: Hashable {
-    case home
+    case top
 }
 
 enum ProfilePagePath: Hashable {
-    case home
+    case top
 }
 
 enum NotificationPagePath: Hashable {
-    case home
+    case top
 }
 
 enum SystemSettingPagePath: Hashable {
-    case home
+    case top
 }
 
 class Router: ObservableObject {

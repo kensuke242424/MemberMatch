@@ -24,7 +24,7 @@ struct RootTabView: View {
                 RecruitmentBoardView()
                     .navigationDestination(for: RecruitmentPagePath.self) { path in
                         switch path {
-                        case .home:
+                        case .top:
                             RecruitmentBoardView()
 
                         case .detail(let recruitment):
@@ -45,7 +45,7 @@ struct RootTabView: View {
                 NotificationView()
                     .navigationDestination(for: NotificationPagePath.self) { path in
                         switch path {
-                        case .home:
+                        case .top:
                             NotificationView()
                         }
                     }
@@ -57,7 +57,7 @@ struct RootTabView: View {
                 ProfileView()
                     .navigationDestination(for: ProfilePagePath.self) { path in
                         switch path {
-                        case .home:
+                        case .top:
                             ProfileView()
                         }
                     }
@@ -69,7 +69,7 @@ struct RootTabView: View {
                 SystemSettingView()
                     .navigationDestination(for: SystemSettingPagePath.self) { path in
                         switch path {
-                        case .home:
+                        case .top:
                             ProfileView()
                         }
                     }
@@ -90,6 +90,6 @@ extension RootTabView {
 }
 
 #Preview {
-    RootTabView()
+    ContentView()
         .environmentObject(Router.shared)
 }

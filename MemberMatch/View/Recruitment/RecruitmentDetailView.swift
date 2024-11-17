@@ -34,7 +34,7 @@ struct RecruitmentDetailView: View {
                 rightToolbarItems: {
                     // 編集ボタン
                     if recruitment.author.id == userManager.currentUser.id {
-                        NavigationLink(destination: CreateRecruitmentView(editData: recruitment)) {
+                        NavigationLink(destination: CreateRecruitmentView(existingData: recruitment)) {
                             Image(systemName:Constants.Symbols.square_and_pencil)
                                 .foregroundStyle(.gray)
                                 .frame(width: Constants.toolBarItemSize, height: Constants.toolBarItemSize)
@@ -496,7 +496,7 @@ extension RecruitmentDetailView {
     private func bottomActionButtons(_ recruitment: Recruitment) -> some View {
         if recruitment.author.id == UserManager.shared.currentUser.id {
             // 募集内容を編集する
-            NavigationLink(destination: CreateRecruitmentView(editData: recruitment)) {
+            NavigationLink(destination: CreateRecruitmentView(existingData: recruitment)) {
                 HStack {
                     Text(l10n.editRecruitmentButtonText)
                     Image(systemName: Constants.Symbols.square_and_pencil)

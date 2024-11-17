@@ -9,7 +9,7 @@ import PhotosUI
 import SwiftUI
 
 struct CreateRecruitmentView: View {
-    var editData: Recruitment?
+    var existingData: Recruitment?
     @EnvironmentObject var router: Router
     @EnvironmentObject var userManager: UserManager
 
@@ -25,7 +25,7 @@ struct CreateRecruitmentView: View {
     var body: some View {
         VStack {
             TabTopBarView(
-                editData == nil ? l10n.createRecruitmentPageTitle : l10n.editRecruitmentPageTitle,
+                existingData != nil ? l10n.editRecruitmentPageTitle : l10n.createRecruitmentPageTitle,
                 leftToolbarItems: {
                     Image(systemName: Constants.Symbols.chevron_backward)
                         .foregroundStyle(.gray)
@@ -34,24 +34,11 @@ struct CreateRecruitmentView: View {
                         .onTapGesture { presentationMode.wrappedValue.dismiss() }
                 },
                 rightToolbarItems: {
-                    if let editData {
-                        createRecruitmentToolbarButton(l10n.editRecruitmentToolbarButtonText) {
-                            guard vm.isValidSubmission() else {
-                                showToastMessage(Constants.Strings.invalidCreateRecruitmentToastMessage)
-                                return
-                            }
-                            vm.editRecruitment(editData: editData)
-                            presentationMode.wrappedValue.dismiss()
-                        }
-                    } else {
-                        createRecruitmentToolbarButton(l10n.createRecruitmentToolbarButtonText) {
-                            guard vm.isValidSubmission() else {
-                                showToastMessage(Constants.Strings.invalidCreateRecruitmentToastMessage)
-                                return
-                            }
-                            vm.createRecruitment()
-                            presentationMode.wrappedValue.dismiss()
-                        }
+                    editCompleteButton(existingData != nil
+                                       ? l10n.editRecruitmentToolbarButtonText
+                                       : l10n.postRecruitmentToolbarButtonText
+                    ) {
+                        onPressedCompleteButton(existingData: existingData)
                     }
                 }
             )
@@ -162,14 +149,31 @@ struct CreateRecruitmentView: View {
         .ignoresSafeArea(edges: .top)
         .navigationBarBackButtonHidden()
         .onAppear {
-            if let editData {
+            if let existingData {
                 // 投稿内容の編集の場合は、各フィールドに内容をセット
-                vm.setEditData(editData)
+                vm.setEditData(existingData)
             }
         }
     }
 
-    func showToastMessage(_ message: String) {
+    private func onPressedCompleteButton(existingData: Recruitment?) {
+        guard vm.isValidSubmission() else {
+            showToastMessage(Constants.Strings.invalidCreateRecruitmentToastMessage)
+            return
+        }
+        if let existingData {
+            vm.editRecruitment(existingData: existingData)
+        } else {
+            vm.postRecruitment()
+        }
+
+        presentationMode.wrappedValue.dismiss()
+    }
+
+    private func showToastMessage(_ message: String) {
+        // 既にトースト表示中の場合は処理しない
+        if vm.showToast { return }
+
         toastMessage = message
         withAnimation { vm.showToast = true }
         HapticFeedback.shared.trigger(.notification(type: .error))
@@ -182,7 +186,7 @@ struct CreateRecruitmentView: View {
     }
 
     @ViewBuilder
-    private func createRecruitmentToolbarButton(_ text: String, _ action: @escaping () -> Void) -> some View {
+    private func editCompleteButton(_ text: String, _ action: @escaping () -> Void) -> some View {
         Button(text) {
             action()
         }
