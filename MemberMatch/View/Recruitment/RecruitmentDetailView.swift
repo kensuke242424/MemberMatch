@@ -8,6 +8,7 @@
 import ScalingHeaderScrollView
 import SwiftUI
 import SwiftUIIntrospect
+import SDWebImageSwiftUI
 
 struct RecruitmentDetailView: View {
     let recruitment: Recruitment
@@ -74,20 +75,7 @@ struct RecruitmentDetailView: View {
                 }
             }, content: {
                 VStack(spacing: 30) {
-                    VStack {
-                        Divider().frame(height: 1).background(.white.opacity(0.3)).padding(.horizontal, 20)
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack {
-                                ForEach(0..<4) { _ in
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .frame(width: 150, height: 110)
-                                        .foregroundStyle(.customAccentYellow.gradient)
-                                }
-                            }
-                            .padding(.vertical, 5)
-                        }
-                        Divider().frame(height: 1).background(.white.opacity(0.3)).padding(.horizontal, 20)
-                    }
+                    imagesDetail(recruitment.images)
                     musicGenreDetail(recruitment.genre)
                     wantedPartsDetail(recruitment.wantedParts)
                     recruitmentDetail(recruitment.description)
@@ -111,6 +99,15 @@ struct RecruitmentDetailView: View {
             .headerAlignment(.top)
             .allowsHeaderGrowth()
             .collapseProgress($vm.collapseProgress)
+        } // VStack
+        .overlay {
+            if vm.isShowImageDetailView {
+                SnapCarouselImageView(isShow: $vm.isShowImageDetailView,
+                                      selectionIndex: $vm.selectionImageIndex,
+                                      images: mockImagesData)
+            } else {
+                EmptyView()
+            }
         }
         .gradientBackground()
         .ignoresSafeArea(edges: .top)
@@ -215,6 +212,44 @@ extension RecruitmentDetailView {
         .overlay {
             GeometryReader { geometry in
                 Color.clear.preference(key: SizePreferenceKey.self, value: geometry.size)
+            }
+        }
+    }
+}
+
+// 写真
+extension RecruitmentDetailView {
+    @ViewBuilder
+    private func imagesDetail(_ images: [ImageData]?) -> some View {
+        VStack {
+            if let images = recruitment.images, images.isNotEmpty {
+                Divider().frame(height: 1).background(.white.opacity(0.3)).padding(.horizontal, 20)
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
+                        ForEach(Array(images.enumerated()), id: \.element) { index, image in
+                            WebImage(url: URL(string: image.url)) {image in
+                                image
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 150, height: 110)
+                                    .clipped()
+                                    .onTapGesture {
+                                        vm.selectionImageIndex = index
+                                        withAnimation { vm.isShowImageDetailView = true }
+                                    }
+                            } placeholder: {
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .foregroundColor(.black.opacity(0.2))
+                                        .frame(width: 150, height: 110)
+                                    ProgressView()
+                                }
+                            }
+                        }
+                    }
+                    .padding(.vertical, 5)
+                }
+                Divider().frame(height: 1).background(.white.opacity(0.3)).padding(.horizontal, 20)
             }
         }
     }

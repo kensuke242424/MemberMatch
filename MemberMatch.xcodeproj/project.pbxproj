@@ -23,6 +23,13 @@
 		BE5179B92CD8AAFF00BFF9AD /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5179B82CD8AAFF00BFF9AD /* Logger.swift */; };
 		BE5179BB2CE8D29700BFF9AD /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5179BA2CE8D29600BFF9AD /* ToastView.swift */; };
 		BE5179BD2CE8DCE400BFF9AD /* HapticFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5179BC2CE8DCE400BFF9AD /* HapticFeedback.swift */; };
+		BE5179C02CE98CBD00BFF9AD /* ImageFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5179BF2CE98CBD00BFF9AD /* ImageFile.swift */; };
+		BE5179C22CE98E5700BFF9AD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5179C12CE98E5700BFF9AD /* ContentView.swift */; };
+		BE5179C62CE990D100BFF9AD /* SnapCarouselImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5179C52CE990D100BFF9AD /* SnapCarouselImageView.swift */; };
+		BE5179C92CE9A1D700BFF9AD /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5179C82CE9A1D700BFF9AD /* AppState.swift */; };
+		BE5179CB2CE9A9F000BFF9AD /* SnapCarouselHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5179CA2CE9A9F000BFF9AD /* SnapCarouselHelper.swift */; };
+		BE5179CE2CEF749500BFF9AD /* MockImageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5179CD2CEF749500BFF9AD /* MockImageData.swift */; };
+		BE5179D02CF2E19800BFF9AD /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5179CF2CF2E19800BFF9AD /* ArrayExtension.swift */; };
 		BE71DBFB2C1538C30026F588 /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71DBFA2C1538C30026F588 /* Gender.swift */; };
 		BE71DBFD2C153B770026F588 /* Part.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71DBFC2C153B770026F588 /* Part.swift */; };
 		BE71DBFF2C1D3F070026F588 /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71DBFE2C1D3F070026F588 /* Mocks.swift */; };
@@ -96,6 +103,13 @@
 		BE5179B82CD8AAFF00BFF9AD /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		BE5179BA2CE8D29600BFF9AD /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		BE5179BC2CE8DCE400BFF9AD /* HapticFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticFeedback.swift; sourceTree = "<group>"; };
+		BE5179BF2CE98CBD00BFF9AD /* ImageFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFile.swift; sourceTree = "<group>"; };
+		BE5179C12CE98E5700BFF9AD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		BE5179C52CE990D100BFF9AD /* SnapCarouselImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapCarouselImageView.swift; sourceTree = "<group>"; };
+		BE5179C82CE9A1D700BFF9AD /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		BE5179CA2CE9A9F000BFF9AD /* SnapCarouselHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapCarouselHelper.swift; sourceTree = "<group>"; };
+		BE5179CD2CEF749500BFF9AD /* MockImageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockImageData.swift; sourceTree = "<group>"; };
+		BE5179CF2CF2E19800BFF9AD /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		BE71DBFA2C1538C30026F588 /* Gender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
 		BE71DBFC2C153B770026F588 /* Part.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Part.swift; sourceTree = "<group>"; };
 		BE71DBFE2C1D3F070026F588 /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
@@ -178,7 +192,6 @@
 		BE00ED7C2C32DF4700572B98 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				BE00ED7D2C32DF5B00572B98 /* UserManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -213,6 +226,40 @@
 				BE5179B42CCFCBC400BFF9AD /* CustomYTView.swift */,
 			);
 			path = VideoPlayer;
+			sourceTree = "<group>";
+		};
+		BE5179BE2CE98CB100BFF9AD /* ImageFile */ = {
+			isa = PBXGroup;
+			children = (
+				BE5179BF2CE98CBD00BFF9AD /* ImageFile.swift */,
+			);
+			path = ImageFile;
+			sourceTree = "<group>";
+		};
+		BE5179C42CE9909600BFF9AD /* SnapCarousel */ = {
+			isa = PBXGroup;
+			children = (
+				BE5179C52CE990D100BFF9AD /* SnapCarouselImageView.swift */,
+				BE5179CA2CE9A9F000BFF9AD /* SnapCarouselHelper.swift */,
+			);
+			path = SnapCarousel;
+			sourceTree = "<group>";
+		};
+		BE5179C72CE9A1CB00BFF9AD /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				BE5179C82CE9A1D700BFF9AD /* AppState.swift */,
+				BE00ED7D2C32DF5B00572B98 /* UserManager.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		BE5179CC2CEF746A00BFF9AD /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				BE5179CD2CEF749500BFF9AD /* MockImageData.swift */,
+			);
+			path = Mock;
 			sourceTree = "<group>";
 		};
 		BE71DC002C1D4C4E0026F588 /* Localizables */ = {
@@ -293,6 +340,7 @@
 				BEE55DDC2BF84FE100299883 /* UIDeviceExtension.swift */,
 				BEE3F86D2C0AE70F007D5328 /* UIScreenExtension.swift */,
 				BE5179AC2CCE8FA000BFF9AD /* DateExtension.swift */,
+				BE5179CF2CF2E19800BFF9AD /* ArrayExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -392,6 +440,7 @@
 		BED4B2372BF0868600C49EB5 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				BE5179C42CE9909600BFF9AD /* SnapCarousel */,
 				BE5179AE2CCFC29700BFF9AD /* VideoPlayer */,
 				BE5179A42C99A28000BFF9AD /* Empty */,
 				BEC24F5E2C3DFAF500524CAF /* CustomImagePicker */,
@@ -479,11 +528,13 @@
 			isa = PBXGroup;
 			children = (
 				BEFAE4E12BDE73A000CADC73 /* MemberMatchApp.swift */,
+				BE5179C72CE9A1CB00BFF9AD /* Shared */,
 				BE00ED7C2C32DF4700572B98 /* Managers */,
 				BED4B2142BEFC8F100C49EB5 /* Utils */,
 				BEFAE4EF2BDE759A00CADC73 /* Model */,
 				BEFAE4F02BDE75A100CADC73 /* View */,
 				BEFAE4F12BDE75AC00CADC73 /* ViewModel */,
+				BE5179CC2CEF746A00BFF9AD /* Mock */,
 				BE00ED7B2C32DF0900572B98 /* Resources */,
 				BEFAE4E72BDE73A200CADC73 /* Preview Content */,
 			);
@@ -501,6 +552,7 @@
 		BEFAE4EF2BDE759A00CADC73 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				BE5179BE2CE98CB100BFF9AD /* ImageFile */,
 				BEE3F86F2C0AFBC4007D5328 /* Browse */,
 				BED4B2532BF3D07E00C49EB5 /* Common */,
 				BED4B2472BF3BE9200C49EB5 /* Team */,
@@ -523,6 +575,7 @@
 				BED4B2212BEFD5A000C49EB5 /* Notification */,
 				BED4B21F2BEFD4A100C49EB5 /* Profile */,
 				BE5179A92CCE81C000BFF9AD /* SystemSetting */,
+				BE5179C12CE98E5700BFF9AD /* ContentView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -649,6 +702,8 @@
 				BED4B2392BF086B500C49EB5 /* SDWebImageCircleIcon.swift in Sources */,
 				BEC24F5D2C3DFAE900524CAF /* Crop.swift in Sources */,
 				BE5179B72CD8AA1A00BFF9AD /* URLNavigator.swift in Sources */,
+				BE5179CB2CE9A9F000BFF9AD /* SnapCarouselHelper.swift in Sources */,
+				BE5179C62CE990D100BFF9AD /* SnapCarouselImageView.swift in Sources */,
 				BEE3F86E2C0AE70F007D5328 /* UIScreenExtension.swift in Sources */,
 				BED4B20E2BE99A3F00C49EB5 /* SignUpView.swift in Sources */,
 				BE5179BD2CE8DCE400BFF9AD /* HapticFeedback.swift in Sources */,
@@ -660,8 +715,10 @@
 				BED4B2442BF3BCD100C49EB5 /* UserProfileView.swift in Sources */,
 				BE00ED7A2C32D83800572B98 /* CreateRecruitmentView.swift in Sources */,
 				BE5179A62C99A29300BFF9AD /* EmptyPartView.swift in Sources */,
+				BE5179C92CE9A1D700BFF9AD /* AppState.swift in Sources */,
 				BED4B24C2BF3C17A00C49EB5 /* MusicGenre.swift in Sources */,
 				BE5179A82C99B1FE00BFF9AD /* InputFieldValidater.swift in Sources */,
+				BE5179D02CF2E19800BFF9AD /* ArrayExtension.swift in Sources */,
 				BEFAE4F52BDE768F00CADC73 /* TabsViewModel.swift in Sources */,
 				BEE55DE32BFA293500299883 /* RecruitmentDetailViewModel.swift in Sources */,
 				BE71DBFD2C153B770026F588 /* Part.swift in Sources */,
@@ -690,13 +747,16 @@
 				BEE95D282C1EA13800EBB934 /* SocialMediaLinks.swift in Sources */,
 				BEC24F612C3E00DA00524CAF /* ScreenUtil.swift in Sources */,
 				BEFAE4E22BDE73A000CADC73 /* MemberMatchApp.swift in Sources */,
+				BE5179CE2CEF749500BFF9AD /* MockImageData.swift in Sources */,
 				BED4B2362BF0788800C49EB5 /* User.swift in Sources */,
 				BED4B2572BF3D74B00C49EB5 /* Prefecture.swift in Sources */,
 				BEC24F632C4D5EA800524CAF /* SelectWantedPartView.swift in Sources */,
 				BE5179B02CCFC2B500BFF9AD /* Video.swift in Sources */,
 				BED4B22F2BF059E100C49EB5 /* Recruitment.swift in Sources */,
 				BEC24F5B2C3DFAA200524CAF /* CustomImagePicker.swift in Sources */,
+				BE5179C22CE98E5700BFF9AD /* ContentView.swift in Sources */,
 				BED4B2272BEFD5F400C49EB5 /* NotificationView.swift in Sources */,
+				BE5179C02CE98CBD00BFF9AD /* ImageFile.swift in Sources */,
 				BED4B2462BF3BCE000C49EB5 /* TeamProfileView.swift in Sources */,
 				BE71DBFB2C1538C30026F588 /* Gender.swift in Sources */,
 				BEE55DDB2BF84BAE00299883 /* TopCornersRoundedRectangle.swift in Sources */,

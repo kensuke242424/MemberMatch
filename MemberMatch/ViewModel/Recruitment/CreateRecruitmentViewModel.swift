@@ -47,46 +47,44 @@ class CreateRecruitmentViewModel: ObservableObject {
         self.inputFacebookURL = editData.author.socialMediaLinks.facebook ?? ""
     }
 
-    func createRecruitment() {
+    func postRecruitment() {
         //TODO: Model経由で募集を作成
     }
 
-    func editRecruitment(editData: Recruitment) {
+    func editRecruitment(existingData: Recruitment) {
         //TODO: Model経由で募集を更新
     }
 
     /// 各入力値のバリデーションが通っているかをチェックするメソッド。
     func isValidSubmission() -> Bool {
-        var result: Bool = true
-
         if InputFieldValidator.validateTitle(inputTitle) != .success {
-            result = false
+            return false
         }
         if InputFieldValidator.validateDescription(inputDescription) != .success {
-            result = false
+            return false
         }
         if InputFieldValidator.validateFrequency(inputFrequency) != .success {
-            result = false
+            return false
         }
         if InputFieldValidator.validateRehearsalLocation(inputRehearsalLocation) != .success {
-            result = false
+            return false
         }
         if InputFieldValidator.validateAdditionalInfo(inputAdditionalInfo) != .success {
-            result = false
+            return false
         }
         if InputFieldValidator.validateYouTubeURL(inputYoutubeURL) != .success {
-            result = false
+            return false
         }
         if InputFieldValidator.validateTwitterURL(inputTwitterURL) != .success {
-            result = false
+            return false
         }
         if InputFieldValidator.validateInstagramURL(inputInstagramURL) != .success {
-            result = false
+            return false
         }
         if InputFieldValidator.validateFacebookURL(inputFacebookURL) != .success {
-            result = false
+            return false
         }
 
-        return result
+        return true
     }
 }

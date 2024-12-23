@@ -7,6 +7,7 @@
 
 import PhotosUI
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct CreateRecruitmentView: View {
     var existingData: Recruitment?
@@ -360,7 +361,7 @@ extension CreateRecruitmentView {
 
         VStack(alignment: .leading) {
             HStack {
-                CustomText("\(l10n.wantedPartsTitle)：", .customTextColorWhite).font(.headline)
+                CustomText(l10n.wantedPartsTitle, .customTextColorWhite).font(.headline)
                 Button(l10n.partSelectButtonText) {
                     vm.isShowSelectPartSheet.toggle()
                 }
@@ -418,49 +419,69 @@ extension CreateRecruitmentView {
                                        images: [ImageData],
                                        selection selectionImagesData: [UIImage]
     ) -> some View {
+        let imageWidth: CGFloat = 200
+        let imageHeight: CGFloat = 140
+        let cornerRadius: CGFloat = 5
+
         VStack(alignment: .leading) {
-            CustomText("▫️\(title)", .customTextColorWhite)
-                .font(.headline)
+            HStack {
+                Text("▫️\(title)").font(.headline).foregroundStyle(.white)
+                Button {
+                    vm.isShowPicker = true
+                } label: {
+                    Image(systemName: Constants.Symbols.plus_circle_fill)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 16, height: 16)
+                        .foregroundStyle(.blue)
+                }
+            }
+
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
+                HStack(spacing: 12) {
                     // すでに保存されている写真
-                    ForEach(images, id: \.self.path) { image in
-                        AsyncImage(url: image.url)
-                            .scaledToFit()
-                            .frame(width: 200, height: 150)
-                            .onTapGesture { vm.isShowPicker = true }
+                    ForEach(images, id: \.self) { image in
+                        WebImage(url: URL(string: image.url)) {image in
+                            image
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: imageWidth, height: imageHeight)
+                                .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+                        } placeholder: {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 5)
+                                    .foregroundColor(.black.opacity(0.2))
+                                    .frame(width: imageWidth, height: imageHeight)
+                                ProgressView()
+                            }
+                        }
                     }
                     // 新しく選択追加された写真
                     ForEach(selectionImagesData, id: \.self) { uiImage in
                         Image(uiImage: uiImage)
                             .resizable()
                             .scaledToFill()
-                            .frame(width: 200, height: 150)
-                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                            .frame(width: imageWidth, height: imageHeight)
+                            .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
                             .onTapGesture {
                                 vm.isShowPicker = true
                             }
                     }
                     // 写真追加ボタン
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 20)
-                            .frame(width: 200, height: 150)
-                            .foregroundStyle(.gray.gradient)
-                        Image(systemName: Constants.Symbols.photo_on_rectangle_angled)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 50, height: 50)
-                            .foregroundStyle(.black.opacity(0.3))
-                            .overlay(alignment: .topTrailing) {
-                                Image(systemName: Constants.Symbols.plus_circle_fill)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 20, height: 20)
-                                    .foregroundStyle(.black.opacity(0.4))
-                                    .offset(x: 15, y: -5)
-                            }
+                    Button {
+                        vm.isShowPicker = true
+                    } label: {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: cornerRadius)
+                                .foregroundStyle(.blue.gradient)
+                                .frame(width: 40, height: imageHeight)
+                            Image(systemName: Constants.Symbols.plus_circle_fill)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 20, height: 20)
+                                .foregroundStyle(.white.opacity(0.5))
+                        }
                     }
-                    .onTapGesture { vm.isShowPicker = true }
                 }
                 .padding(.vertical, 5)
             }

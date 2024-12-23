@@ -8,7 +8,6 @@
 import SwiftUI
 
 class RecruitmentDetailViewModel: ObservableObject {
-
     // Editing
     @Published var isEditing: Bool = false
     @Published var inputTwitterUrl: String = ""
@@ -31,6 +30,10 @@ class RecruitmentDetailViewModel: ObservableObject {
             self.handleScrolledPoint(newValue: collapseProgress)
         }
     }
+
+    @Published var isShowImageDetailView: Bool = false
+    @Published var selectionImageIndex: Int = 0
+
     var minHeaderHeight: CGFloat {
         self.isFixedCard ? 160 : 0
     }
