@@ -72,6 +72,7 @@ struct Recruitment: Identifiable, Hashable {
 let exampleRecruitments = [
     Recruitment(
         id: UUID().uuidString,
+        postedDate: Calendar.current.date(byAdding: .day, value: -10, to: Date()) ?? Date(),
         author: mockUser,
         favorite: 40,
         title: "POPバンドのメンバー大募集！ガチでやろうぜ！",
@@ -80,6 +81,13 @@ let exampleRecruitments = [
 ポップスバンドで経験豊富なバンドメンバーを探しています。ポップスバンドで経験豊富なバンドメンバーを探しています。
 ポップスバンドで経験豊富なバンドメンバーを探しています。ポップスバンドで経験豊富なバンドメンバーを探しています。
 """,
+        images: [
+            .init(url: "https://via.placeholder.com/600x400.png?text=Sample+Image+1", path: ""),
+            .init(url: "https://via.placeholder.com/600x400.png?text=Sample+Image+2", path: ""),
+            .init(url: "https://via.placeholder.com/600x400.png?text=Sample+Image+3", path: ""),
+            .init(url: "https://via.placeholder.com/600x400.png?text=Sample+Image+4", path: ""),
+            .init(url: "https://via.placeholder.com/600x400.png?text=Sample+Image+5", path: "")
+        ],
         policy: .hobby,
         genre: [MusicGenre.pop],
         rehearsalLocation: "新宿スタジオ",
@@ -87,6 +95,7 @@ let exampleRecruitments = [
     ),
     Recruitment(
         id: UUID().uuidString,
+        postedDate: Calendar.current.date(byAdding: .hour, value: -1, to: Date()) ?? Date(),
         author: mockUser2,
         favorite: 20,
         title: "ベーシスト募集！",

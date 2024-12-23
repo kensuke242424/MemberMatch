@@ -25,7 +25,7 @@ extension Date {
             return "１週間前"
         } else {
             let formatter = DateFormatter()
-            formatter.dateFormat = "yyyyMMdd"
+            formatter.dateFormat = "yyyy年 MM月dd日"
             return formatter.string(from: self)
         }
     }
