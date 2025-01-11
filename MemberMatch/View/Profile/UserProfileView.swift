@@ -52,7 +52,6 @@ struct UserProfileView: View {
                             .opacity(1 - tabTopOpacity)
                             .padding(.horizontal)
                     }
-
                 VStack {
 
                     Spacer().frame(height: overlapYOffset)
