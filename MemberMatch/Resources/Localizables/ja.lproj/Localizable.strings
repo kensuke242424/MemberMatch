@@ -48,6 +48,9 @@
 "sheet_dismiss_button_text" = "閉じる";
 "select_gender_unknown_menu_text" = "指定なし";
 
+// ユーザープロフィールページ
+"preferred_genre_detail_title" = "好みのジャンル";
+
 // PlaceHolder
 "place_holder_title" = "ボーカル募集！";
 "place_holder_description" = "一緒に音楽を楽しみませんか？\n私たちはロックバンドのボーカルを募集しています！興味のある方はぜひご連絡ください！";

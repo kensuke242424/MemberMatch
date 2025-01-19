@@ -276,52 +276,19 @@ extension RecruitmentDetailView {
 extension RecruitmentDetailView {
     @ViewBuilder
     private func wantedPartsDetail(_ parts: [Part]) -> some View {
-        let iconSize: CGFloat = 120
         var isWantedParts: [Part] {
             parts.filter { $0.isWanted == true }
         }
 
         VStack(alignment: .leading) {
             CustomText("\(l10n.wantedPartsTitle)：", .customTextColorWhite).font(.headline)
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 20) {
-                    if isWantedParts.isEmpty {
-                        EmptyPartView(l10n.emptyPart,
-                                      symbolName: Constants.Symbols.questionmark,
-                                      iconSize: iconSize
-                        )
-                    } else {
-                        ForEach(isWantedParts) { part in
-                            VStack(spacing: 10) {
-                                Image(part.iconName)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 120, height: 120)
-                                    .shadow(radius: 3)
-                                HStack(spacing: 0) {
-                                    Text(part.instrument.text)
-                                        .font(.caption)
-                                        .foregroundStyle(Color.gray)
-                                    if part.gender != Gender.unknown {
-                                        Text("(\(part.gender.text))")
-                                            .font(.caption)
-                                            .foregroundStyle(Color.gray)
-                                    }
-                                }
-                            }
-                        }
-                    }
+            HorizontalScrollPartImagesView(showPart: isWantedParts, iconSize: 120)
+                .padding(8)
+                .background {
+                    RoundedRectangle(cornerRadius: 5)
+                        .shadow(radius: 10)
+                        .foregroundStyle(.customWhite)
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.vertical, 5)
-                .padding(.horizontal, 5)
-            }
-            .padding(8)
-            .background {
-                RoundedRectangle(cornerRadius: 5)
-                    .shadow(radius: 10)
-                    .foregroundStyle(.customWhite)
-            }
         }
     }
 }

@@ -75,6 +75,9 @@ extension Constants {
         static let createRecruitmentPageTitle = String(localized: "create_recruitment_page_title")
         static let editRecruitmentPageTitle = String(localized: "edit_recruitment_page_title")
 
+        // ユーザープロフィールページ
+        static let preferredGenreDetailTitle = String(localized: "preferred_genre_detail_title")
+
         // Empty
         static let emptyName = String(localized: "empty_name")
         static let emptyTitle = String(localized: "empty_title")

@@ -21,6 +21,8 @@ struct UserProfileView: View {
     let minHeaderHeight: CGFloat = 100
     let overlapYOffset: CGFloat = 50
 
+    let l10n = Constants.Strings.self
+
     var body: some View {
         ScalingHeaderScrollView(header: {
             Image("music_1")
@@ -43,7 +45,8 @@ struct UserProfileView: View {
                     .frame(height: maxHeaderHeight)
                     .zIndex(200)
                     .overlay(alignment: .bottomLeading) {
-                        CustomText("Rock climb", .customTextColorWhite)
+                        Text(user.name ?? Constants.Strings.emptyName)
+                            .foregroundStyle(.white)
                             .zIndex(1000)
                             .tracking(1)
                             .font(.title3.bold())
@@ -52,12 +55,13 @@ struct UserProfileView: View {
                             .opacity(1 - tabTopOpacity)
                             .padding(.horizontal)
                     }
-                VStack {
+                VStack(spacing: 20) {
 
                     Spacer().frame(height: overlapYOffset)
 
-                    userDetail(user: mockUser).padding(.top)
-                    wantedPartsDetail(title: "募集パート", desc: user.bio ?? "")
+                    userDetail(user: user)
+                    musicGenreDetail(user.preferredGenre)
+                    userPartDetail(title: "担当パート", user: user)
                     recruitmentDetail(title: "募集の内容", desc: user.bio ?? "")
                     frequencyDetail(title: "活動頻度", desc: user.bio ?? "")
                     locationDetail(title: "活動場所", desc: user.bio ?? "")
@@ -95,40 +99,40 @@ struct UserProfileView: View {
         .collapseProgress($collapseProgress) // ヘッダーの折りたたみ状況
         .height(min: minHeaderHeight, max: maxHeaderHeight) // ヘッダーの可変サイズ
         .overlay(alignment: .top) {
-            tabTopBarView()
+            tabTopBarView(user: user)
         }
         .ignoresSafeArea(edges: .top)
         .navigationBarBackButtonHidden()
     }
-    
+
     @ViewBuilder
-    private func tabTopBarView() -> some View {
-            let iconSize: CGFloat = 30
+    private func tabTopBarView(user: User) -> some View {
+        let iconSize: CGFloat = 30
+        HStack {
+            RoundedRectangle(cornerRadius: 10).frame(width: 30, height: 30)
+            Text(user.name ?? Constants.Strings.emptyName)
+                .tracking(1)
+                .lineLimit(1)
+                .font(.title3)
+                .fontWeight(.semibold)
+                .contentShape(Rectangle())
+        }
+        .opacity(tabTopOpacity)
+        .frame(maxWidth: .infinity)
+        .onTapGesture { resetScrollToTop = true }
+        .overlay {
             HStack {
-                RoundedRectangle(cornerRadius: 10).frame(width: 30, height: 30)
-                Text("Rock climb")
-                    .tracking(1)
-                    .lineLimit(1)
-                    .font(.title3)
-                    .fontWeight(.semibold)
-                    .contentShape(Rectangle())
-            }
-            .opacity(tabTopOpacity)
-            .frame(maxWidth: .infinity)
-            .onTapGesture { resetScrollToTop = true }
-            .overlay {
-                HStack {
-                    Circle().frame(width: iconSize, height: iconSize).foregroundStyle(.white)
-                        .overlay(Image(systemName: "arrow.left").foregroundColor(.gray))
-                        .onTapGesture { router.popRecruitmentPage() }
-                    Spacer()
-                    Circle().frame(width: iconSize, height: iconSize).foregroundStyle(.white)
-                        .overlay(Image(systemName: "ellipsis").foregroundStyle(.gray))
-                        .onTapGesture {}
-                } // HStack
-                .padding(.horizontal, 20)
-            }
-            .padding(.top, 60)
+                Circle().frame(width: iconSize, height: iconSize).foregroundStyle(.white)
+                    .overlay(Image(systemName: "arrow.left").foregroundColor(.gray))
+                    .onTapGesture { router.popRecruitmentPage() }
+                Spacer()
+                Circle().frame(width: iconSize, height: iconSize).foregroundStyle(.white)
+                    .overlay(Image(systemName: "ellipsis").foregroundStyle(.gray))
+                    .onTapGesture {}
+            } // HStack
+            .padding(.horizontal, 20)
+        }
+        .padding(.top, 60)
 
         .frame(height: minHeaderHeight)
         .background(
@@ -150,16 +154,9 @@ extension UserProfileView {
                                      height: 130,
                                      defaultIcon: "person.fill"
                 )
-                .onTapGesture {
-                    router.push([.userProfile(mockUser)])
-                }
-                VStack(alignment: .leading, spacing: 15) {
-                    CustomText(user.name ?? "", .customTextColorWhite).font(.subheadline)
-                    CustomText(user.skillLevel?.text ?? "", .customTextColorWhite).font(.caption)
-                    CustomText(user.bio ?? "", .customTextColorWhite).font(.caption)
-                        .fixedSize(horizontal: false, vertical: true) // テキストが縦方向に展開
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
+                CustomText(user.bio ?? "", .customTextColorWhite).font(.caption)
+                    .fixedSize(horizontal: false, vertical: true) // テキストが縦方向に展開
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
             Spacer().frame(height: 20)
             Divider().frame(height: 0.8).background(.black.opacity(0.4)).padding(.horizontal, 30)
@@ -180,28 +177,39 @@ extension UserProfileView {
 
 extension UserProfileView {
     @ViewBuilder
-    private func wantedPartsDetail(title: String, desc description: String) -> some View {
+    private func musicGenreDetail(_ genre: [MusicGenre]?) -> some View {
+        VStack(alignment: .leading) {
+            Text("\(l10n.preferredGenreDetailTitle)：")
+                .font(.headline)
+                .foregroundStyle(.white)
+            Spacer().frame(height: 16)
+            MusicGenresCapsuleView(genres: MusicGenre.allCases,
+                                   highlightedGenres: .constant(genre ?? []),
+                                   isEditing: false
+            )
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+}
+
+extension UserProfileView {
+    @ViewBuilder
+    private func userPartDetail(title: String, user: User) -> some View {
+        var userPart: [Part] {
+            user.instrument?.compactMap {
+                return Part(instrument: $0, gender: user.gender)
+            } ?? []
+        }
+
         VStack(alignment: .leading) {
             CustomText("\(title)：", .customTextColorWhite).font(.headline)
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 20) {
-                    ForEach(0..<8) { _ in
-                        Circle()
-                            .frame(width: 50, height: 50)
-                            .foregroundStyle(.customAccentYellow.gradient)
-                            .shadow(radius: 3)
-                    }
+            HorizontalScrollPartImagesView(showPart: userPart, iconSize: 120)
+                .padding(8)
+                .background {
+                    RoundedRectangle(cornerRadius: 5)
+                        .shadow(radius: 10)
+                        .foregroundStyle(.customWhite)
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.vertical, 5)
-                .padding(.horizontal, 5)
-            }
-            .padding(8)
-            .background {
-                RoundedRectangle(cornerRadius: 5)
-                    .shadow(radius: 10)
-                    .foregroundStyle(.customWhite)
-            }
         }
     }
 }
