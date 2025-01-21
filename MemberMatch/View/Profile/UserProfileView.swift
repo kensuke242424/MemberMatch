@@ -55,16 +55,15 @@ struct UserProfileView: View {
                             .opacity(1 - tabTopOpacity)
                             .padding(.horizontal)
                     }
-                VStack(spacing: 20) {
+                VStack(spacing: 30) {
 
                     Spacer().frame(height: overlapYOffset)
 
-                    userDetail(user: user)
-                    musicGenreDetail(user.preferredGenre)
+                    userBioDetail(user: user)
+                    userMusicGenreDetail(user.preferredGenre)
                     userPartDetail(title: "担当パート", user: user)
-                    recruitmentDetail(title: "募集の内容", desc: user.bio ?? "")
-                    frequencyDetail(title: "活動頻度", desc: user.bio ?? "")
-                    locationDetail(title: "活動場所", desc: user.bio ?? "")
+                    userLocationDetail(title: "活動場所", desc: user.bio ?? "")
+                    userSelfIntroductionDetail(title: "募集の内容", desc: user.selfIntroduction ?? "")
 
                     Button("メッセージを送る") {
                         resetScrollToTop = true
@@ -146,7 +145,7 @@ struct UserProfileView: View {
 
 extension UserProfileView {
     @ViewBuilder
-    private func userDetail(user: User) -> some View {
+    private func userBioDetail(user: User) -> some View {
         VStack {
             HStack(spacing: 30) {
                 SDWebImageCircleIcon(nil,
@@ -177,7 +176,7 @@ extension UserProfileView {
 
 extension UserProfileView {
     @ViewBuilder
-    private func musicGenreDetail(_ genre: [MusicGenre]?) -> some View {
+    private func userMusicGenreDetail(_ genre: [MusicGenre]?) -> some View {
         VStack(alignment: .leading) {
             Text("\(l10n.preferredGenreDetailTitle)：")
                 .font(.headline)
@@ -216,7 +215,7 @@ extension UserProfileView {
 
 extension UserProfileView {
     @ViewBuilder
-    private func recruitmentDetail(title: String, desc description: String) -> some View {
+    private func userSelfIntroductionDetail(title: String, desc description: String) -> some View {
         VStack(alignment: .leading) {
             CustomText("\(title)：", .customTextColorWhite)
                 .font(.headline)
@@ -241,32 +240,7 @@ extension UserProfileView {
 
 extension UserProfileView {
     @ViewBuilder
-    private func frequencyDetail(title: String, desc description: String?) -> some View {
-        VStack(alignment: .leading) {
-            CustomText("\(title)：", .customTextColorWhite)
-                .font(.headline)
-            VStack {
-                CustomText(user.name ?? "", .customTextColorBlack).fontWeight(.bold)
-                CustomText(description ?? "記載なし", .customTextColorBlack)
-                    .font(.subheadline)
-                    .frame(minHeight: 50)
-                    .frame(maxHeight: .infinity)
-                Spacer().frame(height: 40)
-            }
-            .frame(maxWidth: .infinity)
-            .padding()
-            .background {
-                RoundedRectangle(cornerRadius: 5)
-                    .shadow(radius: 10)
-                    .foregroundStyle(.customWhite)
-            }
-        }
-    }
-}
-
-extension UserProfileView {
-    @ViewBuilder
-    private func locationDetail(title: String, desc description: String) -> some View {
+    private func userLocationDetail(title: String, desc description: String) -> some View {
         VStack(alignment: .leading) {
             CustomText("\(title)：", .customTextColorWhite)
                 .font(.headline)
